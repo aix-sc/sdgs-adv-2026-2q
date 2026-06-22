@@ -385,9 +385,9 @@
   function sysPrompt(){return "あなたは武蔵野大学の科目『SDGs発展2』の学習アシスタントです。教科書『Lean Analytics』(A. クロール & B. ヨスコビッツ)の考え方に基づき、学生の質問に日本語でやさしく簡潔に答えます。専門用語は身近な具体例で説明し、逐語引用はせず自分の言葉で説明します。授業の共通ケースはEKIDEN.AI（ランナー向けAIコーチ）で、収益(Stripe)の具体データには触れません。この回のテーマ："+LECTURE_FOCUS+"。テーマと無関係な質問には、丁寧にこの授業の範囲へ話を戻してください。回答は3〜6文程度を目安に。";}
   function callGemini(contents,system,cb,err){
     if(!apiKey){err("APIキーが未設定です。");return;}
-    var url="https://generativelanguage.googleapis.com/v1beta/models/"+GEMINI_MODEL+":generateContent?key="+encodeURIComponent(apiKey);
+    var url="https://generativelanguage.googleapis.com/v1beta/models/"+GEMINI_MODEL+":generateContent";
     var body={contents:contents};if(system)body.system_instruction={parts:[{text:system}]};
-    fetch(url,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(body)})
+    fetch(url,{method:"POST",headers:{"Content-Type":"application/json","x-goog-api-key":apiKey},body:JSON.stringify(body)})
       .then(function(r){return r.json().then(function(j){return {ok:r.ok,j:j};});})
       .then(function(res){
         if(!res.ok){var m=(res.j&&res.j.error&&res.j.error.message)?res.j.error.message:("HTTP "+(res.j&&res.j.error&&res.j.error.code||"エラー"));err(m);return;}

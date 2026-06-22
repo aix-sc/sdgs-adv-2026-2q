@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
-# デプロイ直前に public/config.js を生成する（Firebase の predeploy フックから呼ばれる）
-# 使い方:  GEMINI_API_KEY="AIza..." firebase deploy --only hosting --project sdgs-adv-2026-2q
+# デプロイ直前に public/config.js を生成（Firebase predeploy フックから呼ばれる）
+# 使い方:  GEMINI_API_KEY="..." firebase deploy --only hosting --project sdgs-adv-2026-2q
 set -euo pipefail
 OUT="public/config.js"
 if [ -n "${GEMINI_API_KEY:-}" ]; then
@@ -11,8 +11,8 @@ if [ -n "${GEMINI_API_KEY:-}" ]; then
   } > "$OUT"
   echo "make-config: $OUT を生成しました（key length: ${#GEMINI_API_KEY}）"
 elif [ -f "$OUT" ]; then
-  echo "make-config: GEMINI_API_KEY 未指定。既存の $OUT をそのまま使用します。"
+  echo "make-config: GEMINI_API_KEY 未指定。既存の $OUT を使用します。"
 else
   echo "window.GEMINI_API_KEY = \"\";" > "$OUT"
-  echo "make-config: 警告 — GEMINI_API_KEY 未設定のためAI相談は無効でデプロイします（$OUT は空キー）。"
+  echo "make-config: 警告 — GEMINI_API_KEY 未設定。AI相談は無効でデプロイします。"
 fi

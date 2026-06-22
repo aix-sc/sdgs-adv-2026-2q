@@ -784,9 +784,9 @@
 
   function callGemini(contents,system,cb,err){
     if(!apiKey){err("APIキーが未設定です。");return;}
-    var url="https://generativelanguage.googleapis.com/v1beta/models/"+GEMINI_MODEL+":generateContent?key="+encodeURIComponent(apiKey);
+    var url="https://generativelanguage.googleapis.com/v1beta/models/"+GEMINI_MODEL+":generateContent";
     var body={contents:contents};if(system)body.system_instruction={parts:[{text:system}]};
-    fetch(url,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(body)})
+    fetch(url,{method:"POST",headers:{"Content-Type":"application/json","x-goog-api-key":apiKey},body:JSON.stringify(body)})
       .then(function(r){return r.json().then(function(j){return {ok:r.ok,j:j};});})
       .then(function(res){
         if(!res.ok){var m=(res.j&&res.j.error&&res.j.error.message)?res.j.error.message:("HTTP "+(res.j&&res.j.error&&res.j.error.code||"エラー"));err(m);return;}
