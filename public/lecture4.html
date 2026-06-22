@@ -165,6 +165,7 @@
   @media(max-width:640px){.task{grid-template-columns:1fr}}
   @media(prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
 </style>
+  <script src="config.js"></script>
 </head>
 <body class="locked">
 
@@ -322,10 +323,6 @@
     <button class="ai-x" id="aiClose" aria-label="閉じる">✕</button>
   </div>
   <div class="ai-msgs" id="aiMsgs"></div>
-  <div class="ai-key" id="aiKeyRow" style="display:none">
-    <input type="password" id="aiKey" placeholder="Gemini APIキーを貼り付け" autocomplete="off">
-    <button id="aiKeySet">設定</button>
-  </div>
   <div class="ai-sugs">
     <div class="sg-top"><span class="sg-lbl">質問候補</span><button class="sg-reload" id="sgReload" aria-label="質問候補を再生成" title="質問候補を再生成">↻</button></div>
     <div class="sg-list" id="sgList"></div>
@@ -361,18 +358,16 @@
 <script>
 (function(){
   "use strict";
-  /* ===== 設定：下に Gemini APIキーを入れると即座に使えます（公開時はGoogle AI StudioでHTTPリファラ制限を推奨） ===== */
-  var GEMINI_API_KEY = "";                 // 例: "AIza..."（空のままだと、初回にパネル内でキー入力を求めます）
-  var GEMINI_MODEL   = "gemini-3.5-flash"; // 利用可能なモデル名に変更可
-  /* ====================================================================================== */
+  /* APIキーは config.js（デプロイ時に自動生成 / Git管理外）から読み込みます。HTMLには鍵を埋め込みません。 */
+  var GEMINI_API_KEY = (typeof window!=="undefined" && window.GEMINI_API_KEY) ? window.GEMINI_API_KEY : "";
+  var GEMINI_MODEL   = (typeof window!=="undefined" && window.GEMINI_MODEL) ? window.GEMINI_MODEL : "gemini-3.5-flash";
   var LECTURE_FOCUS = "データに基づくピボットの判断基準、継続かピボットかの意思決定、ピボットの類型（ズームイン・ズームアウト・顧客セグメント変更など）、OMTMの再設定と改善計画";
   var FALLBACK_QS = ["ピボットって何？撤退とは違う？", "ピボットの判断はどう決める？", "ズームインとズームアウトの違いは？", "継続かピボットか、何を見て判断する？", "ピボット後にOMTMはどう変える？", "顧客セグメント変更ピボットの例は？"];
 
   var apiKey=GEMINI_API_KEY, history=[], busy=false, greeted=false;
   var fab=document.getElementById("aiFab"),panel=document.getElementById("aiPanel"),closeBtn=document.getElementById("aiClose"),
       msgs=document.getElementById("aiMsgs"),sgList=document.getElementById("sgList"),sgReload=document.getElementById("sgReload"),
-      text=document.getElementById("aiText"),send=document.getElementById("aiSend"),
-      keyRow=document.getElementById("aiKeyRow"),keyInput=document.getElementById("aiKey"),keySet=document.getElementById("aiKeySet");
+      text=document.getElementById("aiText"),send=document.getElementById("aiSend");
   function openPanel(){document.body.classList.add("ai-open");panel.classList.add("open");panel.setAttribute("aria-hidden","false");
     if(!greeted){greeted=true;addBot("こんにちは。『Lean Analytics』とこの回の内容について、なんでも聞いてください。下の質問候補からも選べます。");renderSugs(FALLBACK_QS.slice(0,4));}
     setTimeout(function(){text.focus();},300);}
@@ -386,8 +381,7 @@
   function addNote(t){var d=document.createElement("div");d.className="msg note";d.textContent=t;msgs.appendChild(d);sc();}
   function sc(){msgs.scrollTop=msgs.scrollHeight;}
   function typing(on){var ex=document.getElementById("aiTyping");if(on){if(ex)return;var d=document.createElement("div");d.className="typing";d.id="aiTyping";d.innerHTML="<span></span><span></span><span></span>";msgs.appendChild(d);sc();}else if(ex){ex.remove();}}
-  function needKey(){if(apiKey)return false;keyRow.style.display="flex";addNote("AIに接続するには Gemini APIキーが必要です。下の欄にキーを貼り付けて「設定」を押してください。");return true;}
-  keySet.addEventListener("click",function(){var v=keyInput.value.trim();if(v){apiKey=v;keyRow.style.display="none";keyInput.value="";addNote("APIキーを設定しました。質問できます。");}});
+  function needKey(){if(apiKey)return false;addNote("AI相談は現在ご利用いただけません（APIキーが未設定です）。担当者がデプロイ時にキーを設定すると有効になります。");return true;}
   function sysPrompt(){return "あなたは武蔵野大学の科目『SDGs発展2』の学習アシスタントです。教科書『Lean Analytics』(A. クロール & B. ヨスコビッツ)の考え方に基づき、学生の質問に日本語でやさしく簡潔に答えます。専門用語は身近な具体例で説明し、逐語引用はせず自分の言葉で説明します。授業の共通ケースはEKIDEN.AI（ランナー向けAIコーチ）で、収益(Stripe)の具体データには触れません。この回のテーマ："+LECTURE_FOCUS+"。テーマと無関係な質問には、丁寧にこの授業の範囲へ話を戻してください。回答は3〜6文程度を目安に。";}
   function callGemini(contents,system,cb,err){
     if(!apiKey){err("APIキーが未設定です。");return;}
@@ -407,7 +401,7 @@
     addUser(q);history.push({role:"user",text:q});busy=true;send.disabled=true;typing(true);
     var contents=history.map(function(m){return {role:m.role,parts:[{text:m.text}]};});
     callGemini(contents,sysPrompt(),function(t){typing(false);addBot(t);history.push({role:"model",text:t});busy=false;send.disabled=false;},
-      function(em){typing(false);addNote("エラー："+em);if(/API[_ ]?key|invalid|401|403|PERMISSION|API_KEY/i.test(em)){apiKey="";keyRow.style.display="flex";}history.pop();busy=false;send.disabled=false;});
+      function(em){typing(false);addNote("エラー："+em);history.pop();busy=false;send.disabled=false;});
   }
   function renderSugs(list){sgList.innerHTML="";list.forEach(function(q){var b=document.createElement("button");b.className="sg";b.textContent=q;b.addEventListener("click",function(){ask(q);});sgList.appendChild(b);});}
   function pick4(){var a=FALLBACK_QS.slice();for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1)),t=a[i];a[i]=a[j];a[j]=t;}return a.slice(0,4);}

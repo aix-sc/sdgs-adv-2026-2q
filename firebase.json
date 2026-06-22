@@ -1,6 +1,7 @@
 {
   "hosting": {
     "public": "public",
+    "predeploy": ["bash ./scripts/make-config.sh"],
     "ignore": ["firebase.json", "**/.*", "**/node_modules/**"]
   }
 }
