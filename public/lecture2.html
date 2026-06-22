@@ -129,6 +129,10 @@
   .bm-on .frow[data-flag="low"] .ftag.low{display:block;background:var(--red);color:#fff}
   .bm-on .frow[data-flag="high"] .ftag.high{display:block;background:var(--green);color:#fff}
   .x-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:11px}
+  .x-top{margin-bottom:2px}
+  .x-split{display:grid;grid-template-columns:1.12fr .88fr;gap:14px;margin-top:11px;align-items:start}
+  .x-left{display:flex;flex-direction:column;gap:9px;min-width:0}
+  .x-right{display:flex;flex-direction:column;gap:12px;min-width:0}
   .panel{background:#fff;color:var(--ink);border-radius:11px;padding:12px 14px}
   .panel .ph{font-size:11.5px;font-weight:700;letter-spacing:.05em;color:var(--mute);margin:0 0 8px}
   .detail .dname{font-size:14px;font-weight:700;color:var(--navy);margin:0 0 6px}
@@ -315,6 +319,7 @@
 
   @media(max-width:860px){
     .steps{grid-template-columns:repeat(3,1fr)} .events{grid-template-columns:1fr 1fr} .dots{display:none}
+    .x-split{grid-template-columns:1fr}
   }
   @media(max-width:640px){
     .vs,.four,.x-grid,.two,.task{grid-template-columns:1fr} .steps{grid-template-columns:1fr 1fr}
@@ -531,22 +536,26 @@
   <section class="slide" data-title="ファネル分析（答え合わせ）">
     <div class="in">
       <div class="eyebrow"><span class="num">05</span> 答え合わせ（インタラクティブ・中核）</div>
-      <h2 class="t">同じデータ、違う指標 ── 結論はこう変わる</h2>
+      <h2 class="t">解説：同じデータ、違う指標 ── 結論はこう変わる</h2>
       <p class="lead">先ほどの数字を、ここで確かめます。<b>見る指標（レンズ）を切り替える</b>と、同じ数字から導かれる結論と上司の反応がどう変わるか。各段をクリックして内訳を見ながら、さっきの問いの答えを探っていきましょう。<span style="color:var(--mute)">（一般的な数値例。収益データは扱いません）</span></p>
       <div class="explorer" id="exp">
-        <div><h3>ECサイト　ファネル分析</h3><p class="x-sub">来訪 → 会員登録 → 初回購入 → リピート → 6か月後再購入</p></div>
-        <div class="toggles">
-          <div class="lensgroup" id="lensgroup">
-            <button data-lens="count" class="on">累計で見る（バニティ）</button>
-            <button data-lens="rate">率で見る（アクショナブル）</button>
+        <div class="x-top"><h3>ECサイト　ファネル分析</h3><p class="x-sub">来訪 → 会員登録 → 初回購入 → リピート → 6か月後再購入</p></div>
+        <div class="x-split">
+          <div class="x-left">
+            <div class="toggles">
+              <div class="lensgroup" id="lensgroup">
+                <button data-lens="count" class="on">累計で見る（バニティ）</button>
+                <button data-lens="rate">率で見る（アクショナブル）</button>
+              </div>
+              <label class="bm-toggle"><input type="checkbox" id="bm"><span class="sw"></span>業界平均と比べる</label>
+            </div>
+            <div class="lens-note" id="lensNote"></div>
+            <div class="funnel" id="funnel"></div>
           </div>
-          <label class="bm-toggle"><input type="checkbox" id="bm"><span class="sw"></span>業界平均と比べる</label>
-        </div>
-        <div class="lens-note" id="lensNote"></div>
-        <div class="funnel" id="funnel"></div>
-        <div class="x-grid">
-          <div class="panel detail" id="detail"><p class="ph">選んだ段の内訳</p><p class="dname">段をクリックすると詳細が出ます</p></div>
-          <div class="panel report"><p class="ph" id="reportHead">この指標での報告</p><div class="rbody" id="reportBody"></div><div class="boss-bubble" id="bossBubble"></div></div>
+          <div class="x-right">
+            <div class="panel detail" id="detail"><p class="ph">選んだ段の内訳</p><p class="dname">段をクリックすると詳細が出ます</p></div>
+            <div class="panel report"><p class="ph" id="reportHead">この指標での報告</p><div class="rbody" id="reportBody"></div><div class="boss-bubble" id="bossBubble"></div></div>
+          </div>
         </div>
       </div>
     </div>
