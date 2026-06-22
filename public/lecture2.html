@@ -290,6 +290,20 @@
   @media(max-width:860px){.foot-grid{grid-template-columns:1fr}}
   @media(max-width:640px){.foot-prof{flex-direction:column} .book-row{flex-direction:column}}
 
+  /* 演習：数値テーブル */
+  .numtable{width:100%;border-collapse:collapse;font-size:14px;border:1px solid var(--line);border-radius:12px;overflow:hidden}
+  .numtable th{background:var(--navy);color:#fff;text-align:left;padding:11px 14px;font-size:13px}
+  .numtable th.r,.numtable td.num{text-align:right}
+  .numtable td{padding:11px 14px;border-top:1px solid var(--line)}
+  .numtable tr:nth-child(even) td{background:var(--soft)}
+  .numtable td.num{font-variant-numeric:tabular-nums;font-weight:700;color:var(--navy)}
+  .numtable .stg{font-weight:700;color:var(--navy)}
+  .numtable .arrowcell{color:#b9c5cf;text-align:center;font-size:12px}
+  .exq{margin-top:16px;background:var(--amber-soft);border:1px solid #e8d3a8;border-radius:11px;padding:14px 16px;font-size:13px;color:#7a531a}
+  .exq b{color:#5a3d12}
+  .exq ol{margin:8px 0 0;padding-left:20px} .exq li{margin-bottom:4px}
+  .exq .nextnote{margin:10px 0 0;font-size:12px;color:#8a6a2a}
+
   /* dots */
   .dots{position:fixed;right:16px;top:50%;transform:translateY(-50%);z-index:90;display:flex;flex-direction:column;gap:10px}
   .dots button{width:11px;height:11px;border-radius:50%;border:1.5px solid #b9c5cf;background:transparent;cursor:pointer;padding:0;position:relative;transition:.2s}
@@ -318,7 +332,7 @@
 <body>
 
 <header class="hd">
-  <div class="brand">SDGs発展2 <span>講義紹介</span></div>
+  <div class="brand">SDGs発展2 <span>講義資料</span></div>
   <a class="hd-cr" href="https://classroom.google.com/c/ODU5NjUzNDM0Njk0" target="_blank" rel="noopener">🎓 Classroom</a>
   <div class="dropdown">
     <button class="dd-btn" id="ddBtn" aria-expanded="false">第2回：データ収集の設計 <span class="caret">▼</span></button>
@@ -489,12 +503,40 @@
     </div>
   </section>
 
-  <!-- 5 EXPLORER -->
-  <section class="slide" data-title="データで試す">
+  <!-- 5a EXERCISE (numbers only) -->
+  <section class="slide" data-title="演習：数字を読む">
     <div class="in">
-      <div class="eyebrow"><span class="num">04</span> データで試す（インタラクティブ・中核）</div>
+      <div class="eyebrow"><span class="num">04</span> 演習</div>
+      <h2 class="t">まず“数字だけ”で読んでみる</h2>
+      <p class="lead">あるECサイトの、ある月のデータです。各段階を通過した「人数」だけを並べました。まずはこの生の数字を見て、頭の中で考えてみましょう ── 次のページで“率”や業界平均と照らして答え合わせをします。<span style="color:var(--mute)">（一般的な数値例。収益データは扱いません）</span></p>
+      <table class="numtable">
+        <thead><tr><th>段階</th><th class="r">人数（人）</th></tr></thead>
+        <tbody>
+          <tr><td class="stg">来訪</td><td class="num">1,000,000</td></tr>
+          <tr><td class="stg">会員登録</td><td class="num">100,000</td></tr>
+          <tr><td class="stg">初回購入</td><td class="num">10,000</td></tr>
+          <tr><td class="stg">リピート購入</td><td class="num">4,000</td></tr>
+          <tr><td class="stg">6か月後再購入</td><td class="num">2,000</td></tr>
+        </tbody>
+      </table>
+      <div class="exq">
+        <b>問い（まずは数字だけで考える）</b>
+        <ol>
+          <li>どの段階で、人数が最も大きく減っている？</li>
+          <li>その「減り方」は、率（転換率）で見ても問題と言える？</li>
+          <li>上司に「次に何をするか」まで言える報告にするには、どの数字を見せる？</li>
+        </ol>
+        <p class="nextnote">→ 次のページの「ECサイト　ファネル分析」で、累計⇔率を切り替え、業界平均と比べて確かめましょう。</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 5 EXPLORER -->
+  <section class="slide" data-title="ファネル分析（答え合わせ）">
+    <div class="in">
+      <div class="eyebrow"><span class="num">05</span> 答え合わせ（インタラクティブ・中核）</div>
       <h2 class="t">同じデータ、違う指標 ── 結論はこう変わる</h2>
-      <p class="lead">あるECサイトの1か月のデータ。<b>見る指標（レンズ）を切り替える</b>と、同じ数字から導かれる結論と上司の反応がどう変わるか確かめましょう。各段を選ぶと内訳が出ます。<span style="color:var(--mute)">（一般的な数値例。収益データは扱いません）</span></p>
+      <p class="lead">先ほどの数字を、ここで確かめます。<b>見る指標（レンズ）を切り替える</b>と、同じ数字から導かれる結論と上司の反応がどう変わるか。各段をクリックして内訳を見ながら、さっきの問いの答えを探っていきましょう。<span style="color:var(--mute)">（一般的な数値例。収益データは扱いません）</span></p>
       <div class="explorer" id="exp">
         <div><h3>ECサイト　ファネル分析</h3><p class="x-sub">来訪 → 会員登録 → 初回購入 → リピート → 6か月後再購入</p></div>
         <div class="toggles">
