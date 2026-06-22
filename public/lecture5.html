@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SDGs発展2 第5回｜データストーリーテリング ── 分析結果の伝え方</title>
+<style>
+  :root{
+    --navy:#15324F; --teal:#1C7293; --green:#3E7C53; --amber:#C58B2B;
+    --ink:#2A2E33; --mute:#5C6670; --line:#E3E8ED;
+    --bg:#FFFFFF; --soft:#F5F8FB; --softg:#F1F6F2; --softa:#FBF5EA;
+    --teal-soft:#E7F0F5; --green-soft:#E9F2EC; --amber-soft:#F8EFDD; --red:#C0392B;
+    --jp:"Yu Gothic","游ゴシック体",YuGothic,"Hiragino Sans","Hiragino Kaku Gothic ProN",Meiryo,sans-serif;
+    --hd:54px;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;height:100%}
+  body{font-family:var(--jp);color:var(--ink);line-height:1.65;background:var(--bg);-webkit-font-smoothing:antialiased}
+  a{color:var(--teal);text-decoration:none}
+  .hd{position:fixed;top:0;left:0;right:0;height:var(--hd);z-index:100;background:rgba(255,255,255,.93);backdrop-filter:blur(8px);border-bottom:1px solid var(--line);display:flex;align-items:center;gap:14px;padding:0 18px}
+  .hd .brand{font-weight:700;color:var(--navy);font-size:13.5px;white-space:nowrap}
+  .hd .brand span{color:var(--teal)}
+  .hd-cr{margin-left:auto;display:inline-flex;align-items:center;gap:7px;font-size:12.5px;font-weight:700;color:var(--green);background:var(--green-soft);border:1px solid #cfe3d4;border-radius:9px;padding:7px 13px;white-space:nowrap}
+  .hd-cr:hover{background:#dcebe0}
+  .dropdown{position:relative}
+  .dd-btn{font-family:var(--jp);font-size:13px;border:1px solid var(--line);background:#fff;border-radius:9px;padding:8px 13px;cursor:pointer;color:var(--navy);display:flex;align-items:center;gap:8px}
+  .dd-btn .caret{transition:.2s;font-size:10px;color:var(--mute)}
+  .dd-btn[aria-expanded="true"] .caret{transform:rotate(180deg)}
+  .dd-menu{position:absolute;right:0;top:calc(100% + 8px);background:#fff;border:1px solid var(--line);border-radius:12px;box-shadow:0 14px 36px rgba(21,50,79,.16);padding:6px;min-width:280px;display:none}
+  .dd-menu.open{display:block}
+  .dd-menu .grp{font-size:10.5px;font-weight:700;letter-spacing:.08em;color:var(--mute);padding:8px 12px 4px}
+  .dd-menu a{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:9px 12px;border-radius:8px;font-size:13px;color:var(--ink)}
+  .dd-menu a:hover{background:var(--soft)}
+  .dd-menu a.current{background:var(--teal-soft);color:var(--navy);font-weight:700}
+  .dd-menu a .ttl{display:flex;gap:9px;align-items:center}
+  .dd-menu a .badge{font-size:10px;border-radius:5px;padding:2px 7px;font-weight:700}
+  .badge.ready{background:var(--green-soft);color:var(--green)}
+  .deck{height:100vh;overflow-y:scroll;scroll-snap-type:y mandatory;scroll-behavior:smooth}
+  .slide{min-height:100vh;scroll-snap-align:start;display:flex;flex-direction:column;justify-content:center;padding:calc(var(--hd) + 22px) 22px 92px;position:relative}
+  .in{max-width:1020px;margin:0 auto;width:100%}
+  .eyebrow{display:inline-flex;align-items:center;gap:9px;font-size:11.5px;font-weight:700;letter-spacing:.13em;color:var(--teal);margin:0 0 12px}
+  .eyebrow .num{font-variant-numeric:tabular-nums;background:var(--navy);color:#fff;border-radius:6px;padding:2px 8px;font-size:10.5px}
+  .eyebrow .num.plan{background:var(--amber)}
+  h2.t{font-size:clamp(20px,3.1vw,28px);color:var(--navy);margin:0 0 8px;line-height:1.32;font-weight:700}
+  .lead{color:var(--mute);max-width:64ch;margin:0 0 22px;font-size:14.5px}
+  .hero{background:radial-gradient(900px 360px at 86% -12%,var(--teal-soft),transparent 60%),radial-gradient(700px 320px at -6% 112%,var(--green-soft),transparent 60%)}
+  .hero .kick{font-size:13px;font-weight:700;letter-spacing:.1em;color:var(--teal)}
+  .hero h1{font-size:clamp(26px,4.6vw,42px);line-height:1.22;color:var(--navy);margin:14px 0 12px;font-weight:700;letter-spacing:-.01em}
+  .hero .sub{font-size:clamp(15px,2.1vw,17px);max-width:62ch;margin:0 0 22px}
+  .hero .meta{display:flex;gap:9px;flex-wrap:wrap;font-size:12.5px;color:var(--mute)}
+  .hero .meta b{color:var(--navy)}
+  .pill{display:inline-block;background:#fff;border:1px solid var(--line);border-radius:999px;padding:6px 13px}
+  .plan-chip{display:inline-block;font-size:11.5px;font-weight:700;color:#7a531a;background:var(--amber-soft);border:1px solid #e8d3a8;border-radius:999px;padding:5px 12px;margin-bottom:14px}
+  .toc{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+  .titem{display:flex;gap:13px;background:var(--soft);border:1px solid var(--line);border-radius:12px;padding:14px 15px}
+  .titem .tn{flex:none;width:26px;height:26px;border-radius:50%;background:var(--teal);color:#fff;font-weight:700;font-size:12.5px;display:flex;align-items:center;justify-content:center}
+  .titem h4{margin:0 0 3px;font-size:14px;color:var(--navy);line-height:1.4}
+  .titem p{margin:0;font-size:12px;color:var(--mute);line-height:1.5}
+  .task{display:grid;grid-template-columns:1fr 1fr;gap:15px}
+  .tcard{border-radius:13px;padding:18px;color:#fff}
+  .tcard.review{background:var(--teal)} .tcard.prep{background:var(--green)}
+  .tcard h3{margin:0 0 10px;font-size:15px}
+  .tcard ol{margin:0;padding-left:19px}
+  .tcard li{font-size:13px;margin-bottom:7px;line-height:1.5}
+  .band{margin-top:15px;background:var(--navy);color:#fff;border-radius:12px;padding:15px 18px;display:flex;justify-content:space-between;align-items:center;gap:14px;flex-wrap:wrap}
+  .band .dl{font-size:13.5px;font-weight:700}
+  .band .next{font-size:12.5px;color:#AFC4D7}
+  .cr-submit{display:inline-flex;align-items:center;gap:8px;background:#fff;color:var(--green);font-weight:700;font-size:13.5px;border-radius:10px;padding:10px 16px;white-space:nowrap}
+  .cr-submit:hover{background:var(--green-soft)}
+  .srcnote{font-size:11.5px;color:#9aa4ad;margin-top:16px}
+  .dots{position:fixed;right:16px;top:50%;transform:translateY(-50%);z-index:90;display:flex;flex-direction:column;gap:10px}
+  .dots button{width:11px;height:11px;border-radius:50%;border:1.5px solid #b9c5cf;background:transparent;cursor:pointer;padding:0;position:relative;transition:.2s}
+  .dots button.on{background:var(--teal);border-color:var(--teal);transform:scale(1.3)}
+  .dots button .tip{position:absolute;right:22px;top:50%;transform:translateY(-50%);white-space:nowrap;background:var(--navy);color:#fff;font-size:11px;padding:4px 9px;border-radius:6px;opacity:0;pointer-events:none;transition:.15s}
+  .dots button:hover .tip{opacity:1}
+  .navbtns{position:fixed;bottom:18px;left:50%;transform:translateX(-50%);z-index:90;display:flex;gap:10px}
+  .navbtns button{width:42px;height:42px;border-radius:50%;border:1px solid var(--line);background:rgba(255,255,255,.96);cursor:pointer;font-size:15px;color:var(--navy);box-shadow:0 5px 16px rgba(21,50,79,.14);display:flex;align-items:center;justify-content:center;transition:.15s}
+  .navbtns button:disabled{opacity:.28;cursor:default;box-shadow:none}
+  .navbtns button:hover:not(:disabled){border-color:var(--teal);color:var(--teal)}
+  /* AI相談 */
+  .ai-fab{position:fixed;right:18px;bottom:20px;z-index:95;display:inline-flex;align-items:center;gap:8px;background:var(--navy);color:#fff;border:0;border-radius:999px;padding:12px 18px;font-family:var(--jp);font-size:13.5px;font-weight:700;cursor:pointer;box-shadow:0 8px 24px rgba(21,50,79,.28);transition:.18s}
+  .ai-fab:hover{transform:translateY(-2px);box-shadow:0 12px 30px rgba(21,50,79,.34)}
+  .ai-fab .sp{font-size:15px}
+  body.ai-open .ai-fab{opacity:0;pointer-events:none}
+  body.ai-open .dots{display:none}
+  .ai-panel{position:fixed;top:0;right:0;bottom:0;width:min(430px,94vw);background:#fff;z-index:200;display:flex;flex-direction:column;box-shadow:-12px 0 40px rgba(21,50,79,.18);transform:translateX(100%);transition:transform .28s cubic-bezier(.22,.61,.36,1)}
+  .ai-panel.open{transform:translateX(0)}
+  .ai-head{flex:none;display:flex;align-items:center;gap:11px;padding:15px 18px;border-bottom:1px solid var(--line);background:var(--navy);color:#fff}
+  .ai-head .ttl{font-size:14.5px;font-weight:700}
+  .ai-head .sub{font-size:11px;color:#AFC4D7}
+  .ai-head .badge-g{font-size:10px;font-weight:700;background:#0d2436;color:#7fc4dd;border-radius:5px;padding:2px 7px}
+  .ai-x{margin-left:auto;width:32px;height:32px;border-radius:8px;border:0;background:rgba(255,255,255,.12);color:#fff;font-size:15px;cursor:pointer;display:flex;align-items:center;justify-content:center}
+  .ai-x:hover{background:rgba(255,255,255,.22)}
+  .ai-msgs{flex:1;overflow-y:auto;padding:16px;display:flex;flex-direction:column;gap:11px;background:var(--soft)}
+  .msg{max-width:88%;font-size:13.5px;line-height:1.65;padding:11px 14px;border-radius:13px;white-space:pre-wrap;word-break:break-word}
+  .msg.user{align-self:flex-end;background:var(--teal);color:#fff;border-bottom-right-radius:4px}
+  .msg.bot{align-self:flex-start;background:#fff;border:1px solid var(--line);color:var(--ink);border-bottom-left-radius:4px}
+  .msg.bot b{color:var(--navy)}
+  .msg.note{align-self:center;background:var(--amber-soft);color:#7a531a;font-size:12px;max-width:100%}
+  .typing{align-self:flex-start;display:flex;gap:4px;padding:12px 14px;background:#fff;border:1px solid var(--line);border-radius:13px}
+  .typing span{width:7px;height:7px;border-radius:50%;background:#9fb0bd;animation:bn 1s infinite}
+  .typing span:nth-child(2){animation-delay:.15s} .typing span:nth-child(3){animation-delay:.3s}
+  @keyframes bn{0%,80%,100%{opacity:.3;transform:translateY(0)}40%{opacity:1;transform:translateY(-4px)}}
+  .ai-sugs{flex:none;border-top:1px solid var(--line);padding:11px 14px 6px;background:#fff}
+  .ai-sugs .sg-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:8px}
+  .ai-sugs .sg-lbl{font-size:11px;font-weight:700;color:var(--mute);letter-spacing:.04em}
+  .sg-reload{width:28px;height:28px;border-radius:8px;border:1px solid var(--line);background:#fff;color:var(--teal);cursor:pointer;font-size:14px;display:flex;align-items:center;justify-content:center;transition:.15s}
+  .sg-reload:hover{background:var(--teal-soft)}
+  .sg-reload.spin{animation:sp .7s linear infinite}
+  @keyframes sp{to{transform:rotate(360deg)}}
+  .sg-list{display:flex;flex-wrap:wrap;gap:7px}
+  .sg{font-family:var(--jp);font-size:12px;border:1px solid var(--line);background:var(--soft);color:var(--ink);border-radius:999px;padding:7px 12px;cursor:pointer;text-align:left;transition:.15s;line-height:1.4}
+  .sg:hover{border-color:var(--teal);color:var(--teal);background:#fff}
+  .ai-input{flex:none;display:flex;gap:8px;align-items:flex-end;padding:10px 14px 8px;background:#fff}
+  .ai-input textarea{flex:1;font-family:var(--jp);font-size:13.5px;line-height:1.5;border:1px solid var(--line);border-radius:11px;padding:10px 12px;resize:none;max-height:120px;outline:none;color:var(--ink)}
+  .ai-input textarea:focus{border-color:var(--teal)}
+  .ai-send{flex:none;width:40px;height:40px;border-radius:11px;border:0;background:var(--navy);color:#fff;font-size:15px;cursor:pointer;display:flex;align-items:center;justify-content:center}
+  .ai-send:disabled{opacity:.4;cursor:default}
+  .ai-key{display:flex;gap:7px;padding:0 14px 10px;background:#fff}
+  .ai-key input{flex:1;font-family:var(--jp);font-size:12.5px;border:1px solid var(--line);border-radius:9px;padding:8px 11px;outline:none}
+  .ai-key button{font-family:var(--jp);font-size:12.5px;font-weight:700;border:0;background:var(--teal);color:#fff;border-radius:9px;padding:8px 13px;cursor:pointer}
+  .ai-disclaimer{font-size:10.5px;color:#9aa4ad;padding:0 14px 12px;background:#fff;text-align:center}
+  /* フッター（講師・教科書） */
+  .foot-grid{display:grid;grid-template-columns:1.45fr 1fr;gap:18px;align-items:start}
+  .foot-prof{display:flex;gap:16px;background:var(--soft);border:1px solid var(--line);border-radius:14px;padding:18px}
+  .prof-img{flex:none;width:82px;height:82px;border-radius:50%;object-fit:cover;border:2px solid #fff;box-shadow:0 3px 10px rgba(21,50,79,.15)}
+  .prof-name{font-size:16px;font-weight:700;color:var(--navy)} .prof-name span{font-size:12px;color:var(--mute);font-weight:600;margin-left:6px}
+  .prof-title{font-size:12.5px;color:var(--teal);font-weight:700;margin:2px 0 8px}
+  .prof-bio{font-size:12px;color:var(--ink);margin:0 0 10px;line-height:1.6}
+  .prof-links{display:flex;flex-wrap:wrap;gap:7px}
+  .prof-links a{font-size:11.5px;background:#fff;border:1px solid var(--line);border-radius:8px;padding:5px 10px;color:var(--teal)}
+  .prof-links a:hover{border-color:var(--teal)}
+  .foot-book{display:flex;flex-direction:column;background:#fff;border:1px solid var(--line);border-radius:14px;padding:18px}
+  .book-label{font-size:10.5px;font-weight:700;letter-spacing:.08em;color:var(--mute);margin-bottom:10px}
+  .book-row{display:flex;gap:15px}
+  .bk-cover{flex:none;width:90px;height:128px;border-radius:8px;overflow:hidden;display:block;background:linear-gradient(135deg,#15324F,#1C7293);box-shadow:0 6px 18px rgba(21,50,79,.22);position:relative}
+  .bk-cover img{width:100%;height:100%;object-fit:cover;display:block}
+  .bk-fallback{display:none;position:absolute;inset:0;align-items:center;justify-content:center;color:#fff;font-weight:700;font-size:15px;text-align:center;line-height:1.3;letter-spacing:.02em}
+  .bk-cover.noimg .bk-fallback{display:flex}
+  .book-info{display:flex;flex-direction:column}
+  .book-title{font-size:16px;font-weight:700;color:var(--navy)}
+  .book-sub{font-size:11.5px;color:var(--mute);margin:1px 0 8px;line-height:1.4}
+  .book-meta{font-size:11.5px;color:var(--mute);line-height:1.6}
+  .book-amz{margin-top:10px;align-self:flex-start;background:var(--amber);color:#fff;font-weight:700;font-size:12.5px;border-radius:9px;padding:8px 14px}
+  .book-amz:hover{filter:brightness(1.05)}
+  .foot-copy{margin-top:16px;font-size:11px;color:#9aa4ad;text-align:center;border-top:1px solid var(--line);padding-top:12px}
+  @media(max-width:860px){.foot-grid{grid-template-columns:1fr}}
+  @media(max-width:640px){.foot-prof{flex-direction:column} .book-row{flex-direction:column}}
+
+  /* パスワードゲート */
+  .gate{display:none;position:fixed;inset:0;z-index:500;background:linear-gradient(160deg,#15324F,#0d2436);align-items:center;justify-content:center;padding:24px}
+  body.locked .gate{display:flex}
+  body.locked .deck,body.locked .dots,body.locked .navbtns,body.locked .ai-fab,body.locked .ai-panel,body.locked .hd{display:none!important}
+  .gate-card{width:100%;max-width:390px;background:#fff;border-radius:18px;padding:30px 28px;text-align:center;box-shadow:0 24px 60px rgba(0,0,0,.32)}
+  .gate-ic{font-size:34px}
+  .gate-card h2{margin:10px 0 6px;font-size:19px;color:var(--navy)}
+  .gate-card .desc{font-size:13px;color:var(--mute);margin:0 0 18px;line-height:1.6}
+  .gate-row{display:flex;gap:8px}
+  .gate-row input{flex:1;font-family:var(--jp);font-size:14px;border:1px solid var(--line);border-radius:10px;padding:11px 13px;outline:none}
+  .gate-row input:focus{border-color:var(--teal)}
+  .gate-row button{flex:none;font-family:var(--jp);font-weight:700;font-size:14px;border:0;background:var(--navy);color:#fff;border-radius:10px;padding:11px 18px;cursor:pointer}
+  .gate-err{min-height:18px;margin:10px 0 0;font-size:12.5px;color:var(--red);font-weight:700}
+  .gate-back{display:inline-block;margin-top:12px;font-size:12.5px;color:var(--teal)}
+  @media(max-width:860px){.toc{grid-template-columns:1fr} .dots{display:none}}
+  @media(max-width:640px){.task{grid-template-columns:1fr}}
+  @media(prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
+</style>
+</head>
+<body class="locked">
+
+<div class="gate" id="gate">
+  <div class="gate-card">
+    <div class="gate-ic">🔒</div>
+    <h2>第5回は準備中です</h2>
+    <p class="desc">このページの資料は現在準備中です。閲覧にはパスワードが必要です。担当教員にご確認ください。</p>
+    <div class="gate-row">
+      <input type="password" id="gatePw" placeholder="パスワード" autocomplete="off">
+      <button id="gateBtn">開く</button>
+    </div>
+    <p class="gate-err" id="gateErr"></p>
+    <a class="gate-back" href="lecture1.html">← 公開中の第1回へ戻る</a>
+  </div>
+</div>
+
+<script>
+(function(){
+  "use strict";
+  /* ===== 閲覧パスワード（変更可）。第3回以降の「準備中」ページの解錠に使います。 ===== */
+  var PAGE_PASSWORD = "sdgs2026";
+  /* ============================================================================ */
+  var pw=document.getElementById("gatePw"),btn=document.getElementById("gateBtn"),err=document.getElementById("gateErr");
+  function tryUnlock(){
+    if(pw.value===PAGE_PASSWORD){document.body.classList.remove("locked");err.textContent="";}
+    else{err.textContent="パスワードが違います。";pw.select();}
+  }
+  btn.addEventListener("click",tryUnlock);
+  pw.addEventListener("keydown",function(e){if(e.key==="Enter"){e.preventDefault();tryUnlock();}});
+  setTimeout(function(){if(document.body.classList.contains("locked"))pw.focus();},200);
+})();
+</script>
+
+<header class="hd">
+  <div class="brand">SDGs発展2 <span>講義紹介</span></div>
+  <a class="hd-cr" href="https://classroom.google.com/c/ODU5NjUzNDM0Njk0" target="_blank" rel="noopener">🎓 Classroom</a>
+  <div class="dropdown">
+    <button class="dd-btn" id="ddBtn" aria-expanded="false">第5回：データストーリーテリング <span class="caret">▼</span></button>
+    <div class="dd-menu" id="ddMenu">
+      <div class="grp">全7回</div>
+      <a href="lecture1.html"><span class="ttl">第1回　全体像 ── OMTMとビジネスモデル</span><span class="badge ready">公開</span></a>
+      <a href="lecture2.html"><span class="ttl">第2回　データ収集の設計 ── 定性と定量</span><span class="badge ready">公開</span></a>
+      <a href="lecture3.html"><span class="ttl">第3回　コホート分析とファネル分析</span><span class="badge soon">準備中</span></a>
+      <a href="lecture4.html"><span class="ttl">第4回　ピボットの判断 ── 意思決定</span><span class="badge soon">準備中</span></a>
+      <a class="current" href="#"><span class="ttl">第5回　データストーリーテリング</span><span class="badge ready">表示中</span></a>
+      <a href="lecture6.html"><span class="ttl">第6回　投資家向けピッチの準備</span><span class="badge soon">準備中</span></a>
+      <a href="lecture7.html"><span class="ttl">第7回　最終発表＆振り返り</span><span class="badge soon">準備中</span></a>
+    </div>
+  </div>
+</header>
+
+<main class="deck" id="deck">
+
+  <section class="slide hero" data-title="タイトル">
+    <div class="in">
+      <div class="kick">2026年度　SDGs発展2［a1］　第5回</div>
+      <h1>データストーリーテリング ── 分析結果の伝え方</h1>
+      <p class="sub">データストーリーテリングの原則と手法を学びます。効果的なダッシュボード・レポートの作り方を理解し、SDGs課題の分析結果をストーリーとして構成する練習を行います。</p>
+      <div class="meta">
+        <span class="pill">担当：<b>高橋 雄介</b></span>
+        <span class="pill">教科書：<b>Lean Analytics</b></span>
+        <span class="pill">形態：オンライン（同時双方向）</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="slide" data-title="この回の内容（予定）">
+    <div class="in">
+      <div class="eyebrow"><span class="num plan">予定</span> この回の内容</div>
+      <span class="plan-chip">シラバスに基づく構成案 ── 内容は精査中です</span>
+      <h2 class="t">この回の内容（予定）</h2>
+      <p class="lead">数字を「伝わる物語」に変えます。下は予定の構成です（精査中）。</p>
+      <div class="toc">
+        <div class="titem"><div class="tn">1</div><div><h4>数字は物語で動く</h4><p>なぜストーリーが必要か</p></div></div>
+        <div class="titem"><div class="tn">2</div><div><h4>データストーリーテリングの原則</h4><p>聞き手・文脈・主張の組み立て</p></div></div>
+        <div class="titem"><div class="tn">3</div><div><h4>ダッシュボード／レポート設計</h4><p>効果的に見せる型</p></div></div>
+        <div class="titem"><div class="tn">4</div><div><h4>「課題→分析→打ち手」で構成</h4><p>分析結果を物語にする</p></div></div>
+        <div class="titem"><div class="tn">5</div><div><h4>ありがちな伝え方の失敗</h4><p>数字の羅列・So whatの欠落</p></div></div>
+        <div class="titem"><div class="tn">6</div><div><h4>今日のワーク</h4><p>自分の分析結果をストーリー化</p></div></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="slide" data-title="予習・復習と提出">
+    <div class="in">
+      <div class="eyebrow"><span class="num">提出</span> 予習・復習</div>
+      <h2 class="t">次回までの準備と提出</h2>
+      <div class="task">
+        <div class="tcard review"><h3>🔁 復習</h3><ol><li>分析レポートのドラフトを作成する</li><li>データストーリーを構成する</li></ol></div>
+        <div class="tcard prep"><h3>📖 予習</h3><ol><li>教科書の該当章を読む</li><li>分析結果の可視化を進める</li></ol></div>
+      </div>
+      <div class="band">
+        <div class="dl">提出：締切は授業内で指定します</div>
+        <a class="cr-submit" href="https://classroom.google.com/c/ODU5NjUzNDM0Njk0" target="_blank" rel="noopener">🎓 Classroomで提出 ↗</a>
+        <div class="next">次回予告 ── 第6回：投資家向けピッチの準備 ── データに基づくプレゼンテーション</div>
+      </div>
+      <p class="srcnote">出典：本学シラバス『SDGs発展2[a1]』（2026年度）に基づく構成案。見出し・項目は今後精査して更新します。教科書『Lean Analytics』(A. クロール&B. ヨスコビッツ)を要約・再構成（逐語引用なし）。</p>
+    </div>
+  </section>
+  <!-- FOOTER (講師・教科書) -->
+  <section class="slide" data-title="講師・教科書">
+    <div class="in">
+      <div class="eyebrow"><span class="num">INFO</span> この講義について</div>
+      <h2 class="t">講師と教科書</h2>
+      <div class="foot-grid">
+        <div class="foot-prof">
+          <img class="prof-img" src="https://tensenses-model.web.app/assets/yt.jpg" alt="高橋 雄介" onerror="this.style.display='none'">
+          <div class="prof-body">
+            <div class="prof-name">高橋 雄介 <span>Yusuke Takahashi, PhD</span></div>
+            <div class="prof-title">武蔵野大学 データサイエンス学部 准教授</div>
+            <p class="prof-bio">計算機科学者・連続起業家。AIx{ } 共同創業。直交化した意味空間に基づく適応的なセマンティック基盤と知識ベースを研究。シリコンバレーと東京でソフトウェアのスタートアップを創業し、プロダクト設計・グロース・顧客開発に従事。500 Startups 出身。慶應義塾大学にて博士（政策・メディア）。</p>
+            <div class="prof-links">
+              <a href="https://www.linkedin.com/in/yusuketakahashiphd/" target="_blank" rel="noopener">LinkedIn ↗</a>
+              <a href="https://orcid.org/0009-0006-8351-2280" target="_blank" rel="noopener">ORCID ↗</a>
+              <a href="https://mids.ac/" target="_blank" rel="noopener">武蔵野大学データサイエンス ↗</a>
+              <a href="https://aix.sc" target="_blank" rel="noopener">AIx ↗</a>
+            </div>
+          </div>
+        </div>
+        <div class="foot-book">
+          <div class="book-label">教科書 ／ TEXTBOOK</div>
+          <div class="book-row">
+            <a class="bk-cover" href="https://amzn.to/4vViLH6" target="_blank" rel="noopener" aria-label="Amazonで購入する">
+              <img src="https://m.media-amazon.com/images/P/4873117119.01._SCLZZZZZZZ_.jpg" alt="Lean Analytics 表紙" onerror="if(!this.dataset.f){this.dataset.f='1';this.src='https://www.oreilly.co.jp/books/images/picture_large978-4-87311-711-9.jpeg';}else{this.style.display='none';this.parentNode.classList.add('noimg');}">
+              <span class="bk-fallback">Lean<br>Analytics</span>
+            </a>
+            <div class="book-info">
+              <div class="book-title">Lean Analytics</div>
+              <div class="book-sub">スタートアップのためのデータ解析と活用法</div>
+              <div class="book-meta">アリスター・クロール ＆ ベンジャミン・ヨスコビッツ<br>オライリージャパン<br>ISBN 978-4-87311-711-9</div>
+              <a class="book-amz" href="https://amzn.to/4vViLH6" target="_blank" rel="noopener">Amazonで購入する ↗</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="foot-copy">SDGs発展2［a1］　2026年度　担当：高橋 雄介　／　教科書：A. クロール & B. ヨスコビッツ『Lean Analytics』（オライリージャパン）</div>
+    </div>
+  </section>
+
+</main>
+
+<nav class="dots" id="dots" aria-label="スライド一覧"></nav>
+<div class="navbtns">
+  <button id="upBtn" aria-label="前のスライド">▲</button>
+  <button id="downBtn" aria-label="次のスライド">▼</button>
+</div>
+
+<!-- AI相談（Gemini） -->
+<button class="ai-fab" id="aiFab" aria-label="AIに相談"><span class="sp">✨</span>AIに相談</button>
+<aside class="ai-panel" id="aiPanel" aria-hidden="true">
+  <div class="ai-head">
+    <div><div class="ttl">Lean Analytics アシスタント</div><div class="sub">この回の内容について質問できます</div></div>
+    <span class="badge-g">Gemini</span>
+    <button class="ai-x" id="aiClose" aria-label="閉じる">✕</button>
+  </div>
+  <div class="ai-msgs" id="aiMsgs"></div>
+  <div class="ai-key" id="aiKeyRow" style="display:none">
+    <input type="password" id="aiKey" placeholder="Gemini APIキーを貼り付け" autocomplete="off">
+    <button id="aiKeySet">設定</button>
+  </div>
+  <div class="ai-sugs">
+    <div class="sg-top"><span class="sg-lbl">質問候補</span><button class="sg-reload" id="sgReload" aria-label="質問候補を再生成" title="質問候補を再生成">↻</button></div>
+    <div class="sg-list" id="sgList"></div>
+  </div>
+  <div class="ai-input">
+    <textarea id="aiText" rows="1" placeholder="質問を入力…（例：データストーリーテリングとは？）"></textarea>
+    <button class="ai-send" id="aiSend" aria-label="送信">➤</button>
+  </div>
+  <div class="ai-disclaimer">AIの回答には誤りが含まれることがあります。最終判断は教科書と授業で確認してください。</div>
+</aside>
+
+<script>
+(function(){
+  "use strict";
+  var ddBtn=document.getElementById("ddBtn"),ddMenu=document.getElementById("ddMenu");
+  ddBtn.addEventListener("click",function(e){e.stopPropagation();var o=ddMenu.classList.toggle("open");ddBtn.setAttribute("aria-expanded",o);});
+  document.addEventListener("click",function(e){if(!ddMenu.contains(e.target)&&e.target!==ddBtn){ddMenu.classList.remove("open");ddBtn.setAttribute("aria-expanded","false");}});
+
+  var deck=document.getElementById("deck");
+  var slides=Array.prototype.slice.call(deck.querySelectorAll(".slide"));
+  var dotsWrap=document.getElementById("dots"),upBtn=document.getElementById("upBtn"),downBtn=document.getElementById("downBtn"),current=0;
+  slides.forEach(function(s,i){var b=document.createElement("button");b.innerHTML='<span class="tip">'+(i+1)+'. '+(s.dataset.title||"")+'</span>';b.setAttribute("aria-label",(i+1)+". "+(s.dataset.title||""));b.addEventListener("click",function(){go(i);});dotsWrap.appendChild(b);});
+  var dotBtns=Array.prototype.slice.call(dotsWrap.children);
+  function setActive(i){current=i;dotBtns.forEach(function(d,k){d.classList.toggle("on",k===i);});upBtn.disabled=(i===0);downBtn.disabled=(i===slides.length-1);}
+  function go(i){i=Math.max(0,Math.min(slides.length-1,i));slides[i].scrollIntoView({behavior:"smooth",block:"start"});}
+  upBtn.addEventListener("click",function(){go(current-1);});downBtn.addEventListener("click",function(){go(current+1);});
+  var io=new IntersectionObserver(function(es){es.forEach(function(en){if(en.isIntersecting)setActive(slides.indexOf(en.target));});},{root:deck,threshold:0.55});
+  slides.forEach(function(s){io.observe(s);});setActive(0);
+  document.addEventListener("keydown",function(e){if(e.key==="ArrowDown"||e.key==="PageDown"){e.preventDefault();go(current+1);}if(e.key==="ArrowUp"||e.key==="PageUp"){e.preventDefault();go(current-1);}});
+})();
+</script>
+
+<script>
+(function(){
+  "use strict";
+  /* ===== 設定：下に Gemini APIキーを入れると即座に使えます（公開時はGoogle AI StudioでHTTPリファラ制限を推奨） ===== */
+  var GEMINI_API_KEY = "";                 // 例: "AIza..."（空のままだと、初回にパネル内でキー入力を求めます）
+  var GEMINI_MODEL   = "gemini-3.5-flash"; // 利用可能なモデル名に変更可
+  /* ====================================================================================== */
+  var LECTURE_FOCUS = "データストーリーテリングの原則、効果的なダッシュボード／レポート設計、分析結果を『課題→分析→打ち手』の物語に構成する方法、伝わる発信";
+  var FALLBACK_QS = ["データストーリーテリングとは？", "数字をただ並べるとなぜ伝わらない？", "良いダッシュボードの条件は？", "分析結果をどう物語に構成する？", "レポートでやりがちな失敗は？", "聞き手を動かす伝え方のコツは？"];
+
+  var apiKey=GEMINI_API_KEY, history=[], busy=false, greeted=false;
+  var fab=document.getElementById("aiFab"),panel=document.getElementById("aiPanel"),closeBtn=document.getElementById("aiClose"),
+      msgs=document.getElementById("aiMsgs"),sgList=document.getElementById("sgList"),sgReload=document.getElementById("sgReload"),
+      text=document.getElementById("aiText"),send=document.getElementById("aiSend"),
+      keyRow=document.getElementById("aiKeyRow"),keyInput=document.getElementById("aiKey"),keySet=document.getElementById("aiKeySet");
+  function openPanel(){document.body.classList.add("ai-open");panel.classList.add("open");panel.setAttribute("aria-hidden","false");
+    if(!greeted){greeted=true;addBot("こんにちは。『Lean Analytics』とこの回の内容について、なんでも聞いてください。下の質問候補からも選べます。");renderSugs(FALLBACK_QS.slice(0,4));}
+    setTimeout(function(){text.focus();},300);}
+  function closePanel(){document.body.classList.remove("ai-open");panel.classList.remove("open");panel.setAttribute("aria-hidden","true");}
+  fab.addEventListener("click",openPanel);closeBtn.addEventListener("click",closePanel);
+  document.addEventListener("keydown",function(e){if(e.key==="Escape"&&panel.classList.contains("open"))closePanel();});
+  function esc(s){return s.replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");}
+  function fmt(s){return esc(s).replace(/\*\*(.+?)\*\*/g,"<b>$1</b>");}
+  function addUser(t){var d=document.createElement("div");d.className="msg user";d.textContent=t;msgs.appendChild(d);sc();}
+  function addBot(t){var d=document.createElement("div");d.className="msg bot";d.innerHTML=fmt(t);msgs.appendChild(d);sc();return d;}
+  function addNote(t){var d=document.createElement("div");d.className="msg note";d.textContent=t;msgs.appendChild(d);sc();}
+  function sc(){msgs.scrollTop=msgs.scrollHeight;}
+  function typing(on){var ex=document.getElementById("aiTyping");if(on){if(ex)return;var d=document.createElement("div");d.className="typing";d.id="aiTyping";d.innerHTML="<span></span><span></span><span></span>";msgs.appendChild(d);sc();}else if(ex){ex.remove();}}
+  function needKey(){if(apiKey)return false;keyRow.style.display="flex";addNote("AIに接続するには Gemini APIキーが必要です。下の欄にキーを貼り付けて「設定」を押してください。");return true;}
+  keySet.addEventListener("click",function(){var v=keyInput.value.trim();if(v){apiKey=v;keyRow.style.display="none";keyInput.value="";addNote("APIキーを設定しました。質問できます。");}});
+  function sysPrompt(){return "あなたは武蔵野大学の科目『SDGs発展2』の学習アシスタントです。教科書『Lean Analytics』(A. クロール & B. ヨスコビッツ)の考え方に基づき、学生の質問に日本語でやさしく簡潔に答えます。専門用語は身近な具体例で説明し、逐語引用はせず自分の言葉で説明します。授業の共通ケースはEKIDEN.AI（ランナー向けAIコーチ）で、収益(Stripe)の具体データには触れません。この回のテーマ："+LECTURE_FOCUS+"。テーマと無関係な質問には、丁寧にこの授業の範囲へ話を戻してください。回答は3〜6文程度を目安に。";}
+  function callGemini(contents,system,cb,err){
+    if(!apiKey){err("APIキーが未設定です。");return;}
+    var url="https://generativelanguage.googleapis.com/v1beta/models/"+GEMINI_MODEL+":generateContent?key="+encodeURIComponent(apiKey);
+    var body={contents:contents};if(system)body.system_instruction={parts:[{text:system}]};
+    fetch(url,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(body)})
+      .then(function(r){return r.json().then(function(j){return {ok:r.ok,j:j};});})
+      .then(function(res){
+        if(!res.ok){var m=(res.j&&res.j.error&&res.j.error.message)?res.j.error.message:("HTTP "+(res.j&&res.j.error&&res.j.error.code||"エラー"));err(m);return;}
+        var c=res.j.candidates&&res.j.candidates[0];
+        var t=(c&&c.content&&c.content.parts)?c.content.parts.map(function(p){return p.text||"";}).join(""):"";
+        if(!t){err("空の応答が返りました。");return;}cb(t);
+      }).catch(function(e){err(e.message||"通信に失敗しました。");});
+  }
+  function ask(q){
+    if(busy)return;if(needKey())return;
+    addUser(q);history.push({role:"user",text:q});busy=true;send.disabled=true;typing(true);
+    var contents=history.map(function(m){return {role:m.role,parts:[{text:m.text}]};});
+    callGemini(contents,sysPrompt(),function(t){typing(false);addBot(t);history.push({role:"model",text:t});busy=false;send.disabled=false;},
+      function(em){typing(false);addNote("エラー："+em);if(/API[_ ]?key|invalid|401|403|PERMISSION|API_KEY/i.test(em)){apiKey="";keyRow.style.display="flex";}history.pop();busy=false;send.disabled=false;});
+  }
+  function renderSugs(list){sgList.innerHTML="";list.forEach(function(q){var b=document.createElement("button");b.className="sg";b.textContent=q;b.addEventListener("click",function(){ask(q);});sgList.appendChild(b);});}
+  function pick4(){var a=FALLBACK_QS.slice();for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1)),t=a[i];a[i]=a[j];a[j]=t;}return a.slice(0,4);}
+  function regenSugs(){
+    sgReload.classList.add("spin");
+    if(!apiKey){renderSugs(pick4());sgReload.classList.remove("spin");return;}
+    var prompt="この授業（テーマ："+LECTURE_FOCUS+"）について、学生が聞きたくなりそうな短い質問を、日本語でちょうど4つ作ってください。各質問は40文字以内。JSON配列のみを出力し、説明や記号は付けないでください。例：[\"質問1\",\"質問2\",\"質問3\",\"質問4\"]";
+    callGemini([{role:"user",parts:[{text:prompt}]}],null,function(t){
+      var arr=null;try{var m=t.match(/\[[\s\S]*\]/);if(m)arr=JSON.parse(m[0]);}catch(e){}
+      renderSugs((arr&&arr.length)?arr.slice(0,4):pick4());sgReload.classList.remove("spin");
+    },function(){renderSugs(pick4());sgReload.classList.remove("spin");});
+  }
+  sgReload.addEventListener("click",regenSugs);
+  function autoGrow(){text.style.height="auto";text.style.height=Math.min(text.scrollHeight,120)+"px";}
+  text.addEventListener("input",autoGrow);
+  text.addEventListener("keydown",function(e){if(e.key==="Enter"&&!e.shiftKey){e.preventDefault();submit();}});
+  function submit(){var v=text.value.trim();if(!v)return;text.value="";autoGrow();ask(v);}
+  send.addEventListener("click",submit);
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,1036 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SDGs発展2 第1回｜Lean Analyticsの全体像 ── OMTMとビジネスモデル</title>
+<style>
+  :root{
+    --navy:#15324F; --teal:#1C7293; --green:#3E7C53; --amber:#C58B2B;
+    --ink:#2A2E33; --mute:#5C6670; --line:#E3E8ED;
+    --bg:#FFFFFF; --soft:#F5F8FB; --softg:#F1F6F2; --softa:#FBF5EA;
+    --teal-soft:#E7F0F5; --green-soft:#E9F2EC; --amber-soft:#F8EFDD; --red:#C0392B;
+    --jp:"Yu Gothic","游ゴシック体",YuGothic,"Hiragino Sans","Hiragino Kaku Gothic ProN",Meiryo,sans-serif;
+    --hd:54px;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;height:100%}
+  body{font-family:var(--jp);color:var(--ink);line-height:1.65;background:var(--bg);-webkit-font-smoothing:antialiased}
+  a{color:var(--teal);text-decoration:none}
+
+  /* ---------- header + dropdown ---------- */
+  .hd{position:fixed;top:0;left:0;right:0;height:var(--hd);z-index:100;background:rgba(255,255,255,.93);backdrop-filter:blur(8px);border-bottom:1px solid var(--line);display:flex;align-items:center;gap:14px;padding:0 18px}
+  .hd .brand{font-weight:700;color:var(--navy);font-size:13.5px;letter-spacing:.01em;white-space:nowrap}
+  .hd .brand span{color:var(--teal)}
+  .dropdown{position:relative}
+  .dd-btn{font-family:var(--jp);font-size:13px;border:1px solid var(--line);background:#fff;border-radius:9px;padding:8px 13px;cursor:pointer;color:var(--navy);display:flex;align-items:center;gap:8px}
+  .dd-btn .caret{transition:.2s;font-size:10px;color:var(--mute)}
+  .dd-btn[aria-expanded="true"] .caret{transform:rotate(180deg)}
+  .dd-menu{position:absolute;right:0;top:calc(100% + 8px);background:#fff;border:1px solid var(--line);border-radius:12px;box-shadow:0 14px 36px rgba(21,50,79,.16);padding:6px;min-width:268px;display:none}
+  .dd-menu.open{display:block}
+  .dd-menu .grp{font-size:10.5px;font-weight:700;letter-spacing:.08em;color:var(--mute);padding:8px 12px 4px}
+  .dd-menu a{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:9px 12px;border-radius:8px;font-size:13px;color:var(--ink)}
+  .dd-menu a:hover{background:var(--soft)}
+  .dd-menu a.current{background:var(--teal-soft);color:var(--navy);font-weight:700}
+  .dd-menu a.soon{color:#9aa4ad}
+  .dd-menu a.soon:hover{background:transparent;cursor:default}
+  .dd-menu a .ttl{display:flex;gap:9px;align-items:center}
+  .dd-menu a .badge{font-size:10px;border-radius:5px;padding:2px 7px;font-weight:700}
+  .badge.ready{background:var(--green-soft);color:var(--green)}
+  .badge.soon{background:#eef1f3;color:#9aa4ad}
+
+  /* ---------- deck / slides ---------- */
+  .deck{height:100vh;overflow-y:scroll;scroll-snap-type:y mandatory;scroll-behavior:smooth}
+  .slide{min-height:100vh;scroll-snap-align:start;display:flex;flex-direction:column;justify-content:center;padding:calc(var(--hd) + 22px) 22px 92px;position:relative}
+  .in{max-width:1020px;margin:0 auto;width:100%}
+  .eyebrow{display:inline-flex;align-items:center;gap:9px;font-size:11.5px;font-weight:700;letter-spacing:.13em;color:var(--teal);margin:0 0 12px}
+  .eyebrow .num{font-variant-numeric:tabular-nums;background:var(--navy);color:#fff;border-radius:6px;padding:2px 8px;font-size:10.5px}
+  h2.t{font-size:clamp(20px,3.1vw,28px);color:var(--navy);margin:0 0 8px;line-height:1.32;font-weight:700}
+  .lead{color:var(--mute);max-width:64ch;margin:0 0 22px;font-size:14.5px}
+
+  /* hero */
+  .hero{background:radial-gradient(900px 360px at 86% -12%,var(--teal-soft),transparent 60%),radial-gradient(700px 320px at -6% 112%,var(--green-soft),transparent 60%)}
+  .hero .kick{font-size:13px;font-weight:700;letter-spacing:.1em;color:var(--teal)}
+  .hero h1{font-size:clamp(27px,5vw,46px);line-height:1.2;color:var(--navy);margin:14px 0 10px;font-weight:700;letter-spacing:-.01em}
+  .hero h1 em{font-style:normal;color:var(--teal)}
+  .hero .sub{font-size:clamp(15px,2.1vw,18px);max-width:60ch;margin:0 0 24px}
+  .hero .meta{display:flex;gap:9px;flex-wrap:wrap;font-size:12.5px;color:var(--mute)}
+  .hero .meta b{color:var(--navy)}
+  .pill{display:inline-block;background:#fff;border:1px solid var(--line);border-radius:999px;padding:6px 13px}
+
+  /* generic blocks */
+  .steps{display:grid;grid-template-columns:repeat(5,1fr);gap:11px}
+  .step{background:var(--soft);border:1px solid var(--line);border-radius:12px;padding:15px 13px}
+  .step .n{font-size:12px;font-weight:700;color:#fff;background:var(--teal);width:23px;height:23px;border-radius:50%;display:flex;align-items:center;justify-content:center;margin-bottom:9px}
+  .step h3{margin:0 0 5px;font-size:13.5px;color:var(--navy);line-height:1.4}
+  .step p{margin:0;font-size:11.5px;color:var(--mute);line-height:1.5}
+
+  /* lineage */
+  .lineage{display:flex;align-items:stretch;gap:0;flex-wrap:wrap}
+  .lin{flex:1;min-width:130px;background:var(--soft);border:1px solid var(--line);border-radius:11px;padding:14px 12px;text-align:center;position:relative}
+  .lin.last{background:var(--teal);border-color:var(--teal)}
+  .lin .yr{font-size:11px;color:var(--mute);font-variant-numeric:tabular-nums}
+  .lin.last .yr{color:#cfe3ee}
+  .lin h4{margin:5px 0 3px;font-size:13.5px;color:var(--navy)}
+  .lin.last h4{color:#fff}
+  .lin p{margin:0;font-size:11px;color:var(--mute)}
+  .lin.last p{color:#e4eef4}
+  .arrow{align-self:center;color:#b9c5cf;font-size:18px;padding:0 4px}
+  .lineage .note{flex-basis:100%;font-size:12px;color:var(--mute);margin-top:12px}
+
+  /* 5 stages */
+  .stages{display:flex;gap:10px;flex-wrap:wrap}
+  .stg{flex:1;min-width:120px;border:1px solid var(--line);border-radius:11px;padding:16px 13px;text-align:center;background:#fff}
+  .stg.on{background:var(--teal-soft);border-color:var(--teal)}
+  .stg .en{font-size:11px;color:var(--mute);letter-spacing:.04em}
+  .stg h4{margin:6px 0 4px;font-size:15px;color:var(--navy)}
+  .stg .here{display:none;font-size:10.5px;font-weight:700;color:#fff;background:var(--teal);border-radius:5px;padding:2px 8px;margin-top:6px}
+  .stg .sdesc{font-size:11px;color:var(--mute);margin:6px 0 0;line-height:1.5}
+  .stg.on .sdesc{color:#0f4a63}
+  .stg.on .here{display:inline-block}
+
+  /* case */
+  .case{display:grid;grid-template-columns:1.3fr 1fr;gap:16px}
+  .case .box{border:1px solid var(--line);border-radius:13px;padding:18px}
+  .case h3{margin:0 0 8px;font-size:15px;color:var(--navy)}
+  .case p{font-size:13.5px;margin:0 0 8px}
+  .case ul{margin:6px 0 0;padding-left:18px;font-size:13px;color:var(--mute)}
+  .case .stripe{margin-top:10px;font-size:12px;color:var(--amber);background:var(--amber-soft);border-radius:8px;padding:9px 12px}
+
+  /* vs (OMTM) */
+  .vs{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+  .card{border:1px solid var(--line);border-radius:13px;overflow:hidden}
+  .card .head{padding:13px 17px;font-weight:700;color:#fff;font-size:14.5px}
+  .card.vanity .head{background:var(--amber)} .card.action .head{background:var(--teal)}
+  .card ul{margin:0;padding:14px 17px;list-style:none}
+  .card li{font-size:13px;padding:6px 0 6px 20px;position:relative;border-bottom:1px dashed var(--line)}
+  .card li:last-child{border-bottom:0}
+  .card li::before{content:"";position:absolute;left:2px;top:13px;width:8px;height:8px;border-radius:2px}
+  .card.vanity li::before{background:var(--amber)} .card.action li::before{background:var(--teal)}
+
+  /* interactive flip (funnel 88.86) */
+  .flipwrap{border:1px solid var(--line);border-radius:14px;padding:22px;background:var(--soft)}
+  .funbar{display:flex;align-items:center;gap:14px;margin:6px 0 18px;flex-wrap:wrap}
+  .funbar .seg{text-align:center}
+  .funbar .seg .v{font-size:22px;font-weight:700;color:var(--navy);font-variant-numeric:tabular-nums}
+  .funbar .seg .l{font-size:11.5px;color:var(--mute)}
+  .funbar .conv{background:var(--teal);color:#fff;border-radius:9px;padding:8px 14px;font-weight:700;font-size:15px}
+  .toggle2{display:inline-flex;background:#fff;border:1px solid var(--line);border-radius:11px;padding:4px;margin-bottom:14px}
+  .toggle2 button{font-family:var(--jp);font-size:13px;color:var(--mute);background:transparent;border:0;padding:8px 15px;border-radius:8px;cursor:pointer;font-weight:600}
+  .toggle2 button.on{background:var(--navy);color:#fff}
+  .flipmsg{font-size:14px;border-radius:10px;padding:14px 16px}
+  .flipmsg.vanity{background:var(--amber-soft);color:#7a531a}
+  .flipmsg.real{background:var(--teal-soft);color:#0f4a63}
+  .flipmsg b{font-weight:700}
+
+  /* retention chart */
+  .chartwrap{border:1px solid var(--line);border-radius:14px;padding:18px 18px 8px;background:#fff}
+  .chart-top{display:flex;justify-content:space-between;align-items:center;gap:14px;flex-wrap:wrap;margin-bottom:6px}
+  .legend{display:flex;gap:14px;flex-wrap:wrap}
+  .legend button{font-family:var(--jp);font-size:12.5px;background:transparent;border:0;cursor:pointer;display:flex;align-items:center;gap:7px;color:var(--ink);padding:4px 6px;border-radius:7px}
+  .legend button .sw{width:14px;height:14px;border-radius:4px}
+  .legend button.off{opacity:.35}
+  .legend .cliff .sw{background:var(--amber)} .legend .floor .sw{background:var(--green)}
+  svg.rchart{width:100%;height:auto;display:block}
+  .chart-foot{display:flex;gap:18px;flex-wrap:wrap;margin-top:6px}
+  .chart-foot div{flex:1;min-width:200px;font-size:12.5px;color:var(--mute)}
+  .chart-foot b.cliff{color:var(--amber)} .chart-foot b.floor{color:var(--green)}
+
+  /* active 3 */
+  .three{display:grid;grid-template-columns:repeat(3,1fr);gap:13px}
+  .a3{border:1px solid var(--line);border-radius:12px;padding:16px;background:var(--soft)}
+  .a3 .tag{font-size:11px;font-weight:700;letter-spacing:.05em;color:var(--teal)}
+  .a3 h4{margin:7px 0 5px;font-size:14.5px;color:var(--navy)}
+  .a3 p{margin:0;font-size:12.5px;color:var(--mute)}
+  .trap{margin-top:16px;font-size:13px;color:#7a531a;background:var(--amber-soft);border-radius:10px;padding:13px 16px}
+  .trap b{font-weight:700}
+
+  /* drill */
+  .drill{display:flex;flex-direction:column;gap:11px;counter-reset:d}
+  .dstep{display:flex;gap:14px;border:1px solid var(--line);border-radius:12px;padding:14px 16px;background:#fff}
+  .dstep .dn{flex:none;width:28px;height:28px;border-radius:50%;background:var(--teal);color:#fff;font-weight:700;display:flex;align-items:center;justify-content:center;font-size:13px}
+  .dstep h4{margin:0 0 3px;font-size:14px;color:var(--navy)}
+  .dstep p{margin:0;font-size:12.5px;color:var(--mute)}
+
+  /* task */
+  .task{display:grid;grid-template-columns:1fr 1fr;gap:15px}
+  .tcard{border-radius:13px;padding:18px;color:#fff}
+  .tcard.review{background:var(--teal)} .tcard.prep{background:var(--green)}
+  .tcard h3{margin:0 0 10px;font-size:15px}
+  .tcard ol{margin:0;padding-left:19px}
+  .tcard li{font-size:13px;margin-bottom:7px;line-height:1.5}
+  .band{margin-top:15px;background:var(--navy);color:#fff;border-radius:12px;padding:15px 18px;display:flex;justify-content:space-between;align-items:center;gap:14px;flex-wrap:wrap}
+  .band .dl{font-size:14px;font-weight:700} .band .dl span{color:var(--amber)}
+  .band .next{font-size:12.5px;color:#AFC4D7}
+  .srcnote{font-size:11.5px;color:#9aa4ad;margin-top:16px}
+
+  /* ===== 補足セクション ===== */
+  .eyebrow .num.supp{background:var(--amber)}
+  .q3{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:18px}
+  .qc{background:var(--soft);border:1px solid var(--line);border-radius:12px;padding:15px 14px;position:relative}
+  .qc .qn{width:24px;height:24px;border-radius:50%;background:var(--amber);color:#fff;font-weight:700;font-size:12px;display:flex;align-items:center;justify-content:center;margin-bottom:8px}
+  .qc .ques{font-size:13px;color:var(--navy);font-weight:700;margin:0 0 5px;line-height:1.45}
+  .qc .ans{font-size:11.5px;color:var(--mute);margin:0}
+  .define{background:var(--navy);color:#fff;border-radius:13px;padding:18px 20px}
+  .define .big{font-size:clamp(18px,2.6vw,23px);font-weight:700;margin:0 0 5px}
+  .define .big em{font-style:normal;color:#7fc4dd}
+  .define p{margin:0;font-size:13px;color:#cfe0ec}
+
+  .g4{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+  .rcard{background:var(--soft);border:1px solid var(--line);border-radius:12px;padding:15px 14px}
+  .rcard h4{margin:0 0 5px;font-size:13.5px;color:var(--navy)}
+  .rcard p{margin:0;font-size:12px;color:var(--mute)}
+  .card.r1 .head{background:var(--green)} .card.r2 .head{background:var(--teal)}
+  .card.r1 li::before{background:var(--green)} .card.r2 li::before{background:var(--teal)}
+
+  .spick{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px}
+  .schip{font-family:var(--jp);font-size:13.5px;border:1px solid var(--line);background:#fff;border-radius:999px;padding:9px 17px;cursor:pointer;color:var(--ink);transition:.15s;font-weight:600}
+  .schip:hover{border-color:var(--teal);color:var(--teal)}
+  .schip.on{background:var(--navy);color:#fff;border-color:var(--navy)}
+  .spanel{border:1px solid var(--line);border-radius:13px;padding:0;overflow:hidden;display:grid;grid-template-columns:1fr 1fr}
+  .spanel .half{padding:18px 20px}
+  .spanel .half.q{background:var(--soft);border-right:1px solid var(--line)}
+  .spanel .half .lbl{font-size:11px;font-weight:700;letter-spacing:.06em;color:var(--teal);margin:0 0 6px}
+  .spanel .half.o .lbl{color:var(--green)}
+  .spanel .half .val{font-size:15.5px;color:var(--navy);font-weight:700;margin:0;line-height:1.5}
+  .shint{margin-top:14px;font-size:12.5px;color:var(--mute);background:var(--softa);border-radius:10px;padding:11px 14px}
+
+  .otable{width:100%;border-collapse:collapse;font-size:13px;border:1px solid var(--line);border-radius:12px;overflow:hidden}
+  .otable th{background:var(--navy);color:#fff;font-weight:700;text-align:left;padding:10px 13px;font-size:12px}
+  .otable td{padding:9px 13px;border-top:1px solid var(--line);vertical-align:top}
+  .otable tr:nth-child(even) td{background:var(--soft)}
+  .otable .pj{font-weight:700;color:var(--navy)}
+  .otable .om{font-weight:700;color:var(--teal)}
+  .stbadge{font-size:11px;font-weight:700;border-radius:5px;padding:2px 8px;white-space:nowrap}
+  .stbadge.empathy{background:var(--amber-soft);color:#7a531a}
+  .stbadge.stick{background:var(--teal-soft);color:#0f4a63}
+  .stbadge.rev{background:var(--green-soft);color:#2c5a3c}
+  .otable .pt{font-size:12px;color:var(--mute);margin:12px 0 0}
+
+  .steptoggle{margin-bottom:14px}
+  .lineblk{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+  .linecol h4,.pitcol h4{margin:0 0 10px;font-size:14px;color:var(--navy)}
+  .lineitem{display:flex;justify-content:space-between;align-items:center;gap:10px;background:var(--soft);border:1px solid var(--line);border-radius:10px;padding:10px 14px;margin-bottom:8px}
+  .lineitem .nm{font-size:13px;color:var(--ink)}
+  .lineitem .vl{font-size:13px;font-weight:700;color:var(--teal);white-space:nowrap}
+  .pititem{font-size:12.5px;color:var(--ink);background:var(--amber-soft);border-radius:9px;padding:9px 13px;margin-bottom:8px}
+  .pititem b{color:#7a531a}
+  .whyline{margin-top:6px;font-size:12.5px;color:var(--mute)}
+
+  @media(max-width:860px){.g4{grid-template-columns:1fr 1fr}}
+  @media(max-width:640px){.q3,.g4{grid-template-columns:1fr} .spanel,.lineblk{grid-template-columns:1fr} .spanel .half.q{border-right:0;border-bottom:1px solid var(--line)}}
+
+  /* ===== Classroom リンク ===== */
+  .hd-cr{margin-left:auto;display:inline-flex;align-items:center;gap:7px;font-size:12.5px;font-weight:700;color:var(--green);background:var(--green-soft);border:1px solid #cfe3d4;border-radius:9px;padding:7px 13px;white-space:nowrap}
+  .hd-cr:hover{background:#dcebe0}
+  .cr-submit{display:inline-flex;align-items:center;gap:8px;background:#fff;color:var(--green);font-weight:700;font-size:13.5px;border-radius:10px;padding:10px 16px;white-space:nowrap}
+  .cr-submit:hover{background:var(--green-soft)}
+
+  /* ===== AI相談（Gemini） ===== */
+  .ai-fab{position:fixed;right:18px;bottom:20px;z-index:95;display:inline-flex;align-items:center;gap:8px;background:var(--navy);color:#fff;border:0;border-radius:999px;padding:12px 18px;font-family:var(--jp);font-size:13.5px;font-weight:700;cursor:pointer;box-shadow:0 8px 24px rgba(21,50,79,.28);transition:.18s}
+  .ai-fab:hover{transform:translateY(-2px);box-shadow:0 12px 30px rgba(21,50,79,.34)}
+  .ai-fab .sp{font-size:15px}
+  body.ai-open .ai-fab{opacity:0;pointer-events:none}
+  body.ai-open .dots{display:none}
+  .ai-panel{position:fixed;top:0;right:0;bottom:0;width:min(430px,94vw);background:#fff;z-index:200;display:flex;flex-direction:column;box-shadow:-12px 0 40px rgba(21,50,79,.18);transform:translateX(100%);transition:transform .28s cubic-bezier(.22,.61,.36,1)}
+  .ai-panel.open{transform:translateX(0)}
+  .ai-head{flex:none;display:flex;align-items:center;gap:11px;padding:15px 18px;border-bottom:1px solid var(--line);background:var(--navy);color:#fff}
+  .ai-head .ttl{font-size:14.5px;font-weight:700}
+  .ai-head .sub{font-size:11px;color:#AFC4D7}
+  .ai-head .badge-g{font-size:10px;font-weight:700;background:#0d2436;color:#7fc4dd;border-radius:5px;padding:2px 7px}
+  .ai-x{margin-left:auto;width:32px;height:32px;border-radius:8px;border:0;background:rgba(255,255,255,.12);color:#fff;font-size:15px;cursor:pointer;display:flex;align-items:center;justify-content:center}
+  .ai-x:hover{background:rgba(255,255,255,.22)}
+  .ai-msgs{flex:1;overflow-y:auto;padding:16px;display:flex;flex-direction:column;gap:11px;background:var(--soft)}
+  .msg{max-width:88%;font-size:13.5px;line-height:1.65;padding:11px 14px;border-radius:13px;white-space:pre-wrap;word-break:break-word}
+  .msg.user{align-self:flex-end;background:var(--teal);color:#fff;border-bottom-right-radius:4px}
+  .msg.bot{align-self:flex-start;background:#fff;border:1px solid var(--line);color:var(--ink);border-bottom-left-radius:4px}
+  .msg.bot b{color:var(--navy)}
+  .msg.note{align-self:center;background:var(--amber-soft);color:#7a531a;font-size:12px;max-width:100%}
+  .typing{align-self:flex-start;display:flex;gap:4px;padding:12px 14px;background:#fff;border:1px solid var(--line);border-radius:13px}
+  .typing span{width:7px;height:7px;border-radius:50%;background:#9fb0bd;animation:bn 1s infinite}
+  .typing span:nth-child(2){animation-delay:.15s} .typing span:nth-child(3){animation-delay:.3s}
+  @keyframes bn{0%,80%,100%{opacity:.3;transform:translateY(0)}40%{opacity:1;transform:translateY(-4px)}}
+  .ai-sugs{flex:none;border-top:1px solid var(--line);padding:11px 14px 6px;background:#fff}
+  .ai-sugs .sg-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:8px}
+  .ai-sugs .sg-lbl{font-size:11px;font-weight:700;color:var(--mute);letter-spacing:.04em}
+  .sg-reload{width:28px;height:28px;border-radius:8px;border:1px solid var(--line);background:#fff;color:var(--teal);cursor:pointer;font-size:14px;display:flex;align-items:center;justify-content:center;transition:.15s}
+  .sg-reload:hover{background:var(--teal-soft)}
+  .sg-reload.spin{animation:sp .7s linear infinite}
+  @keyframes sp{to{transform:rotate(360deg)}}
+  .sg-list{display:flex;flex-wrap:wrap;gap:7px}
+  .sg{font-family:var(--jp);font-size:12px;border:1px solid var(--line);background:var(--soft);color:var(--ink);border-radius:999px;padding:7px 12px;cursor:pointer;text-align:left;transition:.15s;line-height:1.4}
+  .sg:hover{border-color:var(--teal);color:var(--teal);background:#fff}
+  .ai-input{flex:none;display:flex;gap:8px;align-items:flex-end;padding:10px 14px 8px;background:#fff}
+  .ai-input textarea{flex:1;font-family:var(--jp);font-size:13.5px;line-height:1.5;border:1px solid var(--line);border-radius:11px;padding:10px 12px;resize:none;max-height:120px;outline:none;color:var(--ink)}
+  .ai-input textarea:focus{border-color:var(--teal)}
+  .ai-send{flex:none;width:40px;height:40px;border-radius:11px;border:0;background:var(--navy);color:#fff;font-size:15px;cursor:pointer;display:flex;align-items:center;justify-content:center}
+  .ai-send:disabled{opacity:.4;cursor:default}
+  .ai-key{display:flex;gap:7px;padding:0 14px 10px;background:#fff}
+  .ai-key input{flex:1;font-family:var(--jp);font-size:12.5px;border:1px solid var(--line);border-radius:9px;padding:8px 11px;outline:none}
+  .ai-key button{font-family:var(--jp);font-size:12.5px;font-weight:700;border:0;background:var(--teal);color:#fff;border-radius:9px;padding:8px 13px;cursor:pointer}
+  .ai-disclaimer{font-size:10.5px;color:#9aa4ad;padding:0 14px 12px;background:#fff;text-align:center}
+
+  /* ファネル・バーチャート */
+  .funnelchart{margin:4px 0 16px}
+  .fbar{margin-bottom:13px}
+  .fbar:last-child{margin-bottom:0}
+  .fbar-top{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:5px}
+  .fbar-name{font-size:13px;font-weight:700;color:var(--navy)}
+  .fbar-name span{font-size:11px;color:var(--mute);font-weight:600;margin-left:5px}
+  .fbar-val{font-size:13px;color:var(--mute);font-variant-numeric:tabular-nums}
+  .fbar-val b{color:var(--navy);font-size:15px}
+  .fbar-track{height:30px;background:#eef2f6;border-radius:8px;overflow:hidden}
+  .fbar-fill{height:100%;border-radius:8px;background:var(--navy);display:flex;align-items:center;justify-content:flex-end;padding-right:10px;color:#fff;font-size:12px;font-weight:700;transition:width .9s cubic-bezier(.22,.61,.36,1)}
+  .fbar-fill.teal{background:var(--teal)}
+  .fconv{margin-top:14px;font-size:13px;color:var(--navy);background:var(--teal-soft);border-radius:9px;padding:10px 14px}
+  .fconv b{color:var(--teal);font-size:16px}
+  .fdrop{font-size:12px;color:var(--amber);margin-left:8px}
+
+  /* フッター（講師・教科書） */
+  .foot-grid{display:grid;grid-template-columns:1.45fr 1fr;gap:18px;align-items:start}
+  .foot-prof{display:flex;gap:16px;background:var(--soft);border:1px solid var(--line);border-radius:14px;padding:18px}
+  .prof-img{flex:none;width:82px;height:82px;border-radius:50%;object-fit:cover;border:2px solid #fff;box-shadow:0 3px 10px rgba(21,50,79,.15)}
+  .prof-name{font-size:16px;font-weight:700;color:var(--navy)} .prof-name span{font-size:12px;color:var(--mute);font-weight:600;margin-left:6px}
+  .prof-title{font-size:12.5px;color:var(--teal);font-weight:700;margin:2px 0 8px}
+  .prof-bio{font-size:12px;color:var(--ink);margin:0 0 10px;line-height:1.6}
+  .prof-links{display:flex;flex-wrap:wrap;gap:7px}
+  .prof-links a{font-size:11.5px;background:#fff;border:1px solid var(--line);border-radius:8px;padding:5px 10px;color:var(--teal)}
+  .prof-links a:hover{border-color:var(--teal)}
+  .foot-book{display:flex;flex-direction:column;background:#fff;border:1px solid var(--line);border-radius:14px;padding:18px}
+  .book-label{font-size:10.5px;font-weight:700;letter-spacing:.08em;color:var(--mute);margin-bottom:10px}
+  .book-row{display:flex;gap:15px}
+  .bk-cover{flex:none;width:90px;height:128px;border-radius:8px;overflow:hidden;display:block;background:linear-gradient(135deg,#15324F,#1C7293);box-shadow:0 6px 18px rgba(21,50,79,.22);position:relative}
+  .bk-cover img{width:100%;height:100%;object-fit:cover;display:block}
+  .bk-fallback{display:none;position:absolute;inset:0;align-items:center;justify-content:center;color:#fff;font-weight:700;font-size:15px;text-align:center;line-height:1.3;letter-spacing:.02em}
+  .bk-cover.noimg .bk-fallback{display:flex}
+  .book-info{display:flex;flex-direction:column}
+  .book-title{font-size:16px;font-weight:700;color:var(--navy)}
+  .book-sub{font-size:11.5px;color:var(--mute);margin:1px 0 8px;line-height:1.4}
+  .book-meta{font-size:11.5px;color:var(--mute);line-height:1.6}
+  .book-amz{margin-top:10px;align-self:flex-start;background:var(--amber);color:#fff;font-weight:700;font-size:12.5px;border-radius:9px;padding:8px 14px}
+  .book-amz:hover{filter:brightness(1.05)}
+  .foot-copy{margin-top:16px;font-size:11px;color:#9aa4ad;text-align:center;border-top:1px solid var(--line);padding-top:12px}
+  @media(max-width:860px){.foot-grid{grid-template-columns:1fr}}
+  @media(max-width:640px){.foot-prof{flex-direction:column} .book-row{flex-direction:column}}
+
+  /* ---------- dots ---------- */
+  .dots{position:fixed;right:16px;top:50%;transform:translateY(-50%);z-index:90;display:flex;flex-direction:column;gap:10px}
+  .dots button{width:11px;height:11px;border-radius:50%;border:1.5px solid #b9c5cf;background:transparent;cursor:pointer;padding:0;position:relative;transition:.2s}
+  .dots button.on{background:var(--teal);border-color:var(--teal);transform:scale(1.3)}
+  .dots button .tip{position:absolute;right:22px;top:50%;transform:translateY(-50%);white-space:nowrap;background:var(--navy);color:#fff;font-size:11px;padding:4px 9px;border-radius:6px;opacity:0;pointer-events:none;transition:.15s}
+  .dots button:hover .tip{opacity:1}
+
+  /* ---------- nav buttons ---------- */
+  .navbtns{position:fixed;bottom:18px;left:50%;transform:translateX(-50%);z-index:90;display:flex;gap:10px}
+  .navbtns button{width:42px;height:42px;border-radius:50%;border:1px solid var(--line);background:rgba(255,255,255,.96);cursor:pointer;font-size:15px;color:var(--navy);box-shadow:0 5px 16px rgba(21,50,79,.14);display:flex;align-items:center;justify-content:center;transition:.15s}
+  .navbtns button:disabled{opacity:.28;cursor:default;box-shadow:none}
+  .navbtns button:hover:not(:disabled){border-color:var(--teal);color:var(--teal)}
+
+  @media(max-width:860px){
+    .steps{grid-template-columns:repeat(3,1fr)} .case{grid-template-columns:1fr} .dots{display:none}
+  }
+  @media(max-width:640px){
+    .vs,.three,.task{grid-template-columns:1fr} .steps{grid-template-columns:1fr 1fr}
+    .lineage .arrow{display:none} .lin{flex-basis:100%}
+  }
+  @media(prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header class="hd">
+  <div class="brand">SDGs発展2 <span>講義紹介</span></div>
+  <a class="hd-cr" href="https://classroom.google.com/c/ODU5NjUzNDM0Njk0" target="_blank" rel="noopener">🎓 Classroom</a>
+  <div class="dropdown">
+    <button class="dd-btn" id="ddBtn" aria-expanded="false">第1回：全体像とOMTM <span class="caret">▼</span></button>
+    <div class="dd-menu" id="ddMenu">
+      <div class="grp">全7回</div>
+      <a class="current" href="#"><span class="ttl">第1回　全体像 ── OMTMとビジネスモデル</span><span class="badge ready">表示中</span></a>
+      <a href="lecture2.html"><span class="ttl">第2回　データ収集の設計 ── 定性と定量</span><span class="badge ready">公開</span></a>
+      <a href="lecture3.html"><span class="ttl">第3回　コホート分析とファネル分析</span><span class="badge soon">準備中</span></a>
+      <a href="lecture4.html"><span class="ttl">第4回　ピボットの判断 ── 意思決定</span><span class="badge soon">準備中</span></a>
+      <a href="lecture5.html"><span class="ttl">第5回　データストーリーテリング</span><span class="badge soon">準備中</span></a>
+      <a href="lecture6.html"><span class="ttl">第6回　投資家向けピッチの準備</span><span class="badge soon">準備中</span></a>
+      <a href="lecture7.html"><span class="ttl">第7回　最終発表＆振り返り</span><span class="badge soon">準備中</span></a>
+    </div>
+  </div>
+</header>
+
+<!-- DECK -->
+<main class="deck" id="deck">
+
+  <!-- 1 HERO -->
+  <section class="slide hero" data-title="タイトル">
+    <div class="in">
+      <div class="kick">2026年度　SDGs発展2［a1］　第1回</div>
+      <h1>Lean Analyticsの全体像<br><em>── OMTMとビジネスモデル</em></h1>
+      <p class="sub">この科目は、SDGs課題を<b>データで検証しながら前に進める</b>ための7回です。第1回は地図を広げます。鍵は<b>OMTM（最重要指標を一つに絞る）</b>こと。EKIDEN.AI を共通ケースに学びます。</p>
+      <div class="meta">
+        <span class="pill">担当：<b>高橋 雄介</b></span>
+        <span class="pill">形態：遠隔（同時双方向）</span>
+        <span class="pill">教科書：<b>Lean Analytics</b>（クロール＆ヨスコビッツ）</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- 2 FLOW -->
+  <section class="slide" data-title="今日の流れ">
+    <div class="in">
+      <div class="eyebrow"><span class="num">01</span> 今日の流れ</div>
+      <h2 class="t">地図を広げ、最初の一点（OMTM）を決める</h2>
+      <p class="lead">分析手法の系譜から始め、EKIDEN.AIの実データで「映える数字の罠」を体験し、自分のプロジェクトのOMTMを仮置きするところまで進みます。</p>
+      <div class="steps">
+        <div class="step"><div class="n">1</div><h3>系譜と全体像</h3><p>顧客開発からLean Analyticsまで</p></div>
+        <div class="step"><div class="n">2</div><h3>5段階とOMTM</h3><p>今どの段階か／一点に絞る</p></div>
+        <div class="step"><div class="n">3</div><h3>ファネルの罠</h3><p>88.86%は“映える数字”？</p></div>
+        <div class="step"><div class="n">4</div><h3>崖と底</h3><p>リテンションの“形”を見る</p></div>
+        <div class="step"><div class="n">5</div><h3>OMTMを仮置き</h3><p>自分のテーマで一つ選ぶ</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3 LINEAGE -->
+  <section class="slide" data-title="系譜">
+    <div class="in">
+      <div class="eyebrow"><span class="num">02</span> 系譜</div>
+      <h2 class="t">Lean Analytics はどこから来たか</h2>
+      <p class="lead">出発点は「顧客に学ぶ」こと。仮説検証の系譜の最後に、検証を“数字で”支えるLean Analyticsが位置します。</p>
+      <div class="lineage">
+        <div class="lin"><div class="yr">2005頃〜</div><h4>顧客開発</h4><p>S. ブランク</p></div>
+        <div class="arrow">→</div>
+        <div class="lin"><div class="yr">2011</div><h4>リーン・スタートアップ</h4><p>E. リース</p></div>
+        <div class="arrow">→</div>
+        <div class="lin"><div class="yr">2012</div><h4>Running Lean</h4><p>A. マウリャ</p></div>
+        <div class="arrow">→</div>
+        <div class="lin"><div class="yr">2013</div><h4>Lean UX</h4><p>J. フレイザー / LUXr ほか</p></div>
+        <div class="arrow">→</div>
+        <div class="lin last"><div class="yr">2013</div><h4>Lean Analytics</h4><p>クロール＆ヨスコビッツ</p></div>
+        <div class="note">流れはこうです。まず顧客に学ぶ「顧客開発」、ムダなく仮説を検証する「リーン・スタートアップ」、それを実践の手順に落とした「Running Lean」、使う人の体験を磨く「Lean UX」、そして検証を“数字”で支えるのが「Lean Analytics」です。一貫しているのは「アイデアの正しさは、机上ではなく顧客と数字で確かめる」という考え方。この授業はその最後の「数字で確かめる」部分を扱います。</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4 STAGES -->
+  <section class="slide" data-title="5段階">
+    <div class="in">
+      <div class="eyebrow"><span class="num">03</span> 5段階</div>
+      <h2 class="t">事業の5段階 ── EKIDEN.AI は今「定着」にいる</h2>
+      <p class="lead">段階によって追うべき指標は変わります。集める前に「今どこか」を見極めます。EKIDEN.AI の現在地は<b>定着（スティッキネス）</b>。使い続けてもらえるかが勝負です。</p>
+      <div class="stages">
+        <div class="stg"><div class="en">Empathy</div><h4>共感</h4><p class="sdesc">その課題は本当に「困りごと」？を確かめる</p></div>
+        <div class="stg on"><div class="en">Stickiness</div><h4>定着</h4><p class="sdesc">一度使った人が「使い続ける」かを見る</p><span class="here">EKIDEN.AI の現在地</span></div>
+        <div class="stg"><div class="en">Virality</div><h4>拡散</h4><p class="sdesc">人づてに「新しい人へ広がる」かを見る</p></div>
+        <div class="stg"><div class="en">Revenue</div><h4>収益</h4><p class="sdesc">事業として「お金（資源）が回る」かを見る</p></div>
+        <div class="stg"><div class="en">Scale</div><h4>規模化</h4><p class="sdesc">仕組みを保ったまま「もっと多くへ届ける」</p></div>
+      </div>
+      <p class="lead" style="margin-top:18px;margin-bottom:0">定着の段階では、新規獲得より<b>「戻ってきて使い続けるか」</b>を測ります。だからこの先のファネルやリテンションが効いてきます。</p>
+    </div>
+  </section>
+
+  <!-- 5 CASE -->
+  <section class="slide" data-title="ケース">
+    <div class="in">
+      <div class="eyebrow"><span class="num">04</span> 共通ケース</div>
+      <h2 class="t">EKIDEN.AI とは ── 今日の“素材”</h2>
+      <p class="lead">講義の共通ケースとして実データを使います。採点は各自のSDGsプロジェクトで行う二層構成です。</p>
+      <div class="case">
+        <div class="box">
+          <h3>プロダクト概要</h3>
+          <p>ランナー向けのAIコーチ。練習計画の提案と、走った記録へのフィードバックで「走り続ける」を支えます。</p>
+          <p style="color:var(--mute);font-size:12.5px;margin:0">SDGsの観点：健康（目標3）と、続けられる習慣づくりに関わります。</p>
+        </div>
+        <div class="box">
+          <h3>使うデータ</h3>
+          <ul>
+            <li>訪問・サインアップ（ファネル）</li>
+            <li>週次フィードバックのクリック</li>
+            <li>ラン記録・投稿（コア行動）</li>
+          </ul>
+          <div class="stripe">⚠ 収益（Stripe）データは扱いません。指標の“形”を学ぶことに集中します。</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 6 OMTM -->
+  <section class="slide" data-title="OMTM">
+    <div class="in">
+      <div class="eyebrow"><span class="num">05</span> OMTM</div>
+      <h2 class="t">OMTM ── 今、最も重要な“一つ”の指標</h2>
+      <p class="lead">指標は多いほど良い、ではありません。今の段階で「これが動けば事業が前に進む」という一点に絞ります。<span style="color:var(--mute)">（『Lean Analytics』の考え方を要約）</span></p>
+      <div class="vs">
+        <div class="card vanity">
+          <div class="head">⚠ バニティに陥りやすい指標</div>
+          <ul>
+            <li>累計サインアップ数（増える一方）</li>
+            <li>サインアップ率 88.86%（“映える”が…）</li>
+            <li>接続済みユーザー総数</li>
+          </ul>
+        </div>
+        <div class="card action">
+          <div class="head">✓ EKIDEN.AI の OMTM 候補</div>
+          <ul>
+            <li>週次フィードバックのクリック率</li>
+            <li>投稿（コア行動）のリテンションの底</li>
+            <li>= 「使い続けているか」を映す一点</li>
+          </ul>
+        </div>
+      </div>
+      <div class="typ" style="margin-top:16px;font-size:13px;color:var(--navy);background:var(--soft);border-radius:10px;padding:12px 15px">用語：<b>バニティ指標</b>＝見栄えはいいが行動が変わらない数字（たいてい累計・総数）。<b>OMTM</b>＝今いちばん大事にする“たった一つ”の指標（たいてい率・割合）。EKIDEN.AI は「定着」段階なので、新規の数より「使い続けているか」を映す指標を一つに絞ります。</div>
+    </div>
+  </section>
+
+  <!-- 7 FUNNEL TRAP (interactive) -->
+  <section class="slide" data-title="ファネルの罠">
+    <div class="in">
+      <div class="eyebrow"><span class="num">06</span> インタラクティブ</div>
+      <h2 class="t">88.86% は良い数字？ ── 見方を切り替える</h2>
+      <p class="lead">EKIDEN.AI の入口のファネルです。同じ数字を「自慢の数字」として見るか、「入口にすぎない」と見るかで、次の打ち手が変わります。</p>
+      <div class="flipwrap">
+        <div class="funnelchart">
+          <div class="fbar">
+            <div class="fbar-top"><span class="fbar-name">訪問 <span>Visits</span></span><span class="fbar-val"><b>359</b> 人</span></div>
+            <div class="fbar-track"><div class="fbar-fill" style="width:100%">100%</div></div>
+          </div>
+          <div class="fbar">
+            <div class="fbar-top"><span class="fbar-name">サインアップ <span>Signups</span></span><span class="fbar-val"><b>319</b> 人</span></div>
+            <div class="fbar-track"><div class="fbar-fill teal" style="width:88.86%">88.86%</div></div>
+          </div>
+          <div class="fconv">サインアップ率（サインアップ ÷ 訪問）＝ <b>88.86%</b><span class="fdrop">▼ 脱落はわずか40人</span></div>
+        </div>
+        <div class="toggle2" id="funToggle">
+          <button data-m="vanity" class="on">数字だけ見る</button>
+          <button data-m="real">意味を見る</button>
+        </div>
+        <div class="flipmsg vanity" id="funMsg"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 8 RETENTION (interactive signature) -->
+  <section class="slide" data-title="崖と底">
+    <div class="in">
+      <div class="eyebrow"><span class="num">07</span> インタラクティブ（中核）</div>
+      <h2 class="t">2つのリテンション ── 崖 と 底</h2>
+      <p class="lead">大事なのは“率の高さ”より<b>“形”</b>です。「実測値」と「初期比＝形」を切り替えると、ゼロへ落ちる崖と、横ばいで残る定着のコア（底）の違いが見えます。凡例をクリックで線の表示を切替。</p>
+      <div class="chartwrap">
+        <div class="chart-top">
+          <div class="legend" id="legend">
+            <button class="cliff" data-line="cliff"><span class="sw"></span>ページ閲覧（崖）</button>
+            <button class="floor" data-line="floor"><span class="sw"></span>投稿＝コア行動（底）</button>
+          </div>
+          <div class="toggle2" id="retToggle">
+            <button data-m="abs" class="on">実測値（％）</button>
+            <button data-m="shape">初期比＝形</button>
+          </div>
+        </div>
+        <svg class="rchart" id="rchart" viewBox="0 0 660 300" role="img" aria-label="リテンション曲線"></svg>
+        <div class="chart-foot">
+          <div><b class="cliff">崖（ページ閲覧）</b>：58.7% → 翌期7%台 → 4%台へ。来訪はするが、ほぼ戻らない。</div>
+          <div><b class="floor">底（投稿＝コア行動）</b>：11.4% → 3〜4%で横ばい。少数でも“定着するコア”が残る ── ここを太らせる。</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 9 ACTIVE -->
+  <section class="slide" data-title="アクティブとは">
+    <div class="in">
+      <div class="eyebrow"><span class="num">08</span> 定義</div>
+      <h2 class="t">「アクティブ」とは何か ── 3つに分ける</h2>
+      <p class="lead">EKIDEN.AI は端末連携で“価値が届く”プロダクト。だから「アプリに戻ったか」だけでは関与を取りこぼします。</p>
+      <div class="three">
+        <div class="a3"><div class="tag">節目（一度きり）</div><h4>アクティベーション</h4><p>デバイス連携の完了。価値を受け取る準備が整った瞬間。</p></div>
+        <div class="a3"><div class="tag">価値への関与</div><h4>アクティブ</h4><p>その期間に価値に関わった（フィードバックをクリック→次の行動）。</p></div>
+        <div class="a3"><div class="tag">関与ではない</div><h4>受動的な状態</h4><p>連携が続いて同期されているだけ。来ている≠使っている。</p></div>
+      </div>
+      <div class="trap">⚠ <b>罠：</b>連携は永続なので「接続済み＝アクティブ」とするとほぼ全員がアクティブになり、定着の弱さを隠してしまう（バニティ）。連携は“節目”、アクティブは“価値への関与”で測る。</div>
+    </div>
+  </section>
+
+  <!-- 10 DRILL -->
+  <section class="slide" data-title="今日のドリル">
+    <div class="in">
+      <div class="eyebrow"><span class="num">09</span> グループワーク</div>
+      <h2 class="t">今日のドリル ── OMTMを一つに絞る</h2>
+      <p class="lead">EKIDEN.AIで練習し、自分のプロジェクトに持ち帰ります。</p>
+      <div class="drill">
+        <div class="dstep"><div class="dn">1</div><div><h4>EKIDEN.AI の OMTM 候補を3つ挙げる</h4><p>累計サインアップ／88.86%／週次クリック率 など。バニティ寄り・アクショナブル寄りに仕分ける。</p></div></div>
+        <div class="dstep"><div class="dn">2</div><div><h4>自分のプロジェクトの OMTM を仮置きする</h4><p>自分のSDGsプロジェクトで「今、最も重要な一つ」を選ぶ。</p></div></div>
+        <div class="dstep"><div class="dn">3</div><div><h4>互いにツッコミ合う</h4><p>「その数字、ごまかせない？」「下がったら何を変える？」と問い、暫定OMTMを一つに絞る。</p></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== 補足セクション（OMTM深掘り） ===== -->
+
+  <!-- S1 補足イントロ -->
+  <section class="slide" data-title="補足：OMTMとは">
+    <div class="in">
+      <div class="eyebrow"><span class="num supp">補足</span> 前回の質問に答えます</div>
+      <h2 class="t">補足：OMTM をやさしく</h2>
+      <p class="lead">前回いただいた質問はどれも良い問いでした。順番に、図と言葉でやさしく整理します。<span style="color:var(--mute)">（『Lean Analytics』の考え方に沿って再構成）</span></p>
+      <div class="q3">
+        <div class="qc"><div class="qn">1</div><p class="ques">「OMTMをもう少しわかりやすく」</p><p class="ans">→ 何か・なぜ一つかを説明</p></div>
+        <div class="qc"><div class="qn">2</div><p class="ques">「自分のOMTMの決め方が難しい」</p><p class="ans">→ 5ステップ＋具体例で手順化</p></div>
+        <div class="qc"><div class="qn">3</div><p class="ques">「具体例でイメージしたい」</p><p class="ans">→ 身近なSDGs事例を並べる</p></div>
+      </div>
+      <div class="define">
+        <p class="big">OMTM ＝ <em>One Metric That Matters</em>（最重要指標）</p>
+        <p>今、いちばん大事にする “たった一つ” の指標。全部は追わず、「今いちばん知りたいこと」に答える一つの数字を選びます。</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- S2 なぜ一つ＋良い指標の条件 -->
+  <section class="slide" data-title="なぜ一つに絞る">
+    <div class="in">
+      <div class="eyebrow"><span class="num supp">補足</span> 絞る理由と、良い指標</div>
+      <h2 class="t">なぜ「一つ」に絞るのか ── 良い指標の条件</h2>
+      <p class="lead">指標を絞ると、かえって前に進みやすくなります。そして選ぶなら「良い指標」の条件を満たすものを。</p>
+      <div class="vs">
+        <div class="card r1"><div class="head">一つに絞ると…</div>
+          <ul><li><b>集中できる</b> ── 一つなら迷わず動ける</li><li><b>問いに答えられる</b> ── 今いちばんの疑問に向き合う</li><li><b>実験しやすい</b> ── その数字を上げる施策に集中</li><li><b>共有しやすい</b> ── 全員が同じ“的”を見られる</li></ul></div>
+        <div class="card r2"><div class="head">良い指標の4条件</div>
+          <ul><li><b>分かりやすい</b> ── 一目で「何の数字か」</li><li><b>比較できる</b> ── 前週・他グループと比べられる</li><li><b>比率・割合</b> ── 合計でなく「〜率」で見る</li><li><b>行動が変わる</b> ── 下がったら次の一手が打てる</li></ul></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- S3 段階で変わる（interactive） -->
+  <section class="slide" data-title="段階で変わる">
+    <div class="in">
+      <div class="eyebrow"><span class="num supp">補足</span> インタラクティブ</div>
+      <h2 class="t">OMTM は「段階」で変わる ── 押して確かめる</h2>
+      <p class="lead">プロジェクトの段階が進むと、いちばん大事な問い＝OMTMも変わります。固定ではありません。段階を選ぶと「問い」と「OMTMの例」が出ます。</p>
+      <div class="spick" id="spick">
+        <button class="schip on" data-s="empathy">共感</button>
+        <button class="schip" data-s="stick">定着</button>
+        <button class="schip" data-s="viral">口コミ</button>
+        <button class="schip" data-s="rev">収益</button>
+        <button class="schip" data-s="scale">拡大</button>
+      </div>
+      <div class="spanel">
+        <div class="half q"><p class="lbl">いちばん大事な問い</p><p class="val" id="sQ"></p></div>
+        <div class="half o"><p class="lbl">OMTM の例</p><p class="val" id="sO"></p></div>
+      </div>
+      <div class="shint">授業のヒント：多くの学生プロジェクトは、まず「<b>共感</b>（課題は本物か）」か「<b>定着</b>（続けて使われるか）」の段階にいます。</div>
+    </div>
+  </section>
+
+  <!-- S4 事例 -->
+  <section class="slide" data-title="事例で見る">
+    <div class="in">
+      <div class="eyebrow"><span class="num supp">補足</span> 具体例</div>
+      <h2 class="t">事例で見る OMTM</h2>
+      <p class="lead">身近なプロジェクトで、段階・問い・OMTMの例を並べました（あくまで一例です）。</p>
+      <table class="otable">
+        <thead><tr><th>プロジェクト</th><th>段階</th><th>いちばん大事な問い</th><th>OMTM の例</th></tr></thead>
+        <tbody>
+          <tr><td class="pj">EKIDEN.AI（授業の例）</td><td><span class="stbadge stick">定着</span></td><td>届いた価値に関与しているか</td><td class="om">週次フィードバック・クリック率</td></tr>
+          <tr><td class="pj">食品ロス削減（目標12）</td><td><span class="stbadge empathy">共感</span></td><td>本当に困っている人がいるか</td><td class="om">今週“食品を捨てた”人の割合</td></tr>
+          <tr><td class="pj">高齢者の遠隔健康相談（目標3）</td><td><span class="stbadge empathy">共感</span></td><td>体調変化に気づけず困っているか</td><td class="om">「見逃した体調変化」経験者の割合</td></tr>
+          <tr><td class="pj">学習アプリ（一般）</td><td><span class="stbadge stick">定着</span></td><td>続けて使ってくれるか</td><td class="om">週次の継続率（リテンション）</td></tr>
+          <tr><td class="pj">ネット通販（一般）</td><td><span class="stbadge rev">収益</span></td><td>リピートされるか</td><td class="om">リピート購入率</td></tr>
+        </tbody>
+      </table>
+      <p class="pt">ポイント：早い段階（共感）では「割合」で<b>“課題が本物か”</b>を測り、定着段階では「継続・関与の率」を測る。</p>
+    </div>
+  </section>
+
+  <!-- S5 決め方5ステップ（interactive toggle） -->
+  <section class="slide" data-title="決め方5ステップ">
+    <div class="in">
+      <div class="eyebrow"><span class="num supp">補足</span> インタラクティブ</div>
+      <h2 class="t">自分の OMTM の決め方（5ステップ）</h2>
+      <p class="lead">5つのステップで決めます。「記入例」に切り替えると、食品ロス削減プロジェクトにあてはめた中身が見られます。</p>
+      <div class="toggle2 steptoggle" id="stepToggle">
+        <button data-m="howto" class="on">手順</button>
+        <button data-m="example">記入例（食品ロス削減）</button>
+      </div>
+      <div class="drill" id="stepList"></div>
+    </div>
+  </section>
+
+  <!-- S6 ライン＋つまずき -->
+  <section class="slide" data-title="ラインとつまずき">
+    <div class="in">
+      <div class="eyebrow"><span class="num supp">補足</span> 仕上げ</div>
+      <h2 class="t">「ライン」を引く ── そして、よくあるつまずき</h2>
+      <p class="lead">OMTMには必ず “ライン（目標値）” をセットします。あると「成功か、見直しか」をその場で判断できます。</p>
+      <div class="lineblk">
+        <div class="linecol">
+          <h4>ライン（目標値）の例</h4>
+          <div class="lineitem"><span class="nm">週次クリック率</span><span class="vl">15% 以上を目指す</span></div>
+          <div class="lineitem"><span class="nm">食品を捨てた割合</span><span class="vl">50% 以上なら課題は本物</span></div>
+          <div class="lineitem"><span class="nm">週次の継続率</span><span class="vl">30% を下回ったら作り直す</span></div>
+          <p class="whyline">ラインがないと、数字を眺めるだけで終わってしまいます。</p>
+        </div>
+        <div class="pitcol">
+          <h4>よくあるつまずき → 対処</h4>
+          <div class="pititem">指標が多すぎて絞れない <b>→</b> 「今いちばん知りたいこと」に戻る。一つでよい</div>
+          <div class="pititem">累計・総数で見てしまう <b>→</b> 「率・割合」に直す</div>
+          <div class="pititem">測れない指標を選ぶ <b>→</b> 「どう集めるか」までセットで考える</div>
+          <div class="pititem">目標値（ライン）がない <b>→</b> 数字に“合格ライン”を決める</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 11 TASK -->
+  <section class="slide" data-title="次回までの課題">
+    <div class="in">
+      <div class="eyebrow"><span class="num">10</span> 次回までの課題</div>
+      <h2 class="t">OMTMを言葉にして、次回につなぐ</h2>
+      <div class="task">
+        <div class="tcard review">
+          <h3>🔁 復習</h3>
+          <ol>
+            <li>自分のプロジェクトのOMTM候補を3つ以上リストアップし比較する</li>
+            <li>選んだOMTMの「分子・分母」を言葉で定義する</li>
+            <li>その指標が“ごまかせない”理由を一文で書く</li>
+          </ol>
+        </div>
+        <div class="tcard prep">
+          <h3>📖 予習</h3>
+          <ol start="4">
+            <li>教科書『Lean Analytics』Part 1 を読む</li>
+            <li>SDGs基礎で作ったリーンキャンバスを見直す</li>
+          </ol>
+        </div>
+      </div>
+      <div class="band">
+        <div class="dl">提出締切：<span>5/28（水）23:59</span></div>
+        <a class="cr-submit" href="https://classroom.google.com/c/ODU5NjUzNDM0Njk0" target="_blank" rel="noopener">🎓 Classroomで提出 ↗</a>
+        <div class="next">次回予告 ── 第2回：データ収集の設計</div>
+      </div>
+      <p class="srcnote">出典：A. クロール＆B. ヨスコビッツ『Lean Analytics』（オライリージャパン）を要約・再構成（逐語引用なし）。数値はEKIDEN.AIの教材用データで、収益（Stripe）データは扱いません。</p>
+    </div>
+  </section>
+  <!-- FOOTER (講師・教科書) -->
+  <section class="slide" data-title="講師・教科書">
+    <div class="in">
+      <div class="eyebrow"><span class="num">INFO</span> この講義について</div>
+      <h2 class="t">講師と教科書</h2>
+      <div class="foot-grid">
+        <div class="foot-prof">
+          <img class="prof-img" src="https://tensenses-model.web.app/assets/yt.jpg" alt="高橋 雄介" onerror="this.style.display='none'">
+          <div class="prof-body">
+            <div class="prof-name">高橋 雄介 <span>Yusuke Takahashi, PhD</span></div>
+            <div class="prof-title">武蔵野大学 データサイエンス学部 准教授</div>
+            <p class="prof-bio">計算機科学者・連続起業家。AIx{ } 共同創業。直交化した意味空間に基づく適応的なセマンティック基盤と知識ベースを研究。シリコンバレーと東京でソフトウェアのスタートアップを創業し、プロダクト設計・グロース・顧客開発に従事。500 Startups 出身。慶應義塾大学にて博士（政策・メディア）。</p>
+            <div class="prof-links">
+              <a href="https://www.linkedin.com/in/yusuketakahashiphd/" target="_blank" rel="noopener">LinkedIn ↗</a>
+              <a href="https://orcid.org/0009-0006-8351-2280" target="_blank" rel="noopener">ORCID ↗</a>
+              <a href="https://mids.ac/" target="_blank" rel="noopener">武蔵野大学データサイエンス ↗</a>
+              <a href="https://aix.sc" target="_blank" rel="noopener">AIx ↗</a>
+            </div>
+          </div>
+        </div>
+        <div class="foot-book">
+          <div class="book-label">教科書 ／ TEXTBOOK</div>
+          <div class="book-row">
+            <a class="bk-cover" href="https://amzn.to/4vViLH6" target="_blank" rel="noopener" aria-label="Amazonで購入する">
+              <img src="https://m.media-amazon.com/images/P/4873117119.01._SCLZZZZZZZ_.jpg" alt="Lean Analytics 表紙" onerror="if(!this.dataset.f){this.dataset.f='1';this.src='https://www.oreilly.co.jp/books/images/picture_large978-4-87311-711-9.jpeg';}else{this.style.display='none';this.parentNode.classList.add('noimg');}">
+              <span class="bk-fallback">Lean<br>Analytics</span>
+            </a>
+            <div class="book-info">
+              <div class="book-title">Lean Analytics</div>
+              <div class="book-sub">スタートアップのためのデータ解析と活用法</div>
+              <div class="book-meta">アリスター・クロール ＆ ベンジャミン・ヨスコビッツ<br>オライリージャパン<br>ISBN 978-4-87311-711-9</div>
+              <a class="book-amz" href="https://amzn.to/4vViLH6" target="_blank" rel="noopener">Amazonで購入する ↗</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="foot-copy">SDGs発展2［a1］　2026年度　担当：高橋 雄介　／　教科書：A. クロール & B. ヨスコビッツ『Lean Analytics』（オライリージャパン）</div>
+    </div>
+  </section>
+
+</main>
+
+<!-- DOTS -->
+<nav class="dots" id="dots" aria-label="スライド一覧"></nav>
+
+<!-- NAV BUTTONS -->
+<div class="navbtns">
+  <button id="upBtn" aria-label="前のスライド">▲</button>
+  <button id="downBtn" aria-label="次のスライド">▼</button>
+</div>
+
+<script>
+(function(){
+  "use strict";
+
+  /* ---------- dropdown ---------- */
+  var ddBtn=document.getElementById("ddBtn"), ddMenu=document.getElementById("ddMenu");
+  ddBtn.addEventListener("click",function(e){e.stopPropagation();var o=ddMenu.classList.toggle("open");ddBtn.setAttribute("aria-expanded",o);});
+  document.addEventListener("click",function(e){ if(!ddMenu.contains(e.target)&&e.target!==ddBtn){ddMenu.classList.remove("open");ddBtn.setAttribute("aria-expanded","false");}});
+
+  /* ---------- deck / dots / buttons ---------- */
+  var deck=document.getElementById("deck");
+  var slides=Array.prototype.slice.call(deck.querySelectorAll(".slide"));
+  var dotsWrap=document.getElementById("dots");
+  var upBtn=document.getElementById("upBtn"), downBtn=document.getElementById("downBtn");
+  var current=0;
+
+  slides.forEach(function(s,i){
+    var b=document.createElement("button");
+    b.innerHTML='<span class="tip">'+(i+1)+'. '+(s.dataset.title||"")+'</span>';
+    b.setAttribute("aria-label",(i+1)+". "+(s.dataset.title||""));
+    b.addEventListener("click",function(){go(i);});
+    dotsWrap.appendChild(b);
+  });
+  var dotBtns=Array.prototype.slice.call(dotsWrap.children);
+
+  function setActive(i){
+    current=i;
+    dotBtns.forEach(function(d,k){d.classList.toggle("on",k===i);});
+    upBtn.disabled=(i===0);
+    downBtn.disabled=(i===slides.length-1);
+  }
+  function go(i){ i=Math.max(0,Math.min(slides.length-1,i)); slides[i].scrollIntoView({behavior:"smooth",block:"start"}); }
+
+  upBtn.addEventListener("click",function(){go(current-1);});
+  downBtn.addEventListener("click",function(){go(current+1);});
+
+  var io=new IntersectionObserver(function(entries){
+    entries.forEach(function(en){ if(en.isIntersecting){ setActive(slides.indexOf(en.target)); } });
+  },{root:deck,threshold:0.55});
+  slides.forEach(function(s){io.observe(s);});
+  setActive(0);
+
+  document.addEventListener("keydown",function(e){
+    if(e.key==="ArrowDown"||e.key==="PageDown"){e.preventDefault();go(current+1);}
+    if(e.key==="ArrowUp"||e.key==="PageUp"){e.preventDefault();go(current-1);}
+  });
+
+  /* ---------- funnel flip ---------- */
+  var funToggle=document.getElementById("funToggle"), funMsg=document.getElementById("funMsg");
+  var funText={
+    vanity:'「サインアップ率 <b>88.86%</b>！ほぼ全員が登録してくれます ── 過去最高です。」<br><span style="opacity:.8">…でも、これは“入口に入った率”にすぎません。</span>',
+    real:'登録は<b>入口</b>にすぎません。問われるのは「<b>その後、使い続けるか</b>」＝リテンション。次のスライドで“崖と底”を見ます。'
+  };
+  function setFun(m){
+    funMsg.className="flipmsg "+(m==="vanity"?"vanity":"real");
+    funMsg.innerHTML=funText[m];
+    Array.prototype.forEach.call(funToggle.children,function(b){b.classList.toggle("on",b.dataset.m===m);});
+  }
+  funToggle.addEventListener("click",function(e){var b=e.target.closest("button");if(b)setFun(b.dataset.m);});
+  setFun("vanity");
+
+  /* ---------- retention chart ---------- */
+  var P=[0,1,2,3,4,5,6,7];
+  var cliff=[58.7,7.2,6.5,6.9,5.1,6.4,4.5,4.3];
+  var floor=[11.4,5.1,3.7,3.6,3.2,3.5,3.6,3.4];
+  var show={cliff:true,floor:true}, mode="abs";
+  var svg=document.getElementById("rchart");
+  var W=660,H=300,PAD={l:46,r:18,t:16,b:34};
+  var plotW=W-PAD.l-PAD.r, plotH=H-PAD.t-PAD.b;
+
+  function series(name){
+    var raw=name==="cliff"?cliff:floor;
+    if(mode==="abs") return raw.slice();
+    return raw.map(function(v){return v/raw[0]*100;}); // 初期比
+  }
+  function yMax(){ return mode==="abs"?60:100; }
+  function x(i){ return PAD.l + plotW*(i/(P.length-1)); }
+  function y(v){ return PAD.t + plotH*(1 - v/yMax()); }
+
+  function draw(){
+    var ymax=yMax();
+    var ns="http://www.w3.org/2000/svg";
+    var parts=[];
+    // gridlines + y labels
+    var ticks=mode==="abs"?[0,20,40,60]:[0,25,50,75,100];
+    ticks.forEach(function(t){
+      var yy=y(t);
+      parts.push('<line x1="'+PAD.l+'" y1="'+yy+'" x2="'+(W-PAD.r)+'" y2="'+yy+'" stroke="#EDF1F4" stroke-width="1"/>');
+      parts.push('<text x="'+(PAD.l-8)+'" y="'+(yy+4)+'" text-anchor="end" font-size="11" fill="#8a95a0">'+t+'%</text>');
+    });
+    // x labels
+    P.forEach(function(p,i){
+      parts.push('<text x="'+x(i)+'" y="'+(H-12)+'" text-anchor="middle" font-size="11" fill="#8a95a0">'+(i===0?"開始":i+"期")+'</text>');
+    });
+    function path(name,color){
+      if(!show[name]) return "";
+      var d=series(name).map(function(v,i){return (i?"L":"M")+x(i).toFixed(1)+" "+y(v).toFixed(1);}).join(" ");
+      var dots=series(name).map(function(v,i){return '<circle cx="'+x(i).toFixed(1)+'" cy="'+y(v).toFixed(1)+'" r="3.2" fill="'+color+'"/>';}).join("");
+      return '<path d="'+d+'" fill="none" stroke="'+color+'" stroke-width="2.6" stroke-linejoin="round"/>'+dots;
+    }
+    parts.push(path("cliff","#C58B2B"));
+    parts.push(path("floor","#3E7C53"));
+    svg.innerHTML=parts.join("");
+  }
+
+  document.getElementById("legend").addEventListener("click",function(e){
+    var b=e.target.closest("button"); if(!b) return;
+    var ln=b.dataset.line; show[ln]=!show[ln]; b.classList.toggle("off",!show[ln]); draw();
+  });
+  var retToggle=document.getElementById("retToggle");
+  retToggle.addEventListener("click",function(e){
+    var b=e.target.closest("button"); if(!b) return;
+    mode=b.dataset.m;
+    Array.prototype.forEach.call(retToggle.children,function(x){x.classList.toggle("on",x.dataset.m===mode);});
+    draw();
+  });
+  draw();
+
+  /* ---------- 補足：段階ピッカー ---------- */
+  var STAGEINFO={
+    empathy:{q:"困りごとは本物か",o:"今週“食品を捨てた”人の割合（調査）"},
+    stick:{q:"繰り返し使われるか",o:"週次の継続率（リテンション）"},
+    viral:{q:"他の人へ広がるか",o:"招待・紹介経由の新規率"},
+    rev:{q:"資源が回るか",o:"リピート購入率"},
+    scale:{q:"より多くへ届くか",o:"チャネル別の獲得効率"}
+  };
+  var spick=document.getElementById("spick"), sQ=document.getElementById("sQ"), sO=document.getElementById("sO");
+  function setStage(k){
+    var d=STAGEINFO[k]; sQ.textContent=d.q; sO.textContent=d.o;
+    Array.prototype.forEach.call(spick.children,function(b){b.classList.toggle("on",b.dataset.s===k);});
+  }
+  spick.addEventListener("click",function(e){var b=e.target.closest(".schip");if(b)setStage(b.dataset.s);});
+  setStage("empathy");
+
+  /* ---------- 補足：決め方5ステップ 切替 ---------- */
+  var STEPS={
+    howto:[
+      ["段階を見極める","今どの段階か（多くは「共感」か「定着」）"],
+      ["いちばん大事な問いを一つ","「今いちばん知りたいこと」は何か"],
+      ["比率・割合にする","「〜率」「〜の割合」の形にする"],
+      ["バニティを避ける","累計・総数・いいね数は使わない"],
+      ["ラインを引く","目標値を決める（段階が進めば変えてよい）"]
+    ],
+    example:[
+      ["① 段階","共感 ── まだ「課題が本物か」を確かめる段階"],
+      ["② 問い","本当に“食品を捨てて困っている”学生がいるのか？"],
+      ["③ 比率にする","アンケートで「今週 食品を捨てた」と答えた人の割合"],
+      ["④ バニティ回避","“回答数”ではなく“割合”を見る（回答数は増える一方）"],
+      ["⑤ ライン","50% 以上なら「課題は本物」とみなして次へ進む"]
+    ]
+  };
+  var stepList=document.getElementById("stepList"), stepToggle=document.getElementById("stepToggle");
+  function renderSteps(m){
+    stepList.innerHTML=STEPS[m].map(function(s,i){
+      return '<div class="dstep"><div class="dn">'+(i+1)+'</div><div><h4>'+s[0]+'</h4><p>'+s[1]+'</p></div></div>';
+    }).join("");
+    Array.prototype.forEach.call(stepToggle.children,function(b){b.classList.toggle("on",b.dataset.m===m);});
+  }
+  stepToggle.addEventListener("click",function(e){var b=e.target.closest("button");if(b)renderSteps(b.dataset.m);});
+  renderSteps("howto");
+
+})();
+</script>
+<!-- AI相談（Gemini） -->
+<button class="ai-fab" id="aiFab" aria-label="AIに相談"><span class="sp">✨</span>AIに相談</button>
+<aside class="ai-panel" id="aiPanel" aria-hidden="true">
+  <div class="ai-head">
+    <div>
+      <div class="ttl">Lean Analytics アシスタント</div>
+      <div class="sub">この回の内容について質問できます</div>
+    </div>
+    <span class="badge-g">Gemini</span>
+    <button class="ai-x" id="aiClose" aria-label="閉じる">✕</button>
+  </div>
+  <div class="ai-msgs" id="aiMsgs"></div>
+  <div class="ai-key" id="aiKeyRow" style="display:none">
+    <input type="password" id="aiKey" placeholder="Gemini APIキーを貼り付け" autocomplete="off">
+    <button id="aiKeySet">設定</button>
+  </div>
+  <div class="ai-sugs">
+    <div class="sg-top">
+      <span class="sg-lbl">質問候補</span>
+      <button class="sg-reload" id="sgReload" aria-label="質問候補を再生成" title="質問候補を再生成">↻</button>
+    </div>
+    <div class="sg-list" id="sgList"></div>
+  </div>
+  <div class="ai-input">
+    <textarea id="aiText" rows="1" placeholder="質問を入力…（例：OMTMって何？）"></textarea>
+    <button class="ai-send" id="aiSend" aria-label="送信">➤</button>
+  </div>
+  <div class="ai-disclaimer">AIの回答には誤りが含まれることがあります。最終判断は教科書と授業で確認してください。</div>
+</aside>
+
+<script>
+(function(){
+  "use strict";
+  /* ===== 設定：下に Gemini APIキーを入れると即座に使えます（公開時はGoogle AI StudioでHTTPリファラ制限を推奨） ===== */
+  var GEMINI_API_KEY = "";                 // 例: "AIza..."（空のままだと、初回にパネル内でキー入力を求めます）
+  var GEMINI_MODEL   = "gemini-3.5-flash"; // 利用可能なモデル名に変更可
+  /* ====================================================================================== */
+
+  var LECTURE_FOCUS = "OMTM（最重要指標を一つに絞る）、分析手法の系譜（顧客開発→リーン・スタートアップ→Running Lean→Lean UX→Lean Analytics）、事業の5段階（共感・定着・拡散・収益・規模化）、バニティ指標とアクショナブル指標、リテンションの『崖』と『底』、『アクティブ』の定義（接続済み≠アクティブ）、OMTMの決め方5ステップとライン（目標値）";
+  var FALLBACK_QS = ["OMTMを一つに絞るのはなぜ？複数じゃダメ？","バニティ指標とアクショナブル指標の見分け方は？","リテンションの『崖』と『底』の違いは？","自分のプロジェクトのOMTMはどう決める？","『接続済み』と『アクティブ』はどう違う？","5段階の今の段階はどう見極める？","OMTMにライン（目標値）が必要なのはなぜ？","顧客開発からLean Analyticsまでの系譜を簡単に教えて"];
+
+  var apiKey=GEMINI_API_KEY, history=[], busy=false, greeted=false;
+  var fab=document.getElementById("aiFab"),panel=document.getElementById("aiPanel"),closeBtn=document.getElementById("aiClose"),
+      msgs=document.getElementById("aiMsgs"),sgList=document.getElementById("sgList"),sgReload=document.getElementById("sgReload"),
+      text=document.getElementById("aiText"),send=document.getElementById("aiSend"),
+      keyRow=document.getElementById("aiKeyRow"),keyInput=document.getElementById("aiKey"),keySet=document.getElementById("aiKeySet");
+
+  function openPanel(){document.body.classList.add("ai-open");panel.classList.add("open");panel.setAttribute("aria-hidden","false");
+    if(!greeted){greeted=true;addBot("こんにちは。『Lean Analytics』とこの回の内容について、なんでも聞いてください。下の質問候補からも選べます。");renderSugs(FALLBACK_QS.slice(0,4));}
+    setTimeout(function(){text.focus();},300);}
+  function closePanel(){document.body.classList.remove("ai-open");panel.classList.remove("open");panel.setAttribute("aria-hidden","true");}
+  fab.addEventListener("click",openPanel);closeBtn.addEventListener("click",closePanel);
+  document.addEventListener("keydown",function(e){if(e.key==="Escape"&&panel.classList.contains("open"))closePanel();});
+
+  function esc(s){return s.replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");}
+  function fmt(s){return esc(s).replace(/\*\*(.+?)\*\*/g,"<b>$1</b>");}
+  function addUser(t){var d=document.createElement("div");d.className="msg user";d.textContent=t;msgs.appendChild(d);sc();}
+  function addBot(t){var d=document.createElement("div");d.className="msg bot";d.innerHTML=fmt(t);msgs.appendChild(d);sc();return d;}
+  function addNote(t){var d=document.createElement("div");d.className="msg note";d.textContent=t;msgs.appendChild(d);sc();}
+  function sc(){msgs.scrollTop=msgs.scrollHeight;}
+  function typing(on){var ex=document.getElementById("aiTyping");if(on){if(ex)return;var d=document.createElement("div");d.className="typing";d.id="aiTyping";d.innerHTML="<span></span><span></span><span></span>";msgs.appendChild(d);sc();}else if(ex){ex.remove();}}
+
+  function needKey(){if(apiKey)return false;keyRow.style.display="flex";addNote("AIに接続するには Gemini APIキーが必要です。下の欄にキーを貼り付けて「設定」を押してください。");return true;}
+  keySet.addEventListener("click",function(){var v=keyInput.value.trim();if(v){apiKey=v;keyRow.style.display="none";keyInput.value="";addNote("APIキーを設定しました。質問できます。");}});
+
+  function sysPrompt(){return "あなたは武蔵野大学の科目『SDGs発展2』の学習アシスタントです。教科書『Lean Analytics』(A. クロール & B. ヨスコビッツ)の考え方に基づき、学生の質問に日本語でやさしく簡潔に答えます。専門用語は身近な具体例で説明し、逐語引用はせず自分の言葉で説明します。授業の共通ケースはEKIDEN.AI（ランナー向けAIコーチ）で、収益(Stripe)の具体データには触れません。この回のテーマ："+LECTURE_FOCUS+"。テーマと無関係な質問には、丁寧にこの授業の範囲へ話を戻してください。回答は3〜6文程度を目安に。";}
+
+  function callGemini(contents,system,cb,err){
+    if(!apiKey){err("APIキーが未設定です。");return;}
+    var url="https://generativelanguage.googleapis.com/v1beta/models/"+GEMINI_MODEL+":generateContent?key="+encodeURIComponent(apiKey);
+    var body={contents:contents};if(system)body.system_instruction={parts:[{text:system}]};
+    fetch(url,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(body)})
+      .then(function(r){return r.json().then(function(j){return {ok:r.ok,j:j};});})
+      .then(function(res){
+        if(!res.ok){var m=(res.j&&res.j.error&&res.j.error.message)?res.j.error.message:("HTTP "+(res.j&&res.j.error&&res.j.error.code||"エラー"));err(m);return;}
+        var c=res.j.candidates&&res.j.candidates[0];
+        var t=(c&&c.content&&c.content.parts)?c.content.parts.map(function(p){return p.text||"";}).join(""):"";
+        if(!t){err("空の応答が返りました。");return;}cb(t);
+      }).catch(function(e){err(e.message||"通信に失敗しました。");});
+  }
+
+  function ask(q){
+    if(busy)return;if(needKey())return;
+    addUser(q);history.push({role:"user",text:q});
+    busy=true;send.disabled=true;typing(true);
+    var contents=history.map(function(m){return {role:m.role,parts:[{text:m.text}]};});
+    callGemini(contents,sysPrompt(),function(t){typing(false);addBot(t);history.push({role:"model",text:t});busy=false;send.disabled=false;},
+      function(em){typing(false);addNote("エラー："+em);if(/API[_ ]?key|invalid|401|403|PERMISSION|API_KEY/i.test(em)){apiKey="";keyRow.style.display="flex";}history.pop();busy=false;send.disabled=false;});
+  }
+
+  function renderSugs(list){sgList.innerHTML="";list.forEach(function(q){var b=document.createElement("button");b.className="sg";b.textContent=q;b.addEventListener("click",function(){ask(q);});sgList.appendChild(b);});}
+  function pick4(){var a=FALLBACK_QS.slice();for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1)),t=a[i];a[i]=a[j];a[j]=t;}return a.slice(0,4);}
+  function regenSugs(){
+    sgReload.classList.add("spin");
+    if(!apiKey){renderSugs(pick4());sgReload.classList.remove("spin");return;}
+    var prompt="この授業（テーマ："+LECTURE_FOCUS+"）について、学生が聞きたくなりそうな短い質問を、日本語でちょうど4つ作ってください。各質問は40文字以内。JSON配列のみを出力し、説明や記号は付けないでください。例：[\"質問1\",\"質問2\",\"質問3\",\"質問4\"]";
+    callGemini([{role:"user",parts:[{text:prompt}]}],null,function(t){
+      var arr=null;try{var m=t.match(/\[[\s\S]*\]/);if(m)arr=JSON.parse(m[0]);}catch(e){}
+      renderSugs((arr&&arr.length)?arr.slice(0,4):pick4());sgReload.classList.remove("spin");
+    },function(){renderSugs(pick4());sgReload.classList.remove("spin");});
+  }
+  sgReload.addEventListener("click",regenSugs);
+
+  function autoGrow(){text.style.height="auto";text.style.height=Math.min(text.scrollHeight,120)+"px";}
+  text.addEventListener("input",autoGrow);
+  text.addEventListener("keydown",function(e){if(e.key==="Enter"&&!e.shiftKey){e.preventDefault();submit();}});
+  function submit(){var v=text.value.trim();if(!v)return;text.value="";autoGrow();ask(v);}
+  send.addEventListener("click",submit);
+})();
+</script>
+</body>
+</html>

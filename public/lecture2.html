@@ -1,0 +1,835 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SDGs発展2 第2回｜データ収集の設計 ── 行動を促すデータとは？</title>
+<style>
+  :root{
+    --navy:#15324F; --teal:#1C7293; --green:#3E7C53; --amber:#C58B2B;
+    --ink:#2A2E33; --mute:#5C6670; --line:#E3E8ED;
+    --bg:#FFFFFF; --soft:#F5F8FB; --softg:#F1F6F2; --softa:#FBF5EA;
+    --teal-soft:#E7F0F5; --green-soft:#E9F2EC; --amber-soft:#F8EFDD; --red:#C0392B; --red-soft:#FBEAE7;
+    --jp:"Yu Gothic","游ゴシック体",YuGothic,"Hiragino Sans","Hiragino Kaku Gothic ProN",Meiryo,sans-serif;
+    --hd:54px;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;height:100%}
+  body{font-family:var(--jp);color:var(--ink);line-height:1.65;background:var(--bg);-webkit-font-smoothing:antialiased}
+  a{color:var(--teal);text-decoration:none}
+
+  /* header + dropdown */
+  .hd{position:fixed;top:0;left:0;right:0;height:var(--hd);z-index:100;background:rgba(255,255,255,.93);backdrop-filter:blur(8px);border-bottom:1px solid var(--line);display:flex;align-items:center;gap:14px;padding:0 18px}
+  .hd .brand{font-weight:700;color:var(--navy);font-size:13.5px;white-space:nowrap}
+  .hd .brand span{color:var(--teal)}
+  .dropdown{position:relative}
+  .dd-btn{font-family:var(--jp);font-size:13px;border:1px solid var(--line);background:#fff;border-radius:9px;padding:8px 13px;cursor:pointer;color:var(--navy);display:flex;align-items:center;gap:8px}
+  .dd-btn .caret{transition:.2s;font-size:10px;color:var(--mute)}
+  .dd-btn[aria-expanded="true"] .caret{transform:rotate(180deg)}
+  .dd-menu{position:absolute;right:0;top:calc(100% + 8px);background:#fff;border:1px solid var(--line);border-radius:12px;box-shadow:0 14px 36px rgba(21,50,79,.16);padding:6px;min-width:268px;display:none}
+  .dd-menu.open{display:block}
+  .dd-menu .grp{font-size:10.5px;font-weight:700;letter-spacing:.08em;color:var(--mute);padding:8px 12px 4px}
+  .dd-menu a{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:9px 12px;border-radius:8px;font-size:13px;color:var(--ink)}
+  .dd-menu a:hover{background:var(--soft)}
+  .dd-menu a.current{background:var(--teal-soft);color:var(--navy);font-weight:700}
+  .dd-menu a.soon{color:#9aa4ad} .dd-menu a.soon:hover{background:transparent;cursor:default}
+  .dd-menu a .ttl{display:flex;gap:9px;align-items:center}
+  .dd-menu a .badge{font-size:10px;border-radius:5px;padding:2px 7px;font-weight:700}
+  .badge.ready{background:var(--green-soft);color:var(--green)}
+  .badge.soon{background:#eef1f3;color:#9aa4ad}
+
+  /* deck / slides */
+  .deck{height:100vh;overflow-y:scroll;scroll-snap-type:y mandatory;scroll-behavior:smooth}
+  .slide{min-height:100vh;scroll-snap-align:start;display:flex;flex-direction:column;justify-content:center;padding:calc(var(--hd) + 22px) 22px 92px;position:relative}
+  .in{max-width:1020px;margin:0 auto;width:100%}
+  .eyebrow{display:inline-flex;align-items:center;gap:9px;font-size:11.5px;font-weight:700;letter-spacing:.13em;color:var(--teal);margin:0 0 12px}
+  .eyebrow .num{font-variant-numeric:tabular-nums;background:var(--navy);color:#fff;border-radius:6px;padding:2px 8px;font-size:10.5px}
+  h2.t{font-size:clamp(20px,3.1vw,28px);color:var(--navy);margin:0 0 8px;line-height:1.32;font-weight:700}
+  .lead{color:var(--mute);max-width:64ch;margin:0 0 22px;font-size:14.5px}
+
+  /* hero */
+  .hero{background:radial-gradient(900px 360px at 86% -12%,var(--teal-soft),transparent 60%),radial-gradient(700px 320px at -6% 112%,var(--green-soft),transparent 60%)}
+  .hero .kick{font-size:13px;font-weight:700;letter-spacing:.1em;color:var(--teal)}
+  .hero h1{font-size:clamp(27px,5vw,46px);line-height:1.2;color:var(--navy);margin:14px 0 10px;font-weight:700;letter-spacing:-.01em}
+  .hero h1 em{font-style:normal;color:var(--teal)}
+  .hero .sub{font-size:clamp(15px,2.1vw,18px);max-width:60ch;margin:0 0 22px}
+  .hero .meta{display:flex;gap:9px;flex-wrap:wrap;font-size:12.5px;color:var(--mute);margin-bottom:24px}
+  .hero .meta b{color:var(--navy)}
+  .pill{display:inline-block;background:#fff;border:1px solid var(--line);border-radius:999px;padding:6px 13px}
+  .sowhat{display:flex;border:1px solid var(--line);border-radius:14px;overflow:hidden;background:#fff;max-width:660px}
+  .sowhat .you,.sowhat .boss{flex:1;padding:16px 19px}
+  .sowhat .boss{background:var(--amber-soft);border-left:1px solid var(--line)}
+  .sowhat .lbl{font-size:11px;font-weight:700;letter-spacing:.06em;margin-bottom:6px}
+  .sowhat .you .lbl{color:var(--teal)} .sowhat .boss .lbl{color:var(--amber)}
+  .sowhat p{margin:0;font-size:15px;color:var(--navy);font-weight:600}
+
+  /* steps */
+  .steps{display:grid;grid-template-columns:repeat(5,1fr);gap:11px}
+  .step{background:var(--soft);border:1px solid var(--line);border-radius:12px;padding:15px 13px}
+  .step .n{font-size:12px;font-weight:700;color:#fff;background:var(--teal);width:23px;height:23px;border-radius:50%;display:flex;align-items:center;justify-content:center;margin-bottom:9px}
+  .step h3{margin:0 0 5px;font-size:13.5px;color:var(--navy);line-height:1.4}
+  .step p{margin:0;font-size:11.5px;color:var(--mute);line-height:1.5}
+
+  /* vs + conditions + checker */
+  .vs{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+  .card{border:1px solid var(--line);border-radius:13px;overflow:hidden}
+  .card .head{padding:13px 17px;font-weight:700;color:#fff;font-size:14.5px}
+  .card.vanity .head{background:var(--amber)} .card.action .head{background:var(--teal)}
+  .card ul{margin:0;padding:14px 17px;list-style:none}
+  .card li{font-size:13px;padding:6px 0 6px 20px;position:relative;border-bottom:1px dashed var(--line)}
+  .card li:last-child{border-bottom:0}
+  .card li::before{content:"";position:absolute;left:2px;top:13px;width:8px;height:8px;border-radius:2px}
+  .card.vanity li::before{background:var(--amber)} .card.action li::before{background:var(--teal)}
+  .typ{margin-top:16px;font-size:13.5px;color:var(--navy);font-style:italic;background:var(--soft);border-radius:10px;padding:12px 15px}
+
+  .four{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:22px}
+  .cond{background:var(--soft);border:1px solid var(--line);border-radius:12px;padding:15px 14px}
+  .cond .ic{font-size:18px} .cond h4{margin:8px 0 4px;font-size:13.5px;color:var(--navy)}
+  .cond p{margin:0;font-size:12px;color:var(--mute)}
+  .checker{border:1px solid var(--line);border-radius:14px;padding:18px}
+  .checker .q{font-size:14px;color:var(--navy);font-weight:700;margin:0 0 12px}
+  .chips{display:flex;flex-wrap:wrap;gap:8px}
+  .chip{font-size:13px;border:1px solid var(--line);background:#fff;border-radius:999px;padding:8px 15px;cursor:pointer;transition:.15s;color:var(--ink)}
+  .chip:hover{border-color:var(--teal);color:var(--teal)}
+  .chip.on{background:var(--navy);color:#fff;border-color:var(--navy)}
+  .verdict{margin-top:14px;font-size:13.5px;padding:12px 15px;border-radius:10px;display:none}
+  .verdict.show{display:block}
+  .verdict.v-vanity{background:var(--amber-soft);color:#7a531a;border:1px solid #e8d3a8}
+  .verdict.v-action{background:var(--teal-soft);color:#0f4a63;border:1px solid #bcdae6}
+  .verdict b{font-weight:700}
+
+  /* explorer */
+  .explorer{background:var(--navy);border-radius:16px;padding:15px 18px;color:#EAF1F7}
+  .explorer h3{margin:0;font-size:16px;color:#fff} .explorer .x-sub{font-size:12px;color:#AFC4D7;margin:3px 0 0}
+  .toggles{display:flex;gap:14px;flex-wrap:wrap;align-items:center;margin:11px 0 4px}
+  .lensgroup{display:inline-flex;background:#0d2436;border:1px solid #2b4b66;border-radius:11px;padding:4px}
+  .lensgroup button{font-family:var(--jp);font-size:12.5px;color:#AFC4D7;background:transparent;border:0;padding:8px 14px;border-radius:8px;cursor:pointer;font-weight:600;transition:.15s}
+  .lensgroup button.on{background:var(--teal);color:#fff}
+  .lensgroup.vanity-on button.on{background:var(--amber)}
+  .bm-toggle{display:inline-flex;align-items:center;gap:9px;font-size:12.5px;color:#cfe0ec;cursor:pointer;user-select:none}
+  .bm-toggle input{display:none}
+  .bm-toggle .sw{width:40px;height:22px;background:#0d2436;border:1px solid #2b4b66;border-radius:999px;position:relative;transition:.2s}
+  .bm-toggle .sw::after{content:"";position:absolute;top:2px;left:2px;width:16px;height:16px;border-radius:50%;background:#7e97ab;transition:.2s}
+  .bm-toggle input:checked + .sw{background:var(--green)}
+  .bm-toggle input:checked + .sw::after{left:20px;background:#fff}
+  .lens-note{font-size:12px;color:#AFC4D7;margin:2px 0 9px;min-height:0;line-height:1.45} .lens-note b{color:#fff}
+  .funnel{display:flex;flex-direction:column;gap:6px}
+  .frow{display:grid;grid-template-columns:120px 1fr 112px;align-items:center;gap:12px;cursor:pointer;background:#0d2436;border:1px solid #234156;border-radius:9px;padding:7px 12px;transition:.15s}
+  .frow:hover{border-color:var(--teal)} .frow.sel{border-color:#fff}
+  .frow .fname{font-size:12.5px;font-weight:700;color:#fff;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;line-height:1.3}
+  .frow .fval{font-size:11px;color:#cfe0ec;font-variant-numeric:tabular-nums;text-align:right;white-space:nowrap;line-height:1.25}
+  .frow .fval .big{font-size:13.5px;font-weight:700;color:#fff}
+  .bar-wrap{position:relative;height:16px;background:#0a1c2b;border-radius:5px;overflow:visible}
+  .bar{height:100%;border-radius:5px;width:0;transition:width .6s cubic-bezier(.22,.61,.36,1);background:var(--teal)}
+  .frow[data-flag="low"] .bar{background:var(--red)} .frow[data-flag="high"] .bar{background:var(--green)}
+  .vanity-mode .bar{background:var(--amber)}
+  .bm-line{position:absolute;top:-2px;height:20px;width:2px;background:#fff;opacity:0;transition:.3s;z-index:2}
+  .bm-on .bm-line{opacity:.9}
+  .frow .ftag{display:none;position:absolute;right:6px;top:50%;transform:translateY(-50%);font-size:9.5px;font-weight:700;padding:1px 7px;border-radius:5px;white-space:nowrap;z-index:3}
+  .bm-on .frow[data-flag="low"] .ftag.low{display:block;background:var(--red);color:#fff}
+  .bm-on .frow[data-flag="high"] .ftag.high{display:block;background:var(--green);color:#fff}
+  .x-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:11px}
+  .panel{background:#fff;color:var(--ink);border-radius:11px;padding:12px 14px}
+  .panel .ph{font-size:11.5px;font-weight:700;letter-spacing:.05em;color:var(--mute);margin:0 0 8px}
+  .detail .dname{font-size:14px;font-weight:700;color:var(--navy);margin:0 0 6px}
+  .detail table{width:100%;border-collapse:collapse;font-size:12.5px}
+  .detail td{padding:4px 0;border-bottom:1px dashed var(--line)}
+  .detail td:last-child{text-align:right;font-variant-numeric:tabular-nums;font-weight:700;color:var(--navy)}
+  .detail .gap-low{color:var(--red)} .detail .gap-high{color:var(--green)}
+  .report .rbody{font-size:13px;color:var(--ink);min-height:0}
+  .boss-bubble{margin-top:8px;border-radius:10px;padding:9px 12px;font-size:13px;font-weight:600;display:flex;gap:9px;align-items:flex-start}
+  .boss-bubble .face{font-size:17px;line-height:1}
+  .boss-bubble.bad{background:var(--amber-soft);color:#7a531a}
+  .boss-bubble.good{background:var(--green-soft);color:#2c5a3c}
+
+  /* qual x quant */
+  .two{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+  .qbox{border:1px solid var(--line);border-radius:13px;padding:18px}
+  .qbox.qual{background:var(--softg);border-color:#cfe3d4} .qbox.quant{background:var(--soft);border-color:#cfe0ec}
+  .qbox h3{margin:0 0 4px;font-size:16px;color:var(--navy)}
+  .qbox .tag{font-size:11px;font-weight:700;letter-spacing:.05em}
+  .qbox.qual .tag{color:var(--green)} .qbox.quant .tag{color:var(--teal)}
+  .qbox p{font-size:13px;color:var(--ink);margin:9px 0 0}
+  .qbox ul{margin:9px 0 0;padding-left:18px;font-size:12.5px;color:var(--mute)}
+  .bridge{margin-top:15px;text-align:center;font-size:13.5px;color:var(--navy);background:#fff;border:1px dashed var(--line);border-radius:10px;padding:12px}
+  .bridge b{color:var(--green)}
+
+  /* events + tiers */
+  .events{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+  .ev{border:1px solid var(--line);border-radius:12px;padding:15px 14px;background:var(--soft);position:relative}
+  .ev .estep{font-size:11px;font-weight:700;color:var(--teal);letter-spacing:.04em}
+  .ev h4{margin:7px 0 5px;font-size:13.5px;color:var(--navy)}
+  .ev p{margin:0;font-size:12px;color:var(--mute)}
+  .ev .aarrr{position:absolute;top:12px;right:12px;font-size:10px;font-weight:700;color:#fff;background:var(--navy);border-radius:5px;padding:2px 6px}
+  .tiers{display:flex;flex-direction:column;gap:10px}
+  .tier{display:flex;align-items:center;gap:14px;border:1px solid var(--line);border-radius:12px;padding:12px 16px}
+  .tier .tnum{flex:none;width:30px;height:30px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700;color:#fff;font-size:13px}
+  .tier:nth-child(1) .tnum{background:#9fb0bd} .tier:nth-child(2) .tnum{background:var(--teal)} .tier:nth-child(3) .tnum{background:var(--green)}
+  .tier h4{margin:0;font-size:14px;color:var(--navy)} .tier p{margin:2px 0 0;font-size:12.5px;color:var(--mute)}
+  .tier .tbar{flex:none;width:clamp(60px,16vw,140px);text-align:right}
+  .tier .tbar span{display:inline-block;height:10px;border-radius:5px}
+  .tier:nth-child(1) .tbar span{width:100%;background:#cdd6dd}
+  .tier:nth-child(2) .tbar span{width:55%;background:var(--teal)}
+  .tier:nth-child(3) .tbar span{width:22%;background:var(--green)}
+  .trap{margin-top:14px;font-size:12.5px;color:#7a531a;background:var(--amber-soft);border-radius:10px;padding:11px 14px}
+  .trap b{font-weight:700}
+
+  /* task */
+  .task{display:grid;grid-template-columns:1fr 1fr;gap:15px}
+  .tcard{border-radius:13px;padding:18px;color:#fff}
+  .tcard.review{background:var(--teal)} .tcard.prep{background:var(--green)}
+  .tcard h3{margin:0 0 10px;font-size:15px}
+  .tcard ol{margin:0;padding-left:19px}
+  .tcard li{font-size:13px;margin-bottom:7px;line-height:1.5}
+  .band{margin-top:15px;background:var(--navy);color:#fff;border-radius:12px;padding:15px 18px;display:flex;justify-content:space-between;align-items:center;gap:14px;flex-wrap:wrap}
+  .band .dl{font-size:14px;font-weight:700} .band .dl span{color:var(--amber)}
+  .band .next{font-size:12.5px;color:#AFC4D7}
+  .srcnote{font-size:11.5px;color:#9aa4ad;margin-top:16px}
+
+  /* ===== Classroom リンク ===== */
+  .hd-cr{margin-left:auto;display:inline-flex;align-items:center;gap:7px;font-size:12.5px;font-weight:700;color:var(--green);background:var(--green-soft);border:1px solid #cfe3d4;border-radius:9px;padding:7px 13px;white-space:nowrap}
+  .hd-cr:hover{background:#dcebe0}
+  .cr-submit{display:inline-flex;align-items:center;gap:8px;background:#fff;color:var(--green);font-weight:700;font-size:13.5px;border-radius:10px;padding:10px 16px;white-space:nowrap}
+  .cr-submit:hover{background:var(--green-soft)}
+
+  /* ===== AI相談（Gemini） ===== */
+  .ai-fab{position:fixed;right:18px;bottom:20px;z-index:95;display:inline-flex;align-items:center;gap:8px;background:var(--navy);color:#fff;border:0;border-radius:999px;padding:12px 18px;font-family:var(--jp);font-size:13.5px;font-weight:700;cursor:pointer;box-shadow:0 8px 24px rgba(21,50,79,.28);transition:.18s}
+  .ai-fab:hover{transform:translateY(-2px);box-shadow:0 12px 30px rgba(21,50,79,.34)}
+  .ai-fab .sp{font-size:15px}
+  body.ai-open .ai-fab{opacity:0;pointer-events:none}
+  body.ai-open .dots{display:none}
+  .ai-panel{position:fixed;top:0;right:0;bottom:0;width:min(430px,94vw);background:#fff;z-index:200;display:flex;flex-direction:column;box-shadow:-12px 0 40px rgba(21,50,79,.18);transform:translateX(100%);transition:transform .28s cubic-bezier(.22,.61,.36,1)}
+  .ai-panel.open{transform:translateX(0)}
+  .ai-head{flex:none;display:flex;align-items:center;gap:11px;padding:15px 18px;border-bottom:1px solid var(--line);background:var(--navy);color:#fff}
+  .ai-head .ttl{font-size:14.5px;font-weight:700}
+  .ai-head .sub{font-size:11px;color:#AFC4D7}
+  .ai-head .badge-g{font-size:10px;font-weight:700;background:#0d2436;color:#7fc4dd;border-radius:5px;padding:2px 7px}
+  .ai-x{margin-left:auto;width:32px;height:32px;border-radius:8px;border:0;background:rgba(255,255,255,.12);color:#fff;font-size:15px;cursor:pointer;display:flex;align-items:center;justify-content:center}
+  .ai-x:hover{background:rgba(255,255,255,.22)}
+  .ai-msgs{flex:1;overflow-y:auto;padding:16px;display:flex;flex-direction:column;gap:11px;background:var(--soft)}
+  .msg{max-width:88%;font-size:13.5px;line-height:1.65;padding:11px 14px;border-radius:13px;white-space:pre-wrap;word-break:break-word}
+  .msg.user{align-self:flex-end;background:var(--teal);color:#fff;border-bottom-right-radius:4px}
+  .msg.bot{align-self:flex-start;background:#fff;border:1px solid var(--line);color:var(--ink);border-bottom-left-radius:4px}
+  .msg.bot b{color:var(--navy)}
+  .msg.note{align-self:center;background:var(--amber-soft);color:#7a531a;font-size:12px;max-width:100%}
+  .typing{align-self:flex-start;display:flex;gap:4px;padding:12px 14px;background:#fff;border:1px solid var(--line);border-radius:13px}
+  .typing span{width:7px;height:7px;border-radius:50%;background:#9fb0bd;animation:bn 1s infinite}
+  .typing span:nth-child(2){animation-delay:.15s} .typing span:nth-child(3){animation-delay:.3s}
+  @keyframes bn{0%,80%,100%{opacity:.3;transform:translateY(0)}40%{opacity:1;transform:translateY(-4px)}}
+  .ai-sugs{flex:none;border-top:1px solid var(--line);padding:11px 14px 6px;background:#fff}
+  .ai-sugs .sg-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:8px}
+  .ai-sugs .sg-lbl{font-size:11px;font-weight:700;color:var(--mute);letter-spacing:.04em}
+  .sg-reload{width:28px;height:28px;border-radius:8px;border:1px solid var(--line);background:#fff;color:var(--teal);cursor:pointer;font-size:14px;display:flex;align-items:center;justify-content:center;transition:.15s}
+  .sg-reload:hover{background:var(--teal-soft)}
+  .sg-reload.spin{animation:sp .7s linear infinite}
+  @keyframes sp{to{transform:rotate(360deg)}}
+  .sg-list{display:flex;flex-wrap:wrap;gap:7px}
+  .sg{font-family:var(--jp);font-size:12px;border:1px solid var(--line);background:var(--soft);color:var(--ink);border-radius:999px;padding:7px 12px;cursor:pointer;text-align:left;transition:.15s;line-height:1.4}
+  .sg:hover{border-color:var(--teal);color:var(--teal);background:#fff}
+  .ai-input{flex:none;display:flex;gap:8px;align-items:flex-end;padding:10px 14px 8px;background:#fff}
+  .ai-input textarea{flex:1;font-family:var(--jp);font-size:13.5px;line-height:1.5;border:1px solid var(--line);border-radius:11px;padding:10px 12px;resize:none;max-height:120px;outline:none;color:var(--ink)}
+  .ai-input textarea:focus{border-color:var(--teal)}
+  .ai-send{flex:none;width:40px;height:40px;border-radius:11px;border:0;background:var(--navy);color:#fff;font-size:15px;cursor:pointer;display:flex;align-items:center;justify-content:center}
+  .ai-send:disabled{opacity:.4;cursor:default}
+  .ai-key{display:flex;gap:7px;padding:0 14px 10px;background:#fff}
+  .ai-key input{flex:1;font-family:var(--jp);font-size:12.5px;border:1px solid var(--line);border-radius:9px;padding:8px 11px;outline:none}
+  .ai-key button{font-family:var(--jp);font-size:12.5px;font-weight:700;border:0;background:var(--teal);color:#fff;border-radius:9px;padding:8px 13px;cursor:pointer}
+  .ai-disclaimer{font-size:10.5px;color:#9aa4ad;padding:0 14px 12px;background:#fff;text-align:center}
+
+  /* ===== 教科書 第2章：指標の対比 ===== */
+  .ent{color:var(--mute);font-size:.58em;font-weight:700}
+  .rules{display:grid;grid-template-columns:repeat(2,1fr);gap:11px;margin-bottom:16px}
+  .rule{display:flex;gap:12px;align-items:flex-start;background:var(--soft);border:1px solid var(--line);border-radius:11px;padding:13px 15px}
+  .rule .ic{font-size:17px;line-height:1.2}
+  .rule .en{font-size:10.5px;font-weight:700;letter-spacing:.05em;color:var(--teal);text-transform:uppercase}
+  .rule h4{margin:1px 0 2px;font-size:14px;color:var(--navy)}
+  .rule p{margin:0;font-size:12px;color:var(--mute)}
+  .ch2chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px}
+  .ch2chip{font-size:12px;border:1px solid var(--line);background:var(--soft);border-radius:999px;padding:6px 13px;color:var(--ink)}
+  .ch2chip b{color:var(--teal)}
+  .pair{display:grid;grid-template-columns:1fr 36px 1fr;align-items:stretch;gap:4px}
+  .pcol{border:1px solid var(--line);border-radius:14px;padding:18px 18px;background:#fff;box-shadow:0 2px 12px rgba(21,50,79,.06)}
+  .pcol .en{display:inline-block;font-size:10.5px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;padding:3px 10px;border-radius:999px;background:#eef1f3;color:#6b7681}
+  .pcol .jp{font-size:23px;font-weight:800;color:var(--navy);margin:9px 0 10px;line-height:1.2;letter-spacing:.01em}
+  .pcol .df{font-size:12.5px;color:var(--ink);margin:0 0 8px;line-height:1.55}
+  .pcol ul{margin:0;padding-left:16px;font-size:12px;color:var(--mute);line-height:1.5}
+  .pcol .ex{margin:8px 0 0;font-size:11.5px;color:var(--mute)} .pcol .ex b{color:var(--navy)}
+  .pcol.amber .en{background:var(--amber-soft);color:#8a5a12} .pcol.amber .jp{color:var(--amber)}
+  .pcol.teal .en{background:var(--teal-soft);color:#0f4a63} .pcol.teal .jp{color:var(--teal)}
+  .pcol.green .en{background:var(--green-soft);color:#2c5a3c} .pcol.green .jp{color:var(--green)}
+  .pcol.mute .en{background:#eef1f3;color:#6b7681} .pcol.mute .jp{color:#5c6670}
+  .pvs{display:flex;align-items:center;justify-content:center;background:none;color:#aeb7c0;font-weight:600;font-style:italic;font-size:13px}
+  .take{margin-top:14px;background:var(--teal-soft);border-radius:11px;padding:12px 16px;font-size:13px;color:#0f4a63;line-height:1.6}
+  .take b{color:var(--navy)}
+  @media(max-width:640px){.rules{grid-template-columns:1fr} .pair{grid-template-columns:1fr} .pvs{padding:6px;font-size:11px} .ent{display:block;margin-top:2px}}
+
+  /* フッター（講師・教科書） */
+  .foot-grid{display:grid;grid-template-columns:1.45fr 1fr;gap:18px;align-items:start}
+  .foot-prof{display:flex;gap:16px;background:var(--soft);border:1px solid var(--line);border-radius:14px;padding:18px}
+  .prof-img{flex:none;width:82px;height:82px;border-radius:50%;object-fit:cover;border:2px solid #fff;box-shadow:0 3px 10px rgba(21,50,79,.15)}
+  .prof-name{font-size:16px;font-weight:700;color:var(--navy)} .prof-name span{font-size:12px;color:var(--mute);font-weight:600;margin-left:6px}
+  .prof-title{font-size:12.5px;color:var(--teal);font-weight:700;margin:2px 0 8px}
+  .prof-bio{font-size:12px;color:var(--ink);margin:0 0 10px;line-height:1.6}
+  .prof-links{display:flex;flex-wrap:wrap;gap:7px}
+  .prof-links a{font-size:11.5px;background:#fff;border:1px solid var(--line);border-radius:8px;padding:5px 10px;color:var(--teal)}
+  .prof-links a:hover{border-color:var(--teal)}
+  .foot-book{display:flex;flex-direction:column;background:#fff;border:1px solid var(--line);border-radius:14px;padding:18px}
+  .book-label{font-size:10.5px;font-weight:700;letter-spacing:.08em;color:var(--mute);margin-bottom:10px}
+  .book-row{display:flex;gap:15px}
+  .bk-cover{flex:none;width:90px;height:128px;border-radius:8px;overflow:hidden;display:block;background:linear-gradient(135deg,#15324F,#1C7293);box-shadow:0 6px 18px rgba(21,50,79,.22);position:relative}
+  .bk-cover img{width:100%;height:100%;object-fit:cover;display:block}
+  .bk-fallback{display:none;position:absolute;inset:0;align-items:center;justify-content:center;color:#fff;font-weight:700;font-size:15px;text-align:center;line-height:1.3;letter-spacing:.02em}
+  .bk-cover.noimg .bk-fallback{display:flex}
+  .book-info{display:flex;flex-direction:column}
+  .book-title{font-size:16px;font-weight:700;color:var(--navy)}
+  .book-sub{font-size:11.5px;color:var(--mute);margin:1px 0 8px;line-height:1.4}
+  .book-meta{font-size:11.5px;color:var(--mute);line-height:1.6}
+  .book-amz{margin-top:10px;align-self:flex-start;background:var(--amber);color:#fff;font-weight:700;font-size:12.5px;border-radius:9px;padding:8px 14px}
+  .book-amz:hover{filter:brightness(1.05)}
+  .foot-copy{margin-top:16px;font-size:11px;color:#9aa4ad;text-align:center;border-top:1px solid var(--line);padding-top:12px}
+  @media(max-width:860px){.foot-grid{grid-template-columns:1fr}}
+  @media(max-width:640px){.foot-prof{flex-direction:column} .book-row{flex-direction:column}}
+
+  /* dots */
+  .dots{position:fixed;right:16px;top:50%;transform:translateY(-50%);z-index:90;display:flex;flex-direction:column;gap:10px}
+  .dots button{width:11px;height:11px;border-radius:50%;border:1.5px solid #b9c5cf;background:transparent;cursor:pointer;padding:0;position:relative;transition:.2s}
+  .dots button.on{background:var(--teal);border-color:var(--teal);transform:scale(1.3)}
+  .dots button .tip{position:absolute;right:22px;top:50%;transform:translateY(-50%);white-space:nowrap;background:var(--navy);color:#fff;font-size:11px;padding:4px 9px;border-radius:6px;opacity:0;pointer-events:none;transition:.15s}
+  .dots button:hover .tip{opacity:1}
+
+  /* nav buttons */
+  .navbtns{position:fixed;bottom:18px;left:50%;transform:translateX(-50%);z-index:90;display:flex;gap:10px}
+  .navbtns button{width:42px;height:42px;border-radius:50%;border:1px solid var(--line);background:rgba(255,255,255,.96);cursor:pointer;font-size:15px;color:var(--navy);box-shadow:0 5px 16px rgba(21,50,79,.14);display:flex;align-items:center;justify-content:center;transition:.15s}
+  .navbtns button:disabled{opacity:.28;cursor:default;box-shadow:none}
+  .navbtns button:hover:not(:disabled){border-color:var(--teal);color:var(--teal)}
+
+  @media(max-width:860px){
+    .steps{grid-template-columns:repeat(3,1fr)} .events{grid-template-columns:1fr 1fr} .dots{display:none}
+  }
+  @media(max-width:640px){
+    .vs,.four,.x-grid,.two,.task{grid-template-columns:1fr} .steps{grid-template-columns:1fr 1fr}
+    .sowhat{flex-direction:column} .sowhat .boss{border-left:0;border-top:1px solid var(--line)}
+    .frow{grid-template-columns:80px 1fr 90px;gap:8px} .frow .fname{font-size:11px} .frow .fval{font-size:10px} .frow .fval .big{font-size:12px}
+  }
+  @media(prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
+</style>
+</head>
+<body>
+
+<header class="hd">
+  <div class="brand">SDGs発展2 <span>講義紹介</span></div>
+  <a class="hd-cr" href="https://classroom.google.com/c/ODU5NjUzNDM0Njk0" target="_blank" rel="noopener">🎓 Classroom</a>
+  <div class="dropdown">
+    <button class="dd-btn" id="ddBtn" aria-expanded="false">第2回：データ収集の設計 <span class="caret">▼</span></button>
+    <div class="dd-menu" id="ddMenu">
+      <div class="grp">全7回</div>
+      <a href="lecture1.html"><span class="ttl">第1回　全体像 ── OMTMとビジネスモデル</span><span class="badge ready">公開</span></a>
+      <a class="current" href="#"><span class="ttl">第2回　データ収集の設計 ── 定性と定量</span><span class="badge ready">表示中</span></a>
+      <a href="lecture3.html"><span class="ttl">第3回　コホート分析とファネル分析</span><span class="badge soon">準備中</span></a>
+      <a href="lecture4.html"><span class="ttl">第4回　ピボットの判断 ── 意思決定</span><span class="badge soon">準備中</span></a>
+      <a href="lecture5.html"><span class="ttl">第5回　データストーリーテリング</span><span class="badge soon">準備中</span></a>
+      <a href="lecture6.html"><span class="ttl">第6回　投資家向けピッチの準備</span><span class="badge soon">準備中</span></a>
+      <a href="lecture7.html"><span class="ttl">第7回　最終発表＆振り返り</span><span class="badge soon">準備中</span></a>
+    </div>
+  </div>
+</header>
+
+<main class="deck" id="deck">
+
+  <!-- 1 HERO -->
+  <section class="slide hero" data-title="タイトル">
+    <div class="in">
+      <div class="kick">2026年度　SDGs発展2［a1］　第2回</div>
+      <h1>データ収集の設計<br><em>── 行動を促すデータとは？</em></h1>
+      <p class="sub">前回はOMTMを一つに絞り、リテンションの“形”を見分けました。今日は同じ指標を「どう測り、どう伝えれば<b>相手が動くか</b>」を設計します。鍵はバニティ（虚構の数字）ではなく<b>アクショナブル（行動可能）</b>な指標。</p>
+      <div class="meta">
+        <span class="pill">担当：<b>高橋 雄介</b></span>
+        <span class="pill">教科書：<b>Lean Analytics</b></span>
+        <span class="pill">ケース：<b>EKIDEN.AI</b></span>
+      </div>
+      <div class="sowhat">
+        <div class="you"><div class="lbl">あなたの報告</div><p>「今月のPVは1万でした！」</p></div>
+        <div class="boss"><div class="lbl">上司の反応</div><p>「So what?（で、何をする？）」</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 2 FLOW -->
+  <section class="slide" data-title="今日の流れ">
+    <div class="in">
+      <div class="eyebrow"><span class="num">01</span> 今日の流れ</div>
+      <h2 class="t">教科書 第2章を軸に「行動を促す指標」を設計する</h2>
+      <p class="lead">『Lean Analytics』第2章「優れた指標とは何か」をたどり、5つの対比で指標を見極め、自分のデータに落とし込みます。</p>
+      <div class="steps">
+        <div class="step"><div class="n">1</div><h3>優れた指標とは</h3><p>良い指標の4条件</p></div>
+        <div class="step"><div class="n">2</div><h3>5つの対比</h3><p>定性/定量〜相関/因果</p></div>
+        <div class="step"><div class="n">3</div><h3>虚栄 or 行動を促す？</h3><p>チェッカーで練習</p></div>
+        <div class="step"><div class="n">4</div><h3>データで試す</h3><p>ECファネルで実感</p></div>
+        <div class="step"><div class="n">5</div><h3>計測とアクティブ</h3><p>設計と定義・提出</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3 CH2 INTRO -->
+  <section class="slide" data-title="優れた指標とは">
+    <div class="in">
+      <div class="eyebrow"><span class="num">02</span> 教科書 第2章</div>
+      <h2 class="t">優れた指標とは何か？ <span class="ent">What Makes a Good Metric?</span></h2>
+      <p class="lead">『Lean Analytics』第2章は「良い指標の条件」と、指標を見極める「5つの対比」を示します。<span style="color:var(--mute)">（要約・再構成。逐語引用なし）</span></p>
+      <div class="rules">
+        <div class="rule"><div class="ic">⚖️</div><div><div class="en">Comparative</div><h4>比較できる</h4><p>前の期間・他の群・業界平均と並べられる</p></div></div>
+        <div class="rule"><div class="ic">🧠</div><div><div class="en">Understandable</div><h4>分かりやすい</h4><p>見た人がすぐ「何の数字か」を掴める</p></div></div>
+        <div class="rule"><div class="ic">％</div><div><div class="en">A rate or ratio</div><h4>比率・割合である</h4><p>合計でなく「率」。行動を導き、比べやすい</p></div></div>
+        <div class="rule"><div class="ic">🎯</div><div><div class="en">Changes behavior</div><h4>行動が変わる</h4><p>見たら次の打ち手が変わる＝アクショナブル</p></div></div>
+      </div>
+      <p class="lead" style="margin:0 0 4px">さらに、指標は次の<b>5つの対</b>で捉えると見極めやすくなります。</p>
+      <div class="ch2chips">
+        <span class="ch2chip">① 定性 <b>Qualitative</b> ／ 定量 <b>Quantitative</b></span>
+        <span class="ch2chip">② 虚栄 <b>Vanity</b> ／ 行動を促す <b>Actionable</b></span>
+        <span class="ch2chip">③ 探索 <b>Exploratory</b> ／ 報告 <b>Reporting</b></span>
+        <span class="ch2chip">④ 先行 <b>Leading</b> ／ 遅行 <b>Lagging</b></span>
+        <span class="ch2chip">⑤ 相関 <b>Correlated</b> ／ 因果 <b>Causal</b></span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ① QUAL vs QUANT -->
+  <section class="slide" data-title="① 定性 vs 定量">
+    <div class="in">
+      <div class="eyebrow"><span class="num">第2章 ①</span> 対比</div>
+      <h2 class="t">定性 vs 定量 <span class="ent">Qualitative vs. Quantitative</span></h2>
+      <p class="lead">数字は「何が・どれだけ（What / How much）」を、声は「なぜ（Why）」を教えてくれます。</p>
+      <div class="pair">
+        <div class="pcol l green"><div class="en">Qualitative</div><div class="jp">定性</div><p class="df">言葉・観察。構造化されておらず集計しにくいが、感情や理由＝<b>なぜ</b>を捉える。少数でも深い。</p><ul><li>インタビュー・自由記述・行動観察</li><li>「初回購入で何に迷った？」を聞く</li></ul><p class="ex"><b>強み</b>：仮説の発見　／　<b>弱み</b>：一般化しにくい</p></div>
+        <div class="pvs">vs</div>
+        <div class="pcol r teal"><div class="en">Quantitative</div><div class="jp">定量</div><p class="df">数値・事実。集計でき、<b>何が・どれだけ</b>に答える。多数を率・割合で測り、規模で検証できる。</p><ul><li>転換率・リテンション率・ファネル</li><li>「登録→初回購入が10%」と測る</li></ul><p class="ex"><b>強み</b>：検証・比較　／　<b>弱み</b>：理由は語らない</p></div>
+      </div>
+      <div class="take">👉 <b>使いどころ</b>：定性で「なぜ」の仮説をつくり → 定量で「どれだけ」を検証する。両輪で回すと打ち手を誤りにくい。</div>
+    </div>
+  </section>
+
+  <!-- ② VANITY vs ACTIONABLE -->
+  <section class="slide" data-title="② 虚栄 vs 行動を促す">
+    <div class="in">
+      <div class="eyebrow"><span class="num">第2章 ②</span> 対比</div>
+      <h2 class="t">虚栄 vs 行動を促す <span class="ent">Vanity vs. Actionable Metrics</span></h2>
+      <p class="lead">「増えると気持ちいい数字」と「行動を変える数字」を見分けます。</p>
+      <div class="pair">
+        <div class="pcol l amber"><div class="en">Vanity</div><div class="jp">虚栄（見栄えだけ）</div><p class="df">見ると気持ちいいが、行動は変わらない。たいてい<b>累計・総数</b>で、増える一方。</p><ul><li>累計ページビュー・総ダウンロード数</li><li>フォロワー・いいねの総数</li></ul><p class="ex"><b>罠</b>：「今月のPVは1万！」→ 上司「So what?」</p></div>
+        <div class="pvs">vs</div>
+        <div class="pcol r teal"><div class="en">Actionable</div><div class="jp">行動を促す</div><p class="df">見たら<b>次の打ち手</b>が決まる。たいてい<b>率・割合</b>で、上下するから原因を探せる。</p><ul><li>コンバージョン率・継続率</li><li>クリック率・完了率</li></ul><p class="ex"><b>強み</b>：下がれば改善の手を打てる</p></div>
+      </div>
+      <div class="take">👉 <b>見分け方</b>：その数字が変わったら、明日あなたは何を変える？ ── 答えられれば「行動を促す（アクショナブル）」。</div>
+    </div>
+  </section>
+
+  <!-- ③ EXPLORATORY vs REPORTING -->
+  <section class="slide" data-title="③ 探索 vs 報告">
+    <div class="in">
+      <div class="eyebrow"><span class="num">第2章 ③</span> 対比</div>
+      <h2 class="t">探索 vs 報告 <span class="ent">Exploratory vs. Reporting Metrics</span></h2>
+      <p class="lead">「まだ知らないことを探す指標」と「分かっていることを管理する指標」です。</p>
+      <div class="pair">
+        <div class="pcol l teal"><div class="en">Exploratory</div><div class="jp">探索</div><p class="df">まだ知らない発見を探す、仮説的・先回り的な指標。当たれば<b>競争優位</b>になる（“未知の未知”を見つける）。</p><ul><li>「どの使い方が伸びている？」を掘る</li><li>新しい相関・兆しを探す</li></ul><p class="ex"><b>向き</b>：立ち上げ期・新領域</p></div>
+        <div class="pvs">vs</div>
+        <div class="pcol r mute"><div class="en">Reporting</div><div class="jp">報告</div><p class="df">すでに分かっている指標で、日々の運営・管理を回す（<b>既知の管理</b>）。</p><ul><li>週次アクティブ数・売上の定例確認</li><li>ダッシュボードの定点観測</li></ul><p class="ex"><b>向き</b>：安定運用・進捗共有</p></div>
+      </div>
+      <div class="take">👉 <b>使いどころ</b>：発見が競争優位を生むので、早い段階ほど<b>探索</b>を厚めに。軌道に乗ったら<b>報告</b>で守る。</div>
+    </div>
+  </section>
+
+  <!-- ④ LEADING vs LAGGING -->
+  <section class="slide" data-title="④ 先行 vs 遅行">
+    <div class="in">
+      <div class="eyebrow"><span class="num">第2章 ④</span> 対比</div>
+      <h2 class="t">先行 vs 遅行 <span class="ent">Leading vs. Lagging Metrics</span></h2>
+      <p class="lead">「これから起きることを予測する指標」と「もう起きた結果を示す指標」です。</p>
+      <div class="pair">
+        <div class="pcol l teal"><div class="en">Leading</div><div class="jp">先行指標</div><p class="df"><b>未来を予測</b>する指標。今動けば結果を変えられる。</p><ul><li>問い合わせ数・商談パイプライン（→将来の売上）</li><li>週次の新規トライアル数</li></ul><p class="ex"><b>できること</b>：先手を打つ</p></div>
+        <div class="pvs">vs</div>
+        <div class="pcol r amber"><div class="en">Lagging</div><div class="jp">遅行指標</div><p class="df">すでに<b>起きた結果</b>を示す。原因はもう過去のこと。</p><ul><li>解約率（churn）・今月の売上</li><li>期末の達成額</li></ul><p class="ex"><b>できること</b>：確認・答え合わせ</p></div>
+      </div>
+      <div class="take">👉 <b>使いどころ</b>：先行指標で<b>先手</b>を打ち、遅行指標で<b>答え合わせ</b>。先行指標は十分なデータ量があってこそ予測になる。</div>
+    </div>
+  </section>
+
+  <!-- ⑤ CORRELATED vs CAUSAL -->
+  <section class="slide" data-title="⑤ 相関 vs 因果">
+    <div class="in">
+      <div class="eyebrow"><span class="num">第2章 ⑤</span> 対比</div>
+      <h2 class="t">相関 vs 因果 <span class="ent">Correlated vs. Causal Metrics</span></h2>
+      <p class="lead">「一緒に動く」と「引き起こす」は別物。ここを取り違えると打ち手を誤ります。</p>
+      <div class="pair">
+        <div class="pcol l amber"><div class="en">Correlated</div><div class="jp">相関</div><p class="df">二つの指標が<b>一緒に動く</b>。予測には使えるが、片方を変えても相手が動くとは限らない。</p><ul><li>例：アイスの売上と水難事故は一緒に増える</li><li>真の原因は別（“夏の暑さ”）かもしれない</li></ul><p class="ex"><b>できること</b>：予測</p></div>
+        <div class="pvs">vs</div>
+        <div class="pcol r green"><div class="en">Causal</div><div class="jp">因果</div><p class="df">一方がもう一方を<b>引き起こす</b>。変えれば結果を変えられる。</p><ul><li>普通は A/Bテスト等の<b>実験</b>で確かめる</li><li>見つかれば最強の武器になる</li></ul><p class="ex"><b>できること</b>：制御（改善できる）</p></div>
+      </div>
+      <div class="take">👉 <b>使いどころ</b>：相関は予測、因果は制御。相関を見つけたら、実験で「本当に因果か」を確かめる。</div>
+    </div>
+  </section>
+
+  <!-- 4 CHECKER -->
+  <section class="slide" data-title="良い指標チェッカー">
+    <div class="in">
+      <div class="eyebrow"><span class="num">第2章 練習</span> 虚栄 or 行動を促す？</div>
+      <h2 class="t">この指標は「行動を促す（Actionable）」指標？ ── 虚栄 vs 行動を促すを見分ける</h2>
+      <p class="lead">下の指標を一つ選ぶと、虚栄（Vanity）寄りか・行動を促す（Actionable）寄りかを判定し、その理由まで説明します。見分けのコツは2つ。「累計・総数ではなく“率・割合”になっているか」「その数字を見たら、次の打ち手が決まるか」です。</p>
+      <div class="checker">
+        <p class="q">この指標は「行動を促す（Actionable）」指標？　── 一つ選んでみよう</p>
+        <div class="chips" id="chips">
+          <button class="chip" data-k="pv">累計ページビュー</button>
+          <button class="chip" data-k="dl">累計ダウンロード数</button>
+          <button class="chip" data-k="cvr">登録→初回購入の転換率</button>
+          <button class="chip" data-k="ret">7日後リテンション率</button>
+          <button class="chip" data-k="reg">登録ユーザー総数</button>
+        </div>
+        <div class="verdict" id="verdict"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 5 EXPLORER -->
+  <section class="slide" data-title="データで試す">
+    <div class="in">
+      <div class="eyebrow"><span class="num">04</span> データで試す（インタラクティブ・中核）</div>
+      <h2 class="t">同じデータ、違う指標 ── 結論はこう変わる</h2>
+      <p class="lead">あるECサイトの1か月のデータ。<b>見る指標（レンズ）を切り替える</b>と、同じ数字から導かれる結論と上司の反応がどう変わるか確かめましょう。各段を選ぶと内訳が出ます。<span style="color:var(--mute)">（一般的な数値例。収益データは扱いません）</span></p>
+      <div class="explorer" id="exp">
+        <div><h3>ECサイト　ファネル分析</h3><p class="x-sub">来訪 → 会員登録 → 初回購入 → リピート → 6か月後再購入</p></div>
+        <div class="toggles">
+          <div class="lensgroup" id="lensgroup">
+            <button data-lens="count" class="on">累計で見る（バニティ）</button>
+            <button data-lens="rate">率で見る（アクショナブル）</button>
+          </div>
+          <label class="bm-toggle"><input type="checkbox" id="bm"><span class="sw"></span>業界平均と比べる</label>
+        </div>
+        <div class="lens-note" id="lensNote"></div>
+        <div class="funnel" id="funnel"></div>
+        <div class="x-grid">
+          <div class="panel detail" id="detail"><p class="ph">選んだ段の内訳</p><p class="dname">段をクリックすると詳細が出ます</p></div>
+          <div class="panel report"><p class="ph" id="reportHead">この指標での報告</p><div class="rbody" id="reportBody"></div><div class="boss-bubble" id="bossBubble"></div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 7 MEASURE EVENTS -->
+  <section class="slide" data-title="計測設計">
+    <div class="in">
+      <div class="eyebrow"><span class="num">06</span> EKIDEN.AI の計測設計</div>
+      <h2 class="t">何を、いつ、どう測るかを先に決める</h2>
+      <p class="lead">指標は「測れるように仕込んでから」生まれます。EKIDEN.AI（ランナー向けAIコーチ）を例に、ユーザーの歩みに沿った4つの計測イベントを設計します。<span style="color:var(--mute)">（教材上の設計例）</span></p>
+      <div class="events">
+        <div class="ev"><span class="aarrr">獲得</span><div class="estep">EVENT 1</div><h4>アプリ初回起動</h4><p>入口に来た。分母の出発点。</p></div>
+        <div class="ev"><span class="aarrr">活性化</span><div class="estep">EVENT 2</div><h4>トレーニングプラン作成</h4><p>価値を一度体験した瞬間。</p></div>
+        <div class="ev"><span class="aarrr">定着</span><div class="estep">EVENT 3</div><h4>ラン記録（コア行動）</h4><p>本当に使っているかを映す核。</p></div>
+        <div class="ev"><span class="aarrr">継続</span><div class="estep">EVENT 4</div><h4>週次レビュー閲覧</h4><p>戻ってくるか＝リテンション。</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 8 ACTIVE TIERS -->
+  <section class="slide" data-title="アクティブ3層">
+    <div class="in">
+      <div class="eyebrow"><span class="num">07</span> 定義</div>
+      <h2 class="t">「アクティブ」を3層で定義する</h2>
+      <p class="lead">「登録した」だけでは使っているとは限りません。<b>接続済み ≠ アクティブ</b>。どこからを「アクティブ」と呼ぶかを決めることが、分母の設計です。</p>
+      <div class="tiers">
+        <div class="tier"><div class="tnum">1</div><div style="flex:1"><h4>登録ユーザー</h4><p>アカウントを作っただけ。まだ使っていないかも。</p></div><div class="tbar"><span></span></div></div>
+        <div class="tier"><div class="tnum">2</div><div style="flex:1"><h4>接続済みユーザー</h4><p>最近ログインした。来てはいるが価値行動は未確認。</p></div><div class="tbar"><span></span></div></div>
+        <div class="tier"><div class="tnum">3</div><div style="flex:1"><h4>アクティブユーザー</h4><p>コア行動（ラン記録）を一定頻度で実行。ここが本命の分母。</p></div><div class="tbar"><span></span></div></div>
+      </div>
+      <div class="trap">⚠ <b>罠：</b>「接続済み＝アクティブ」とするとほぼ全員がアクティブになり、定着の弱さを隠す（バニティ）。アクティブは“価値への関与”で測る。</div>
+    </div>
+  </section>
+
+  <!-- 9 TASK -->
+  <section class="slide" data-title="今日のワーク">
+    <div class="in">
+      <div class="eyebrow"><span class="num">08</span> 今日のワーク／次回までの課題</div>
+      <h2 class="t">自分のテーマで「行動を促す報告」を設計する</h2>
+      <div class="task">
+        <div class="tcard review"><h3>🔁 復習</h3>
+          <ol><li>あなたのOMTMの「分子・分母」を言葉で定義する</li><li>自分のテーマを簡易ファネル化し、各段を「率」で書き換える</li><li>「累計で見た報告」を「行動を促す報告」に書き直す</li></ol></div>
+        <div class="tcard prep"><h3>📖 予習</h3>
+          <ol start="4"><li>計測計画メモを作る ── 何を・いつ・どのイベントで測るか</li><li>教科書の該当章（コホート／ファネル）に目を通す</li></ol></div>
+      </div>
+      <div class="band">
+        <div class="dl">提出締切：<span>6/30（火）23:59</span></div>
+        <a class="cr-submit" href="https://classroom.google.com/c/ODU5NjUzNDM0Njk0" target="_blank" rel="noopener">🎓 Classroomで提出 ↗</a>
+        <div class="next">次回予告 ── 第3回：コホート分析とファネル分析</div>
+      </div>
+      <p class="srcnote">出典：A. クロール＆B. ヨスコビッツ『Lean Analytics』（オライリージャパン）を要約・再構成（逐語引用なし）。ECサイトの数値は一般的な数値例。EKIDEN.AI の計測設計・アクティブ定義は教材上の設計例で、収益（Stripe）データは扱いません。</p>
+    </div>
+  </section>
+  <!-- FOOTER (講師・教科書) -->
+  <section class="slide" data-title="講師・教科書">
+    <div class="in">
+      <div class="eyebrow"><span class="num">INFO</span> この講義について</div>
+      <h2 class="t">講師と教科書</h2>
+      <div class="foot-grid">
+        <div class="foot-prof">
+          <img class="prof-img" src="https://tensenses-model.web.app/assets/yt.jpg" alt="高橋 雄介" onerror="this.style.display='none'">
+          <div class="prof-body">
+            <div class="prof-name">高橋 雄介 <span>Yusuke Takahashi, PhD</span></div>
+            <div class="prof-title">武蔵野大学 データサイエンス学部 准教授</div>
+            <p class="prof-bio">計算機科学者・連続起業家。AIx{ } 共同創業。直交化した意味空間に基づく適応的なセマンティック基盤と知識ベースを研究。シリコンバレーと東京でソフトウェアのスタートアップを創業し、プロダクト設計・グロース・顧客開発に従事。500 Startups 出身。慶應義塾大学にて博士（政策・メディア）。</p>
+            <div class="prof-links">
+              <a href="https://www.linkedin.com/in/yusuketakahashiphd/" target="_blank" rel="noopener">LinkedIn ↗</a>
+              <a href="https://orcid.org/0009-0006-8351-2280" target="_blank" rel="noopener">ORCID ↗</a>
+              <a href="https://mids.ac/" target="_blank" rel="noopener">武蔵野大学データサイエンス ↗</a>
+              <a href="https://aix.sc" target="_blank" rel="noopener">AIx ↗</a>
+            </div>
+          </div>
+        </div>
+        <div class="foot-book">
+          <div class="book-label">教科書 ／ TEXTBOOK</div>
+          <div class="book-row">
+            <a class="bk-cover" href="https://amzn.to/4vViLH6" target="_blank" rel="noopener" aria-label="Amazonで購入する">
+              <img src="https://m.media-amazon.com/images/P/4873117119.01._SCLZZZZZZZ_.jpg" alt="Lean Analytics 表紙" onerror="if(!this.dataset.f){this.dataset.f='1';this.src='https://www.oreilly.co.jp/books/images/picture_large978-4-87311-711-9.jpeg';}else{this.style.display='none';this.parentNode.classList.add('noimg');}">
+              <span class="bk-fallback">Lean<br>Analytics</span>
+            </a>
+            <div class="book-info">
+              <div class="book-title">Lean Analytics</div>
+              <div class="book-sub">スタートアップのためのデータ解析と活用法</div>
+              <div class="book-meta">アリスター・クロール ＆ ベンジャミン・ヨスコビッツ<br>オライリージャパン<br>ISBN 978-4-87311-711-9</div>
+              <a class="book-amz" href="https://amzn.to/4vViLH6" target="_blank" rel="noopener">Amazonで購入する ↗</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="foot-copy">SDGs発展2［a1］　2026年度　担当：高橋 雄介　／　教科書：A. クロール & B. ヨスコビッツ『Lean Analytics』（オライリージャパン）</div>
+    </div>
+  </section>
+
+</main>
+
+<nav class="dots" id="dots" aria-label="スライド一覧"></nav>
+<div class="navbtns">
+  <button id="upBtn" aria-label="前のスライド">▲</button>
+  <button id="downBtn" aria-label="次のスライド">▼</button>
+</div>
+
+<script>
+(function(){
+  "use strict";
+
+  /* dropdown */
+  var ddBtn=document.getElementById("ddBtn"), ddMenu=document.getElementById("ddMenu");
+  ddBtn.addEventListener("click",function(e){e.stopPropagation();var o=ddMenu.classList.toggle("open");ddBtn.setAttribute("aria-expanded",o);});
+  document.addEventListener("click",function(e){ if(!ddMenu.contains(e.target)&&e.target!==ddBtn){ddMenu.classList.remove("open");ddBtn.setAttribute("aria-expanded","false");}});
+
+  /* deck / dots / buttons */
+  var deck=document.getElementById("deck");
+  var slides=Array.prototype.slice.call(deck.querySelectorAll(".slide"));
+  var dotsWrap=document.getElementById("dots");
+  var upBtn=document.getElementById("upBtn"), downBtn=document.getElementById("downBtn");
+  var current=0;
+  slides.forEach(function(s,i){
+    var b=document.createElement("button");
+    b.innerHTML='<span class="tip">'+(i+1)+'. '+(s.dataset.title||"")+'</span>';
+    b.setAttribute("aria-label",(i+1)+". "+(s.dataset.title||""));
+    b.addEventListener("click",function(){go(i);});
+    dotsWrap.appendChild(b);
+  });
+  var dotBtns=Array.prototype.slice.call(dotsWrap.children);
+  function setActive(i){current=i;dotBtns.forEach(function(d,k){d.classList.toggle("on",k===i);});upBtn.disabled=(i===0);downBtn.disabled=(i===slides.length-1);}
+  function go(i){i=Math.max(0,Math.min(slides.length-1,i));slides[i].scrollIntoView({behavior:"smooth",block:"start"});}
+  upBtn.addEventListener("click",function(){go(current-1);});
+  downBtn.addEventListener("click",function(){go(current+1);});
+  var io=new IntersectionObserver(function(es){es.forEach(function(en){if(en.isIntersecting)setActive(slides.indexOf(en.target));});},{root:deck,threshold:0.55});
+  slides.forEach(function(s){io.observe(s);});
+  setActive(0);
+  document.addEventListener("keydown",function(e){
+    if(e.key==="ArrowDown"||e.key==="PageDown"){e.preventDefault();go(current+1);}
+    if(e.key==="ArrowUp"||e.key==="PageUp"){e.preventDefault();go(current-1);}
+  });
+
+  /* metric checker */
+  var verdicts={
+    pv:{v:"vanity",t:"<b>これはバニティ（虚栄）寄りです。</b>累計ページビューは“これまでの合計”なので増える一方で、減ることがありません。数字が大きくなっても「次に何をすべきか」は分からず、改善につながりにくいのです。これが「PV1万 → So what?（で、何をするの？）」と言われてしまう罠です。"},
+    dl:{v:"vanity",t:"<b>これはバニティ（虚栄）寄りです。</b>累計ダウンロード数も“過去の合計”。入れたけれど使っていない人も数に含まれるため、「今、実際に使われているか」は分かりません。実態は『継続率（リテンション）』のような“率”で測る必要があります。"},
+    cvr:{v:"action",t:"<b>これは行動を促す（アクショナブル）指標です。</b>登録した人のうち何％が初回購入まで進んだか、という“率”なので上がり下がりします。低ければ「登録後の案内や購入導線を直す」など打ち手が直結し、どこで人がつまずいているか（ボトルネック）を見つけられます。"},
+    ret:{v:"action",t:"<b>これは行動を促す（アクショナブル）指標です。</b>一定期間後にどれだけの人が戻ってきたかを“率”で測るため、定着しているか・離れているかがすぐ分かります。下がったら「使い続けてもらう工夫」を打つ、と次の行動に直結します。"},
+    reg:{v:"vanity",t:"<b>これはバニティ（虚栄）寄りです。</b>登録ユーザー“総数”は累計なので増える一方。しかも「登録した＝使っている」ではありません（接続済み≠アクティブ）。本当に価値を受け取っている人の割合は、別に“率”で測る必要があります。"}
+  };
+  var chips=document.getElementById("chips"), verdict=document.getElementById("verdict");
+  chips.addEventListener("click",function(e){var b=e.target.closest(".chip");if(!b)return;
+    Array.prototype.forEach.call(chips.children,function(c){c.classList.remove("on");});b.classList.add("on");
+    var d=verdicts[b.dataset.k];verdict.className="verdict show "+(d.v==="vanity"?"v-vanity":"v-action");verdict.innerHTML=d.t;});
+
+  /* explorer */
+  var STAGES=[
+    {key:"visit",name:"来訪",count:1000000,rate:null,bench:null,flag:null,note:"流入の入口。ここが分母。広告・SEO・SNSなどの合計。"},
+    {key:"reg",name:"会員登録",count:100000,rate:10,bench:8,flag:"high",note:"来訪のうち登録した割合。入口の関心の強さを映す。"},
+    {key:"buy",name:"初回購入",count:10000,rate:10,bench:30,flag:"low",note:"登録から初めて買った割合。ここが最大のボトルネック。"},
+    {key:"rep",name:"リピート購入",count:4000,rate:40,bench:35,flag:"high",note:"初回購入者が2回目を買った割合。商品の満足度を映す。"},
+    {key:"ret",name:"6か月後再購入",count:2000,rate:50,bench:30,flag:"high",note:"半年後も戻って買った割合＝継続。ここが強み。"}
+  ];
+  var state={lens:"count",bench:false,sel:1};
+  var funnel=document.getElementById("funnel"),lensgroup=document.getElementById("lensgroup"),bmInput=document.getElementById("bm"),
+      lensNote=document.getElementById("lensNote"),exp=document.getElementById("exp"),detail=document.getElementById("detail"),
+      reportHead=document.getElementById("reportHead"),reportBody=document.getElementById("reportBody"),bossBubble=document.getElementById("bossBubble");
+  function fmt(n){return n.toLocaleString("ja-JP");}
+  STAGES.forEach(function(s,i){
+    var row=document.createElement("div");row.className="frow";row.dataset.i=i;if(s.flag)row.dataset.flag=s.flag;
+    row.innerHTML='<span class="fname">'+s.name+'</span><div class="bar-wrap"><div class="bar"></div><div class="bm-line"></div><span class="ftag low">緊急改善</span><span class="ftag high">強み</span></div><span class="fval" data-fval></span>';
+    row.addEventListener("click",function(){state.sel=i;render();});
+    funnel.appendChild(row);
+  });
+  function maxCount(){return STAGES[0].count;}
+  function render(){
+    exp.classList.toggle("vanity-mode",state.lens==="count");
+    exp.classList.toggle("bm-on",state.bench&&state.lens==="rate");
+    lensgroup.classList.toggle("vanity-on",state.lens==="count");
+    if(state.lens==="count"){lensNote.innerHTML="<b>累計レンズ：</b>大きい数字が目立ちます。見栄えは良いが「次に何をするか」は見えません。";}
+    else{lensNote.innerHTML="<b>率レンズ：</b>各段の転換率で見ると、低い段＝ボトルネックが一目で。"+(state.bench?"業界平均との差で打ち手の優先度が決まります。":"「業界平均と比べる」をオンにすると、どこを直すべきかがさらに明確に。");}
+    Array.prototype.forEach.call(funnel.children,function(row,i){
+      var s=STAGES[i],bar=row.querySelector(".bar"),bmline=row.querySelector(".bm-line"),fval=row.querySelector("[data-fval]");
+      row.classList.toggle("sel",i===state.sel);
+      if(state.lens==="count"){bar.style.width=(s.count/maxCount()*100)+"%";bmline.style.display="none";fval.innerHTML='<span class="big">'+fmt(s.count)+'</span> 人';}
+      else{bmline.style.display="";
+        if(s.rate===null){bar.style.width="100%";bmline.style.opacity=0;fval.innerHTML='<span class="big">基準</span> （分母）';}
+        else{bar.style.width=s.rate+"%";bmline.style.left=s.bench+"%";fval.innerHTML='<span class="big">'+s.rate+'%</span> '+(state.bench?'<span style="color:#9fb6c7">／ 業界 '+s.bench+'%</span>':'前段から');}}
+    });
+    renderDetail();renderReport();
+  }
+  function renderDetail(){
+    var s=STAGES[state.sel],rows='';
+    rows+='<tr><td>人数</td><td>'+fmt(s.count)+' 人</td></tr>';
+    if(s.rate!==null){rows+='<tr><td>前段からの転換率</td><td>'+s.rate+'%</td></tr><tr><td>業界平均</td><td>'+s.bench+'%</td></tr>';
+      var diff=s.rate-s.bench,cls=diff<0?"gap-low":"gap-high";rows+='<tr><td>業界平均との差</td><td class="'+cls+'">'+(diff>0?"+":"")+diff+' pt</td></tr>';}
+    else{rows+='<tr><td>位置づけ</td><td>分母（出発点）</td></tr>';}
+    detail.innerHTML='<p class="ph">選んだ段の内訳</p><p class="dname">'+s.name+'</p><table>'+rows+'</table><p style="font-size:12px;color:var(--mute);margin:10px 0 0">'+s.note+'</p>';
+  }
+  function renderReport(){
+    if(state.lens==="count"){
+      reportHead.textContent="この指標での報告（累計レンズ）";
+      reportBody.innerHTML='「今月の来訪は<b>100万</b>！会員登録<b>10万</b>、購入<b>1万</b>、半年後も<b>2千人</b>が戻ってきました。<b>過去最高</b>です。」';
+      bossBubble.className="boss-bubble bad";
+      bossBubble.innerHTML='<span class="face">🤨</span><div>上司「数字は大きいけど…<b>で、次は何をするの？（So what?）</b>」</div>';
+    }else{
+      reportHead.textContent="この指標での報告（率レンズ）";
+      reportBody.innerHTML='「来訪→登録は<b>10%</b>で業界＋2pt と健闘。一方、<b style="color:var(--red)">登録→初回購入が10%</b>で業界平均30%を<b style="color:var(--red)">20pt下回る</b>最大のボトルネックです。ここを直せば購入数が最も伸びます。継続は業界30%に対し<b style="color:var(--green)">50%</b>で強みです。」';
+      bossBubble.className="boss-bubble good";
+      bossBubble.innerHTML='<span class="face">👍</span><div>上司「いいね！<b>初回購入の導線をすぐ直そう。</b>」データの向こうには人がいる。</div>';
+    }
+  }
+  lensgroup.addEventListener("click",function(e){var b=e.target.closest("button");if(!b)return;state.lens=b.dataset.lens;
+    Array.prototype.forEach.call(lensgroup.children,function(x){x.classList.remove("on");});b.classList.add("on");render();});
+  bmInput.addEventListener("change",function(){state.bench=bmInput.checked;render();});
+  render();
+})();
+</script>
+<!-- AI相談（Gemini） -->
+<button class="ai-fab" id="aiFab" aria-label="AIに相談"><span class="sp">✨</span>AIに相談</button>
+<aside class="ai-panel" id="aiPanel" aria-hidden="true">
+  <div class="ai-head">
+    <div>
+      <div class="ttl">Lean Analytics アシスタント</div>
+      <div class="sub">この回の内容について質問できます</div>
+    </div>
+    <span class="badge-g">Gemini</span>
+    <button class="ai-x" id="aiClose" aria-label="閉じる">✕</button>
+  </div>
+  <div class="ai-msgs" id="aiMsgs"></div>
+  <div class="ai-key" id="aiKeyRow" style="display:none">
+    <input type="password" id="aiKey" placeholder="Gemini APIキーを貼り付け" autocomplete="off">
+    <button id="aiKeySet">設定</button>
+  </div>
+  <div class="ai-sugs">
+    <div class="sg-top">
+      <span class="sg-lbl">質問候補</span>
+      <button class="sg-reload" id="sgReload" aria-label="質問候補を再生成" title="質問候補を再生成">↻</button>
+    </div>
+    <div class="sg-list" id="sgList"></div>
+  </div>
+  <div class="ai-input">
+    <textarea id="aiText" rows="1" placeholder="質問を入力…（例：良い指標の4条件は？）"></textarea>
+    <button class="ai-send" id="aiSend" aria-label="送信">➤</button>
+  </div>
+  <div class="ai-disclaimer">AIの回答には誤りが含まれることがあります。最終判断は教科書と授業で確認してください。</div>
+</aside>
+
+<script>
+(function(){
+  "use strict";
+  /* ===== 設定：下に Gemini APIキーを入れると即座に使えます（公開時はGoogle AI StudioでHTTPリファラ制限を推奨） ===== */
+  var GEMINI_API_KEY = "";                 // 例: "AIza..."（空のままだと、初回にパネル内でキー入力を求めます）
+  var GEMINI_MODEL   = "gemini-3.5-flash"; // 利用可能なモデル名に変更可
+  /* ====================================================================================== */
+
+  var LECTURE_FOCUS = "教科書『Lean Analytics』第2章『優れた指標とは何か（What Makes a Good Metric?）』、良い指標の4条件（比較できる Comparative・分かりやすい Understandable・比率/割合 Rate or ratio・行動が変わる Changes behavior）、指標の5つの対比＝定性/定量（Qualitative/Quantitative）、虚栄/行動を促す（Vanity/Actionable）、探索/報告（Exploratory/Reporting）、先行/遅行（Leading/Lagging）、相関/因果（Correlated/Causal）、ファネル分析、計測イベント設計、アクティブの3層";
+  var FALLBACK_QS = ["優れた指標の4条件をやさしく教えて","定性と定量はどう使い分ける？","虚栄指標と行動を促すの指標の見分け方は？","探索指標と報告指標の違いは？","先行指標と遅行指標の例は？","相関と因果はどう違う？","アイスと水難事故の例で相関と因果を説明して","『PV1万→So what?』と言われない報告は？"];
+
+  var apiKey=GEMINI_API_KEY, history=[], busy=false, greeted=false;
+  var fab=document.getElementById("aiFab"),panel=document.getElementById("aiPanel"),closeBtn=document.getElementById("aiClose"),
+      msgs=document.getElementById("aiMsgs"),sgList=document.getElementById("sgList"),sgReload=document.getElementById("sgReload"),
+      text=document.getElementById("aiText"),send=document.getElementById("aiSend"),
+      keyRow=document.getElementById("aiKeyRow"),keyInput=document.getElementById("aiKey"),keySet=document.getElementById("aiKeySet");
+
+  function openPanel(){document.body.classList.add("ai-open");panel.classList.add("open");panel.setAttribute("aria-hidden","false");
+    if(!greeted){greeted=true;addBot("こんにちは。『Lean Analytics』とこの回の内容について、なんでも聞いてください。下の質問候補からも選べます。");renderSugs(FALLBACK_QS.slice(0,4));}
+    setTimeout(function(){text.focus();},300);}
+  function closePanel(){document.body.classList.remove("ai-open");panel.classList.remove("open");panel.setAttribute("aria-hidden","true");}
+  fab.addEventListener("click",openPanel);closeBtn.addEventListener("click",closePanel);
+  document.addEventListener("keydown",function(e){if(e.key==="Escape"&&panel.classList.contains("open"))closePanel();});
+
+  function esc(s){return s.replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");}
+  function fmt(s){return esc(s).replace(/\*\*(.+?)\*\*/g,"<b>$1</b>");}
+  function addUser(t){var d=document.createElement("div");d.className="msg user";d.textContent=t;msgs.appendChild(d);sc();}
+  function addBot(t){var d=document.createElement("div");d.className="msg bot";d.innerHTML=fmt(t);msgs.appendChild(d);sc();return d;}
+  function addNote(t){var d=document.createElement("div");d.className="msg note";d.textContent=t;msgs.appendChild(d);sc();}
+  function sc(){msgs.scrollTop=msgs.scrollHeight;}
+  function typing(on){var ex=document.getElementById("aiTyping");if(on){if(ex)return;var d=document.createElement("div");d.className="typing";d.id="aiTyping";d.innerHTML="<span></span><span></span><span></span>";msgs.appendChild(d);sc();}else if(ex){ex.remove();}}
+
+  function needKey(){if(apiKey)return false;keyRow.style.display="flex";addNote("AIに接続するには Gemini APIキーが必要です。下の欄にキーを貼り付けて「設定」を押してください。");return true;}
+  keySet.addEventListener("click",function(){var v=keyInput.value.trim();if(v){apiKey=v;keyRow.style.display="none";keyInput.value="";addNote("APIキーを設定しました。質問できます。");}});
+
+  function sysPrompt(){return "あなたは武蔵野大学の科目『SDGs発展2』の学習アシスタントです。教科書『Lean Analytics』(A. クロール & B. ヨスコビッツ)の考え方に基づき、学生の質問に日本語でやさしく簡潔に答えます。専門用語は身近な具体例で説明し、逐語引用はせず自分の言葉で説明します。授業の共通ケースはEKIDEN.AI（ランナー向けAIコーチ）で、収益(Stripe)の具体データには触れません。この回のテーマ："+LECTURE_FOCUS+"。テーマと無関係な質問には、丁寧にこの授業の範囲へ話を戻してください。回答は3〜6文程度を目安に。";}
+
+  function callGemini(contents,system,cb,err){
+    if(!apiKey){err("APIキーが未設定です。");return;}
+    var url="https://generativelanguage.googleapis.com/v1beta/models/"+GEMINI_MODEL+":generateContent?key="+encodeURIComponent(apiKey);
+    var body={contents:contents};if(system)body.system_instruction={parts:[{text:system}]};
+    fetch(url,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(body)})
+      .then(function(r){return r.json().then(function(j){return {ok:r.ok,j:j};});})
+      .then(function(res){
+        if(!res.ok){var m=(res.j&&res.j.error&&res.j.error.message)?res.j.error.message:("HTTP "+(res.j&&res.j.error&&res.j.error.code||"エラー"));err(m);return;}
+        var c=res.j.candidates&&res.j.candidates[0];
+        var t=(c&&c.content&&c.content.parts)?c.content.parts.map(function(p){return p.text||"";}).join(""):"";
+        if(!t){err("空の応答が返りました。");return;}cb(t);
+      }).catch(function(e){err(e.message||"通信に失敗しました。");});
+  }
+
+  function ask(q){
+    if(busy)return;if(needKey())return;
+    addUser(q);history.push({role:"user",text:q});
+    busy=true;send.disabled=true;typing(true);
+    var contents=history.map(function(m){return {role:m.role,parts:[{text:m.text}]};});
+    callGemini(contents,sysPrompt(),function(t){typing(false);addBot(t);history.push({role:"model",text:t});busy=false;send.disabled=false;},
+      function(em){typing(false);addNote("エラー："+em);if(/API[_ ]?key|invalid|401|403|PERMISSION|API_KEY/i.test(em)){apiKey="";keyRow.style.display="flex";}history.pop();busy=false;send.disabled=false;});
+  }
+
+  function renderSugs(list){sgList.innerHTML="";list.forEach(function(q){var b=document.createElement("button");b.className="sg";b.textContent=q;b.addEventListener("click",function(){ask(q);});sgList.appendChild(b);});}
+  function pick4(){var a=FALLBACK_QS.slice();for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1)),t=a[i];a[i]=a[j];a[j]=t;}return a.slice(0,4);}
+  function regenSugs(){
+    sgReload.classList.add("spin");
+    if(!apiKey){renderSugs(pick4());sgReload.classList.remove("spin");return;}
+    var prompt="この授業（テーマ："+LECTURE_FOCUS+"）について、学生が聞きたくなりそうな短い質問を、日本語でちょうど4つ作ってください。各質問は40文字以内。JSON配列のみを出力し、説明や記号は付けないでください。例：[\"質問1\",\"質問2\",\"質問3\",\"質問4\"]";
+    callGemini([{role:"user",parts:[{text:prompt}]}],null,function(t){
+      var arr=null;try{var m=t.match(/\[[\s\S]*\]/);if(m)arr=JSON.parse(m[0]);}catch(e){}
+      renderSugs((arr&&arr.length)?arr.slice(0,4):pick4());sgReload.classList.remove("spin");
+    },function(){renderSugs(pick4());sgReload.classList.remove("spin");});
+  }
+  sgReload.addEventListener("click",regenSugs);
+
+  function autoGrow(){text.style.height="auto";text.style.height=Math.min(text.scrollHeight,120)+"px";}
+  text.addEventListener("input",autoGrow);
+  text.addEventListener("keydown",function(e){if(e.key==="Enter"&&!e.shiftKey){e.preventDefault();submit();}});
+  function submit(){var v=text.value.trim();if(!v)return;text.value="";autoGrow();ask(v);}
+  send.addEventListener("click",submit);
+})();
+</script>
+</body>
+</html>
