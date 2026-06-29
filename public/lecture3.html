@@ -57,10 +57,12 @@
   .hero .meta b{color:var(--navy)}
   .pill{display:inline-block;background:#fff;border:1px solid var(--line);border-radius:999px;padding:6px 13px}
   .sowhat{display:flex;border:1px solid var(--line);border-radius:14px;overflow:hidden;background:#fff;max-width:660px}
-  .sowhat .you,.sowhat .boss{flex:1;padding:16px 19px}
+  .sowhat .you,.sowhat .boss,.sowhat .good{flex:1 1 0;min-width:0;padding:16px 19px}
   .sowhat .boss{background:var(--amber-soft);border-left:1px solid var(--line)}
+  .sowhat .good{background:#f4faf6;border-left:1px solid var(--line)}
   .sowhat .lbl{font-size:11px;font-weight:700;letter-spacing:.06em;margin-bottom:6px}
   .sowhat .you .lbl{color:var(--teal)} .sowhat .boss .lbl{color:var(--amber)}
+  .sowhat .good .lbl{color:var(--green)}
   .sowhat p{margin:0;font-size:15px;color:var(--navy);font-weight:600}
 
   /* steps */
@@ -342,6 +344,7 @@
   @media(max-width:860px){
     .steps{grid-template-columns:repeat(3,1fr)} .events{grid-template-columns:1fr 1fr} .dots{display:none}
     .x-split{grid-template-columns:1fr}
+    .aq{grid-template-columns:1fr}
     .ekfunnel{flex-direction:column}
     .ekstep{flex-direction:row;align-items:center;gap:13px}
     .eks-img{width:104px;flex:none} .eks-info{flex:1}
@@ -349,7 +352,7 @@
   }
   @media(max-width:640px){
     .vs,.four,.x-grid,.two,.task{grid-template-columns:1fr} .steps{grid-template-columns:1fr 1fr}
-    .sowhat{flex-direction:column} .sowhat .boss{border-left:0;border-top:1px solid var(--line)}
+    .sowhat{flex-direction:column} .sowhat .boss,.sowhat .good{border-left:0;border-top:1px solid var(--line)}
     .frow{grid-template-columns:80px 1fr 90px;gap:8px} .frow .fname{font-size:11px} .frow .fval{font-size:10px} .frow .fval .big{font-size:12px}
   }
   @media(prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
@@ -404,6 +407,19 @@
   
   .ans-h{font-size:14px;color:var(--navy);margin:22px 0 6px;display:flex;align-items:center;gap:9px}
   .ans-no{flex:none;font-size:11px;font-weight:700;color:#fff;background:var(--green);border-radius:6px;padding:3px 9px}
+  
+  .pfig{margin:14px 0 4px}
+  .pfig img{width:100%;max-width:680px;height:auto;border:1px solid var(--line);border-radius:12px;box-shadow:0 6px 20px rgba(21,50,79,.10);display:block;margin:0 auto;background:#fff}
+  .pfig.wide img{max-width:880px}
+  .pcap{font-size:11.5px;color:var(--mute);margin:8px 0 0;text-align:center;line-height:1.5}
+  .aq{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:8px}
+  .aqi{background:var(--soft);border:1px solid var(--line);border-radius:11px;padding:12px 14px}
+  .aqi h4{margin:0 0 5px;font-size:13px;color:var(--navy);display:flex;align-items:center;gap:8px}
+  .aqi h4 .en{font-size:10px;color:#fff;background:var(--teal);border-radius:5px;padding:2px 7px;font-weight:700;letter-spacing:.02em}
+  .aqi p{margin:0;font-size:12px;color:var(--mute);line-height:1.6}
+  .dmc{display:flex;gap:12px;align-items:flex-start;background:#fff;border:1px solid var(--line);border-left:4px solid var(--teal);border-radius:11px;padding:13px 15px;margin-top:8px}
+  .dmc .ic{font-size:20px;flex:none}
+  .dmc p{margin:0;font-size:12.5px;color:var(--ink);line-height:1.65}
   </style>
   <script src="config.js"></script>
 </head>
@@ -466,16 +482,30 @@
   <section class="slide" data-title="AARRR">
     <div class="in">
       <div class="eyebrow"><span class="num">02</span> 指標のフレーム</div>
-      <h2 class="t">AARRR ── ユーザーの道のりを5段階で測る</h2>
-      <p class="lead">「海賊指標（AARRR）」は、ユーザーがサービスに出会い、使い続けるまでの道のりを<b>5段階</b>に分けて測る枠組みです。ファネルもコホートも、この道のりの「どこ」を見ているかを意識すると読みやすくなります。</p>
-      <div class="steps">
-        <div class="step"><div class="n">A</div><h3>獲得</h3><p>Acquisition ── どう知り、来てくれたか</p></div>
-        <div class="step"><div class="n">A</div><h3>活性化</h3><p>Activation ── 最初の価値体験に届いたか</p></div>
-        <div class="step"><div class="n">R</div><h3>定着</h3><p>Retention ── 戻ってきて使い続けるか</p></div>
-        <div class="step"><div class="n">R</div><h3>紹介</h3><p>Referral ── 他の人に勧めるか</p></div>
-        <div class="step"><div class="n">R</div><h3>収益</h3><p>Revenue ── 収益につながるか</p></div>
+      <h2 class="t">AARRR（海賊指標）── ユーザーの道のりを5段階で測る</h2>
+      <p class="lead">AARRRは、製品やビジネスと顧客の<b>「接点」を5ステップ</b>に整理したフレームワークです。世界中のグロースチームやスタートアップが、成長やマーケティングを考えるときの<b>共通言語</b>として使っています。ファネルもコホートも「この道のりのどこを見ているか」を意識すると読みやすくなります。</p>
+      <div class="dmc"><span class="ic">🏴‍☠️</span><p>提唱者は <b>Dave McClure</b>。PayPal を経て、著名なシードアクセラレーター <b>500 Startups</b> を創業（現在は micro VC「Practical Venture Capital」）。頭文字をつなげると海賊の雄叫び「AARRR!」になることから <b>Pirate Metrics（海賊指標）</b>と呼ばれます。HBOドラマ『シリコンバレー』の投資家キャラのモデルとも言われる人物です。</p></div>
+
+      <figure class="pfig">
+        <img src="assets/aarrr-stages.jpg" alt="AARRRの5ステージ：Acquisition獲得・Activation利用開始・Retention継続・Referral紹介・Revenue収益" loading="lazy">
+        <figcaption class="pcap">5つのステージ：獲得 → 活性化（利用開始）→ 定着（継続）→ 紹介 → 収益　（出典：AARRR for Pirates by Dave McClure）</figcaption>
+      </figure>
+
+      <p class="lead" style="margin-top:18px">各ステージは、こう問いかけると分かりやすくなります。</p>
+      <div class="aq">
+        <div class="aqi"><h4><span class="en">Acquisition</span>獲得</h4><p>見込み客に、製品の価値が<b>的確かつスムーズ</b>に伝わっているか？</p></div>
+        <div class="aqi"><h4><span class="en">Activation</span>活性化（利用開始）</h4><p>初回の利用で<b>「良い体験＝価値」</b>に到達できているか？</p></div>
+        <div class="aqi"><h4><span class="en">Retention</span>定着（継続）</h4><p>満足して<b>使い続けてくれる</b>顧客がどれくらいいるか？</p></div>
+        <div class="aqi"><h4><span class="en">Referral</span>紹介</h4><p><b>友達を巻き込む</b>ほど満足している顧客がどれくらいいるか？</p></div>
+        <div class="aqi"><h4><span class="en">Revenue</span>収益</h4><p><b>お金を払う</b>ほど満足している顧客がどれくらいいるか？</p></div>
       </div>
-      <p class="lead" style="margin-top:16px">この授業の共通ケース EKIDEN.AI では、<b>獲得 → 活性化 → 定着 → 継続（エンゲージメント）</b>の流れを中心に見ます。<span style="color:var(--mute)">（収益＝Stripe の具体データは扱いません）</span></p>
+
+      <figure class="pfig wide" style="margin-top:18px">
+        <img src="assets/aarrr-funnel.jpg" alt="AARRR 5-Step Startup Metrics Model のファネル図。各ステージに流入チャネル（SEO・PR・ブログ・Eメール・紹介ループ・広告など）が対応する。" loading="lazy">
+        <figcaption class="pcap">各ステージには流入・継続・紹介・収益のチャネルが対応する（AARRR!: 5-Step Startup Metrics Model）。出典：Dave McClure / 500hats.typepad.com (2007)</figcaption>
+      </figure>
+
+      <p class="lead" style="margin-top:18px">この授業の共通ケース EKIDEN.AI では、<b>獲得 → 活性化 → 定着 → 継続（エンゲージメント）</b>の流れを中心に見ます。<span style="color:var(--mute)">（収益＝Stripe の具体データは扱いません）</span></p>
     </div>
   </section>
 
