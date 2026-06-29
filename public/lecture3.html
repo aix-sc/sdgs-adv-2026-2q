@@ -460,6 +460,14 @@
     .ek-steps{grid-template-columns:1fr 1fr} .ek-head{flex-direction:column;align-items:flex-start;gap:10px}
     .ex-split{grid-template-columns:1fr} .ex-panel{position:static}
   }
+  
+  .aarrr-figs{display:flex;gap:14px;flex-wrap:wrap;margin-top:12px}
+  .aarrr-figs figure{margin:0;flex:1 1 260px;max-width:340px}
+  .aarrr-figs img{width:100%;height:auto;border:1px solid var(--line);border-radius:11px;box-shadow:0 4px 14px rgba(21,50,79,.10);display:block;background:#fff}
+  .zoomable{cursor:zoom-in;transition:transform .12s,box-shadow .12s}
+  .zoomable:hover{transform:translateY(-2px);box-shadow:0 8px 22px rgba(21,50,79,.16)}
+  .lightbox{position:fixed;inset:0;z-index:400;background:rgba(13,36,54,.86);display:flex;align-items:center;justify-content:center;padding:24px;cursor:zoom-out}
+  .lightbox img{max-width:94vw;max-height:90vh;border-radius:10px;box-shadow:0 24px 70px rgba(0,0,0,.45);background:#fff}
   </style>
   <script src="config.js"></script>
 </head>
@@ -538,11 +546,15 @@
       <div class="eyebrow"><span class="num">03</span> 指標のフレーム</div>
       <h2 class="t">AARRR（海賊指標）── ユーザーの道のりを5段階で測る</h2>
       <p class="lead">AARRRは、製品やビジネスと顧客の<b>「接点」を5ステップ</b>に整理したフレームワークです。世界中のグロースチームやスタートアップが、成長やマーケティングを考えるときの<b>共通言語</b>として使っています。</p>
-      <div class="aarrr-row">
-        <div class="dmc"><img class="dmc-photo" src="assets/dave-mcclure.jpg" alt="Dave McClure"><p>提唱者は <b>Dave McClure</b>。PayPal を経て、著名なシードアクセラレーター <b>500 Startups</b> を創業。頭文字をつなげると海賊の雄叫び「AARRR!」になることから <b>Pirate Metrics（海賊指標）</b>と呼ばれます。HBOドラマ『シリコンバレー』の投資家キャラのモデルとも言われる人物です。</p></div>
-        <figure class="pfig" style="margin:0;flex:none;width:300px">
-          <img src="assets/aarrr-stages.jpg" alt="AARRRの5ステージ" loading="lazy">
-          <figcaption class="pcap">5つのステージ（出典：AARRR for Pirates by Dave McClure）</figcaption>
+      <div class="dmc"><img class="dmc-photo" src="assets/dave-mcclure.jpg" alt="Dave McClure"><p>提唱者は <b>Dave McClure</b>。PayPal を経て、著名なシードアクセラレーター <b>500 Startups</b> を創業。頭文字をつなげると海賊の雄叫び「AARRR!」になることから <b>Pirate Metrics（海賊指標）</b>と呼ばれます。HBOドラマ『シリコンバレー』の投資家キャラのモデルとも言われる人物です。</p></div>
+      <div class="aarrr-figs">
+        <figure>
+          <img class="zoomable" src="assets/aarrr-stages2.jpg" alt="AARRRの5つのステージ：Acquisition獲得・Activation利用開始・Retention継続・Referral紹介・Revenue収益" loading="lazy">
+          <figcaption class="pcap">5つのステージ（クリックで拡大）／出典：AARRR for Pirates by Dave McClure</figcaption>
+        </figure>
+        <figure>
+          <img class="zoomable" src="assets/aarrr-questions2.jpg" alt="AARRR 各ステージの問い" loading="lazy">
+          <figcaption class="pcap">各ステージの“問い”（クリックで拡大）</figcaption>
         </figure>
       </div>
       <p class="lead" style="margin-top:14px">この授業の共通ケース EKIDEN.AI では、<b>獲得 → 活性化 → 定着 → 継続（エンゲージメント）</b>の流れを中心に見ます。<span style="color:var(--mute)">（収益＝Stripe の具体データは扱いません）</span></p>
@@ -1021,7 +1033,16 @@
       else{a.hidden=true;q.hidden=false;btn.textContent='回答例を見る →';btn.classList.remove('on');}
     });
   });
+  var lb=document.getElementById('lightbox'),lbimg=document.getElementById('lightbox-img');
+  if(lb&&lbimg){
+    Array.prototype.forEach.call(document.querySelectorAll('img.zoomable'),function(im){
+      im.addEventListener('click',function(){lbimg.src=im.currentSrc||im.src;lbimg.alt=im.alt||'';lb.hidden=false;});
+    });
+    lb.addEventListener('click',function(){lb.hidden=true;lbimg.src='';});
+    document.addEventListener('keydown',function(e){if(e.key==='Escape'&&!lb.hidden){lb.hidden=true;lbimg.src='';}});
+  }
 })();
 </script>
+<div class="lightbox" id="lightbox" hidden><img id="lightbox-img" src="" alt=""></div>
 </body>
 </html>
