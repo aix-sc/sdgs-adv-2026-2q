@@ -466,6 +466,7 @@
   .aarrr-figs img{width:100%;height:auto;border:1px solid var(--line);border-radius:11px;box-shadow:0 4px 14px rgba(21,50,79,.10);display:block;background:#fff}
   .zoomable{cursor:zoom-in;transition:transform .12s,box-shadow .12s}
   .zoomable:hover{transform:translateY(-2px);box-shadow:0 8px 22px rgba(21,50,79,.16)}
+  .lightbox[hidden]{display:none}
   .lightbox{position:fixed;inset:0;z-index:400;background:rgba(13,36,54,.86);display:flex;align-items:center;justify-content:center;padding:24px;cursor:zoom-out}
   .lightbox img{max-width:94vw;max-height:90vh;border-radius:10px;box-shadow:0 24px 70px rgba(0,0,0,.45);background:#fff}
   </style>
@@ -531,12 +532,16 @@
     <div class="in">
       <div class="eyebrow"><span class="num">02</span> 分析の基本</div>
       <h2 class="t">ファネル分析とは ── 「漏斗（じょうご）」で離脱を見る</h2>
-      <p class="lead"><b>ファネル（funnel）</b>は、英語で<b>「漏斗（じょうご／ろうと）」</b>のこと。上が広く下が狭い形のとおり、ユーザーは<b>上の入口から入り、各段階で一部が離脱</b>し、下に進むほど人数が減っていきます。各段を<b>どれだけの人が通過したか（転換率）</b>を見て、<b>最も漏れている段</b>を見つけるのがファネル分析です。</p>
-      <div class="fnl-illust"><div class="fnl-tier"><div class="fnl-bar b-nv" style="width:100%"><span class="fnl-stage">獲得 <em>Acquisition</em></span><span class="fnl-num">1,000</span></div></div><span class="fnl-drop">↓</span><div class="fnl-tier"><div class="fnl-bar b-tl" style="width:76%"><span class="fnl-stage">活性化 <em>Activation</em></span><span class="fnl-num">600</span></div></div><span class="fnl-drop">↓</span><div class="fnl-tier"><div class="fnl-bar b-gr" style="width:58%"><span class="fnl-stage">定着 <em>Retention</em></span><span class="fnl-num">420</span></div></div><span class="fnl-drop">↓</span><div class="fnl-tier"><div class="fnl-bar b-am" style="width:42%"><span class="fnl-stage">紹介 <em>Referral</em></span><span class="fnl-num">180</span></div></div><span class="fnl-drop">↓</span><div class="fnl-tier"><div class="fnl-bar b-rd" style="width:30%"><span class="fnl-stage">収益 <em>Revenue</em></span><span class="fnl-num">90</span></div></div></div>
-      <p class="pcap" style="text-align:left;max-width:660px">概念図（教材上の数値例）。AARRR の各段を下るほど人数が減っていく様子。減り方が最も大きい段＝<b style="color:var(--amber)">ボトルネック</b>＝最優先で直す候補。</p>
-      <div class="sowhat" style="margin-top:16px">
-        <div class="you"><div class="lbl">ありがちな見方</div><p>「登録は1,000人もいる！」＝入口（絶対数）だけを見て満足してしまう。</p></div>
-        <div class="good"><div class="lbl">ファネルの見方</div><p>「どの段で、何％が落ちたか」を見て、直す一手を1つに絞る。</p></div>
+      <p class="lead" style="max-width:none"><b>ファネル（funnel）</b>は、英語で<b>「漏斗（じょうご／ろうと）」</b>のこと。上が広く下が狭い形のとおり、ユーザーは<b>上の入口から入り、各段階で一部が離脱</b>し、下に進むほど人数が減ります。各段を<b>どれだけの人が通過したか（転換率）</b>を見て、<b>最も漏れている段</b>を見つけるのがファネル分析です。</p>
+      <div class="ex-split">
+        <div class="ex-chart">
+          <div class="fnl-illust"><div class="fnl-tier"><div class="fnl-bar b-nv" style="width:100%"><span class="fnl-stage">獲得 <em>Acquisition</em></span><span class="fnl-num">1,000</span></div></div><span class="fnl-drop">↓</span><div class="fnl-tier"><div class="fnl-bar b-tl" style="width:76%"><span class="fnl-stage">活性化 <em>Activation</em></span><span class="fnl-num">600</span></div></div><span class="fnl-drop">↓</span><div class="fnl-tier"><div class="fnl-bar b-gr" style="width:58%"><span class="fnl-stage">定着 <em>Retention</em></span><span class="fnl-num">420</span></div></div><span class="fnl-drop">↓</span><div class="fnl-tier"><div class="fnl-bar b-am" style="width:42%"><span class="fnl-stage">紹介 <em>Referral</em></span><span class="fnl-num">180</span></div></div><span class="fnl-drop">↓</span><div class="fnl-tier"><div class="fnl-bar b-rd" style="width:30%"><span class="fnl-stage">収益 <em>Revenue</em></span><span class="fnl-num">90</span></div></div></div>
+          <p class="pcap" style="text-align:left">概念図（教材上の数値例）。AARRR の各段を下るほど人数が減る。減り方が最大の段＝<b style="color:var(--amber)">ボトルネック</b>＝最優先で直す候補。</p>
+        </div>
+        <div class="ex-panel">
+          <div class="cmp bad"><h3><span class="ic">😶</span>ありがちな見方</h3><p>「登録は1,000人もいる！」＝入口（絶対数）だけを見て満足してしまう。</p></div>
+          <div class="cmp good"><h3><span class="ic">🔎</span>ファネルの見方</h3><p>「どの段で、何％が落ちたか」を見て、<b>直す一手を1つに絞る</b>。</p></div>
+        </div>
       </div>
     </div>
   </section>
