@@ -420,6 +420,15 @@
   .dmc{display:flex;gap:12px;align-items:flex-start;background:#fff;border:1px solid var(--line);border-left:4px solid var(--teal);border-radius:11px;padding:13px 15px;margin-top:8px}
   .dmc .ic{font-size:20px;flex:none}
   .dmc p{margin:0;font-size:12.5px;color:var(--ink);line-height:1.65}
+  
+  .fnl-illust{display:flex;flex-direction:column;align-items:center;gap:3px;margin:14px 0 4px;max-width:660px}
+  .fnl-tier{width:100%;display:flex;justify-content:center}
+  .fnl-bar{height:46px;border-radius:8px;display:flex;align-items:center;justify-content:space-between;padding:0 16px;color:#fff;box-shadow:0 2px 8px rgba(21,50,79,.12);min-width:180px}
+  .fnl-bar .fnl-stage{font-size:13px;font-weight:700} .fnl-bar .fnl-stage em{font-style:normal;font-weight:600;opacity:.8;font-size:11px;margin-left:4px}
+  .fnl-bar .fnl-num{font-size:16px;font-weight:800;font-variant-numeric:tabular-nums;margin-left:14px}
+  .fnl-bar.b-nv{background:var(--navy)} .fnl-bar.b-tl{background:var(--teal)} .fnl-bar.b-gr{background:var(--green)} .fnl-bar.b-am{background:var(--amber)} .fnl-bar.b-rd{background:var(--red)}
+  .fnl-drop{color:#b9c5cf;font-size:16px;line-height:1}
+  .dmc-photo{width:62px;height:62px;border-radius:50%;object-fit:cover;flex:none;border:2px solid #fff;box-shadow:0 2px 10px rgba(21,50,79,.2)}
   </style>
   <script src="config.js"></script>
 </head>
@@ -479,12 +488,26 @@
     </div>
   </section>
 
+  <section class="slide" data-title="ファネル分析とは">
+    <div class="in">
+      <div class="eyebrow"><span class="num">02</span> 分析の基本</div>
+      <h2 class="t">ファネル分析とは ── 「漏斗（じょうご）」で離脱を見る</h2>
+      <p class="lead"><b>ファネル（funnel）</b>は、英語で<b>「漏斗（じょうご／ろうと）」</b>のこと。上が広く下が狭い形のとおり、ユーザーは<b>上の入口から入り、各段階で一部が離脱</b>し、下に進むほど人数が減っていきます。各段を<b>どれだけの人が通過したか（転換率）</b>を見て、<b>最も漏れている段</b>を見つけるのがファネル分析です。</p>
+      <div class="fnl-illust"><div class="fnl-tier"><div class="fnl-bar b-nv" style="width:100%"><span class="fnl-stage">獲得 <em>Acquisition</em></span><span class="fnl-num">1,000</span></div></div><span class="fnl-drop">↓</span><div class="fnl-tier"><div class="fnl-bar b-tl" style="width:76%"><span class="fnl-stage">活性化 <em>Activation</em></span><span class="fnl-num">600</span></div></div><span class="fnl-drop">↓</span><div class="fnl-tier"><div class="fnl-bar b-gr" style="width:58%"><span class="fnl-stage">定着 <em>Retention</em></span><span class="fnl-num">420</span></div></div><span class="fnl-drop">↓</span><div class="fnl-tier"><div class="fnl-bar b-am" style="width:42%"><span class="fnl-stage">紹介 <em>Referral</em></span><span class="fnl-num">180</span></div></div><span class="fnl-drop">↓</span><div class="fnl-tier"><div class="fnl-bar b-rd" style="width:30%"><span class="fnl-stage">収益 <em>Revenue</em></span><span class="fnl-num">90</span></div></div></div>
+      <p class="pcap" style="text-align:left;max-width:660px">概念図（教材上の数値例）。AARRR の各段を下るほど人数が減っていく様子。減り方が最も大きい段＝<b style="color:var(--amber)">ボトルネック</b>＝最優先で直す候補。</p>
+      <div class="sowhat" style="margin-top:16px">
+        <div class="you"><div class="lbl">ありがちな見方</div><p>「登録は1,000人もいる！」＝入口（絶対数）だけを見て満足してしまう。</p></div>
+        <div class="good"><div class="lbl">ファネルの見方</div><p>「どの段で、何％が落ちたか」を見て、直す一手を1つに絞る。</p></div>
+      </div>
+    </div>
+  </section>
+
   <section class="slide" data-title="AARRR">
     <div class="in">
-      <div class="eyebrow"><span class="num">02</span> 指標のフレーム</div>
+      <div class="eyebrow"><span class="num">03</span> 指標のフレーム</div>
       <h2 class="t">AARRR（海賊指標）── ユーザーの道のりを5段階で測る</h2>
       <p class="lead">AARRRは、製品やビジネスと顧客の<b>「接点」を5ステップ</b>に整理したフレームワークです。世界中のグロースチームやスタートアップが、成長やマーケティングを考えるときの<b>共通言語</b>として使っています。ファネルもコホートも「この道のりのどこを見ているか」を意識すると読みやすくなります。</p>
-      <div class="dmc"><span class="ic">🏴‍☠️</span><p>提唱者は <b>Dave McClure</b>。PayPal を経て、著名なシードアクセラレーター <b>500 Startups</b> を創業（現在は micro VC「Practical Venture Capital」）。頭文字をつなげると海賊の雄叫び「AARRR!」になることから <b>Pirate Metrics（海賊指標）</b>と呼ばれます。HBOドラマ『シリコンバレー』の投資家キャラのモデルとも言われる人物です。</p></div>
+      <div class="dmc"><img class="dmc-photo" src="assets/dave-mcclure.jpg" alt="Dave McClure"><p>提唱者は <b>Dave McClure</b>。PayPal を経て、著名なシードアクセラレーター <b>500 Startups</b> を創業（現在は micro VC「Practical Venture Capital」）。頭文字をつなげると海賊の雄叫び「AARRR!」になることから <b>Pirate Metrics（海賊指標）</b>と呼ばれます。HBOドラマ『シリコンバレー』の投資家キャラのモデルとも言われる人物です。</p></div>
 
       <figure class="pfig">
         <img src="assets/aarrr-stages.jpg" alt="AARRRの5ステージ：Acquisition獲得・Activation利用開始・Retention継続・Referral紹介・Revenue収益" loading="lazy">
@@ -511,7 +534,7 @@
 
   <section class="slide" data-title="EKIDEN.AIの確認">
     <div class="in">
-      <div class="eyebrow"><span class="num">03</span> 共通ケースの確認</div>
+      <div class="eyebrow"><span class="num">04</span> 共通ケースの確認</div>
       <h2 class="t">EKIDEN.AI と、4つの計測イベント</h2>
       <p class="lead">この授業の共通ケースは <b>EKIDEN.AI</b>（ランナー向けのAIコーチ。オリンピック選手やプロコーチと共同開発）です。第2回で設計した<b>4つの計測イベント</b>を、AARRRの段階に対応づけて確認しましょう。今日の演習は、この4イベントを題材にします。</p>
       <div class="events">
@@ -525,7 +548,7 @@
 
   <section class="slide" data-title="ファネルを深める">
     <div class="in">
-      <div class="eyebrow"><span class="num">04</span> ファネルを深める</div>
+      <div class="eyebrow"><span class="num">05</span> ファネルを深める</div>
       <h2 class="t">ボトルネックを見つける ── 直すのは「いちばん低い1つ」</h2>
       <p class="lead">ユーザーの道のり（来訪 → 登録 → アクティベーション → コア行動）を段階に分け、各段階の<b>転換率</b>を見ると、最大の漏れ（ボトルネック）が分かります。すべてを直そうとせず、最も低い転換を<b>1つだけ</b>狙います。</p>
       <div class="lens3">
@@ -542,7 +565,7 @@
 
   <section class="slide" data-title="コホートとは">
     <div class="in">
-      <div class="eyebrow"><span class="num">05</span> コホート分析とは</div>
+      <div class="eyebrow"><span class="num">06</span> コホート分析とは</div>
       <h2 class="t">「いつ始めたか」で束ねて、時間で追う</h2>
       <p class="lead">コホートとは、<b>同じ時期に始めたユーザーの集団</b>です。各コホートを時間で追うと、世代ごとの定着が見えます。下の表は <b>縦＝開始週</b>、<b>横＝経過週</b>、<b>セル＝その時点でまだ使っている割合</b>を表します。</p>
       <table class="cohort"><thead><tr><th>コホート（開始週）</th><th>W0</th><th>W1</th><th>W2</th></tr></thead><tbody><tr><th class="ct-row">5月 第1週</th><td style="background:rgba(28,114,147,0.9);color:#fff">100%</td><td style="background:rgba(28,114,147,0.413);color:var(--navy)">42%</td><td style="background:rgba(28,114,147,0.295);color:var(--navy)">28%</td></tr><tr><th class="ct-row">5月 第3週</th><td style="background:rgba(28,114,147,0.9);color:#fff">100%</td><td style="background:rgba(28,114,147,0.48);color:#fff">50%</td><td style="background:rgba(28,114,147,0.354);color:var(--navy)">35%</td></tr><tr><th class="ct-row">6月 第1週</th><td style="background:rgba(28,114,147,0.9);color:#fff">100%</td><td style="background:rgba(28,114,147,0.564);color:#fff">60%</td><td class="ct-empty">—</td></tr></tbody></table>
@@ -553,7 +576,7 @@
 
   <section class="slide" data-title="平均は嘘をつく">
     <div class="in">
-      <div class="eyebrow"><span class="num">06</span> なぜコホートが要る？</div>
+      <div class="eyebrow"><span class="num">07</span> なぜコホートが要る？</div>
       <h2 class="t">平均は嘘をつく ── 新規が既存の離脱を隠す</h2>
       <div class="cmp2">
         <div class="cmp bad"><h3><span class="ic">😶</span>集計（平均）で見ると</h3><p>全体のアクティブ率は“横ばい”に見えがち。新規の流入が既存の離脱を埋めて隠すため、「問題なし」と勘違いしてしまう。</p></div>
@@ -565,7 +588,7 @@
 
   <section class="slide" data-title="コホート表の読み方">
     <div class="in">
-      <div class="eyebrow"><span class="num">07</span> コホート表の読み方</div>
+      <div class="eyebrow"><span class="num">08</span> コホート表の読み方</div>
       <h2 class="t">横で「形」、縦で「進歩」</h2>
       <table class="cohort"><thead><tr><th>コホート（登録週）</th><th>W0</th><th>W1</th><th>W2</th><th>W3</th></tr></thead><tbody><tr><th class="ct-row">5月 第1週</th><td style="background:rgba(28,114,147,0.9);color:#fff">100%</td><td style="background:rgba(28,114,147,0.413);color:var(--navy)">42%</td><td style="background:rgba(28,114,147,0.295);color:var(--navy)">28%</td><td style="background:rgba(28,114,147,0.245);color:var(--navy)">22%</td></tr><tr><th class="ct-row">5月 第3週</th><td style="background:rgba(28,114,147,0.9);color:#fff">100%</td><td style="background:rgba(28,114,147,0.48);color:#fff">50%</td><td style="background:rgba(28,114,147,0.354);color:var(--navy)">35%</td><td style="background:rgba(28,114,147,0.312);color:var(--navy)">30%</td></tr><tr><th class="ct-row">6月 第1週</th><td style="background:rgba(28,114,147,0.9);color:#fff">100%</td><td style="background:rgba(28,114,147,0.564);color:#fff">60%</td><td style="background:rgba(28,114,147,0.438);color:#fff">45%</td><td class="ct-empty">—</td></tr><tr><th class="ct-row">6月 第3週</th><td style="background:rgba(28,114,147,0.9);color:#fff">100%</td><td style="background:rgba(28,114,147,0.598);color:#fff">64%</td><td class="ct-empty">—</td><td class="ct-empty">—</td></tr></tbody></table>
       <div class="ct-legend">低い<span class="bar"></span>高い</div>
@@ -578,7 +601,7 @@
 
   <section class="slide" data-title="ファネル × コホート">
     <div class="in">
-      <div class="eyebrow"><span class="num">08</span> ファネル × コホート</div>
+      <div class="eyebrow"><span class="num">09</span> ファネル × コホート</div>
       <h2 class="t">「場所（どこで漏れる）」×「時機（いつの世代か）」→ 打ち手</h2>
       <p class="lead">ファネルは<b>場所</b>（段階）を、コホートは<b>時機</b>（世代と時間）を教えてくれます。2つを重ねると、「いつ入った人が、どの段でつまずくか」が分かり、打ち手の的が定まります。</p>
       <div class="matrix">
@@ -592,7 +615,7 @@
 
   <section class="slide" data-title="演習①ファネル">
     <div class="in">
-      <div class="eyebrow"><span class="num">09</span> 演習① ファネル</div>
+      <div class="eyebrow"><span class="num">10</span> 演習① ファネル</div>
       <h2 class="t">EKIDEN.AI のファネルでボトルネックを探す</h2>
       <div class="ex-bar">
         <p class="lead" style="margin:0">サンプルデータです。各段の<b>前段比（転換率）</b>を見て、最大のボトルネックを考えましょう。<span style="color:var(--mute)">（教材上の数値例）</span></p>
@@ -610,7 +633,7 @@
 
   <section class="slide" data-title="演習②コホート">
     <div class="in">
-      <div class="eyebrow"><span class="num">10</span> 演習② コホート</div>
+      <div class="eyebrow"><span class="num">11</span> 演習② コホート</div>
       <h2 class="t">EKIDEN.AI のコホートで「世代の進歩」を読む</h2>
       <div class="ex-bar">
         <p class="lead" style="margin:0">登録週ごとに、その後どれだけ「メール開封（コア行動）」を続けているかのサンプルです。<span style="color:var(--mute)">（教材上の数値例）</span></p>
@@ -629,7 +652,7 @@
 
   <section class="slide" data-title="改善仮説">
     <div class="in">
-      <div class="eyebrow"><span class="num">11</span> 改善仮説を立てる</div>
+      <div class="eyebrow"><span class="num">12</span> 改善仮説を立てる</div>
       <h2 class="t">「観察 → ターゲット → 仮説 → 検証」の4ステップ</h2>
       <div class="steps" style="grid-template-columns:repeat(4,1fr)">
         <div class="step"><div class="n">1</div><h3>観察</h3><p>ファネル×コホートで、漏れる「場所」と離れる「世代」を特定する。</p></div>
@@ -643,7 +666,7 @@
 
   <section class="slide" data-title="今日のワーク">
     <div class="in">
-      <div class="eyebrow"><span class="num">12</span> 今日のワーク／次回までの課題</div>
+      <div class="eyebrow"><span class="num">13</span> 今日のワーク／次回までの課題</div>
       <h2 class="t">自分のテーマを「ファネル × コホート」で読む</h2>
       <div class="task">
         <div class="tcard review"><h3>🔁 復習</h3>
@@ -662,7 +685,7 @@
 
   <section class="slide" data-title="復習の解答例">
     <div class="in">
-      <div class="eyebrow"><span class="num">13</span> 復習の解答例</div>
+      <div class="eyebrow"><span class="num">14</span> 復習の解答例</div>
       <h2 class="t">EKIDEN.AI の数値でたどる「復習」の解答例</h2>
       <p class="lead">今日扱った EKIDEN.AI のサンプル数値・事例をそのまま使った解答例です。自分のテーマでも同じ手順で作ってみましょう。<span style="color:var(--mute)">（教材上の数値例。収益データは扱いません）</span></p>
 
