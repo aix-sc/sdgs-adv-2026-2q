@@ -394,6 +394,16 @@
     .cohort{font-size:12px} .cohort td{width:auto;min-width:42px}
   }
 
+  
+  .ex-bar{display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap;margin-bottom:12px}
+  .ex-toggle{flex:none;font-family:var(--jp);font-weight:700;font-size:13px;border:1px solid var(--teal);background:#fff;color:var(--teal);border-radius:9px;padding:8px 15px;cursor:pointer;transition:background .15s,color .15s,border-color .15s}
+  .ex-toggle:hover{background:var(--teal);color:#fff}
+  .ex-toggle.on{background:var(--navy);border-color:var(--navy);color:#fff}
+  .exa{margin-top:14px;max-width:640px;background:var(--soft);border:1px solid var(--line);border-left:4px solid var(--green);border-radius:11px;padding:14px 16px;font-size:13px;color:var(--ink);line-height:1.75}
+  .exa b{color:var(--green)}
+  
+  .ans-h{font-size:14px;color:var(--navy);margin:22px 0 6px;display:flex;align-items:center;gap:9px}
+  .ans-no{flex:none;font-size:11px;font-weight:700;color:#fff;background:var(--green);border-radius:6px;padding:3px 9px}
   </style>
   <script src="config.js"></script>
 </head>
@@ -453,9 +463,39 @@
     </div>
   </section>
 
+  <section class="slide" data-title="AARRR">
+    <div class="in">
+      <div class="eyebrow"><span class="num">02</span> 指標のフレーム</div>
+      <h2 class="t">AARRR ── ユーザーの道のりを5段階で測る</h2>
+      <p class="lead">「海賊指標（AARRR）」は、ユーザーがサービスに出会い、使い続けるまでの道のりを<b>5段階</b>に分けて測る枠組みです。ファネルもコホートも、この道のりの「どこ」を見ているかを意識すると読みやすくなります。</p>
+      <div class="steps">
+        <div class="step"><div class="n">A</div><h3>獲得</h3><p>Acquisition ── どう知り、来てくれたか</p></div>
+        <div class="step"><div class="n">A</div><h3>活性化</h3><p>Activation ── 最初の価値体験に届いたか</p></div>
+        <div class="step"><div class="n">R</div><h3>定着</h3><p>Retention ── 戻ってきて使い続けるか</p></div>
+        <div class="step"><div class="n">R</div><h3>紹介</h3><p>Referral ── 他の人に勧めるか</p></div>
+        <div class="step"><div class="n">R</div><h3>収益</h3><p>Revenue ── 収益につながるか</p></div>
+      </div>
+      <p class="lead" style="margin-top:16px">この授業の共通ケース EKIDEN.AI では、<b>獲得 → 活性化 → 定着 → 継続（エンゲージメント）</b>の流れを中心に見ます。<span style="color:var(--mute)">（収益＝Stripe の具体データは扱いません）</span></p>
+    </div>
+  </section>
+
+  <section class="slide" data-title="EKIDEN.AIの確認">
+    <div class="in">
+      <div class="eyebrow"><span class="num">03</span> 共通ケースの確認</div>
+      <h2 class="t">EKIDEN.AI と、4つの計測イベント</h2>
+      <p class="lead">この授業の共通ケースは <b>EKIDEN.AI</b>（ランナー向けのAIコーチ。オリンピック選手やプロコーチと共同開発）です。第2回で設計した<b>4つの計測イベント</b>を、AARRRの段階に対応づけて確認しましょう。今日の演習は、この4イベントを題材にします。</p>
+      <div class="events">
+        <div class="ev"><span class="aarrr">獲得</span><div class="estep">EVENT 1</div><h4>サインアップ</h4><p>入口に来た。分母の出発点。</p></div>
+        <div class="ev"><span class="aarrr">活性化</span><div class="estep">EVENT 2</div><h4>スポーツウォッチを接続</h4><p>最大の価値を体験するための最重要行動。</p></div>
+        <div class="ev"><span class="aarrr">定着</span><div class="estep">EVENT 3</div><h4>毎日のラン記録に対するコーチングメールを開封（コア行動）</h4><p>本当に使っているかを映す核。</p></div>
+        <div class="ev"><span class="aarrr">継続</span><div class="estep">EVENT 4</div><h4>メール内の次の質問候補をクリックし質疑が往復する</h4><p>価値を感じて、より深いコーチングを受けようとするか。</p></div>
+      </div>
+    </div>
+  </section>
+
   <section class="slide" data-title="ファネルを深める">
     <div class="in">
-      <div class="eyebrow"><span class="num">02</span> ファネルを深める</div>
+      <div class="eyebrow"><span class="num">04</span> ファネルを深める</div>
       <h2 class="t">ボトルネックを見つける ── 直すのは「いちばん低い1つ」</h2>
       <p class="lead">ユーザーの道のり（来訪 → 登録 → アクティベーション → コア行動）を段階に分け、各段階の<b>転換率</b>を見ると、最大の漏れ（ボトルネック）が分かります。すべてを直そうとせず、最も低い転換を<b>1つだけ</b>狙います。</p>
       <div class="lens3">
@@ -472,7 +512,7 @@
 
   <section class="slide" data-title="コホートとは">
     <div class="in">
-      <div class="eyebrow"><span class="num">03</span> コホート分析とは</div>
+      <div class="eyebrow"><span class="num">05</span> コホート分析とは</div>
       <h2 class="t">「いつ始めたか」で束ねて、時間で追う</h2>
       <p class="lead">コホートとは、<b>同じ時期に始めたユーザーの集団</b>です。各コホートを時間で追うと、世代ごとの定着が見えます。下の表は <b>縦＝開始週</b>、<b>横＝経過週</b>、<b>セル＝その時点でまだ使っている割合</b>を表します。</p>
       <table class="cohort"><thead><tr><th>コホート（開始週）</th><th>W0</th><th>W1</th><th>W2</th></tr></thead><tbody><tr><th class="ct-row">5月 第1週</th><td style="background:rgba(28,114,147,0.9);color:#fff">100%</td><td style="background:rgba(28,114,147,0.413);color:var(--navy)">42%</td><td style="background:rgba(28,114,147,0.295);color:var(--navy)">28%</td></tr><tr><th class="ct-row">5月 第3週</th><td style="background:rgba(28,114,147,0.9);color:#fff">100%</td><td style="background:rgba(28,114,147,0.48);color:#fff">50%</td><td style="background:rgba(28,114,147,0.354);color:var(--navy)">35%</td></tr><tr><th class="ct-row">6月 第1週</th><td style="background:rgba(28,114,147,0.9);color:#fff">100%</td><td style="background:rgba(28,114,147,0.564);color:#fff">60%</td><td class="ct-empty">—</td></tr></tbody></table>
@@ -483,7 +523,7 @@
 
   <section class="slide" data-title="平均は嘘をつく">
     <div class="in">
-      <div class="eyebrow"><span class="num">04</span> なぜコホートが要る？</div>
+      <div class="eyebrow"><span class="num">06</span> なぜコホートが要る？</div>
       <h2 class="t">平均は嘘をつく ── 新規が既存の離脱を隠す</h2>
       <div class="cmp2">
         <div class="cmp bad"><h3><span class="ic">😶</span>集計（平均）で見ると</h3><p>全体のアクティブ率は“横ばい”に見えがち。新規の流入が既存の離脱を埋めて隠すため、「問題なし」と勘違いしてしまう。</p></div>
@@ -495,7 +535,7 @@
 
   <section class="slide" data-title="コホート表の読み方">
     <div class="in">
-      <div class="eyebrow"><span class="num">05</span> コホート表の読み方</div>
+      <div class="eyebrow"><span class="num">07</span> コホート表の読み方</div>
       <h2 class="t">横で「形」、縦で「進歩」</h2>
       <table class="cohort"><thead><tr><th>コホート（登録週）</th><th>W0</th><th>W1</th><th>W2</th><th>W3</th></tr></thead><tbody><tr><th class="ct-row">5月 第1週</th><td style="background:rgba(28,114,147,0.9);color:#fff">100%</td><td style="background:rgba(28,114,147,0.413);color:var(--navy)">42%</td><td style="background:rgba(28,114,147,0.295);color:var(--navy)">28%</td><td style="background:rgba(28,114,147,0.245);color:var(--navy)">22%</td></tr><tr><th class="ct-row">5月 第3週</th><td style="background:rgba(28,114,147,0.9);color:#fff">100%</td><td style="background:rgba(28,114,147,0.48);color:#fff">50%</td><td style="background:rgba(28,114,147,0.354);color:var(--navy)">35%</td><td style="background:rgba(28,114,147,0.312);color:var(--navy)">30%</td></tr><tr><th class="ct-row">6月 第1週</th><td style="background:rgba(28,114,147,0.9);color:#fff">100%</td><td style="background:rgba(28,114,147,0.564);color:#fff">60%</td><td style="background:rgba(28,114,147,0.438);color:#fff">45%</td><td class="ct-empty">—</td></tr><tr><th class="ct-row">6月 第3週</th><td style="background:rgba(28,114,147,0.9);color:#fff">100%</td><td style="background:rgba(28,114,147,0.598);color:#fff">64%</td><td class="ct-empty">—</td><td class="ct-empty">—</td></tr></tbody></table>
       <div class="ct-legend">低い<span class="bar"></span>高い</div>
@@ -508,7 +548,7 @@
 
   <section class="slide" data-title="ファネル × コホート">
     <div class="in">
-      <div class="eyebrow"><span class="num">06</span> ファネル × コホート</div>
+      <div class="eyebrow"><span class="num">08</span> ファネル × コホート</div>
       <h2 class="t">「場所（どこで漏れる）」×「時機（いつの世代か）」→ 打ち手</h2>
       <p class="lead">ファネルは<b>場所</b>（段階）を、コホートは<b>時機</b>（世代と時間）を教えてくれます。2つを重ねると、「いつ入った人が、どの段でつまずくか」が分かり、打ち手の的が定まります。</p>
       <div class="matrix">
@@ -522,32 +562,48 @@
 
   <section class="slide" data-title="演習①ファネル">
     <div class="in">
-      <div class="eyebrow"><span class="num">07</span> 演習① ファネル</div>
+      <div class="eyebrow"><span class="num">09</span> 演習① ファネル</div>
       <h2 class="t">EKIDEN.AI のファネルでボトルネックを探す</h2>
-      <p class="lead">サンプルデータです。各段の<b>前段比（転換率）</b>を見て、<b>最大のボトルネック</b>はどこかを考えましょう。<span style="color:var(--mute)">（教材上の数値例。収益データは扱いません）</span></p>
+      <div class="ex-bar">
+        <p class="lead" style="margin:0">サンプルデータです。各段の<b>前段比（転換率）</b>を見て、最大のボトルネックを考えましょう。<span style="color:var(--mute)">（教材上の数値例）</span></p>
+        <button class="ex-toggle" data-ex="ex1">回答例を見る →</button>
+      </div>
       <div class="fn"><div class="fn-row"><div class="fn-name"><span class="aarrr">獲得</span><b>EVENT 1</b>　サインアップ</div><div class="fn-bar"><span class="b1" style="width:100%"></span></div><div class="fn-val"><b>1,000</b> 人<span class="fn-rt">分母</span></div></div><div class="fn-row"><div class="fn-name"><span class="aarrr">活性化</span><b>EVENT 2</b>　ウォッチ接続</div><div class="fn-bar"><span class="b2" style="width:60%"></span></div><div class="fn-val"><b>600</b> 人<span class="fn-rt">前段比 60%</span></div></div><div class="fn-row"><div class="fn-name"><span class="aarrr">定着</span><b>EVENT 3</b>　メール開封（コア）</div><div class="fn-bar"><span class="b3" style="width:42%"></span></div><div class="fn-val"><b>420</b> 人<span class="fn-rt">前段比 70%</span></div></div><div class="fn-row"><div class="fn-name"><span class="aarrr">継続</span><b>EVENT 4</b>　質疑往復</div><div class="fn-bar"><span class="b4" style="width:15%"></span></div><div class="fn-val"><b>150</b> 人<span class="fn-rt low">前段比 36%</span></div></div></div>
-      <div class="exq"><b>問い：</b>最も低い転換率はどの段ですか？　そこを直すと、最終の「質疑往復」まで到達する人はどう変わりますか？　<b>1つだけ</b>狙うなら、どの段に手を打ちますか。</div>
+      <div class="ex-view" id="ex1-q">
+        <div class="exq"><b>問い：</b>最も低い転換率はどの段ですか？　そこを直すと、最終の「質疑往復」まで到達する人はどう変わりますか？　<b>1つだけ</b>狙うなら、どの段に手を打ちますか。</div>
+      </div>
+      <div class="ex-view" id="ex1-a" hidden>
+        <div class="exa"><b>回答例：</b>最も低い転換は <b>EVENT 3 → EVENT 4「質疑往復」（前段比 36%）</b>＝ここがボトルネック。手前の「ウォッチ接続（60%）」「メール開封（70%）」より落ち込みが大きい。<br>狙うのはこの最終段＝<b>「読むだけ」で止めず会話に踏み込ませる導線</b>（例：メール内の質問候補を、その人のラン内容に合わせて具体化する）。仮に 36% → 50% に改善できれば、質疑往復は <b>150 → 約210人</b>に増える計算。まず<b>1段だけ</b>狙うのが鉄則です。</div>
+      </div>
     </div>
   </section>
 
   <section class="slide" data-title="演習②コホート">
     <div class="in">
-      <div class="eyebrow"><span class="num">08</span> 演習② コホート</div>
+      <div class="eyebrow"><span class="num">10</span> 演習② コホート</div>
       <h2 class="t">EKIDEN.AI のコホートで「世代の進歩」を読む</h2>
-      <p class="lead">登録週ごとに、その後どれだけ「コーチングメール開封（コア行動）」を続けているかのサンプルです。<span style="color:var(--mute)">（教材上の数値例）</span></p>
+      <div class="ex-bar">
+        <p class="lead" style="margin:0">登録週ごとに、その後どれだけ「メール開封（コア行動）」を続けているかのサンプルです。<span style="color:var(--mute)">（教材上の数値例）</span></p>
+        <button class="ex-toggle" data-ex="ex2">回答例を見る →</button>
+      </div>
       <table class="cohort"><thead><tr><th>コホート（登録週）</th><th>W0</th><th>W1</th><th>W2</th><th>W3</th></tr></thead><tbody><tr><th class="ct-row">5月 第1週</th><td style="background:rgba(28,114,147,0.9);color:#fff">100%</td><td style="background:rgba(28,114,147,0.413);color:var(--navy)">42%</td><td style="background:rgba(28,114,147,0.295);color:var(--navy)">28%</td><td style="background:rgba(28,114,147,0.245);color:var(--navy)">22%</td></tr><tr><th class="ct-row">5月 第3週</th><td style="background:rgba(28,114,147,0.9);color:#fff">100%</td><td style="background:rgba(28,114,147,0.48);color:#fff">50%</td><td style="background:rgba(28,114,147,0.354);color:var(--navy)">35%</td><td style="background:rgba(28,114,147,0.312);color:var(--navy)">30%</td></tr><tr><th class="ct-row">6月 第1週</th><td style="background:rgba(28,114,147,0.9);color:#fff">100%</td><td style="background:rgba(28,114,147,0.564);color:#fff">60%</td><td style="background:rgba(28,114,147,0.438);color:#fff">45%</td><td class="ct-empty">—</td></tr><tr><th class="ct-row">6月 第3週</th><td style="background:rgba(28,114,147,0.9);color:#fff">100%</td><td style="background:rgba(28,114,147,0.598);color:#fff">64%</td><td class="ct-empty">—</td><td class="ct-empty">—</td></tr></tbody></table>
       <div class="ct-legend">低い<span class="bar"></span>高い</div>
-      <div class="exq"><b>問い：</b>① 各世代の定着の“形”（崖と底）はどうですか？　② 縦に見て、製品は良くなっていますか（W1の推移）？　③ もし良くなっているなら、6月に何を変えたと考えられますか。</div>
+      <div class="ex-view" id="ex2-q">
+        <div class="exq"><b>問い：</b>① 各世代の定着の“形”（崖と底）はどうですか？　② 縦に見て、製品は良くなっていますか（W1の推移）？　③ もし良くなっているなら、6月に何を変えたと考えられますか。</div>
+      </div>
+      <div class="ex-view" id="ex2-a" hidden>
+        <div class="exa"><b>回答例：</b>① <b>横（形）</b>＝W0→W1で大きく落ち（崖）、その後は緩やかに下げ止まる（底）。底＝離れない“コア”の厚み。<br>② <b>縦（進歩）</b>＝W1が <b>42% → 50% → 60% → 64%</b> と世代ごとに上昇＝<b>製品・体験が良くなっている</b>証拠。<br>③ 6月以降の改善は、オンボーディング（ウォッチ接続の促し方や、コーチングメールの出し方）の見直しが効いた可能性。次回はこれを<b>A/Bテスト</b>で「本当に効いたのか（因果）」を確かめます。</div>
+      </div>
     </div>
   </section>
 
   <section class="slide" data-title="改善仮説">
     <div class="in">
-      <div class="eyebrow"><span class="num">09</span> 改善仮説を立てる</div>
-      <h2 class="t">「観察 → 的 → 仮説 → 検証」の4ステップ</h2>
+      <div class="eyebrow"><span class="num">11</span> 改善仮説を立てる</div>
+      <h2 class="t">「観察 → ターゲット → 仮説 → 検証」の4ステップ</h2>
       <div class="steps" style="grid-template-columns:repeat(4,1fr)">
         <div class="step"><div class="n">1</div><h3>観察</h3><p>ファネル×コホートで、漏れる「場所」と離れる「世代」を特定する。</p></div>
-        <div class="step"><div class="n">2</div><h3>的を1つ</h3><p>最大のボトルネック（最も低い転換）を1つだけ選ぶ。</p></div>
+        <div class="step"><div class="n">2</div><h3>ターゲットを1つ</h3><p>最大のボトルネック（最も低い転換）を1つだけ選ぶ。</p></div>
         <div class="step"><div class="n">3</div><h3>仮説</h3><p>「○○を変えれば、この転換が△%上がる」と数値で書く。</p></div>
         <div class="step"><div class="n">4</div><h3>検証へ</h3><p>次回、A/Bテストで「効いたか」を因果として確かめる。</p></div>
       </div>
@@ -557,13 +613,13 @@
 
   <section class="slide" data-title="今日のワーク">
     <div class="in">
-      <div class="eyebrow"><span class="num">10</span> 今日のワーク／次回までの課題</div>
+      <div class="eyebrow"><span class="num">12</span> 今日のワーク／次回までの課題</div>
       <h2 class="t">自分のテーマを「ファネル × コホート」で読む</h2>
       <div class="task">
         <div class="tcard review"><h3>🔁 復習</h3>
           <ol><li>自分のテーマを簡易ファネル化し、各段を「率」で書いて最大のボトルネックを1つ特定する</li><li>登録週×経過週の簡易コホート表（3世代×3週）を作る</li><li>観察から改善仮説を1つ、数値の形で書く</li></ol></div>
         <div class="tcard prep"><h3>📖 予習</h3>
-          <ol start="4"><li>その仮説を「実験」で確かめるなら、何と何を比べるかをメモする</li><li>教科書のA/Bテスト（実験）の章に目を通す</li></ol></div>
+          <ol start="4"><li>その仮説を「実験」で確かめるなら、何と何を比べるかをメモする</li><li>教科書のA/Bテスト（実験）の章に目を通す。今回と次回の内容の多くは2章に含まれているので、読んで予習と復習をしておきましょう。</li></ol></div>
       </div>
       <div class="band">
         <div class="dl">提出締切：<span>7/7（火）23:59</span></div>
@@ -571,6 +627,26 @@
         <div class="next">次回予告 ── 第4回：A/Bテストと実験 ──「因果」を確かめる</div>
       </div>
       <p class="srcnote">出典：A. クロール＆B. ヨスコビッツ『Lean Analytics』（オライリージャパン）を要約・再構成（逐語引用なし）。ファネル・コホートの数値は教材上の例で、EKIDEN.AI の収益（Stripe）データは扱いません。</p>
+    </div>
+  </section>
+
+  <section class="slide" data-title="復習の解答例">
+    <div class="in">
+      <div class="eyebrow"><span class="num">13</span> 復習の解答例</div>
+      <h2 class="t">EKIDEN.AI の数値でたどる「復習」の解答例</h2>
+      <p class="lead">今日扱った EKIDEN.AI のサンプル数値・事例をそのまま使った解答例です。自分のテーマでも同じ手順で作ってみましょう。<span style="color:var(--mute)">（教材上の数値例。収益データは扱いません）</span></p>
+
+      <h3 class="ans-h"><span class="ans-no">復習1</span> 簡易ファネル化＋ボトルネックの特定</h3>
+      <div class="fn"><div class="fn-row"><div class="fn-name"><span class="aarrr">獲得</span><b>EVENT 1</b>　サインアップ</div><div class="fn-bar"><span class="b1" style="width:100%"></span></div><div class="fn-val"><b>1,000</b> 人<span class="fn-rt">分母</span></div></div><div class="fn-row"><div class="fn-name"><span class="aarrr">活性化</span><b>EVENT 2</b>　ウォッチ接続</div><div class="fn-bar"><span class="b2" style="width:60%"></span></div><div class="fn-val"><b>600</b> 人<span class="fn-rt">前段比 60%</span></div></div><div class="fn-row"><div class="fn-name"><span class="aarrr">定着</span><b>EVENT 3</b>　メール開封（コア）</div><div class="fn-bar"><span class="b3" style="width:42%"></span></div><div class="fn-val"><b>420</b> 人<span class="fn-rt">前段比 70%</span></div></div><div class="fn-row"><div class="fn-name"><span class="aarrr">継続</span><b>EVENT 4</b>　質疑往復</div><div class="fn-bar"><span class="b4" style="width:15%"></span></div><div class="fn-val"><b>150</b> 人<span class="fn-rt low">前段比 36%</span></div></div></div>
+      <div class="exa" style="border-left-color:var(--amber)"><b>ボトルネック：</b>最も低い転換は <b>EVENT 3 → EVENT 4「質疑往復」＝前段比 36%</b>。手前のウォッチ接続(60%)・メール開封(70%)より落ち込みが大きく、ここが最大の漏れ。直すターゲットはこの1段。</div>
+
+      <h3 class="ans-h"><span class="ans-no">復習2</span> 簡易コホート表（3世代 × 3週）</h3>
+      <table class="cohort"><thead><tr><th>コホート（登録週）</th><th>W0</th><th>W1</th><th>W2</th></tr></thead><tbody><tr><th class="ct-row">5月 第1週</th><td style="background:rgba(28,114,147,0.9);color:#fff">100%</td><td style="background:rgba(28,114,147,0.413);color:var(--navy)">42%</td><td style="background:rgba(28,114,147,0.295);color:var(--navy)">28%</td></tr><tr><th class="ct-row">5月 第3週</th><td style="background:rgba(28,114,147,0.9);color:#fff">100%</td><td style="background:rgba(28,114,147,0.48);color:#fff">50%</td><td style="background:rgba(28,114,147,0.354);color:var(--navy)">35%</td></tr><tr><th class="ct-row">6月 第1週</th><td style="background:rgba(28,114,147,0.9);color:#fff">100%</td><td style="background:rgba(28,114,147,0.564);color:#fff">60%</td><td style="background:rgba(28,114,147,0.438);color:#fff">45%</td></tr></tbody></table>
+      <div class="ct-legend">低い<span class="bar"></span>高い</div>
+      <div class="exa"><b>読み：</b><b>横</b>＝W0→W1で大きく落ち（崖）、その後は緩やかに下げ止まる（底）。<b>縦</b>＝W1が <b>42% → 50% → 60%</b> と世代ごとに改善＝製品・体験が良くなっている。</div>
+
+      <h3 class="ans-h"><span class="ans-no">復習3</span> 改善仮説（数値の形）</h3>
+      <div class="exa" style="border-left-color:var(--teal)"><b>仮説例：</b>「6月以降の新規ユーザーに対し、コーチングメール内の質問候補を<b>その人のラン内容に合わせて具体化</b>すると、<b>メール開封 → 質疑往復の転換率が 36% → 50%</b>に上がるはず（質疑往復が月 <b>150 → 約210人</b>）」。<br><b>「誰に・何を変えると・どの指標が・どれだけ」</b>の形になっている。次回はこれを A/Bテストで「本当に効いたか（因果）」を確かめます。</div>
     </div>
   </section>
 
@@ -828,6 +904,20 @@
   text.addEventListener("keydown",function(e){if(e.key==="Enter"&&!e.shiftKey){e.preventDefault();submit();}});
   function submit(){var v=text.value.trim();if(!v)return;text.value="";autoGrow();ask(v);}
   send.addEventListener("click",submit);
+})();
+</script>
+<script>
+(function(){
+  var btns=document.querySelectorAll('.ex-toggle');
+  Array.prototype.forEach.call(btns,function(btn){
+    btn.addEventListener('click',function(){
+      var k=btn.getAttribute('data-ex');
+      var q=document.getElementById(k+'-q'),a=document.getElementById(k+'-a');
+      if(!q||!a)return;
+      if(a.hidden){a.hidden=false;q.hidden=true;btn.textContent='← 演習に戻る';btn.classList.add('on');}
+      else{a.hidden=true;q.hidden=false;btn.textContent='回答例を見る →';btn.classList.remove('on');}
+    });
+  });
 })();
 </script>
 </body>
