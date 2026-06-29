@@ -182,6 +182,11 @@
   .eks-rate{font-size:11px;color:var(--mute)} .eks-rate.low{color:var(--amber);font-weight:700}
   .ekarrow{flex:none;align-self:center;color:#b9c5cf;font-size:20px;font-weight:700}
   .ekf-note{margin:13px 0 0;font-size:12.5px;color:var(--mute);line-height:1.6}
+  .ekf-link{display:flex;align-items:center;gap:14px;margin-top:16px;background:var(--soft);border:1px solid var(--line);border-radius:14px;padding:15px 18px;text-decoration:none;color:var(--ink);transition:border-color .15s,box-shadow .15s}
+  .ekf-link:hover{border-color:var(--teal);box-shadow:0 6px 18px rgba(21,50,79,.08)}
+  .ekf-link-ic{font-size:22px;flex:none}
+  .ekf-link-t{flex:1;display:flex;flex-direction:column;gap:2px;min-width:0} .ekf-link-t b{font-size:14px;color:var(--navy)} .ekf-link-t span{font-size:12px;color:var(--mute)}
+  .ekf-link-ar{flex:none;color:var(--teal);font-size:18px;font-weight:700}
   .tiers{display:flex;flex-direction:column;gap:10px}
   .tier{display:flex;align-items:center;gap:14px;border:1px solid var(--line);border-radius:12px;padding:12px 16px}
   .tier .tnum{flex:none;width:30px;height:30px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700;color:#fff;font-size:13px}
@@ -362,7 +367,7 @@
       <div class="grp">全7回</div>
       <a href="lecture1.html"><span class="ttl">第1回　全体像 ── OMTMとビジネスモデル</span><span class="badge ready">公開</span></a>
       <a class="current" href="#"><span class="ttl">第2回　データ収集の設計 ── 定性と定量</span><span class="badge ready">表示中</span></a>
-      <a href="lecture3.html"><span class="ttl">第3回　コホート分析とファネル分析</span><span class="badge soon">準備中</span></a>
+      <a href="lecture3.html"><span class="ttl">第3回　コホート分析とファネル分析</span><span class="badge ready">公開</span></a>
       <a href="lecture4.html"><span class="ttl">第4回　ピボットの判断 ── 意思決定</span><span class="badge soon">準備中</span></a>
       <a href="lecture5.html"><span class="ttl">第5回　データストーリーテリング</span><span class="badge soon">準備中</span></a>
       <a href="lecture6.html"><span class="ttl">第6回　投資家向けピッチの準備</span><span class="badge soon">準備中</span></a>
@@ -595,55 +600,11 @@
         <div class="ev"><span class="aarrr">継続</span><div class="estep">EVENT 4</div><h4>メール内の次の質問候補をクリックし質疑が往復する</h4><p>価値を感じて、より深いコーチングを受けようとするか。</p></div>
       </div>
 
-      <div class="ekf-card">
-        <div class="ekf-top"><h3>サンプルデータで見る計測ファネル</h3><p class="x-sub">サインアップ → ウォッチ接続 → コーチングメール開封 → 質疑往復　<span style="color:var(--mute)">（教材上の数値例。収益データは扱いません）</span></p></div>
-        <div class="ekfunnel">
-          <div class="ekstep">
-            <img class="eks-img" src="assets/ekiden-event1-signup.jpg" alt="EKIDEN.AI サインアップ画面" loading="lazy">
-            <div class="eks-info">
-              <div class="eks-head"><span class="aarrr">獲得</span>EVENT 1</div>
-              <div class="eks-name">サインアップ</div>
-              <div class="eks-metric"><b>1,000</b> 人</div>
-              <div class="eks-bar"><span class="b1" style="width:100%"></span></div>
-              <div class="eks-rate">分母（出発点）</div>
-            </div>
-          </div>
-          <div class="ekarrow">→</div>
-          <div class="ekstep">
-            <img class="eks-img" src="assets/ekiden-event2-watch.jpg" alt="スポーツウォッチ接続画面" loading="lazy">
-            <div class="eks-info">
-              <div class="eks-head"><span class="aarrr">活性化</span>EVENT 2</div>
-              <div class="eks-name">スポーツウォッチを接続</div>
-              <div class="eks-metric"><b>600</b> 人</div>
-              <div class="eks-bar"><span class="b2" style="width:60%"></span></div>
-              <div class="eks-rate">前段比 60%</div>
-            </div>
-          </div>
-          <div class="ekarrow">→</div>
-          <div class="ekstep">
-            <img class="eks-img" src="assets/ekiden-event3-email.jpg" alt="EKIDEN.AI コーチングメール（本日の推奨メニュー）" loading="lazy">
-            <div class="eks-info">
-              <div class="eks-head"><span class="aarrr">定着</span>EVENT 3</div>
-              <div class="eks-name">コーチングメールを開封（コア）</div>
-              <div class="eks-metric"><b>420</b> 人</div>
-              <div class="eks-bar"><span class="b3" style="width:42%"></span></div>
-              <div class="eks-rate">前段比 70%</div>
-            </div>
-          </div>
-          <div class="ekarrow">→</div>
-          <div class="ekstep">
-            <img class="eks-img" src="assets/ekiden-event4-reply.jpg" alt="メール内の質問候補から質疑が往復する画面" loading="lazy">
-            <div class="eks-info">
-              <div class="eks-head"><span class="aarrr">継続</span>EVENT 4</div>
-              <div class="eks-name">質問候補から質疑が往復</div>
-              <div class="eks-metric"><b>150</b> 人</div>
-              <div class="eks-bar"><span class="b4" style="width:15%"></span></div>
-              <div class="eks-rate low">前段比 36%</div>
-            </div>
-          </div>
-        </div>
-        <p class="ekf-note">同じ4イベントでも、累計人数ではなく<b>各段の転換率</b>で見ると打ち手が変わります。最大の落ち込みは <b style="color:var(--amber)">メール開封 → 質疑往復（36%）</b>。「読むだけ」で止めず<b>会話に踏み込ませる</b>導線づくりが、定着から継続への鍵になります。</p>
-      </div>
+      <a class="ekf-link" href="lecture2-funnel.html">
+        <span class="ekf-link-ic">📊</span>
+        <span class="ekf-link-t"><b>サンプルデータで見る計測ファネル</b><span>4イベントの実画面と、サインアップ（分母）からの転換率を別ページで確認できます。</span></span>
+        <span class="ekf-link-ar">→</span>
+      </a>
     </div>
   </section>
 
@@ -773,7 +734,7 @@
     reg:{v:"vanity",t:"<b>これはバニティ（虚栄）寄りです。</b>登録ユーザー“総数”は累計なので増える一方。しかも「登録した＝使っている」ではありません（接続済み≠アクティブ）。本当に価値を受け取っている人の割合は、別に“率”で測る必要があります。"}
   };
   var chips=document.getElementById("chips"), verdict=document.getElementById("verdict");
-  chips.addEventListener("click",function(e){var b=e.target.closest(".chip");if(!b)return;
+  chips&&chips.addEventListener("click",function(e){var b=e.target.closest(".chip");if(!b)return;
     Array.prototype.forEach.call(chips.children,function(c){c.classList.remove("on");});b.classList.add("on");
     var d=verdicts[b.dataset.k];verdict.className="verdict show "+(d.v==="vanity"?"v-vanity":"v-action");verdict.innerHTML=d.t;});
 
@@ -789,6 +750,7 @@
   var funnel=document.getElementById("funnel"),lensgroup=document.getElementById("lensgroup"),bmInput=document.getElementById("bm"),
       lensNote=document.getElementById("lensNote"),exp=document.getElementById("exp"),detail=document.getElementById("detail"),
       reportHead=document.getElementById("reportHead"),reportBody=document.getElementById("reportBody"),bossBubble=document.getElementById("bossBubble");
+  if(funnel&&lensgroup){
   function fmt(n){return n.toLocaleString("ja-JP");}
   STAGES.forEach(function(s,i){
     var row=document.createElement("div");row.className="frow";row.dataset.i=i;if(s.flag)row.dataset.flag=s.flag;
@@ -838,6 +800,7 @@
     Array.prototype.forEach.call(lensgroup.children,function(x){x.classList.remove("on");});b.classList.add("on");render();});
   bmInput.addEventListener("change",function(){state.bench=bmInput.checked;render();});
   render();
+  }
 })();
 </script>
 <!-- AI相談（Gemini） -->

@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>SDGs発展2 第3回｜コホート分析とファネル分析</title>
+<title>SDGs発展2 第2回 補足｜サンプルデータで見る計測ファネル</title>
 <style>
   :root{
     --navy:#15324F; --teal:#1C7293; --green:#3E7C53; --amber:#C58B2B;
@@ -182,11 +182,6 @@
   .eks-rate{font-size:11px;color:var(--mute)} .eks-rate.low{color:var(--amber);font-weight:700}
   .ekarrow{flex:none;align-self:center;color:#b9c5cf;font-size:20px;font-weight:700}
   .ekf-note{margin:13px 0 0;font-size:12.5px;color:var(--mute);line-height:1.6}
-  .ekf-link{display:flex;align-items:center;gap:14px;margin-top:16px;background:var(--soft);border:1px solid var(--line);border-radius:14px;padding:15px 18px;text-decoration:none;color:var(--ink);transition:border-color .15s,box-shadow .15s}
-  .ekf-link:hover{border-color:var(--teal);box-shadow:0 6px 18px rgba(21,50,79,.08)}
-  .ekf-link-ic{font-size:22px;flex:none}
-  .ekf-link-t{flex:1;display:flex;flex-direction:column;gap:2px;min-width:0} .ekf-link-t b{font-size:14px;color:var(--navy)} .ekf-link-t span{font-size:12px;color:var(--mute)}
-  .ekf-link-ar{flex:none;color:var(--teal);font-size:18px;font-weight:700}
   .tiers{display:flex;flex-direction:column;gap:10px}
   .tier{display:flex;align-items:center;gap:14px;border:1px solid var(--line);border-radius:12px;padding:12px 16px}
   .tier .tnum{flex:none;width:30px;height:30px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700;color:#fff;font-size:13px}
@@ -353,48 +348,7 @@
     .frow{grid-template-columns:80px 1fr 90px;gap:8px} .frow .fname{font-size:11px} .frow .fval{font-size:10px} .frow .fval .big{font-size:12px}
   }
   @media(prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
-
-  /* ===== 第3回：合言葉・コホート・ファネル・比較 ===== */
-  .creed{display:inline-block;margin:6px 0 4px;font-size:clamp(20px,3.2vw,30px);font-weight:800;color:var(--navy);letter-spacing:.01em}
-  .creed em{color:var(--red);font-style:normal}
-  .lens3{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:6px}
-  .lens{background:var(--soft);border:1px solid var(--line);border-radius:12px;padding:14px 15px}
-  .lens .lh{display:flex;align-items:center;gap:8px;font-size:13.5px;font-weight:700;color:var(--navy);margin-bottom:6px}
-  .lens .lh .tag{font-size:10px;color:#fff;background:var(--teal);border-radius:5px;padding:2px 7px}
-  .lens p{margin:0;font-size:12.5px;color:var(--mute);line-height:1.6}
-  .cohort{border-collapse:separate;border-spacing:3px;font-size:13px;font-variant-numeric:tabular-nums;margin-top:8px}
-  .cohort th{font-size:11.5px;color:var(--navy);font-weight:700;padding:6px 8px;text-align:center;white-space:nowrap}
-  .cohort th.ct-row{text-align:left;background:var(--soft);border-radius:7px}
-  .cohort td{width:60px;height:34px;text-align:center;border-radius:7px;font-weight:700}
-  .cohort td.ct-empty{background:#f1f4f7;color:#c2ccd4;font-weight:400}
-  .ct-legend{display:flex;align-items:center;gap:8px;margin-top:10px;font-size:11px;color:var(--mute)}
-  .ct-legend .bar{flex:1;max-width:180px;height:9px;border-radius:5px;background:linear-gradient(90deg,rgba(28,114,147,.1),rgba(28,114,147,.9))}
-  .cmp2{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:6px}
-  .cmp{border:1px solid var(--line);border-radius:13px;padding:15px 17px;background:#fff}
-  .cmp.bad{border-color:#e6c9c9;background:#fdf6f6} .cmp.good{border-color:#cfe3d6;background:#f5faf7}
-  .cmp h3{margin:0 0 7px;font-size:13.5px;color:var(--navy);display:flex;align-items:center;gap:7px}
-  .cmp h3 .ic{font-size:16px}
-  .cmp p{margin:0;font-size:12.5px;color:var(--ink);line-height:1.65}
-  .fn{display:flex;flex-direction:column;gap:9px;margin-top:8px;max-width:640px}
-  .fn-row{display:grid;grid-template-columns:210px 1fr 132px;align-items:center;gap:12px}
-  .fn-name{font-size:12.5px;color:var(--ink);display:flex;align-items:center;gap:7px;line-height:1.3} .fn-name b{color:var(--navy)}
-  .fn-name .aarrr{font-size:9.5px;font-weight:700;color:#fff;background:var(--navy);border-radius:5px;padding:2px 6px;flex:none}
-  .fn-bar{height:18px;background:#e7edf2;border-radius:6px;overflow:hidden}
-  .fn-bar span{display:block;height:100%;border-radius:6px}
-  .fn-bar .b1{background:var(--navy)} .fn-bar .b2{background:var(--teal)} .fn-bar .b3{background:var(--green)} .fn-bar .b4{background:var(--amber)}
-  .fn-val{font-size:12.5px;text-align:right;font-variant-numeric:tabular-nums;color:var(--ink)} .fn-val b{color:var(--navy);font-size:14px}
-  .fn-val .fn-rt{display:block;font-size:11px;color:var(--mute)} .fn-val .fn-rt.low{color:var(--amber);font-weight:700}
-  .matrix{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:6px}
-  .mx{background:var(--soft);border:1px solid var(--line);border-radius:12px;padding:14px 15px}
-  .mx h3{margin:0 0 5px;font-size:13px;color:var(--teal)} .mx p{margin:0;font-size:12.5px;color:var(--ink);line-height:1.6}
-  .exq{margin-top:14px;max-width:640px;background:var(--amber-soft);border:1px solid #e8d3a8;border-radius:11px;padding:14px 16px;font-size:13px;color:#7a531a}
-  .exq b{color:#7a531a}
-  @media(max-width:860px){
-    .lens3{grid-template-columns:1fr} .cmp2{grid-template-columns:1fr} .matrix{grid-template-columns:1fr} .fn-row{grid-template-columns:1fr;gap:4px}
-    .cohort{font-size:12px} .cohort td{width:auto;min-width:42px}
-  }
-
-  </style>
+</style>
   <script src="config.js"></script>
 </head>
 <body>
@@ -403,12 +357,12 @@
   <div class="brand">SDGs発展2 <span>講義資料</span></div>
   <a class="hd-cr" href="https://classroom.google.com/c/ODU5NjUzNDM0Njk0" target="_blank" rel="noopener">🎓 Classroom</a>
   <div class="dropdown">
-    <button class="dd-btn" id="ddBtn" aria-expanded="false">第3回：コホート/ファネル分析 <span class="caret">▼</span></button>
+    <button class="dd-btn" id="ddBtn" aria-expanded="false">第2回 補足：計測ファネル <span class="caret">▼</span></button>
     <div class="dd-menu" id="ddMenu">
       <div class="grp">全7回</div>
       <a href="lecture1.html"><span class="ttl">第1回　全体像 ── OMTMとビジネスモデル</span><span class="badge ready">公開</span></a>
       <a href="lecture2.html"><span class="ttl">第2回　データ収集の設計 ── 定性と定量</span><span class="badge ready">公開</span></a>
-      <a class="current" href="#"><span class="ttl">第3回　コホート分析とファネル分析</span><span class="badge ready">表示中</span></a>
+      <a href="lecture3.html"><span class="ttl">第3回　コホート分析とファネル分析</span><span class="badge soon">準備中</span></a>
       <a href="lecture4.html"><span class="ttl">第4回　ピボットの判断 ── 意思決定</span><span class="badge soon">準備中</span></a>
       <a href="lecture5.html"><span class="ttl">第5回　データストーリーテリング</span><span class="badge soon">準備中</span></a>
       <a href="lecture6.html"><span class="ttl">第6回　投資家向けピッチの準備</span><span class="badge soon">準備中</span></a>
@@ -420,157 +374,60 @@
 <main class="deck" id="deck">
 
   <!-- 1 HERO -->
-  <section class="slide hero" data-title="タイトル">
+  <section class="slide" data-title="計測ファネル">
     <div class="in">
-      <div class="kick">2026年度　SDGs発展2［a1］　第3回</div>
-      <h1>コホート分析とファネル分析<br><em>── どこで漏れ、どの世代が離れるか</em></h1>
-      <p class="sub">前回はOMTMと「良い指標の条件」、ファネルの入口を学びました。今日はファネルで<b>“どこで漏れるか”</b>を、コホートで<b>“どの世代が離れるか”</b>を読み、改善の的を1つに絞ります。</p>
-      <div class="creed">平均は、<em>嘘をつく。</em></div>
-      <p class="sub" style="margin-top:6px">全体の平均値は、伸びている世代と離れていく世代を混ぜて見えなくします。</p>
-      <div class="meta">
-        <span class="pill">担当：<b>高橋 雄介</b></span>
-        <span class="pill">教科書：<b>Lean Analytics</b></span>
-        <span class="pill">ケース：<b>EKIDEN.AI</b></span>
+      <p style="margin:0 0 14px"><a href="lecture2.html" style="color:var(--teal);font-weight:700;text-decoration:none">&larr; 第2回（データ収集の設計）に戻る</a></p>
+      <div class="eyebrow"><span class="num">06</span> EKIDEN.AI の計測設計（補足）</div>
+      <h2 class="t">サンプルデータで見る計測ファネル</h2>
+      <p class="lead">第2回「06 計測設計」で設計した4つの計測イベントを、サンプルデータのファネルで確かめます。各ステップの実画面と、サインアップ（分母）からの転換率を一緒に確認しましょう。<span style="color:var(--mute)">（教材上の数値例。収益データは扱いません）</span></p>
+<div class="ekf-card">
+        <div class="ekfunnel">
+          <div class="ekstep">
+            <img class="eks-img" src="assets/ekiden-event1-signup.jpg" alt="EKIDEN.AI サインアップ画面" loading="lazy">
+            <div class="eks-info">
+              <div class="eks-head"><span class="aarrr">獲得</span>EVENT 1</div>
+              <div class="eks-name">サインアップ</div>
+              <div class="eks-metric"><b>1,000</b> 人</div>
+              <div class="eks-bar"><span class="b1" style="width:100%"></span></div>
+              <div class="eks-rate">分母（出発点）</div>
+            </div>
+          </div>
+          <div class="ekarrow">→</div>
+          <div class="ekstep">
+            <img class="eks-img" src="assets/ekiden-event2-watch.jpg" alt="スポーツウォッチ接続画面" loading="lazy">
+            <div class="eks-info">
+              <div class="eks-head"><span class="aarrr">活性化</span>EVENT 2</div>
+              <div class="eks-name">スポーツウォッチを接続</div>
+              <div class="eks-metric"><b>600</b> 人</div>
+              <div class="eks-bar"><span class="b2" style="width:60%"></span></div>
+              <div class="eks-rate">前段比 60%</div>
+            </div>
+          </div>
+          <div class="ekarrow">→</div>
+          <div class="ekstep">
+            <img class="eks-img" src="assets/ekiden-event3-email.jpg" alt="EKIDEN.AI コーチングメール（本日の推奨メニュー）" loading="lazy">
+            <div class="eks-info">
+              <div class="eks-head"><span class="aarrr">定着</span>EVENT 3</div>
+              <div class="eks-name">コーチングメールを開封（コア）</div>
+              <div class="eks-metric"><b>420</b> 人</div>
+              <div class="eks-bar"><span class="b3" style="width:42%"></span></div>
+              <div class="eks-rate">前段比 70%</div>
+            </div>
+          </div>
+          <div class="ekarrow">→</div>
+          <div class="ekstep">
+            <img class="eks-img" src="assets/ekiden-event4-reply.jpg" alt="メール内の質問候補から質疑が往復する画面" loading="lazy">
+            <div class="eks-info">
+              <div class="eks-head"><span class="aarrr">継続</span>EVENT 4</div>
+              <div class="eks-name">質問候補から質疑が往復</div>
+              <div class="eks-metric"><b>150</b> 人</div>
+              <div class="eks-bar"><span class="b4" style="width:15%"></span></div>
+              <div class="eks-rate low">前段比 36%</div>
+            </div>
+          </div>
+        </div>
+        <p class="ekf-note">同じ4イベントでも、累計人数ではなく<b>各段の転換率</b>で見ると打ち手が変わります。最大の落ち込みは <b style="color:var(--amber)">メール開封 → 質疑往復（36%）</b>。「読むだけ」で止めず<b>会話に踏み込ませる</b>導線づくりが、定着から継続への鍵になります。</p>
       </div>
-      <div class="sowhat">
-        <div class="you"><div class="lbl">あなたの報告</div><p>「全体のアクティブ率は、横ばいです」</p></div>
-        <div class="boss"><div class="lbl">上司の反応</div><p>「本当に？ “世代ごと”に見た？」</p></div>
-      </div>
-    </div>
-  </section>
-
-  <section class="slide" data-title="今日の流れ">
-    <div class="in">
-      <div class="eyebrow"><span class="num">01</span> 今日の流れ</div>
-      <h2 class="t">5つのステップで「改善の的」を絞る</h2>
-      <div class="steps">
-        <div class="step"><div class="n">1</div><h3>ファネルを深める</h3><p>どこで漏れるか（ボトルネック）</p></div>
-        <div class="step"><div class="n">2</div><h3>コホートとは</h3><p>世代 × 時間で追う</p></div>
-        <div class="step"><div class="n">3</div><h3>平均は嘘をつく</h3><p>なぜコホートが要るか</p></div>
-        <div class="step"><div class="n">4</div><h3>EKIDEN.AIで読む</h3><p>ファネル＆コホート演習</p></div>
-        <div class="step"><div class="n">5</div><h3>改善仮説 → 次へ</h3><p>次回はA/Bテストで確かめる</p></div>
-      </div>
-    </div>
-  </section>
-
-  <section class="slide" data-title="ファネルを深める">
-    <div class="in">
-      <div class="eyebrow"><span class="num">02</span> ファネルを深める</div>
-      <h2 class="t">ボトルネックを見つける ── 直すのは「いちばん低い1つ」</h2>
-      <p class="lead">ユーザーの道のり（来訪 → 登録 → アクティベーション → コア行動）を段階に分け、各段階の<b>転換率</b>を見ると、最大の漏れ（ボトルネック）が分かります。すべてを直そうとせず、最も低い転換を<b>1つだけ</b>狙います。</p>
-      <div class="lens3">
-        <div class="lens"><div class="lh"><span class="tag">規模</span>絶対数で見る</div><p>どれだけの人数が動いたか。大きな機会かどうかを見る。</p></div>
-        <div class="lens"><div class="lh"><span class="tag">質</span>率＝転換率で見る</div><p>各段階の通過率。どこが弱いかを見る。規模が違っても比較できる。</p></div>
-        <div class="lens"><div class="lh"><span class="tag">文脈</span>比較・セグメント</div><p>業界平均や属性別と比べ、良し悪しを判断する。</p></div>
-      </div>
-      <div class="sowhat" style="margin-top:16px">
-        <div class="you"><div class="lbl">前回の演習は…</div><p>絶対数 → 率 → 業界平均、と重ねて“真の課題”を確定する実践でした。</p></div>
-        <div class="good"><div class="lbl">今日はその先へ</div><p>「どこで漏れる（ファネル）」に「どの世代が離れる（コホート）」を重ねます。</p></div>
-      </div>
-    </div>
-  </section>
-
-  <section class="slide" data-title="コホートとは">
-    <div class="in">
-      <div class="eyebrow"><span class="num">03</span> コホート分析とは</div>
-      <h2 class="t">「いつ始めたか」で束ねて、時間で追う</h2>
-      <p class="lead">コホートとは、<b>同じ時期に始めたユーザーの集団</b>です。各コホートを時間で追うと、世代ごとの定着が見えます。下の表は <b>縦＝開始週</b>、<b>横＝経過週</b>、<b>セル＝その時点でまだ使っている割合</b>を表します。</p>
-      <table class="cohort"><thead><tr><th>コホート（開始週）</th><th>W0</th><th>W1</th><th>W2</th></tr></thead><tbody><tr><th class="ct-row">5月 第1週</th><td style="background:rgba(28,114,147,0.9);color:#fff">100%</td><td style="background:rgba(28,114,147,0.413);color:var(--navy)">42%</td><td style="background:rgba(28,114,147,0.295);color:var(--navy)">28%</td></tr><tr><th class="ct-row">5月 第3週</th><td style="background:rgba(28,114,147,0.9);color:#fff">100%</td><td style="background:rgba(28,114,147,0.48);color:#fff">50%</td><td style="background:rgba(28,114,147,0.354);color:var(--navy)">35%</td></tr><tr><th class="ct-row">6月 第1週</th><td style="background:rgba(28,114,147,0.9);color:#fff">100%</td><td style="background:rgba(28,114,147,0.564);color:#fff">60%</td><td class="ct-empty">—</td></tr></tbody></table>
-      <div class="ct-legend">低い<span class="bar"></span>高い（色が濃いほど定着が高い）</div>
-      <p class="lead" style="margin-top:14px"><b>横に読む</b>＝その世代の定着の“形”（崖→底）。<b>縦に読む</b>＝世代ごとに良くなっているか（上の表ではW1が 42% → 50% → 60% と改善）。</p>
-    </div>
-  </section>
-
-  <section class="slide" data-title="平均は嘘をつく">
-    <div class="in">
-      <div class="eyebrow"><span class="num">04</span> なぜコホートが要る？</div>
-      <h2 class="t">平均は嘘をつく ── 新規が既存の離脱を隠す</h2>
-      <div class="cmp2">
-        <div class="cmp bad"><h3><span class="ic">😶</span>集計（平均）で見ると</h3><p>全体のアクティブ率は“横ばい”に見えがち。新規の流入が既存の離脱を埋めて隠すため、「問題なし」と勘違いしてしまう。</p></div>
-        <div class="cmp good"><h3><span class="ic">🔍</span>コホートで見ると</h3><p>各世代の定着の“形”（崖と底）が分かる。後の世代ほど定着が上がっていれば、製品は良くなっている。改善（オンボーディング等）の効果を確認できる。</p></div>
-      </div>
-      <p class="lead" style="margin-top:16px"><b>結論：</b>定着は“平均”ではなく“コホート”で見る。</p>
-    </div>
-  </section>
-
-  <section class="slide" data-title="コホート表の読み方">
-    <div class="in">
-      <div class="eyebrow"><span class="num">05</span> コホート表の読み方</div>
-      <h2 class="t">横で「形」、縦で「進歩」</h2>
-      <table class="cohort"><thead><tr><th>コホート（登録週）</th><th>W0</th><th>W1</th><th>W2</th><th>W3</th></tr></thead><tbody><tr><th class="ct-row">5月 第1週</th><td style="background:rgba(28,114,147,0.9);color:#fff">100%</td><td style="background:rgba(28,114,147,0.413);color:var(--navy)">42%</td><td style="background:rgba(28,114,147,0.295);color:var(--navy)">28%</td><td style="background:rgba(28,114,147,0.245);color:var(--navy)">22%</td></tr><tr><th class="ct-row">5月 第3週</th><td style="background:rgba(28,114,147,0.9);color:#fff">100%</td><td style="background:rgba(28,114,147,0.48);color:#fff">50%</td><td style="background:rgba(28,114,147,0.354);color:var(--navy)">35%</td><td style="background:rgba(28,114,147,0.312);color:var(--navy)">30%</td></tr><tr><th class="ct-row">6月 第1週</th><td style="background:rgba(28,114,147,0.9);color:#fff">100%</td><td style="background:rgba(28,114,147,0.564);color:#fff">60%</td><td style="background:rgba(28,114,147,0.438);color:#fff">45%</td><td class="ct-empty">—</td></tr><tr><th class="ct-row">6月 第3週</th><td style="background:rgba(28,114,147,0.9);color:#fff">100%</td><td style="background:rgba(28,114,147,0.598);color:#fff">64%</td><td class="ct-empty">—</td><td class="ct-empty">—</td></tr></tbody></table>
-      <div class="ct-legend">低い<span class="bar"></span>高い</div>
-      <div class="cmp2" style="margin-top:14px">
-        <div class="cmp"><h3>→ 横に読む＝定着の“形”</h3><p>W0→W1で大きく落ち（崖）、やがて下げ止まる（底）。底＝離れない“コア”の厚み。崖の深さがオンボーディングの課題を示す。</p></div>
-        <div class="cmp"><h3>↓ 縦に読む＝世代の“進歩”</h3><p>後の世代ほどW1が高い（42→50→60→64）＝製品・体験が良くなっている証拠。改善施策の効果はここで確認する。</p></div>
-      </div>
-    </div>
-  </section>
-
-  <section class="slide" data-title="ファネル × コホート">
-    <div class="in">
-      <div class="eyebrow"><span class="num">06</span> ファネル × コホート</div>
-      <h2 class="t">「場所（どこで漏れる）」×「時機（いつの世代か）」→ 打ち手</h2>
-      <p class="lead">ファネルは<b>場所</b>（段階）を、コホートは<b>時機</b>（世代と時間）を教えてくれます。2つを重ねると、「いつ入った人が、どの段でつまずくか」が分かり、打ち手の的が定まります。</p>
-      <div class="matrix">
-        <div class="mx"><h3>ファネルだけ</h3><p>「メール開封→質疑往復が弱い」とは分かるが、改善が効いているかは見えない。</p></div>
-        <div class="mx"><h3>コホートだけ</h3><p>「最近の世代ほど定着が良い」とは分かるが、どの段で離れるかは見えない。</p></div>
-        <div class="mx"><h3>重ねると</h3><p>「6月以降の世代は“質疑往復”への到達が改善 → 導線変更が効いた」と因果に近づける。</p></div>
-        <div class="mx"><h3>打ち手</h3><p>弱い段（場所）に、効いた世代の施策（時機）を横展開する。次回はそれをA/Bで検証。</p></div>
-      </div>
-    </div>
-  </section>
-
-  <section class="slide" data-title="演習①ファネル">
-    <div class="in">
-      <div class="eyebrow"><span class="num">07</span> 演習① ファネル</div>
-      <h2 class="t">EKIDEN.AI のファネルでボトルネックを探す</h2>
-      <p class="lead">サンプルデータです。各段の<b>前段比（転換率）</b>を見て、<b>最大のボトルネック</b>はどこかを考えましょう。<span style="color:var(--mute)">（教材上の数値例。収益データは扱いません）</span></p>
-      <div class="fn"><div class="fn-row"><div class="fn-name"><span class="aarrr">獲得</span><b>EVENT 1</b>　サインアップ</div><div class="fn-bar"><span class="b1" style="width:100%"></span></div><div class="fn-val"><b>1,000</b> 人<span class="fn-rt">分母</span></div></div><div class="fn-row"><div class="fn-name"><span class="aarrr">活性化</span><b>EVENT 2</b>　ウォッチ接続</div><div class="fn-bar"><span class="b2" style="width:60%"></span></div><div class="fn-val"><b>600</b> 人<span class="fn-rt">前段比 60%</span></div></div><div class="fn-row"><div class="fn-name"><span class="aarrr">定着</span><b>EVENT 3</b>　メール開封（コア）</div><div class="fn-bar"><span class="b3" style="width:42%"></span></div><div class="fn-val"><b>420</b> 人<span class="fn-rt">前段比 70%</span></div></div><div class="fn-row"><div class="fn-name"><span class="aarrr">継続</span><b>EVENT 4</b>　質疑往復</div><div class="fn-bar"><span class="b4" style="width:15%"></span></div><div class="fn-val"><b>150</b> 人<span class="fn-rt low">前段比 36%</span></div></div></div>
-      <div class="exq"><b>問い：</b>最も低い転換率はどの段ですか？　そこを直すと、最終の「質疑往復」まで到達する人はどう変わりますか？　<b>1つだけ</b>狙うなら、どの段に手を打ちますか。</div>
-    </div>
-  </section>
-
-  <section class="slide" data-title="演習②コホート">
-    <div class="in">
-      <div class="eyebrow"><span class="num">08</span> 演習② コホート</div>
-      <h2 class="t">EKIDEN.AI のコホートで「世代の進歩」を読む</h2>
-      <p class="lead">登録週ごとに、その後どれだけ「コーチングメール開封（コア行動）」を続けているかのサンプルです。<span style="color:var(--mute)">（教材上の数値例）</span></p>
-      <table class="cohort"><thead><tr><th>コホート（登録週）</th><th>W0</th><th>W1</th><th>W2</th><th>W3</th></tr></thead><tbody><tr><th class="ct-row">5月 第1週</th><td style="background:rgba(28,114,147,0.9);color:#fff">100%</td><td style="background:rgba(28,114,147,0.413);color:var(--navy)">42%</td><td style="background:rgba(28,114,147,0.295);color:var(--navy)">28%</td><td style="background:rgba(28,114,147,0.245);color:var(--navy)">22%</td></tr><tr><th class="ct-row">5月 第3週</th><td style="background:rgba(28,114,147,0.9);color:#fff">100%</td><td style="background:rgba(28,114,147,0.48);color:#fff">50%</td><td style="background:rgba(28,114,147,0.354);color:var(--navy)">35%</td><td style="background:rgba(28,114,147,0.312);color:var(--navy)">30%</td></tr><tr><th class="ct-row">6月 第1週</th><td style="background:rgba(28,114,147,0.9);color:#fff">100%</td><td style="background:rgba(28,114,147,0.564);color:#fff">60%</td><td style="background:rgba(28,114,147,0.438);color:#fff">45%</td><td class="ct-empty">—</td></tr><tr><th class="ct-row">6月 第3週</th><td style="background:rgba(28,114,147,0.9);color:#fff">100%</td><td style="background:rgba(28,114,147,0.598);color:#fff">64%</td><td class="ct-empty">—</td><td class="ct-empty">—</td></tr></tbody></table>
-      <div class="ct-legend">低い<span class="bar"></span>高い</div>
-      <div class="exq"><b>問い：</b>① 各世代の定着の“形”（崖と底）はどうですか？　② 縦に見て、製品は良くなっていますか（W1の推移）？　③ もし良くなっているなら、6月に何を変えたと考えられますか。</div>
-    </div>
-  </section>
-
-  <section class="slide" data-title="改善仮説">
-    <div class="in">
-      <div class="eyebrow"><span class="num">09</span> 改善仮説を立てる</div>
-      <h2 class="t">「観察 → 的 → 仮説 → 検証」の4ステップ</h2>
-      <div class="steps" style="grid-template-columns:repeat(4,1fr)">
-        <div class="step"><div class="n">1</div><h3>観察</h3><p>ファネル×コホートで、漏れる「場所」と離れる「世代」を特定する。</p></div>
-        <div class="step"><div class="n">2</div><h3>的を1つ</h3><p>最大のボトルネック（最も低い転換）を1つだけ選ぶ。</p></div>
-        <div class="step"><div class="n">3</div><h3>仮説</h3><p>「○○を変えれば、この転換が△%上がる」と数値で書く。</p></div>
-        <div class="step"><div class="n">4</div><h3>検証へ</h3><p>次回、A/Bテストで「効いたか」を因果として確かめる。</p></div>
-      </div>
-      <p class="lead" style="margin-top:16px"><b>良い仮説の形：</b>「<b>誰に</b>・<b>何を</b>変えると・<b>どの指標が</b>・<b>どれだけ</b>変わるはず」。曖昧な「改善する」ではなく、検証できる数値で書きます。</p>
-    </div>
-  </section>
-
-  <section class="slide" data-title="今日のワーク">
-    <div class="in">
-      <div class="eyebrow"><span class="num">10</span> 今日のワーク／次回までの課題</div>
-      <h2 class="t">自分のテーマを「ファネル × コホート」で読む</h2>
-      <div class="task">
-        <div class="tcard review"><h3>🔁 復習</h3>
-          <ol><li>自分のテーマを簡易ファネル化し、各段を「率」で書いて最大のボトルネックを1つ特定する</li><li>登録週×経過週の簡易コホート表（3世代×3週）を作る</li><li>観察から改善仮説を1つ、数値の形で書く</li></ol></div>
-        <div class="tcard prep"><h3>📖 予習</h3>
-          <ol start="4"><li>その仮説を「実験」で確かめるなら、何と何を比べるかをメモする</li><li>教科書のA/Bテスト（実験）の章に目を通す</li></ol></div>
-      </div>
-      <div class="band">
-        <div class="dl">提出締切：<span>7/7（火）23:59</span></div>
-        <a class="cr-submit" href="https://classroom.google.com/c/ODU5NjUzNDM0Njk0" target="_blank" rel="noopener">🎓 Classroomで提出 ↗</a>
-        <div class="next">次回予告 ── 第4回：A/Bテストと実験 ──「因果」を確かめる</div>
-      </div>
-      <p class="srcnote">出典：A. クロール＆B. ヨスコビッツ『Lean Analytics』（オライリージャパン）を要約・再構成（逐語引用なし）。ファネル・コホートの数値は教材上の例で、EKIDEN.AI の収益（Stripe）データは扱いません。</p>
     </div>
   </section>
 
@@ -747,7 +604,7 @@
     <button class="sg-reload" id="sgReload" aria-label="質問候補を再生成" title="質問候補を再生成"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12a9 9 0 1 1-2.6-6.3"/><path d="M21 4v5h-5"/></svg></button>
   </div>
   <div class="ai-input">
-    <textarea id="aiText" rows="1" placeholder="質問を入力…（例：コホートと平均の違いは？）"></textarea>
+    <textarea id="aiText" rows="1" placeholder="質問を入力…（例：良い指標の4条件は？）"></textarea>
     <button class="ai-send" id="aiSend" aria-label="送信">&uarr;</button>
   </div>
   <div class="ai-disclaimer">AIの回答には誤りが含まれることがあります。最終判断は教科書と授業で確認してください。</div>
@@ -760,7 +617,7 @@
   var GEMINI_API_KEY = (typeof window!=="undefined" && window.GEMINI_API_KEY) ? window.GEMINI_API_KEY : "";
   var GEMINI_MODEL   = (typeof window!=="undefined" && window.GEMINI_MODEL) ? window.GEMINI_MODEL : "gemini-3.5-flash";
 
-  var LECTURE_FOCUS = "コホート分析（登録時期などで利用者を分けて時間変化を追う）、ファネル分析（段階ごとの転換率とボトルネックの発見）、なぜ平均では定着が見えないか、ファネル×コホートの掛け合わせ、改善仮説の立て方、次回のA/Bテストへの接続、EKIDEN.AIへの適用";
+  var LECTURE_FOCUS = "教科書『Lean Analytics』第2章『優れた指標とは何か（What Makes a Good Metric?）』、良い指標の4条件（比較できる Comparative・分かりやすい Understandable・比率/割合 Rate or ratio・行動が変わる Changes behavior）、指標の5つの対比＝定性/定量（Qualitative/Quantitative）、虚栄/行動を促す（Vanity/Actionable）、探索/報告（Exploratory/Reporting）、先行/遅行（Leading/Lagging）、相関/因果（Correlated/Causal）、ファネル分析、計測イベント設計、アクティブの3層";
   var FALLBACK_QS = ["優れた指標の4条件をやさしく教えて","定性と定量はどう使い分ける？","虚栄指標と行動を促すの指標の見分け方は？","探索指標と報告指標の違いは？","先行指標と遅行指標の例は？","相関と因果はどう違う？","アイスと水難事故の例で相関と因果を説明して","『PV1万→So what?』と言われない報告は？"];
 
   var apiKey=GEMINI_API_KEY, history=[], busy=false, greeted=false;
