@@ -410,7 +410,7 @@
   
   .pfig{margin:14px 0 4px}
   .pfig img{width:100%;max-width:680px;height:auto;border:1px solid var(--line);border-radius:12px;box-shadow:0 6px 20px rgba(21,50,79,.10);display:block;margin:0 auto;background:#fff}
-  .pfig.wide img{max-width:880px}
+  .pfig.wide img{max-width:560px}
   .pcap{font-size:11.5px;color:var(--mute);margin:8px 0 0;text-align:center;line-height:1.5}
   .aq{display:grid;grid-template-columns:repeat(5,1fr);gap:9px;margin-top:8px}
   .aqi{background:var(--soft);border:1px solid var(--line);border-radius:11px;padding:11px 11px}
@@ -578,8 +578,8 @@
         <div class="aqi"><h4><span class="en">Revenue</span>収益</h4><p><b>お金を払う</b>ほど満足している顧客がどれくらいいるか？</p></div>
       </div>
       <figure class="pfig wide" style="margin-top:14px">
-        <img src="assets/aarrr-funnel.jpg" alt="AARRR 5-Step Startup Metrics Model のファネル図" loading="lazy">
-        <figcaption class="pcap">各ステージに流入・継続・紹介・収益のチャネルが対応する（AARRR!: 5-Step Startup Metrics Model）。出典：Dave McClure / 500hats.typepad.com (2007)</figcaption>
+        <img class="zoomable" src="assets/aarrr-funnel.jpg" alt="AARRR 5-Step Startup Metrics Model のファネル図（クリックで拡大）" loading="lazy">
+        <figcaption class="pcap">クリックで拡大。各ステージに流入・継続・紹介・収益のチャネルが対応する（AARRR!: 5-Step Startup Metrics Model）。出典：Dave McClure / 500hats.typepad.com (2007)</figcaption>
       </figure>
     </div>
   </section>
@@ -1026,6 +1026,7 @@
   send.addEventListener("click",submit);
 })();
 </script>
+<div class="lightbox" id="lightbox" hidden><img id="lightbox-img" src="" alt=""></div>
 <script>
 (function(){
   var btns=document.querySelectorAll('.ex-toggle');
@@ -1048,6 +1049,5 @@
   }
 })();
 </script>
-<div class="lightbox" id="lightbox" hidden><img id="lightbox-img" src="" alt=""></div>
 </body>
 </html>
