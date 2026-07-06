@@ -470,10 +470,36 @@
   .lightbox{position:fixed;inset:0;z-index:400;background:rgba(13,36,54,.86);display:flex;align-items:center;justify-content:center;padding:24px;cursor:zoom-out}
   .lightbox img{max-width:94vw;max-height:90vh;border-radius:10px;box-shadow:0 24px 70px rgba(0,0,0,.45);background:#fff}
     .plain{margin:6px 0 0;padding-left:1.1em} .plain li{margin:6px 0;font-size:13px;color:var(--ink);line-height:1.6}
+    .gate{display:none;position:fixed;inset:0;z-index:500;background:linear-gradient(160deg,#15324F,#0d2436);align-items:center;justify-content:center;padding:24px}
+  body.locked .gate{display:flex}
+  body.locked .deck,body.locked .dots,body.locked .navbtns,body.locked .ai-fab,body.locked .ai-panel,body.locked .hd{display:none!important}
+  .gate-card{width:100%;max-width:390px;background:#fff;border-radius:18px;padding:30px 28px;text-align:center;box-shadow:0 24px 60px rgba(0,0,0,.32)}
+  .gate-ic{font-size:34px}
+  .gate-card h2{margin:10px 0 6px;font-size:19px;color:var(--navy)}
+  .gate-card .desc{font-size:13px;color:var(--mute);margin:0 0 18px;line-height:1.6}
+  .gate-row{display:flex;gap:8px}
+  .gate-row input{flex:1;font-family:var(--jp);font-size:14px;border:1px solid var(--line);border-radius:10px;padding:11px 13px;outline:none}
+  .gate-row input:focus{border-color:var(--teal)}
+  .gate-row button{flex:none;font-family:var(--jp);font-weight:700;font-size:14px;border:0;background:var(--navy);color:#fff;border-radius:10px;padding:11px 18px;cursor:pointer}
+  .gate-err{min-height:18px;margin:10px 0 0;font-size:12.5px;color:var(--red);font-weight:700}
+  .gate-back{display:inline-block;margin-top:12px;font-size:12.5px;color:var(--teal)}
   </style>
   <script src="config.js"></script>
 </head>
-<body>
+<body class="locked">
+<div class="gate" id="gate">
+  <div class="gate-card">
+    <div class="gate-ic">🔒</div>
+    <h2>第6回は限定公開です</h2>
+    <p class="desc">この回の資料は授業の進行に合わせて公開します。閲覧にはパスワードが必要です。担当教員にご確認ください。</p>
+    <div class="gate-row">
+      <input type="password" id="gatePw" placeholder="パスワード" autocomplete="off">
+      <button id="gateBtn">開く</button>
+    </div>
+    <p class="gate-err" id="gateErr"></p>
+    <a class="gate-back" href="lecture1.html">← 公開中の第1回へ戻る</a>
+  </div>
+</div>
 
 <header class="hd">
   <div class="brand">SDGs発展2 <span>講義資料</span></div>
@@ -486,7 +512,7 @@
       <a href="lecture2.html"><span class="ttl">第2回　データ収集の設計 ── 定性と定量</span><span class="badge ready">公開</span></a>
       <a href="lecture3.html"><span class="ttl">第3回　コホート分析とファネル分析</span><span class="badge ready">公開</span></a>
       <a href="lecture4.html"><span class="ttl">第4回　A/Bテストとピボット ── 実験と意思決定</span><span class="badge ready">公開</span></a>
-      <a href="lecture5.html"><span class="ttl">第5回　データストーリーテリング</span><span class="badge ready">公開</span></a>
+      <a href="lecture5.html"><span class="ttl">第5回　データストーリーテリング</span><span class="badge soon">準備中</span></a>
       <a class="current" href="#"><span class="ttl">第6回　投資家向けピッチの準備</span><span class="badge ready">表示中</span></a>
       <a href="lecture7.html"><span class="ttl">第7回　最終発表＆振り返り</span><span class="badge soon">準備中</span></a>
     </div>
@@ -899,6 +925,22 @@
     lb.addEventListener('click',function(){lb.hidden=true;lbimg.src='';});
     document.addEventListener('keydown',function(e){if(e.key==='Escape'&&!lb.hidden){lb.hidden=true;lbimg.src='';}});
   }
+})();
+</script>
+<script>
+(function(){
+  "use strict";
+  /* ===== 閲覧パスワード（変更可）。第3回以降の「準備中」ページの解錠に使います。 ===== */
+  var PAGE_PASSWORD = "sdgs2026";
+  /* ============================================================================ */
+  var pw=document.getElementById("gatePw"),btn=document.getElementById("gateBtn"),err=document.getElementById("gateErr");
+  function tryUnlock(){
+    if(pw.value===PAGE_PASSWORD){document.body.classList.remove("locked");err.textContent="";}
+    else{err.textContent="パスワードが違います。";pw.select();}
+  }
+  btn.addEventListener("click",tryUnlock);
+  pw.addEventListener("keydown",function(e){if(e.key==="Enter"){e.preventDefault();tryUnlock();}});
+  setTimeout(function(){if(document.body.classList.contains("locked"))pw.focus();},200);
 })();
 </script>
 </body>
