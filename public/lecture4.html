@@ -477,6 +477,12 @@
   .rtab td.l{text-align:left}
   .rtab .ok{color:var(--green);font-weight:800} .rtab .warn{color:var(--amber);font-weight:800}
   .gate{display:inline-block;background:var(--amber-soft);border:1px solid #e8d3a8;color:#7a531a;border-radius:8px;padding:6px 12px;font-size:12px;font-weight:700;margin-top:10px}
+  
+  .pv{cursor:pointer;transition:box-shadow .12s,border-color .12s}
+  .pv:hover{border-color:var(--teal);box-shadow:0 4px 14px rgba(21,50,79,.10)}
+  .pv-hint{margin-top:8px;font-size:11px;font-weight:700;color:var(--teal)}
+  .pv-ex{display:none;margin-top:8px;padding-top:8px;border-top:1px dashed var(--line);font-size:11.5px;color:var(--ink);line-height:1.65}
+  .pv.open{border-color:var(--teal)} .pv.open .pv-ex{display:block}
   </style>
   <script src="config.js"></script>
 </head>
@@ -615,14 +621,10 @@
 
   <section class="slide" data-title="ピボットの類型">
     <div class="in"><div class="eyebrow"><span class="num">09</span> ピボットの類型</div>
-      <h2 class="t">代表的なピボットの型</h2>
+      <h2 class="t">代表的なピボットの型 ── カードで実例を見る</h2>
+      <p class="lead">各カードを<b>クリック</b>すると、書籍で語られる<b>実例</b>が開きます。<span style="color:var(--mute)">（型の分類は E. リース『リーン・スタートアップ』。『Lean Analytics』でも用いられます）</span></p>
       <div class="aq" style="grid-template-columns:repeat(3,1fr)">
-        <div class="aqi"><h4><span class="en">Zoom-in</span>ズームイン</h4><p>一機能が主役だった＝それを製品全体にする。</p></div>
-        <div class="aqi"><h4><span class="en">Zoom-out</span>ズームアウト</h4><p>製品全体が一機能に過ぎない＝より大きな枠へ。</p></div>
-        <div class="aqi"><h4><span class="en">Segment</span>顧客セグメント</h4><p>作った価値が、想定と別の顧客に刺さる。</p></div>
-        <div class="aqi"><h4><span class="en">Need</span>課題（ニーズ）</h4><p>その顧客の、別のもっと重要な課題へ。</p></div>
-        <div class="aqi"><h4><span class="en">Solution</span>解決策</h4><p>課題は同じで、解き方を変える。</p></div>
-        <div class="aqi"><h4><span class="en">Channel</span>チャネル</h4><p>届け方・課金の仕組みを変える。</p></div>
+        <div class="aqi pv"><h4><span class="en">Zoom-in</span>ズームイン</h4><p>一機能が主役だった＝それを製品全体にする。</p><div class="pv-hint">▸ 書籍の実例を見る</div><div class="pv-ex">例：<b>Instagram</b>。多機能の位置情報アプリ「Burbn」から、最も使われた<b>写真共有</b>の1機能に絞って再出発した。（同様に <b>Flickr</b> もオンラインゲームから写真共有へ）</div></div><div class="aqi pv"><h4><span class="en">Zoom-out</span>ズームアウト</h4><p>製品全体が一機能に過ぎない＝より大きな枠へ。</p><div class="pv-hint">▸ 書籍の実例を見る</div><div class="pv-ex">例：<b>Yelp</b>。当初は知人へのおすすめを<b>メールで送る仕組み</b>だったが、それを一部に含む<b>店舗のクチコミ・評価ポータル</b>という大きな製品へ広げた。</div></div><div class="aqi pv"><h4><span class="en">Segment</span>顧客セグメント</h4><p>作った価値が、想定と別の顧客に刺さる。</p><div class="pv-hint">▸ 書籍の実例を見る</div><div class="pv-ex">例：<b>Circle of Friends</b>。汎用のSNSだったが、<b>子育て中の親</b>のグループで特に強く使われていると分かり、その層に特化して再定義した。<span style="color:var(--mute)">（『Lean Analytics』のケース）</span></div></div><div class="aqi pv"><h4><span class="en">Need</span>課題（ニーズ）</h4><p>その顧客の、別のもっと重要な課題へ。</p><div class="pv-hint">▸ 書籍の実例を見る</div><div class="pv-ex">例：<b>Pinterest</b>。紙のショッピングカタログの置き換えを狙ったが、ユーザーは購入より<b>「好きなものを集めて共有する」</b>ことに価値を感じた＝別の課題へ移った。</div></div><div class="aqi pv"><h4><span class="en">Solution</span>解決策</h4><p>課題は同じで、解き方を変える。</p><div class="pv-hint">▸ 書籍の実例を見る</div><div class="pv-ex">例：<b>Netflix</b>。「映画を観たい」という同じ課題に対し、<b>DVDの郵送</b>から<b>ストリーミング配信</b>へ、解き方（技術）を変えた。</div></div><div class="aqi pv"><h4><span class="en">Channel</span>チャネル</h4><p>届け方・課金の仕組みを変える。</p><div class="pv-hint">▸ 書籍の実例を見る</div><div class="pv-ex">例：課題も解決策も同じまま、<b>届け方</b>を変える。ソフトを<b>代理店経由の営業</b>から<b>自社サイトでの直販・セルフ登録</b>に切り替える、など。<span style="color:var(--mute)">（リース「チャネル・ピボット」）</span></div></div>
       </div>
     </div></section>
 
@@ -977,6 +979,17 @@
     lb.addEventListener('click',function(){lb.hidden=true;lbimg.src='';});
     document.addEventListener('keydown',function(e){if(e.key==='Escape'&&!lb.hidden){lb.hidden=true;lbimg.src='';}});
   }
+})();
+</script>
+<script>
+(function(){
+  Array.prototype.forEach.call(document.querySelectorAll('.pv'),function(c){
+    c.addEventListener('click',function(){
+      c.classList.toggle('open');
+      var hint=c.querySelector('.pv-hint');
+      if(hint) hint.textContent=c.classList.contains('open')?'▾ 閉じる':'▸ 書籍の実例を見る';
+    });
+  });
 })();
 </script>
 </body>
