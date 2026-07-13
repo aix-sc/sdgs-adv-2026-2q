@@ -587,20 +587,7 @@
   </style>
   <script src="config.js"></script>
 </head>
-<body class="locked">
-<div class="gate" id="gate">
-  <div class="gate-card">
-    <div class="gate-ic">🔒</div>
-    <h2>第5回は限定公開です</h2>
-    <p class="desc">この回の資料は授業の進行に合わせて公開します。閲覧にはパスワードが必要です。担当教員にご確認ください。</p>
-    <div class="gate-row">
-      <input type="password" id="gatePw" placeholder="パスワード" autocomplete="off">
-      <button id="gateBtn">開く</button>
-    </div>
-    <p class="gate-err" id="gateErr"></p>
-    <a class="gate-back" href="lecture1.html">← 公開中の第1回へ戻る</a>
-  </div>
-</div>
+<body>
 
 <header class="hd">
   <div class="brand">SDGs発展2 <span>講義資料</span></div>
@@ -1364,22 +1351,6 @@
     lb.addEventListener('click',function(){lb.hidden=true;lbimg.src='';});
     document.addEventListener('keydown',function(e){if(e.key==='Escape'&&!lb.hidden){lb.hidden=true;lbimg.src='';}});
   }
-})();
-</script>
-<script>
-(function(){
-  "use strict";
-  /* ===== 閲覧パスワード（変更可）。第3回以降の「準備中」ページの解錠に使います。 ===== */
-  var PAGE_PASSWORD = "sdgs2026";
-  /* ============================================================================ */
-  var pw=document.getElementById("gatePw"),btn=document.getElementById("gateBtn"),err=document.getElementById("gateErr");
-  function tryUnlock(){
-    if(pw.value===PAGE_PASSWORD){document.body.classList.remove("locked");err.textContent="";}
-    else{err.textContent="パスワードが違います。";pw.select();}
-  }
-  btn.addEventListener("click",tryUnlock);
-  pw.addEventListener("keydown",function(e){if(e.key==="Enter"){e.preventDefault();tryUnlock();}});
-  setTimeout(function(){if(document.body.classList.contains("locked"))pw.focus();},200);
 })();
 </script>
 <script>
