@@ -518,6 +518,21 @@
   .rtab th{background:var(--soft);color:var(--navy);font-weight:700}
   .rtab td.l{text-align:left}
   .rtab .ok{color:var(--green);font-weight:800} .rtab .warn{color:var(--amber);font-weight:800}
+  
+  .vz-detail{margin-top:9px;padding-top:9px;border-top:1px dashed var(--line);text-align:left}
+  .vz-detail p{margin:0 0 7px;font-size:11.5px;color:var(--ink);line-height:1.72}
+  .vz-detail p:last-child{margin-bottom:0}
+  .vz-detail b{color:var(--navy)}
+  .vz.open{grid-column:span 3}
+  .vz.open .vz-fig{display:grid;grid-template-columns:.85fr 1.15fr;gap:14px;align-items:start}
+  .vz.open .vz-fig svg{max-width:340px}
+  .vz.open .vz-cap{grid-column:1;margin-top:6px}
+  .vz.open .vz-detail{grid-column:2;grid-row:1 / span 2;margin-top:0;padding-top:0;border-top:0;border-left:1px dashed var(--line);padding-left:14px}
+  @media(max-width:860px){
+    .vz.open{grid-column:span 2}
+    .vz.open .vz-fig{grid-template-columns:1fr}
+    .vz.open .vz-detail{grid-column:1;grid-row:auto;border-left:0;padding-left:0;padding-top:9px;border-top:1px dashed var(--line)}
+  }
   </style>
   <script src="config.js"></script>
 </head>
@@ -658,31 +673,31 @@
 
   <section class="slide" data-title="可視化の使い分け">
     <div class="in"><div class="eyebrow"><span class="num">05</span> 可視化の使い分け</div>
-      <h2 class="t">伝えたいこと別・グラフの選び方 ── カードで実例を見る</h2>
-      <p class="lead">各カードを<b>クリック</b>すると、そのグラフの<b>イメージ</b>が開きます。</p>
+      <h2 class="t">伝えたいこと別・グラフの選び方 ── カードで実例と解説を見る</h2>
+      <p class="lead">各カードを<b>クリック</b>すると、グラフのイメージと<b>詳しい解説</b>（EKIDEN.AI の例つき）が開きます。</p>
       <div class="aq" style="grid-template-columns:repeat(3,1fr)">
-        <div class="aqi vz"><h4><span class="en">比較</span>棒グラフ</h4><p>A vs B、群ごとの大小を比べる。</p><div class="vz-hint">▸ グラフ例を見る</div><div class="vz-fig"><svg viewBox="0 0 260 120"><line x1="26" y1="100" x2="250" y2="100" stroke="#dfe6ec" stroke-width="1.5"/>
+        <div class="aqi vz"><h4><span class="en">比較</span>棒グラフ</h4><p>A vs B、群ごとの大小を正確に比べる。</p><div class="vz-hint">▸ グラフ例と詳しい説明を見る</div><div class="vz-fig"><svg viewBox="0 0 260 120"><line x1="26" y1="100" x2="250" y2="100" stroke="#dfe6ec" stroke-width="1.5"/>
 <rect x="50" y="52" width="40" height="48" rx="3" fill="#b9c5cf"/><rect x="120" y="28" width="40" height="72" rx="3" fill="#3E7C53"/><rect x="190" y="62" width="40" height="38" rx="3" fill="#b9c5cf"/>
 <text x="70" y="46" font-size="10" fill="#6b7a87" text-anchor="middle">36%</text><text x="140" y="22" font-size="10" fill="#3E7C53" font-weight="700" text-anchor="middle">47%</text><text x="210" y="56" font-size="10" fill="#6b7a87" text-anchor="middle">30%</text>
-<text x="70" y="114" font-size="9" fill="#6b7a87" text-anchor="middle">従来A</text><text x="140" y="114" font-size="9" fill="#6b7a87" text-anchor="middle">具体化B</text><text x="210" y="114" font-size="9" fill="#6b7a87" text-anchor="middle">C案</text></svg><span class="vz-cap">A/Bの転換率を比較（36% vs 47%）</span></div></div><div class="aqi vz"><h4><span class="en">推移</span>折れ線</h4><p>時間による変化・トレンドを見る。</p><div class="vz-hint">▸ グラフ例を見る</div><div class="vz-fig"><svg viewBox="0 0 260 120"><line x1="26" y1="100" x2="250" y2="100" stroke="#dfe6ec" stroke-width="1.5"/><line x1="26" y1="14" x2="26" y2="100" stroke="#dfe6ec" stroke-width="1.5"/>
+<text x="70" y="114" font-size="9" fill="#6b7a87" text-anchor="middle">従来A</text><text x="140" y="114" font-size="9" fill="#6b7a87" text-anchor="middle">具体化B</text><text x="210" y="114" font-size="9" fill="#6b7a87" text-anchor="middle">C案</text></svg><span class="vz-cap">A/Bの転換率を比較（36% vs 47%）</span><div class="vz-detail"><p><b>棒グラフは「大小を、正確に、ひと目で」比べるための道具です。</b>人間の目は「棒の長さ」の違いを最も正確に読み取れるため、A案とB案のどちらが優れているか、どのセグメントが強いかといった<b>比較</b>には、円グラフや3Dではなく棒グラフを使います。</p><p>EKIDEN.AI では、A/Bテストの結果（従来メール36% と 具体化メール47%）を並べて示すのが典型です。見る人は「Bのほうが明らかに高い」と一瞬で理解できます。</p><p><b>使うときの注意：</b>①縦軸は必ず<b>0から</b>始める（途中で切ると差が誇張される）。②比較したい対象だけを並べ、順序に意味を持たせる（大きい順、または時系列順）。③各棒に<b>分母（n）</b>を添える。「47%」も、10人中5人と1,000人中470人ではまったく意味が違います。</p></div></div></div><div class="aqi vz"><h4><span class="en">推移</span>折れ線</h4><p>時間による変化・トレンド（勢い）を見る。</p><div class="vz-hint">▸ グラフ例と詳しい説明を見る</div><div class="vz-fig"><svg viewBox="0 0 260 120"><line x1="26" y1="100" x2="250" y2="100" stroke="#dfe6ec" stroke-width="1.5"/><line x1="26" y1="14" x2="26" y2="100" stroke="#dfe6ec" stroke-width="1.5"/>
 <polyline points="40,84 78,74 116,58 154,44 192,36 236,30" fill="none" stroke="#1C7293" stroke-width="3" stroke-linecap="round"/>
 <circle cx="40" cy="84" r="3.5" fill="#1C7293"/><circle cx="116" cy="58" r="3.5" fill="#1C7293"/><circle cx="236" cy="30" r="4" fill="#1C7293"/>
 <text x="236" y="22" font-size="9" fill="#1C7293" font-weight="700" text-anchor="middle">↑</text>
-<text x="40" y="114" font-size="9" fill="#6b7a87" text-anchor="middle">4月</text><text x="236" y="114" font-size="9" fill="#6b7a87" text-anchor="middle">9月</text></svg><span class="vz-cap">月ごとのコア行動率の推移</span></div></div><div class="aqi vz"><h4><span class="en">内訳</span>積み上げ/割合</h4><p>全体に占める構成を示す。</p><div class="vz-hint">▸ グラフ例を見る</div><div class="vz-fig"><svg viewBox="0 0 260 120">
+<text x="40" y="114" font-size="9" fill="#6b7a87" text-anchor="middle">4月</text><text x="236" y="114" font-size="9" fill="#6b7a87" text-anchor="middle">9月</text></svg><span class="vz-cap">月ごとのコア行動率の推移</span><div class="vz-detail"><p><b>折れ線グラフは「時間とともに、どう変わってきたか」を見るための道具です。</b>点をつないだ線の傾きが、そのまま「勢い（トレンド）」を表します。改善が効いているのか、頭打ちなのか、悪化しているのかを判断するのに向いています。</p><p>EKIDEN.AI では、週次・月次の<b>コア行動率（コーチングメールの開封率）</b>の推移を追います。施策を入れた時点に縦線を引いておくと、「入れてから上がった／変わらなかった」が読み取りやすくなります。ただし前後比較だけでは因果は言えないので、確かめるにはA/Bテストが必要です（第4回）。</p><p><b>使うときの注意：</b>①<b>累計</b>を折れ線にしない。累計は必ず右肩上がりになるため、調子が悪くても良く見えてしまいます（虚栄の指標）。必ず<b>期間ごとの実数・率</b>で描く。②線が多すぎると読めない。比べる対象は3〜4本までに絞る。</p></div></div></div><div class="aqi vz"><h4><span class="en">内訳</span>積み上げ/割合</h4><p>全体が何でできているか（構成）を示す。</p><div class="vz-hint">▸ グラフ例と詳しい説明を見る</div><div class="vz-fig"><svg viewBox="0 0 260 120">
 <rect x="40" y="24" width="46" height="76" rx="3" fill="#15324F"/><rect x="40" y="24" width="46" height="30" fill="#1C7293"/><rect x="40" y="24" width="46" height="12" fill="#3E7C53"/>
 <rect x="110" y="24" width="46" height="76" rx="3" fill="#15324F"/><rect x="110" y="24" width="46" height="38" fill="#1C7293"/><rect x="110" y="24" width="46" height="18" fill="#3E7C53"/>
 <rect x="180" y="24" width="46" height="76" rx="3" fill="#15324F"/><rect x="180" y="24" width="46" height="46" fill="#1C7293"/><rect x="180" y="24" width="46" height="26" fill="#3E7C53"/>
-<text x="63" y="114" font-size="9" fill="#6b7a87" text-anchor="middle">5月</text><text x="133" y="114" font-size="9" fill="#6b7a87" text-anchor="middle">6月</text><text x="203" y="114" font-size="9" fill="#6b7a87" text-anchor="middle">7月</text></svg><span class="vz-cap">月別・段階ごとの内訳の変化</span></div></div><div class="aqi vz"><h4><span class="en">分布</span>ヒストグラム</h4><p>ばらつき・偏りを見る。平均の嘘に注意。</p><div class="vz-hint">▸ グラフ例を見る</div><div class="vz-fig"><svg viewBox="0 0 260 120"><line x1="26" y1="100" x2="250" y2="100" stroke="#dfe6ec" stroke-width="1.5"/>
+<text x="63" y="114" font-size="9" fill="#6b7a87" text-anchor="middle">5月</text><text x="133" y="114" font-size="9" fill="#6b7a87" text-anchor="middle">6月</text><text x="203" y="114" font-size="9" fill="#6b7a87" text-anchor="middle">7月</text></svg><span class="vz-cap">月別・層ごとの内訳の変化</span><div class="vz-detail"><p><b>積み上げ棒・割合グラフは「全体が、何でできているか」を示す道具です。</b>合計の大きさと、その<b>内訳（構成比）</b>を同時に見せられます。「増えているのは分かった。では、どの部分が増えたのか？」に答えるのがこのグラフです。</p><p>EKIDEN.AI では、月ごとの登録者を「ライトランナー層」と「競技・駅伝チーム層」に分けて積み上げると、<b>どちらの層が伸びているか</b>が見えます。第4回のピボット判断（競技層へ寄せる）を語るときの根拠になります。ファネルの各段（サインアップ→ウォッチ接続→メール開封→質疑往復）の人数構成を示すのにも使えます。</p><p><b>使うときの注意：</b>①要素が多すぎると読めない。<b>4〜5区分まで</b>にまとめる。②円グラフは角度の比較が苦手なので、正確に比べたいときは棒に。③「割合（%）」だけを見せると母数の変化が隠れるため、<b>実数とセット</b>で示すのが安全です。</p></div></div></div><div class="aqi vz"><h4><span class="en">分布</span>ヒストグラム</h4><p>ばらつき・偏りを見る。「平均の嘘」に注意。</p><div class="vz-hint">▸ グラフ例と詳しい説明を見る</div><div class="vz-fig"><svg viewBox="0 0 260 120"><line x1="26" y1="100" x2="250" y2="100" stroke="#dfe6ec" stroke-width="1.5"/>
 <rect x="36" y="80" width="24" height="20" fill="#b9c5cf"/><rect x="62" y="60" width="24" height="40" fill="#b9c5cf"/><rect x="88" y="34" width="24" height="66" fill="#1C7293"/><rect x="114" y="52" width="24" height="48" fill="#b9c5cf"/><rect x="140" y="72" width="24" height="28" fill="#b9c5cf"/><rect x="166" y="84" width="24" height="16" fill="#b9c5cf"/><rect x="192" y="70" width="24" height="30" fill="#C58B2B"/><rect x="218" y="88" width="24" height="12" fill="#C58B2B"/>
 <line x1="150" y1="14" x2="150" y2="100" stroke="#C0392B" stroke-width="1.5" stroke-dasharray="4 3"/><text x="150" y="11" font-size="9" fill="#C0392B" text-anchor="middle">平均</text>
-<text x="215" y="60" font-size="9" fill="#C58B2B" text-anchor="middle">二山</text></svg><span class="vz-cap">平均だけでは二山（2層）が見えない</span></div></div><div class="aqi vz"><h4><span class="en">定着</span>コホート表</h4><p>世代×時間の残り具合（前回の手法）。</p><div class="vz-hint">▸ グラフ例を見る</div><div class="vz-fig"><svg viewBox="0 0 260 120">
+<text x="215" y="60" font-size="9" fill="#C58B2B" text-anchor="middle">二山</text></svg><span class="vz-cap">平均だけでは二山（2つの層）が見えない</span><div class="vz-detail"><p><b>ヒストグラムは「データのばらつき（分布）」を見るための道具です。</b>横軸に値の範囲、縦軸にその範囲に入る人数（度数）を取り、山の形からデータの実像をつかみます。</p><p><b>「平均の嘘」とは、</b>データを1つの「平均値」だけで判断すると、全体のばらつきや極端な偏りが見えなくなり、実態を見誤ってしまうことを言います。たとえば EKIDEN.AI のユーザー10人のうち、1人だけが月間100km走り、残り9人がまったく走っていない（0km）場合、平均は「1人あたり10km」になりますが、これでは「平均的なユーザー」の実態をまったく表していません。この平均値だけを信じて「みんな月10km走るから、そのレベル向けの機能を開発しよう」と判断すると、<b>誰も使わないサービス</b>になってしまうという失敗が起こります。</p><p>だからこそ、平均値にだまされず、ヒストグラムを使ってデータの<b>「分布（ばらつき）」</b>をビジュアルで確認し、<b>本当のユーザー像</b>を見極めることが重要なのです。山が2つに割れていれば（二山＝ふたやま）、そこには性質の違う2つの集団が混ざっているサイン。EKIDEN.AI で言えば「ほとんど走らない層」と「本気で走り込む競技層」です。分けて見れば（＝セグメント）、それぞれに合った打ち手が見えてきます。</p><p><b>使うときの注意：</b>①平均だけでなく<b>中央値</b>も見る。②山が2つ以上あれば、必ずセグメントに分ける。③区間（ビン）の幅を変えると印象が変わるので、恣意的に選ばない。</p></div></div></div><div class="aqi vz"><h4><span class="en">定着</span>コホート表</h4><p>世代×時間の残り具合（第3回の手法）。</p><div class="vz-hint">▸ グラフ例と詳しい説明を見る</div><div class="vz-fig"><svg viewBox="0 0 260 120">
 <text x="18" y="24" font-size="8" fill="#6b7a87">W0</text><text x="58" y="24" font-size="8" fill="#6b7a87">W1</text><text x="98" y="24" font-size="8" fill="#6b7a87">W2</text><text x="138" y="24" font-size="8" fill="#6b7a87">W3</text>
 <g>
 <rect x="10" y="30" width="34" height="20" rx="3" fill="rgba(28,114,147,.9)"/><rect x="50" y="30" width="34" height="20" rx="3" fill="rgba(28,114,147,.42)"/><rect x="90" y="30" width="34" height="20" rx="3" fill="rgba(28,114,147,.3)"/><rect x="130" y="30" width="34" height="20" rx="3" fill="rgba(28,114,147,.25)"/>
 <rect x="10" y="54" width="34" height="20" rx="3" fill="rgba(28,114,147,.9)"/><rect x="50" y="54" width="34" height="20" rx="3" fill="rgba(28,114,147,.52)"/><rect x="90" y="54" width="34" height="20" rx="3" fill="rgba(28,114,147,.38)"/><rect x="130" y="54" width="34" height="20" rx="3" fill="rgba(28,114,147,.32)"/>
 <rect x="10" y="78" width="34" height="20" rx="3" fill="rgba(28,114,147,.9)"/><rect x="50" y="78" width="34" height="20" rx="3" fill="rgba(28,114,147,.66)"/><rect x="90" y="78" width="34" height="20" rx="3" fill="rgba(28,114,147,.5)"/><rect x="130" y="78" width="34" height="20" rx="3" fill="#f1f4f7"/>
 </g>
-<text x="180" y="46" font-size="9" fill="#6b7a87">→ 崖と底</text><text x="180" y="90" font-size="9" fill="#3E7C53" font-weight="700">↓ 世代改善</text></svg><span class="vz-cap">横＝崖と底、縦＝世代の改善</span></div></div><div class="aqi vz"><h4><span class="en">誤解</span>避ける表現</h4><p> 軸を途中で切る・3D・過剰な装飾は誤読のもと。</p><div class="vz-hint">▸ グラフ例を見る</div><div class="vz-fig"><svg viewBox="0 0 260 120">
+<text x="180" y="46" font-size="9" fill="#6b7a87">→ 崖と底</text><text x="180" y="90" font-size="9" fill="#3E7C53" font-weight="700">↓ 世代改善</text></svg><span class="vz-cap">横＝崖と底、縦＝世代の改善</span><div class="vz-detail"><p><b>コホート表（ヒートマップ）は「世代ごとに、時間とともにどれだけ残ったか」を見る道具です。</b>縦に「いつ始めた人か（登録週＝コホート）」、横に「開始から何週たったか」を並べ、セルの色の濃さで残存率を表します（第3回の手法）。</p><p>読み方は2方向です。<b>横に読む</b>と、その世代の定着の“形”＝最初に大きく落ちる「崖」と、やがて下げ止まる「底」が見えます。底の厚みが、離れない<b>コア・ユーザー</b>の大きさです。<b>縦に読む</b>と、世代ごとの進歩が見えます。EKIDEN.AI では W1 の定着が 42% → 50% → 60% → 64% と上がっており、<b>後から入った世代ほど定着が良い＝製品が良くなっている</b>証拠になります。</p><p><b>なぜ必要か：</b>全体の平均だけを見ると、新しく入った人が増えることで、既存ユーザーの離脱が埋もれて「横ばい」に見えてしまいます（＝平均の嘘の一種）。コホートに分けて初めて、改善が効いているかどうかを正しく判断できます。投資家に「伸びている証拠（トラクション）」を示すときにも、最も説得力のある図の1つです。</p></div></div></div><div class="aqi vz"><h4><span class="en">誤解</span>避ける表現</h4><p>軸を切る・累計・3D・分母隠しは誤読のもと。</p><div class="vz-hint">▸ グラフ例と詳しい説明を見る</div><div class="vz-fig"><svg viewBox="0 0 260 120">
 <rect x="20" y="14" width="105" height="92" rx="4" fill="#fdf6f6" stroke="#e6c9c9"/>
 <text x="72" y="30" font-size="9" fill="#C0392B" text-anchor="middle">✕ 軸を切る</text>
 <rect x="40" y="66" width="24" height="30" fill="#C0392B" opacity=".5"/><rect x="80" y="46" width="24" height="50" fill="#C0392B" opacity=".8"/>
@@ -690,7 +705,7 @@
 <rect x="135" y="14" width="105" height="92" rx="4" fill="#f5faf7" stroke="#cfe3d6"/>
 <text x="187" y="30" font-size="9" fill="#3E7C53" text-anchor="middle">◯ 0から始める</text>
 <rect x="155" y="52" width="24" height="44" fill="#3E7C53" opacity=".5"/><rect x="195" y="44" width="24" height="52" fill="#3E7C53" opacity=".8"/>
-<text x="187" y="106" font-size="7" fill="#3E7C53" text-anchor="middle">正しい大小関係</text></svg><span class="vz-cap">軸を0から始めないと差が誇張される</span></div></div>
+<text x="187" y="106" font-size="7" fill="#3E7C53" text-anchor="middle">正しい大小関係</text></svg><span class="vz-cap">軸を0から始めないと差が誇張される</span><div class="vz-detail"><p><b>グラフは、描き方ひとつで簡単に「嘘」をつけます。</b>伝える技術は、都合よく見せる技術ではありません。次の4つは特に起こしやすい誤りです。</p><p><b>① 軸を途中で切る（truncated axis）：</b>縦軸を0からでなく40%あたりから始めると、わずかな差が何倍にも見えます。左右の図は<b>同じデータ</b>ですが、印象はまったく違います。比較のグラフでは<b>0から始める</b>のが原則です。</p><p><b>② 累計を使う：</b>累計値は必ず増えるため、実態が悪化していても右肩上がりに見えます。教科書が戒める<b>虚栄の指標</b>の典型です。必ず期間ごとの実数・率で示します。</p><p><b>③ 3Dや過剰な装飾：</b>奥行きや影は面積・角度の認識を歪めます。装飾は情報量を増やさず、誤読だけを増やします。</p><p><b>④ 分母を隠す：</b>「+50%改善」と書いても、母数が20人なら偶然の範囲かもしれません。率を出すときは必ず<b>n（分母）</b>を添えます。</p><p>EKIDEN.AI の報告でも、悪い数字（定着37%でゲート未達）を隠さずそのまま出し、「だから競技層へピボットする」とセットで伝えました。<b>正しい判断のための報告</b>である以上、誠実さこそが信頼につながります。</p></div></div></div>
       </div>
     </div></section>
 
@@ -1133,7 +1148,7 @@
     c.addEventListener('click',function(){
       c.classList.toggle('open');
       var hint=c.querySelector('.vz-hint');
-      if(hint) hint.textContent=c.classList.contains('open')?'▾ 閉じる':'▸ グラフ例を見る';
+      if(hint) hint.textContent=c.classList.contains('open')?'▾ 閉じる':'▸ グラフ例と詳しい説明を見る';
     });
   });
 })();
