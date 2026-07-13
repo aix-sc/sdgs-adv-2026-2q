@@ -483,6 +483,35 @@
   .gate-row button{flex:none;font-family:var(--jp);font-weight:700;font-size:14px;border:0;background:var(--navy);color:#fff;border-radius:10px;padding:11px 18px;cursor:pointer}
   .gate-err{min-height:18px;margin:10px 0 0;font-size:12.5px;color:var(--red);font-weight:700}
   .gate-back{display:inline-block;margin-top:12px;font-size:12.5px;color:var(--teal)}
+  
+  /* 04 スライド例 */
+  .ex-cmp{display:grid;grid-template-columns:.9fr 2.1fr;gap:14px;margin-top:14px}
+  .ex-col{min-width:0}
+  .ex-lbl{font-size:11.5px;font-weight:700;margin-bottom:6px}
+  .ex-lbl.bad{color:var(--red)} .ex-lbl.good{color:var(--green)}
+  .mini-row{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+  .mini{background:#fff;border:1px solid var(--line);border-radius:10px;padding:10px;box-shadow:0 2px 8px rgba(21,50,79,.07);display:flex;flex-direction:column;gap:6px}
+  .mini.bad-ex{border-color:#e6c9c9;background:#fdf9f9}
+  .mini.good-ex{border-color:#cfe3d6}
+  .mini-ttl{font-size:11px;font-weight:800;color:var(--navy);line-height:1.35;border-bottom:1px solid var(--line);padding-bottom:5px}
+  .mini-ttl.gray{color:#9aa8b3;font-weight:600}
+  .mini-chart svg{width:100%;height:auto;display:block}
+  .mini-grid4{display:grid;grid-template-columns:1fr 1fr;gap:5px}
+  .mini-grid4 svg{width:100%;height:auto;display:block}
+  .mini-act{font-size:9.5px;font-weight:700;color:var(--green);background:#f5faf7;border-radius:5px;padding:4px 6px;line-height:1.3}
+  .mini-note{font-size:9.5px;color:var(--red);text-align:center}
+  .mini-note.gray{color:#b0787a}
+  /* 05 可視化カード */
+  .vz{cursor:pointer;transition:box-shadow .12s,border-color .12s}
+  .vz:hover{border-color:var(--teal);box-shadow:0 4px 14px rgba(21,50,79,.10)}
+  .vz-hint{margin-top:8px;font-size:11px;font-weight:700;color:var(--teal)}
+  .vz-fig{display:none;margin-top:8px;padding-top:8px;border-top:1px dashed var(--line)}
+  .vz.open{border-color:var(--teal)} .vz.open .vz-fig{display:block}
+  .vz-fig svg{width:100%;height:auto;display:block;background:#fff;border:1px solid var(--line);border-radius:8px}
+  .vz-cap{display:block;margin-top:6px;font-size:10.5px;color:var(--mute);line-height:1.5}
+  @media(max-width:860px){
+    .ex-cmp{grid-template-columns:1fr} .mini-row{grid-template-columns:1fr}
+  }
   </style>
   <script src="config.js"></script>
 </head>
@@ -567,26 +596,92 @@
 
   <section class="slide" data-title="1画面1メッセージ">
     <div class="in"><div class="eyebrow"><span class="num">04</span> 設計の原則</div>
-      <h2 class="t">1画面に、主張は1つ</h2>
+      <h2 class="t">1画面に、主張は1つ ── スライドの実例で見る</h2>
       <div class="lens3">
         <div class="lens"><div class="lh"><span class="tag">主張</span>言いたいこと1つ</div><p>スライドのタイトルが結論。1枚で複数を欲張らない。</p></div>
         <div class="lens"><div class="lh"><span class="tag">根拠</span>支える数字</div><p>その主張を裏づける最小限のグラフ・数値だけを置く。</p></div>
         <div class="lens"><div class="lh"><span class="tag">行動</span>次の一手</div><p>相手に取ってほしい行動・意思決定を明記する。</p></div>
       </div>
+
+      <div class="ex-cmp">
+        <div class="ex-col">
+          <div class="ex-lbl bad">✕ ありがち：主張がない</div>
+          <div class="mini bad-ex">
+  <div class="mini-ttl gray">Q2 分析結果</div>
+  <div class="mini-grid4">
+    <svg viewBox="0 0 100 60"><rect x="8" y="30" width="12" height="26" fill="#b9c5cf"/><rect x="26" y="20" width="12" height="36" fill="#b9c5cf"/><rect x="44" y="36" width="12" height="20" fill="#b9c5cf"/><rect x="62" y="14" width="12" height="42" fill="#b9c5cf"/><rect x="80" y="28" width="12" height="28" fill="#b9c5cf"/></svg>
+    <svg viewBox="0 0 100 60"><polyline points="6,44 24,34 42,40 60,22 78,28 94,14" fill="none" stroke="#b9c5cf" stroke-width="3"/></svg>
+    <svg viewBox="0 0 100 60"><circle cx="50" cy="30" r="22" fill="#dfe6ec"/><path d="M50 30 L50 8 A22 22 0 0 1 70 40 Z" fill="#b9c5cf"/></svg>
+    <svg viewBox="0 0 100 60"><rect x="6" y="10" width="88" height="8" fill="#e7edf2"/><rect x="6" y="24" width="70" height="8" fill="#e7edf2"/><rect x="6" y="38" width="52" height="8" fill="#e7edf2"/><rect x="6" y="50" width="34" height="6" fill="#e7edf2"/></svg>
+  </div>
+  <div class="mini-note gray">指標を全部のせ／主張がない</div>
+</div>
+        </div>
+        <div class="ex-col">
+          <div class="ex-lbl good">◯ 良い例：主張＝タイトル、根拠＝図、行動＝次の一手</div>
+          <div class="mini-row">
+            <div class="mini good-ex">
+  <div class="mini-ttl">質疑往復が最大の漏れ（36%）</div>
+  <div class="mini-chart"><svg viewBox="0 0 220 90"><rect x="10" y="14" width="190" height="14" rx="3" fill="#15324F"/><rect x="10" y="34" width="114" height="14" rx="3" fill="#1C7293"/><rect x="10" y="54" width="80" height="14" rx="3" fill="#3E7C53"/><rect x="10" y="74" width="29" height="14" rx="3" fill="#C0392B"/><text x="205" y="86" font-size="9" fill="#C0392B" text-anchor="end">36%</text></svg></div>
+  <div class="mini-act">▶ 次：質問候補の具体化をA/Bで検証</div>
+</div>
+            <div class="mini good-ex">
+  <div class="mini-ttl">具体化メールで +11pt 改善</div>
+  <div class="mini-chart"><svg viewBox="0 0 220 90"><rect x="40" y="42" width="46" height="44" rx="3" fill="#b9c5cf"/><rect x="130" y="18" width="46" height="68" rx="3" fill="#3E7C53"/><text x="63" y="36" font-size="10" fill="#6b7a87" text-anchor="middle">36%</text><text x="153" y="12" font-size="10" fill="#3E7C53" font-weight="700" text-anchor="middle">47%</text><text x="63" y="98" font-size="8" fill="#6b7a87" text-anchor="middle">A</text><text x="153" y="98" font-size="8" fill="#6b7a87" text-anchor="middle">B</text></svg></div>
+  <div class="mini-act">▶ 次：全ユーザーへ横展開</div>
+</div>
+            <div class="mini good-ex">
+  <div class="mini-ttl">定着は世代ごとに改善（42→64%）</div>
+  <div class="mini-chart"><svg viewBox="0 0 220 90"><g>
+<rect x="20" y="14" width="40" height="16" fill="rgba(28,114,147,.9)"/><rect x="64" y="14" width="40" height="16" fill="rgba(28,114,147,.45)"/><rect x="108" y="14" width="40" height="16" fill="rgba(28,114,147,.32)"/>
+<rect x="20" y="34" width="40" height="16" fill="rgba(28,114,147,.9)"/><rect x="64" y="34" width="40" height="16" fill="rgba(28,114,147,.55)"/><rect x="108" y="34" width="40" height="16" fill="rgba(28,114,147,.4)"/>
+<rect x="20" y="54" width="40" height="16" fill="rgba(28,114,147,.9)"/><rect x="64" y="54" width="40" height="16" fill="rgba(28,114,147,.68)"/><rect x="108" y="54" width="40" height="16" fill="rgba(28,114,147,.5)"/>
+<text x="175" y="66" font-size="10" fill="#3E7C53" font-weight="700">↑改善</text></g></svg></div>
+  <div class="mini-act">▶ 次：獲得を強化して伸ばす</div>
+</div>
+          </div>
+        </div>
+      </div>
+
       <div class="why"><h3>ダッシュボード／レポートも同じ</h3>
         <p>まず <b>OMTM（最重要指標）</b>を大きく。次に推移と内訳。飾りや不要な指標を削り、<b>「今どうで、次に何をするか」</b>が一目で分かる状態にします。</p></div>
     </div></section>
 
   <section class="slide" data-title="可視化の使い分け">
     <div class="in"><div class="eyebrow"><span class="num">05</span> 可視化の使い分け</div>
-      <h2 class="t">伝えたいこと別・グラフの選び方</h2>
+      <h2 class="t">伝えたいこと別・グラフの選び方 ── カードで実例を見る</h2>
+      <p class="lead">各カードを<b>クリック</b>すると、そのグラフの<b>イメージ</b>が開きます。</p>
       <div class="aq" style="grid-template-columns:repeat(3,1fr)">
-        <div class="aqi"><h4><span class="en">比較</span>棒グラフ</h4><p>A vs B、群ごとの大小を比べる。</p></div>
-        <div class="aqi"><h4><span class="en">推移</span>折れ線</h4><p>時間による変化・トレンドを見る。</p></div>
-        <div class="aqi"><h4><span class="en">内訳</span>積み上げ/割合</h4><p>全体に占める構成を示す。</p></div>
-        <div class="aqi"><h4><span class="en">分布</span>ヒストグラム</h4><p>ばらつき・偏りを見る。平均の嘘に注意。</p></div>
-        <div class="aqi"><h4><span class="en">定着</span>コホート表</h4><p>世代×時間の残り具合（前回の手法）。</p></div>
-        <div class="aqi"><h4><span class="en">誤解</span>避ける表現</h4><p>軸を途中で切る・3D・過剰な装飾は誤読のもと。</p></div>
+        <div class="aqi vz"><h4><span class="en">比較</span>棒グラフ</h4><p>A vs B、群ごとの大小を比べる。</p><div class="vz-hint">▸ グラフ例を見る</div><div class="vz-fig"><svg viewBox="0 0 260 120"><line x1="26" y1="100" x2="250" y2="100" stroke="#dfe6ec" stroke-width="1.5"/>
+<rect x="50" y="52" width="40" height="48" rx="3" fill="#b9c5cf"/><rect x="120" y="28" width="40" height="72" rx="3" fill="#3E7C53"/><rect x="190" y="62" width="40" height="38" rx="3" fill="#b9c5cf"/>
+<text x="70" y="46" font-size="10" fill="#6b7a87" text-anchor="middle">36%</text><text x="140" y="22" font-size="10" fill="#3E7C53" font-weight="700" text-anchor="middle">47%</text><text x="210" y="56" font-size="10" fill="#6b7a87" text-anchor="middle">30%</text>
+<text x="70" y="114" font-size="9" fill="#6b7a87" text-anchor="middle">従来A</text><text x="140" y="114" font-size="9" fill="#6b7a87" text-anchor="middle">具体化B</text><text x="210" y="114" font-size="9" fill="#6b7a87" text-anchor="middle">C案</text></svg><span class="vz-cap">A/Bの転換率を比較（36% vs 47%）</span></div></div><div class="aqi vz"><h4><span class="en">推移</span>折れ線</h4><p>時間による変化・トレンドを見る。</p><div class="vz-hint">▸ グラフ例を見る</div><div class="vz-fig"><svg viewBox="0 0 260 120"><line x1="26" y1="100" x2="250" y2="100" stroke="#dfe6ec" stroke-width="1.5"/><line x1="26" y1="14" x2="26" y2="100" stroke="#dfe6ec" stroke-width="1.5"/>
+<polyline points="40,84 78,74 116,58 154,44 192,36 236,30" fill="none" stroke="#1C7293" stroke-width="3" stroke-linecap="round"/>
+<circle cx="40" cy="84" r="3.5" fill="#1C7293"/><circle cx="116" cy="58" r="3.5" fill="#1C7293"/><circle cx="236" cy="30" r="4" fill="#1C7293"/>
+<text x="236" y="22" font-size="9" fill="#1C7293" font-weight="700" text-anchor="middle">↑</text>
+<text x="40" y="114" font-size="9" fill="#6b7a87" text-anchor="middle">4月</text><text x="236" y="114" font-size="9" fill="#6b7a87" text-anchor="middle">9月</text></svg><span class="vz-cap">月ごとのコア行動率の推移</span></div></div><div class="aqi vz"><h4><span class="en">内訳</span>積み上げ/割合</h4><p>全体に占める構成を示す。</p><div class="vz-hint">▸ グラフ例を見る</div><div class="vz-fig"><svg viewBox="0 0 260 120">
+<rect x="40" y="24" width="46" height="76" rx="3" fill="#15324F"/><rect x="40" y="24" width="46" height="30" fill="#1C7293"/><rect x="40" y="24" width="46" height="12" fill="#3E7C53"/>
+<rect x="110" y="24" width="46" height="76" rx="3" fill="#15324F"/><rect x="110" y="24" width="46" height="38" fill="#1C7293"/><rect x="110" y="24" width="46" height="18" fill="#3E7C53"/>
+<rect x="180" y="24" width="46" height="76" rx="3" fill="#15324F"/><rect x="180" y="24" width="46" height="46" fill="#1C7293"/><rect x="180" y="24" width="46" height="26" fill="#3E7C53"/>
+<text x="63" y="114" font-size="9" fill="#6b7a87" text-anchor="middle">5月</text><text x="133" y="114" font-size="9" fill="#6b7a87" text-anchor="middle">6月</text><text x="203" y="114" font-size="9" fill="#6b7a87" text-anchor="middle">7月</text></svg><span class="vz-cap">月別・段階ごとの内訳の変化</span></div></div><div class="aqi vz"><h4><span class="en">分布</span>ヒストグラム</h4><p>ばらつき・偏りを見る。平均の嘘に注意。</p><div class="vz-hint">▸ グラフ例を見る</div><div class="vz-fig"><svg viewBox="0 0 260 120"><line x1="26" y1="100" x2="250" y2="100" stroke="#dfe6ec" stroke-width="1.5"/>
+<rect x="36" y="80" width="24" height="20" fill="#b9c5cf"/><rect x="62" y="60" width="24" height="40" fill="#b9c5cf"/><rect x="88" y="34" width="24" height="66" fill="#1C7293"/><rect x="114" y="52" width="24" height="48" fill="#b9c5cf"/><rect x="140" y="72" width="24" height="28" fill="#b9c5cf"/><rect x="166" y="84" width="24" height="16" fill="#b9c5cf"/><rect x="192" y="70" width="24" height="30" fill="#C58B2B"/><rect x="218" y="88" width="24" height="12" fill="#C58B2B"/>
+<line x1="150" y1="14" x2="150" y2="100" stroke="#C0392B" stroke-width="1.5" stroke-dasharray="4 3"/><text x="150" y="11" font-size="9" fill="#C0392B" text-anchor="middle">平均</text>
+<text x="215" y="60" font-size="9" fill="#C58B2B" text-anchor="middle">二山</text></svg><span class="vz-cap">平均だけでは二山（2層）が見えない</span></div></div><div class="aqi vz"><h4><span class="en">定着</span>コホート表</h4><p>世代×時間の残り具合（前回の手法）。</p><div class="vz-hint">▸ グラフ例を見る</div><div class="vz-fig"><svg viewBox="0 0 260 120">
+<text x="18" y="24" font-size="8" fill="#6b7a87">W0</text><text x="58" y="24" font-size="8" fill="#6b7a87">W1</text><text x="98" y="24" font-size="8" fill="#6b7a87">W2</text><text x="138" y="24" font-size="8" fill="#6b7a87">W3</text>
+<g>
+<rect x="10" y="30" width="34" height="20" rx="3" fill="rgba(28,114,147,.9)"/><rect x="50" y="30" width="34" height="20" rx="3" fill="rgba(28,114,147,.42)"/><rect x="90" y="30" width="34" height="20" rx="3" fill="rgba(28,114,147,.3)"/><rect x="130" y="30" width="34" height="20" rx="3" fill="rgba(28,114,147,.25)"/>
+<rect x="10" y="54" width="34" height="20" rx="3" fill="rgba(28,114,147,.9)"/><rect x="50" y="54" width="34" height="20" rx="3" fill="rgba(28,114,147,.52)"/><rect x="90" y="54" width="34" height="20" rx="3" fill="rgba(28,114,147,.38)"/><rect x="130" y="54" width="34" height="20" rx="3" fill="rgba(28,114,147,.32)"/>
+<rect x="10" y="78" width="34" height="20" rx="3" fill="rgba(28,114,147,.9)"/><rect x="50" y="78" width="34" height="20" rx="3" fill="rgba(28,114,147,.66)"/><rect x="90" y="78" width="34" height="20" rx="3" fill="rgba(28,114,147,.5)"/><rect x="130" y="78" width="34" height="20" rx="3" fill="#f1f4f7"/>
+</g>
+<text x="180" y="46" font-size="9" fill="#6b7a87">→ 崖と底</text><text x="180" y="90" font-size="9" fill="#3E7C53" font-weight="700">↓ 世代改善</text></svg><span class="vz-cap">横＝崖と底、縦＝世代の改善</span></div></div><div class="aqi vz"><h4><span class="en">誤解</span>避ける表現</h4><p> 軸を途中で切る・3D・過剰な装飾は誤読のもと。</p><div class="vz-hint">▸ グラフ例を見る</div><div class="vz-fig"><svg viewBox="0 0 260 120">
+<rect x="20" y="14" width="105" height="92" rx="4" fill="#fdf6f6" stroke="#e6c9c9"/>
+<text x="72" y="30" font-size="9" fill="#C0392B" text-anchor="middle">✕ 軸を切る</text>
+<rect x="40" y="66" width="24" height="30" fill="#C0392B" opacity=".5"/><rect x="80" y="46" width="24" height="50" fill="#C0392B" opacity=".8"/>
+<text x="72" y="106" font-size="7" fill="#C0392B" text-anchor="middle">差が誇張される</text>
+<rect x="135" y="14" width="105" height="92" rx="4" fill="#f5faf7" stroke="#cfe3d6"/>
+<text x="187" y="30" font-size="9" fill="#3E7C53" text-anchor="middle">◯ 0から始める</text>
+<rect x="155" y="52" width="24" height="44" fill="#3E7C53" opacity=".5"/><rect x="195" y="44" width="24" height="52" fill="#3E7C53" opacity=".8"/>
+<text x="187" y="106" font-size="7" fill="#3E7C53" text-anchor="middle">正しい大小関係</text></svg><span class="vz-cap">軸を0から始めないと差が誇張される</span></div></div>
       </div>
     </div></section>
 
@@ -931,6 +1026,17 @@
   btn.addEventListener("click",tryUnlock);
   pw.addEventListener("keydown",function(e){if(e.key==="Enter"){e.preventDefault();tryUnlock();}});
   setTimeout(function(){if(document.body.classList.contains("locked"))pw.focus();},200);
+})();
+</script>
+<script>
+(function(){
+  Array.prototype.forEach.call(document.querySelectorAll('.vz'),function(c){
+    c.addEventListener('click',function(){
+      c.classList.toggle('open');
+      var hint=c.querySelector('.vz-hint');
+      if(hint) hint.textContent=c.classList.contains('open')?'▾ 閉じる':'▸ グラフ例を見る';
+    });
+  });
 })();
 </script>
 </body>
