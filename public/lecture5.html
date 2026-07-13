@@ -40,7 +40,6 @@
 
   /* deck / slides */
   .deck{height:100vh;overflow-y:scroll;scroll-snap-type:y mandatory;scroll-behavior:smooth}
-  .deck.locked-scroll{scroll-snap-type:none;overflow-y:hidden}
   .slide{min-height:100vh;scroll-snap-align:start;display:flex;flex-direction:column;justify-content:center;padding:calc(var(--hd) + 22px) 22px 92px;position:relative}
   .in{max-width:840px;margin:0 auto;width:100%}
   .eyebrow{display:inline-flex;align-items:center;gap:9px;font-size:11.5px;font-weight:700;letter-spacing:.13em;color:var(--teal);margin:0 0 12px}
@@ -563,7 +562,7 @@
   .sw-ex b{color:var(--navy)}
   @media(max-width:860px){ .sw2{grid-template-columns:1fr} }
   
-  .slide.reading{height:100vh;max-height:100vh;justify-content:flex-start;overflow-y:auto;overscroll-behavior:contain;scroll-snap-align:start}
+  .slide.reading{height:100vh;max-height:100vh;justify-content:flex-start;overflow-y:auto;-webkit-overflow-scrolling:touch;overscroll-behavior:contain;scroll-snap-align:start}
   .slide.reading .in{margin:0 auto;padding-bottom:24px}
   
   .mece-opts{display:flex;flex-direction:column;gap:9px;margin-top:6px}
@@ -1404,19 +1403,12 @@
       var full=btn.parentNode.querySelector('.tldr-full');
       if(!full)return;
       var slide=btn.closest('.slide');
-      var deck=document.querySelector('.deck');
       if(full.hidden){
         full.hidden=false;btn.textContent='閉じる ▾';
-        if(slide){
-          slide.classList.add('reading');
-          if(deck){deck.classList.add('locked-scroll');}
-        }
+        if(slide)slide.classList.add('reading');
       }else{
         full.hidden=true;btn.textContent='もっと詳しく ▸';
-        if(slide){
-          slide.classList.remove('reading');slide.scrollTop=0;
-          if(deck){deck.classList.remove('locked-scroll');}
-        }
+        if(slide){slide.classList.remove('reading');slide.scrollTop=0;}
       }
     });
   });
@@ -1433,6 +1425,13 @@
       if(!was){c.classList.add('open');lbl(c);}
     });
   });
+})();
+</script>
+<script>
+(function(){
+  var deck=document.querySelector('.deck');
+  if(deck){deck.classList.remove('locked-scroll');deck.style.overflowY='';}
+  Array.prototype.forEach.call(document.querySelectorAll('.slide.reading'),function(s){s.classList.remove('reading');});
 })();
 </script>
 </body>
