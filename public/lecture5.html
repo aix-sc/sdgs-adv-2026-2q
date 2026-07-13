@@ -300,8 +300,9 @@
   .foot-book{display:flex;flex-direction:column;background:#fff;border:1px solid var(--line);border-radius:14px;padding:18px}
   .book-label{font-size:10.5px;font-weight:700;letter-spacing:.08em;color:var(--mute);margin-bottom:10px}
   .book-row{display:flex;gap:15px}
-  .bk-cover{flex:none;width:90px;height:128px;border-radius:8px;overflow:hidden;display:block;background:linear-gradient(135deg,#15324F,#1C7293);box-shadow:0 6px 18px rgba(21,50,79,.22);position:relative}
-  .bk-cover img{width:100%;height:100%;object-fit:cover;display:block}
+  .bk-cover{flex:none;display:block;line-height:0}
+  .bk-cover img{width:150px;height:auto;max-height:60vh;object-fit:contain;display:block;border-radius:8px;box-shadow:0 6px 20px rgba(21,50,79,.22);transition:transform .15s,box-shadow .15s}
+  .bk-cover:hover img{transform:translateY(-3px);box-shadow:0 10px 28px rgba(21,50,79,.30)}
   .bk-fallback{display:none;position:absolute;inset:0;align-items:center;justify-content:center;color:#fff;font-weight:700;font-size:15px;text-align:center;line-height:1.3;letter-spacing:.02em}
   .bk-cover.noimg .bk-fallback{display:flex}
   .book-info{display:flex;flex-direction:column}
@@ -582,7 +583,7 @@
   .bk-desc{margin:0 0 12px;font-size:13px;color:var(--ink);line-height:1.75}
   .bk-link{display:inline-block;font-size:12.5px;font-weight:700;color:#fff;background:var(--teal);border-radius:9px;padding:8px 15px;text-decoration:none;transition:background .15s}
   .bk-link:hover{background:var(--navy)}
-  @media(max-width:860px){ .bk{flex-direction:column;align-items:center;text-align:center} .bk-cover img{width:120px} }
+  @media(max-width:860px){ .bk{flex-direction:column;align-items:center;text-align:center} .bk-cover img{width:130px} }
   </style>
   <script src="config.js"></script>
 </head>
