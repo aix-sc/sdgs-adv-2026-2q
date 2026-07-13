@@ -483,6 +483,75 @@
   .gate-row button{flex:none;font-family:var(--jp);font-weight:700;font-size:14px;border:0;background:var(--navy);color:#fff;border-radius:10px;padding:11px 18px;cursor:pointer}
   .gate-err{min-height:18px;margin:10px 0 0;font-size:12.5px;color:var(--red);font-weight:700}
   .gate-back{display:inline-block;margin-top:12px;font-size:12.5px;color:var(--teal)}
+  
+  /* 第6回：ピッチ構成・実例カード・参考資料 */
+  .pitch2{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:8px}
+  .pcol{background:#fff;border:1px solid var(--line);border-radius:13px;padding:16px 18px}
+  .pch{margin:0 0 10px;font-size:14px;color:var(--navy);display:flex;align-items:center;gap:8px}
+  .pnum{flex:none;width:22px;height:22px;border-radius:6px;background:var(--teal);color:#fff;font-size:11px;font-weight:700;display:flex;align-items:center;justify-content:center}
+  .p5{margin:0;padding-left:1.2em}
+  .p5 li{margin:0 0 8px;font-size:13px;color:var(--navy);font-weight:700}
+  .p5 li span{display:block;font-size:11.5px;color:var(--mute);font-weight:400;margin-top:2px}
+  .pnot{margin:0;padding:0;list-style:none}
+  .pnot li{margin:0 0 9px;font-size:13px;color:var(--navy);font-weight:700;padding-left:14px;border-left:3px solid var(--amber)}
+  .pnot li b{color:var(--green)}
+  .pnot li span{display:block;font-size:11.5px;color:var(--mute);font-weight:400;margin-top:2px}
+  .deckcards{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:8px}
+  .dcard{background:var(--soft);border:1px solid var(--line);border-radius:12px;padding:14px 15px;cursor:pointer;transition:border-color .12s,box-shadow .12s}
+  .dcard:hover{border-color:var(--teal);box-shadow:0 4px 14px rgba(21,50,79,.10)}
+  .dcard.open{border-color:var(--teal);background:#fff}
+  .dc-h{font-size:13px;font-weight:700;color:var(--navy);line-height:1.5}
+  .dc-tag{display:inline-block;font-size:9.5px;color:#fff;background:var(--navy);border-radius:5px;padding:2px 7px;margin-right:6px;vertical-align:middle}
+  .dc-hint{margin-top:8px;font-size:11px;font-weight:700;color:var(--teal)}
+  .dc-body{display:none;margin-top:9px;padding-top:9px;border-top:1px dashed var(--line)}
+  .dcard.open .dc-body{display:block}
+  .dc-body p{margin:0 0 8px;font-size:11.5px;color:var(--ink);line-height:1.7}
+  .dc-warn{background:var(--amber-soft);border-radius:8px;padding:8px 10px;color:#7a531a!important}
+  .dc-link{display:inline-block;margin-top:4px;font-size:11.5px;font-weight:700;color:#fff;background:var(--teal);border-radius:8px;padding:6px 12px;text-decoration:none}
+  .dc-link:hover{background:var(--navy)}
+  .quote-box{background:#fdf6f6;border:1px solid #e6c9c9;border-left:4px solid var(--red);border-radius:11px;padding:14px 16px}
+  .quote-box p{margin:0 0 8px;font-size:13px;color:var(--ink);line-height:1.75}
+  .quote-box p:last-child{margin-bottom:0}
+  .reflist{display:flex;flex-direction:column;gap:10px;margin-top:8px}
+  .refitem{display:flex;gap:12px;align-items:flex-start;background:#fff;border:1px solid var(--line);border-radius:11px;padding:13px 15px;text-decoration:none;transition:border-color .12s,box-shadow .12s}
+  .refitem:hover{border-color:var(--teal);box-shadow:0 4px 14px rgba(21,50,79,.10)}
+  .rf-tag{flex:none;font-size:9.5px;font-weight:700;color:#fff;background:var(--teal);border-radius:5px;padding:3px 8px;margin-top:2px}
+  .refitem b{font-size:13px;color:var(--navy);display:block}
+  .refitem p{margin:3px 0 0;font-size:11.5px;color:var(--mute);line-height:1.6}
+  .rtab{width:100%;border-collapse:collapse;font-size:12.5px;margin-top:6px}
+  .rtab th,.rtab td{border:1px solid var(--line);padding:7px 9px;text-align:center;font-variant-numeric:tabular-nums}
+  .rtab th{background:var(--soft);color:var(--navy);font-weight:700}
+  .rtab td.l{text-align:left}
+  .rtab .ok{color:var(--green);font-weight:800} .rtab .warn{color:var(--amber);font-weight:800}
+  .gate{display:inline-block;background:var(--amber-soft);border:1px solid #e8d3a8;color:#7a531a;border-radius:8px;padding:6px 12px;font-size:12px;font-weight:700;margin-top:10px}
+  .ans-h{font-size:14px;color:var(--navy);margin:22px 0 6px;display:flex;align-items:center;gap:9px}
+  .ans-no{flex:none;font-size:11px;font-weight:700;color:#fff;background:var(--green);border-radius:6px;padding:3px 9px}
+  .exa{margin-top:14px;max-width:none;background:var(--soft);border:1px solid var(--line);border-left:4px solid var(--green);border-radius:11px;padding:14px 16px;font-size:13px;color:var(--ink);line-height:1.75}
+  .exa b{color:var(--green)}
+  .exq{margin-top:0;max-width:none;background:var(--amber-soft);border:1px solid #e8d3a8;border-radius:11px;padding:14px 16px;font-size:13px;color:#7a531a}
+  .ex-split{display:grid;grid-template-columns:1fr 38%;gap:18px;align-items:start;margin-top:10px}
+  .ex-chart{min-width:0}
+  .ex-panel{position:sticky;top:74px;display:flex;flex-direction:column;gap:10px;min-width:0}
+  .ex-toggle{align-self:flex-start;font-family:var(--jp);font-weight:700;font-size:13px;border:1px solid var(--teal);background:#fff;color:var(--teal);border-radius:9px;padding:8px 15px;cursor:pointer;transition:background .15s,color .15s}
+  .ex-toggle:hover{background:var(--teal);color:#fff}
+  .ex-toggle.on{background:var(--navy);border-color:var(--navy);color:#fff}
+  .why{background:#fff;border:1px solid var(--line);border-left:4px solid var(--amber);border-radius:12px;padding:14px 17px;margin-top:14px}
+  .why h3{margin:0 0 6px;font-size:14px;color:var(--navy)}
+  .why p{margin:0;font-size:12.5px;color:var(--ink);line-height:1.7}
+  @media(max-width:860px){
+    .pitch2{grid-template-columns:1fr} .deckcards{grid-template-columns:1fr}
+    .ex-split{grid-template-columns:1fr} .ex-panel{position:static}
+  }
+  .tldr{margin-top:20px;padding-top:14px;border-top:1px solid var(--line)}
+  .tldr-sum{margin:0;font-size:13px;color:var(--ink);line-height:1.8}
+  .tldr-btn{margin-top:6px;font-family:var(--jp);font-size:12px;font-weight:700;color:var(--teal);background:none;border:0;padding:0;cursor:pointer}
+  .tldr-btn:hover{text-decoration:underline}
+  .tldr-full{margin-top:8px}
+  .tldr-full p{margin:0 0 9px;font-size:12.5px;color:var(--ink);line-height:1.85}
+  .tldr-full p:last-child{margin-bottom:0}
+  .tldr-full b{color:var(--navy)}
+  .slide.reading{height:100vh;max-height:100vh;justify-content:flex-start;overflow-y:auto;-webkit-overflow-scrolling:touch;overscroll-behavior:contain;scroll-snap-align:start}
+  .slide.reading .in{margin:0 auto;padding-bottom:24px}
   </style>
   <script src="config.js"></script>
 </head>
@@ -526,10 +595,10 @@
     <div class="in">
       <div class="kick">2026年度　SDGs発展2［a1］　第6</div>
       <h1>投資家向けピッチの準備<br><em>── データで信頼を勝ち取る</em></h1>
-      <p class="sub">これまでの分析（AARRR・ファネル・コホート・A/B）を、投資家に<b>「投資する価値がある」</b>と信じてもらうピッチにまとめます。鍵は<b>トラクション（進捗の証拠）</b>です。</p>
       <div class="creed">語るな、<em>示せ。</em></div>
       <div class="meta"><span class="pill">担当：<b>高橋 雄介</b></span><span class="pill">教科書：<b>Lean Analytics</b></span><span class="pill">ケース：<b>EKIDEN.AI</b></span></div>
-      <div class="sowhat"><div class="you"><div class="lbl">あなたの報告</div><p>「きっと伸びます、良いアイデアなんです」</p></div><div class="boss"><div class="lbl">上司の反応</div><p>「で、“伸びている証拠（数字）”は？」</p></div></div>
+      <div class="sowhat"><div class="you"><div class="lbl">あなたのピッチ</div><p>「きっと伸びます。良いアイデアなんです」</p></div><div class="boss"><div class="lbl">投資家の反応</div><p>「で、“伸びている証拠（数字）”は？」</p></div></div>
+      <div class="tldr"><p class="tldr-sum">合言葉は「語るな、示せ」。信頼の源はアイデアの巧みさではなく、データが示す“進んでいる証拠”です。</p><button class="tldr-btn" type="button">もっと詳しく ▸</button><div class="tldr-full" hidden><p>投資家は毎日、無数のピッチを聞いています。そのなかで「良いアイデアなんです」と語る人は、<b>全員が同じことを言っている</b>ように聞こえます。差がつくのは、語りの巧みさではありません。<b>示せる証拠があるかどうか</b>です。</p><p>第2回から第5回まで、私たちは指標を設計し、ファネルとコホートで読み、A/Bテストで確かめ、物語として伝える技術を積み上げてきました。その全てが、今日の<b>トラクション（進捗の証拠）</b>になります。分析は、ここで最終的な形を得るのです。</p><p>今日は、優れたピッチの<b>5つの必須要素</b>と<b>5つの原則</b>を学び、500 Startups や Y Combinator の実例に触れ、EKIDEN.AI でドリルを行います。次回はいよいよ最終発表です。</p></div></div>
     </div>
   </section>
 
@@ -538,26 +607,112 @@
       <h2 class="t">分析を、投資家に伝わるピッチへ</h2>
       <div class="steps">
         <div class="step"><div class="n">1</div><h3>ピッチの目的</h3><p>短時間で信頼を得る</p></div>
-        <div class="step"><div class="n">2</div><h3>基本構成</h3><p>問題〜askの流れ</p></div>
-        <div class="step"><div class="n">3</div><h3>トラクション</h3><p>進捗の証拠を示す</p></div>
-        <div class="step"><div class="n">4</div><h3>データの組み込み</h3><p>1枚に要点</p></div>
-        <div class="step"><div class="n">5</div><h3>リハ→演習</h3><p>伝わるまで練る</p></div>
-      </div></div></section>
+        <div class="step"><div class="n">2</div><h3>優れた構成</h3><p>5要素と5つの原則</p></div>
+        <div class="step"><div class="n">3</div><h3>実例に学ぶ</h3><p>Demo Dayのデッキ</p></div>
+        <div class="step"><div class="n">4</div><h3>トラクション</h3><p>進捗の証拠を示す</p></div>
+        <div class="step"><div class="n">5</div><h3>ドリルと設計</h3><p>EKIDEN.AIで実践</p></div>
+      </div>
+      <div class="tldr"><p class="tldr-sum">ピッチの目的から、優れた構成、Demo Dayの実例、トラクション、そしてEKIDEN.AIでのドリルまで進みます。</p><button class="tldr-btn" type="button">もっと詳しく ▸</button><div class="tldr-full" hidden><p>今日は5つのステップで進みます。</p><p>まず<b>ピッチの目的</b>──短時間で「投資する価値がある」と信じてもらうこと。次に<b>優れた構成</b>として、Dave McClure が示した<b>5つの必須要素</b>と、<b>5つの「◯◯ではなく、△△」</b>という原則を学びます。これがピッチの骨格になります。</p><p>さらに、<b>500 Startups と Y Combinator の Demo Day</b>で実際に使われているデッキを見て、型を体で覚えます。その後、<b>トラクション</b>の示し方（成長・熱量・学び）を確認し、2つのドリルで実践します。</p><p>今日つくるトラクション・スライド1枚が、次回の<b>最終発表</b>の中心になります。</p></div></div>
+    </div></section>
 
   <section class="slide" data-title="ピッチの目的">
     <div class="in"><div class="eyebrow"><span class="num">02</span> ピッチとは</div>
       <h2 class="t">短時間で「投資する価値がある」と信じてもらう</h2>
-      <p class="lead">ピッチは、限られた時間で相手の<b>意思決定（投資・協力）</b>を引き出す発表です。信頼の源は、話のうまさではなく<b>トラクション＝前に進んでいる証拠</b>。これまでのデータ分析が、その証拠になります。</p>
-      <div class="sowhat"><div class="you"><div class="lbl">アイデア中心</div><p>「良いアイデアです」だけ＝根拠がなく信じてもらえない。</p></div>
-        <div class="good"><div class="lbl">証拠中心</div><p>「これだけ伸びています」＝数字で示すから信頼される。</p></div></div>
+      <div class="sowhat"><div class="you"><div class="lbl">アイデア中心</div><p>「良いアイデアです」だけ＝根拠がなく、信じてもらえない。</p></div>
+        <div class="good"><div class="lbl">証拠中心</div><p>「これだけ伸びています」＝数字で示すから、信頼される。</p></div></div>
+      <div class="tldr"><p class="tldr-sum">ピッチの目的は、限られた時間で相手の意思決定を引き出すこと。信頼の源はトラクション＝前に進んでいる証拠です。</p><button class="tldr-btn" type="button">もっと詳しく ▸</button><div class="tldr-full" hidden><p>ピッチは、プレゼンテーションの一種ですが、目的が明確に違います。<b>相手の意思決定（投資・協力）を引き出すこと</b>──それだけです。「よく分かりました」で終わるピッチは、失敗です。</p><p>では、何が相手を動かすのか。答えは<b>トラクション</b>、すなわち「<b>前に進んでいる証拠</b>」です。「これから伸びます」は誰でも言えます。しかし「<b>すでにこれだけ伸びています</b>」は、データを持つ人にしか言えません。</p><p>ここで、これまでの授業がすべて生きてきます。ファネルで見つけたボトルネック、コホートで確認した世代改善、A/Bで実証した打ち手の効果──これらは全部、<b>投資家に見せるための証拠</b>だったのです。</p><p>第5回の言葉で言えば、ピッチとは「<b>分析を、最も高い賭け金の場で語る</b>」行為です。</p></div></div>
+    </div></section>
+
+  <section class="slide" data-title="優れた構成">
+    <div class="in"><div class="eyebrow"><span class="num">03</span> 優れたピッチの構成</div>
+      <h2 class="t">5つの必須要素と、5つの「◯◯ではなく、△△」</h2>
+      <div class="pitch2">
+        <div class="pcol">
+          <h3 class="pch"><span class="pnum">A</span> 押さえるべき5要素</h3>
+          <ol class="p5">
+            <li><b>Market</b><span>市場 ── どれだけ大きいか</span></li>
+            <li><b>Product</b><span>製品 ── 何を、どう解くか（デモ）</span></li>
+            <li><b>Team</b><span>チーム ── なぜ自分たちか</span></li>
+            <li><b>Customers</b><span>顧客 ── 誰が、実際に使っているか</span></li>
+            <li><b>Revenue</b><span>収益 ── どう成り立つか</span></li>
+          </ol>
+        </div>
+        <div class="pcol">
+          <h3 class="pch"><span class="pnum">B</span> 5つの「◯◯ではなく、△△」</h3>
+          <ul class="pnot">
+            <li><b>Problem</b>, NOT solution.<span>解決策より、まず「痛み」を語れ</span></li>
+            <li><b>Customer</b>, NOT technology.<span>技術より、それを使う人を語れ</span></li>
+            <li><b>UX</b>, NOT code.<span>実装より、体験を見せろ</span></li>
+            <li><b>Distribution</b>, NOT PR.<span>話題より、届く仕組みを示せ</span></li>
+            <li><b>Acq cost</b>, NOT revenue projections.<span>皮算用より、獲得コストの実測を</span></li>
+          </ul>
+        </div>
+      </div>
+      <p class="srcnote">参考：Dave McClure「How to Pitch a VC」（500 Startups）の Essential Elements ／「Pitch MY PROBLEM, not YOUR SOLUTION」の考え方を再構成。</p>
+      <div class="tldr"><p class="tldr-sum">押さえるべきは Market / Product / Team / Customers / Revenue の5つ。そして「Problem, NOT solution.」から始まる5つの原則です。</p><button class="tldr-btn" type="button">もっと詳しく ▸</button><div class="tldr-full" hidden><p>500 Startups 創業者 <b>Dave McClure</b> は、ピッチに必要な<b>5つの必須要素</b>を挙げています。<b>Market</b>（市場は十分に大きいか）、<b>Product</b>（何を、どう解くか＝デモ）、<b>Team</b>（なぜ自分たちなのか）、<b>Customers</b>（実際に誰が使っているか）、<b>Revenue</b>（どう成り立つか）。これが骨格です。</p><p>しかし、それ以上に重要なのが<b>5つの原則</b>です。</p><p><b>Problem, NOT solution.</b>──あなたの解決策より、まず<b>私の痛み</b>を語れ。<b>Customer, NOT technology.</b>──技術ではなく、それを使う<b>人</b>を語れ。<b>UX, NOT code.</b>──実装の話ではなく、<b>体験</b>を見せろ。<b>Distribution, NOT PR.</b>──話題になったかではなく、<b>届く仕組み</b>があるか。<b>Acq cost, NOT revenue projections.</b>──3年後の売上予測ではなく、<b>1人を獲得する実測コスト</b>を示せ。</p><p>これらはすべて、<b>「あなたが言いたいこと」ではなく「相手が知りたいこと」を語れ</b>という一点に集約されます。第5回で学んだ原則と、まったく同じです。</p></div></div>
+    </div></section>
+
+  <section class="slide" data-title="実例に学ぶ">
+    <div class="in"><div class="eyebrow"><span class="num">04</span> 実例に学ぶ</div>
+      <h2 class="t">500 Startups / Y Combinator の Demo Day に学ぶ</h2>
+      <p class="lead">実際に使われているピッチ・デッキを見て、構成の型を体で覚えましょう。各カードをクリックすると、要点と<b>元資料へのリンク</b>が開きます。</p>
+      <div class="deckcards">
+        <div class="dcard">
+          <div class="dc-h"><span class="dc-tag">原典</span>How to Pitch a VC ── Dave McClure</div>
+          <div class="dc-hint">▸ 要点とリンクを見る</div>
+          <div class="dc-body">
+            <p><b>500 Startups 創業者による定番デッキ。</b>「10 Slides to an Awesome Pitch」として知られ、
+            ①Elevator Pitch ②The Problem ③Your Solution ④Market Size ⑤Business Model
+            ⑥Proprietary Tech ⑦Competition ⑧Marketing Plan ⑨Team ⑩Money / Milestones
+            の10枚構成を提示します。</p>
+            <p>冒頭の Essential Elements が、<b>Market / Product（demo）/ Team / Customers / Revenue</b> に対応します。
+            そして最も有名なメッセージが <b>「Pitch MY PROBLEM (not YOUR SOLUTION)」</b>。
+            聞き手が知りたいのは、あなたの技術ではなく<b>自分の痛み</b>だという指摘です。</p>
+            <p class="dc-warn">⚠️ Marketing Plan の章では、測るべきは <b>Volume / Cost / Conversion</b> の3つだと明示されています。
+            「収益の皮算用」ではなく<b>獲得コスト</b>を見よ、という主張と一致します。</p>
+            <a class="dc-link" href="https://www.slideshare.net/slideshow/dave-mcclure-how-2-pitch/32700536" target="_blank" rel="noopener">SlideShare で見る ↗</a>
+          </div>
+        </div>
+        <div class="dcard">
+          <div class="dc-h"><span class="dc-tag">改訂版</span>How to Pitch a VC, Redesigned</div>
+          <div class="dc-hint">▸ 要点とリンクを見る</div>
+          <div class="dc-body">
+            <p><b>McClure の構成はそのままに、スライド設計だけを作り直した版。</b>
+            Slides That Rock による再デザインで、「同じ内容でも、見せ方で伝わり方が変わる」ことがよく分かります。</p>
+            <p>注目すべきは、<b>Demo（製品）</b>と<b>Customer Testimonial（顧客の声）</b>が
+            構成の途中に「差し込みスライド」として置かれている点。
+            10枚の骨格に、<b>証拠</b>を挟み込む設計です。</p>
+            <p>「What have you achieved so far?」の章では、
+            <b>Revenue & Customers / Testimonials / Profits</b> を示せと促します。
+            ＝第5回で学んだ<b>トラクション</b>そのものです。</p>
+            <a class="dc-link" href="https://www.slideshare.net/slideshow/how-to-pitch-a-vc-redesigned/14749407" target="_blank" rel="noopener">SlideShare で見る ↗</a>
+          </div>
+        </div>
+        <div class="dcard">
+          <div class="dc-h"><span class="dc-tag">Demo Day</span>Y Combinator のピッチ様式</div>
+          <div class="dc-hint">▸ 要点とリンクを見る</div>
+          <div class="dc-body">
+            <p><b>YC の Demo Day は、1社あたりわずか2〜3分。</b>
+            数百人の投資家の前で、極限まで削ぎ落とした構成が求められます。</p>
+            <p>共通する型は明快です。<b>①一文で何者かを言う ②誰の、どんな痛みか
+            ③どう解いたか（1枚のデモ）④トラクション（成長を示すグラフ）⑤チーム ⑥ask</b>。
+            とりわけ<b>④のグラフ</b>が中心で、右肩上がりの成長曲線を大きく1枚見せることが多い。</p>
+            <p class="dc-warn">⚠️ 2〜3分では、技術の詳細を語る時間はありません。
+            だからこそ <b>UX, NOT code.</b>／<b>Distribution, NOT PR.</b> が効いてきます。</p>
+            <a class="dc-link" href="https://www.ycombinator.com/library" target="_blank" rel="noopener">YC Startup Library ↗</a>
+          </div>
+        </div>
+      </div>
+      <p class="srcnote">※ 各リンクは外部サイト（SlideShare／Y Combinator）です。内容は要約・再構成しており、スライドの複製は行っていません。</p>
+      <div class="tldr"><p class="tldr-sum">500 Startups と Y Combinator の実際のデッキを見て、型を体で覚えます。YCのDemo Dayは、わずか2〜3分です。</p><button class="tldr-btn" type="button">もっと詳しく ▸</button><div class="tldr-full" hidden><p>型は、実例で見るのが最も早く身につきます。</p><p><b>Dave McClure「How to Pitch a VC」</b>は、「10 Slides to an Awesome Pitch」として知られる原典です。Elevator Pitch から Money / Milestones まで10枚。その冒頭で <b>「Pitch MY PROBLEM (not YOUR SOLUTION)」</b>と明言しているのが象徴的です。</p><p><b>Y Combinator の Demo Day</b> は、さらに過酷です。1社あたり<b>わずか2〜3分</b>。数百人の投資家の前で、削ぎ落とした構成が求められます。型は明快で、①一文で何者かを言う ②誰の、どんな痛みか ③どう解いたか（1枚のデモ）④<b>トラクション（成長グラフ）</b>⑤チーム ⑥ask。とりわけ④が中心で、右肩上がりの曲線を大きく1枚見せます。</p><p>2〜3分では、技術の詳細を語る時間などありません。だからこそ <b>UX, NOT code.</b> が効いてくるのです。各カードをクリックすると、要点と元資料へのリンクが開きます。</p></div></div>
     </div></section>
 
   <section class="slide" data-title="基本構成">
-    <div class="in"><div class="eyebrow"><span class="num">03</span> ピッチの基本構成</div>
+    <div class="in"><div class="eyebrow"><span class="num">05</span> ピッチの標準形</div>
       <h2 class="t">定番の流れ（各1枚が目安）</h2>
       <div class="aq" style="grid-template-columns:repeat(4,1fr)">
-        <div class="aqi"><h4><span class="en">1</span>問題</h4><p>誰の、どんな課題か。</p></div>
-        <div class="aqi"><h4><span class="en">2</span>解決策</h4><p>どう解くか。独自性。</p></div>
+        <div class="aqi"><h4><span class="en">1</span>問題</h4><p>誰の、どんな痛みか。</p></div>
+        <div class="aqi"><h4><span class="en">2</span>解決策</h4><p>どう解くか。デモで見せる。</p></div>
         <div class="aqi"><h4><span class="en">3</span>市場</h4><p>どれだけ大きいか。</p></div>
         <div class="aqi"><h4><span class="en">4</span>トラクション</h4><p>進捗の証拠（数字）。</p></div>
         <div class="aqi"><h4><span class="en">5</span>ビジネスモデル</h4><p>どう収益化するか。</p></div>
@@ -565,88 +720,199 @@
         <div class="aqi"><h4><span class="en">7</span>資金使途</h4><p>何にいくら使うか。</p></div>
         <div class="aqi"><h4><span class="en">8</span>ask</h4><p>何を求めるか（明確に）。</p></div>
       </div>
+      <div class="tldr"><p class="tldr-sum">問題→解決策→市場→トラクション→ビジネスモデル→チーム→資金使途→ask。各1枚が目安です。</p><button class="tldr-btn" type="button">もっと詳しく ▸</button><div class="tldr-full" hidden><p>ピッチの標準形は、8つのパートで構成されます。各1枚が目安です。</p><p><b>①問題</b>（誰の、どんな痛みか）→ <b>②解決策</b>（どう解くか。デモで見せる）→ <b>③市場</b>（どれだけ大きいか）→ <b>④トラクション</b>（進捗の証拠）→ <b>⑤ビジネスモデル</b>（どう収益化するか）→ <b>⑥チーム</b>（なぜ自分たちか）→ <b>⑦資金使途</b>（何にいくら使うか）→ <b>⑧ask</b>（何を求めるか）。</p><p>順番には意味があります。まず<b>問題</b>で「それは困る」と共感させる。それから解決策を示す。これは第5回の3幕構成（課題→分析→打ち手）と同じ論理です。</p><p>そして、多くのピッチが失敗するのは<b>⑧ask</b>を曖昧にするからです。「ご検討ください」ではなく、「<b>◯◯のために、◯◯を求めています</b>」と明示する。報告に「次の一手」が必要なのと、まったく同じです。</p></div></div>
     </div></section>
 
   <section class="slide" data-title="トラクション">
-    <div class="in"><div class="eyebrow"><span class="num">04</span> トラクション</div>
+    <div class="in"><div class="eyebrow"><span class="num">06</span> トラクション</div>
       <h2 class="t">「前に進んでいる証拠」を数字で示す</h2>
       <div class="lens3">
         <div class="lens"><div class="lh"><span class="tag">成長</span>伸びている</div><p>コホートの世代改善、ユーザー数の推移。右肩上がりを示す。</p></div>
         <div class="lens"><div class="lh"><span class="tag">熱量</span>使われている</div><p>コア行動（定着）の割合、継続率。深く使われている証拠。</p></div>
         <div class="lens"><div class="lh"><span class="tag">学び</span>改善できる</div><p>A/Bで「打ち手が効く」ことを実証済み＝伸びしろの根拠。</p></div>
       </div>
-      <p class="lead" style="margin-top:14px">＝前回までに作った<b>ファネル・コホート・A/B</b>が、そのままトラクションになります。</p>
+      <div class="why"><h3>収益の「予測」ではなく、獲得の「実測」を</h3>
+        <p>McClure は、<b>Acq cost, NOT revenue projections</b>（獲得コストであって、収益の皮算用ではない）と説きます。
+        3年後に売上◯億円という表を出しても、投資家は信じません。
+        しかし「<b>1人を獲得するのに◯円かかり、その人は◯円分の価値を生む</b>」という実測値は、
+        検証可能な事実として信頼されます。<b>予測より実測</b>。これがトラクションの本質です。</p></div>
+      <div class="tldr"><p class="tldr-sum">トラクションは「成長・熱量・学び」の3点セット。収益の予測ではなく、獲得コストの実測を示します。</p><button class="tldr-btn" type="button">もっと詳しく ▸</button><div class="tldr-full" hidden><p><b>トラクション</b>とは、「前に進んでいる証拠」です。3つの要素で構成されます。</p><p><b>成長</b>（伸びている）：コホートの世代改善、ユーザー数の推移。<b>熱量</b>（使われている）：コア行動の割合、継続率。<b>学び</b>（改善できる）：A/Bで「打ち手が効く」ことを実証済み。この3つが揃うと、「伸びていて、深く使われていて、さらに伸ばせる」という完成した物語になります。</p><p>ここで McClure の原則が効いてきます。<b>Acq cost, NOT revenue projections.</b>3年後に売上5億円という表を出しても、投資家は信じません。それは<b>誰にでも書ける数字</b>だからです。</p><p>しかし「<b>1人を獲得するのに◯円かかり、その人は◯円分の価値を生む</b>」という実測値は違います。検証可能な事実であり、そこから「では資金を入れれば、この比率でスケールする」という論理が成立します。<b>予測より実測</b>。これがトラクションの本質です。</p></div></div>
     </div></section>
 
   <section class="slide" data-title="データの組み込み">
-    <div class="in"><div class="eyebrow"><span class="num">05</span> データの見せ方</div>
+    <div class="in"><div class="eyebrow"><span class="num">07</span> データの見せ方</div>
       <h2 class="t">生データではなく「1枚の要点」に</h2>
       <div class="cmp2">
         <div class="cmp bad"><h3><span class="ic">🧾</span>やりがち</h3><p>指標を全部盛り・細かい表。投資家は読めず、印象に残らない。</p></div>
-        <div class="cmp good"><h3><span class="ic">🎯</span>効くやり方</h3><p><b>OMTM＋推移＋次の一手</b>を1枚に。1画面1メッセージ（前回の原則）。</p></div>
+        <div class="cmp good"><h3><span class="ic">🎯</span>効くやり方</h3><p><b>OMTM＋推移＋次の一手</b>を1枚に。1画面1メッセージ（第5回の原則）。</p></div>
       </div>
-      <p class="lead" style="margin-top:14px">AARRRのどの段が伸びているか、コホートの改善、A/Bの効果を<b>1枚に凝縮</b>して示します。</p>
+      <div class="tldr"><p class="tldr-sum">指標の全部盛りは逆効果。OMTM＋推移＋次の一手を1枚に凝縮します（1画面1メッセージ）。</p><button class="tldr-btn" type="button">もっと詳しく ▸</button><div class="tldr-full" hidden><p>分析をたくさんやった人ほど、「せっかくだから全部見せたい」と考えます。これが最大の落とし穴です。</p><p>投資家は数分でジャッジします。指標を10個並べた表を出せば、<b>何も印象に残らない</b>まま終わります。見せるべきは、<b>OMTM ＋ 推移 ＋ 次の一手</b>だけ。第5回で学んだ<b>1画面1メッセージ</b>の原則が、ここでそのまま効いてきます。</p><p>具体的には、①タイトルが<b>主張</b>（「競技層で定着55%」）、②図は<b>最小限</b>（主役の数字を大きく、脇に補強）、③末尾に<b>次の一手</b>（ask）。この3点セットです。</p><p>そして、率には必ず<b>分母（n）</b>を添えること。「+11pt改善」も、母数が20人なら投資家は信用しません。<b>誠実さこそが信頼の源</b>である、という第5回の教えは、ピッチでも変わりません。</p></div></div>
     </div></section>
 
   <section class="slide" data-title="EKIDEN.AIの骨子">
-    <div class="in"><div class="eyebrow"><span class="num">06</span> ケースで見る</div>
-      <h2 class="t">EKIDEN.AI のピッチ骨子（例）</h2>
-      <div class="aq" style="grid-template-columns:repeat(2,1fr)">
-        <div class="aqi"><h4><span class="en">問題</span>続かない</h4><p>ランナーは独学だと継続が難しい。</p></div>
-        <div class="aqi"><h4><span class="en">解決</span>AIコーチ</h4><p>ウォッチ連携＋日々のコーチングメール。</p></div>
-        <div class="aqi"><h4><span class="en">トラクション</span>定着改善</h4><p>コホートW1が42→64%へ。A/Bで具体化が+11pt。</p></div>
-        <div class="aqi"><h4><span class="en">ask</span>次の一手</h4><p>横展開と獲得強化のための資金・協力。</p></div>
+    <div class="in"><div class="eyebrow"><span class="num">08</span> ケースで見る</div>
+      <h2 class="t">EKIDEN.AI のピッチ骨子（5要素で組む）</h2>
+      <div class="aq" style="grid-template-columns:repeat(5,1fr)">
+        <div class="aqi"><h4><span class="en">Market</span>市場</h4><p>市民ランナーと競技・駅伝チーム。継続が最大の課題。</p></div>
+        <div class="aqi"><h4><span class="en">Product</span>製品</h4><p>ウォッチ連携＋日々のコーチングメール（デモで見せる）。</p></div>
+        <div class="aqi"><h4><span class="en">Team</span>チーム</h4><p>五輪選手・プロコーチとの共同開発。</p></div>
+        <div class="aqi"><h4><span class="en">Customers</span>顧客</h4><p>競技・駅伝層で4週後定着 <b>55%</b>（ゲート40%超え）。</p></div>
+        <div class="aqi"><h4><span class="en">Revenue</span>収益</h4><p>収益モデルの設計（※本授業では具体データは扱いません）。</p></div>
       </div>
-      <p class="lead" style="margin-top:12px"><span style="color:var(--mute)">※ 教材上の骨子例。収益（Stripe）の具体データは扱いません。</span></p>
+      <div class="why"><h3>Problem, NOT solution. で語り直すと</h3>
+        <p>✕「AIがランを解析してメールを送ります」（＝solution から入る）<br>
+        ◯「<b>ランナーは独学だと続かない。3か月で7割がやめる。</b>その痛みを、日々のコーチングで解く」（＝problem から入る）。
+        聞き手が反応するのは、<b>自分にも思い当たる痛み</b>です。</p></div>
+      <div class="tldr"><p class="tldr-sum">EKIDEN.AI を5要素で組むと、Customersに「競技層の定着55%」という強い証拠が置けます。</p><button class="tldr-btn" type="button">もっと詳しく ▸</button><div class="tldr-full" hidden><p>EKIDEN.AI を、5要素で組み立ててみます。</p><p><b>Market</b>：市民ランナーと競技・駅伝チーム。「継続できない」という痛みが市場を規定します。<b>Product</b>：ウォッチ連携＋日々のコーチングメール（デモで見せる）。<b>Team</b>：五輪選手・プロコーチとの共同開発＝「なぜ自分たちか」への明確な答え。<b>Customers</b>：競技・駅伝層で<b>4週後定着55%</b>（ライト層は30%）＝刺さる顧客が特定できている。<b>Revenue</b>：収益モデルの構造（※本授業では具体データは扱いません）。</p><p>ここで <b>Problem, NOT solution.</b> を適用して語り直すと、大きく印象が変わります。</p><p>✕「AIがランを解析してメールを送ります」（solution から入る）<br>◯「<b>ランナーは独学だと続かない。3か月で7割がやめる。</b>その痛みを、日々のコーチングで解く」（problem から入る）。</p><p>聞き手が反応するのは、<b>自分にも思い当たる痛み</b>です。技術の説明は、その後でいい。</div></div>
+    </div></section>
+
+  <section class="slide" data-title="ドリル①">
+    <div class="in"><div class="eyebrow"><span class="num">09</span> ドリル① 悪いピッチを直す</div>
+      <h2 class="t">この1分間ピッチ、どこが問題？</h2>
+      <p class="lead" style="max-width:none">ある学生チームのピッチ冒頭です。5つの原則に照らして、問題点を指摘しましょう。<span style="color:var(--mute)">（教材上の例）</span></p>
+      <div class="ex-split">
+        <div class="ex-chart">
+          <div class="quote-box">
+            <p>「私たちは<b>最新のTransformerモデル</b>を使った推薦エンジンを開発しました。</p>
+            <p>独自の<b>アルゴリズム</b>により、従来比30%高精度な予測が可能です。</p>
+            <p>すでに<b>大手メディア3社に紹介</b>され、話題になっています。</p>
+            <p><b>3年後には売上5億円</b>を見込んでいます。」</p>
+          </div>
+        </div>
+        <div class="ex-panel">
+          <button class="ex-toggle" data-ex="ex1">回答例を見る →</button>
+          <div class="ex-view" id="ex1-q"><div class="exq"><b>問い：</b>5つの原則（Problem／Customer／UX／Distribution／Acq cost）に照らして、問題点を挙げてください。どう直しますか。</div></div>
+          <div class="ex-view" id="ex1-a" hidden><div class="exa">
+            <b>回答例：</b>4つすべてが逆になっています。<br>
+            ✕ <b>solution から入っている</b>（Transformer、独自アルゴリズム）→ ◯ <b>Problem</b>：「誰が、どんな痛みを抱えているか」から始める。<br>
+            ✕ <b>technology を語っている</b>（30%高精度）→ ◯ <b>Customer</b>：「その精度で、誰の何が変わったか」。<br>
+            ✕ <b>PR を実績と混同</b>（メディア3社）→ ◯ <b>Distribution</b>：「話題」ではなく「<b>届く仕組み</b>」と、そこを通った人数。<br>
+            ✕ <b>収益の皮算用</b>（3年後5億円）→ ◯ <b>Acq cost</b>：「1人の獲得に◯円、その人が生む価値は◯円」という<b>実測</b>。<br><br>
+            <b>直したピッチ：</b>「ランナーの7割が3か月でやめます（Problem）。私たちのユーザーは、競技層で4週後も<b>55%</b>が使い続けています（Customer/トラクション）。デモをご覧ください（UX）。獲得は駅伝チーム経由で、1人あたり◯円（Distribution/Acq cost）」。
+          </div></div>
+        </div>
+      </div>
+      <div class="tldr"><p class="tldr-sum">technology・PR・収益予測から入るピッチは、5つの原則すべてに反しています。Problemから語り直します。</p><button class="tldr-btn" type="button">もっと詳しく ▸</button><div class="tldr-full" hidden><p>このドリルの例は、実際によく見かける失敗の典型です。一見すると立派ですが、<b>5つの原則すべてに反しています</b>。</p><p>「最新のTransformerモデル」「独自のアルゴリズム」──これは <b>solution と technology</b> から入っています。聞き手が知りたいのは、モデル名ではなく「<b>それで、誰の何が変わったのか</b>」です。</p><p>「大手メディア3社に紹介され、話題に」──これは <b>PR</b> であって <b>Distribution</b> ではありません。話題になることと、<b>顧客に届く仕組みがある</b>ことは別物です。投資家が知りたいのは後者です。</p><p>「3年後には売上5億円」──典型的な <b>revenue projections</b>（皮算用）。誰にでも書ける数字であり、何の証拠にもなりません。代わりに示すべきは <b>Acq cost</b>、すなわち「1人の獲得に◯円、その人が生む価値は◯円」という実測です。</p><p>直し方は明快です。<b>痛み（Problem）から始め、使う人（Customer）の変化を語り、体験（UX）を見せ、届く仕組み（Distribution）と獲得の実測（Acq cost）で締める</b>。</p></div></div>
+    </div></section>
+
+  <section class="slide" data-title="ドリル②">
+    <div class="in"><div class="eyebrow"><span class="num">10</span> ドリル② トラクション1枚</div>
+      <h2 class="t">分析から「トラクション・スライド」を1枚設計する</h2>
+      <p class="lead" style="max-width:none">これまでの分析結果を材料に、投資家に見せる<b>1枚</b>を設計しましょう。<span style="color:var(--mute)">（教材上の数値例）</span></p>
+      <div class="ex-split">
+        <div class="ex-chart">
+          <table class="rtab">
+            <thead><tr><th>材料</th><th>数値</th></tr></thead>
+            <tbody>
+              <tr><td class="l">コホート：W1定着（世代別）</td><td class="ok">42% → 64%</td></tr>
+              <tr><td class="l">A/B：具体化メール</td><td class="ok">36% → 47%（+11pt）</td></tr>
+              <tr><td class="l">セグメント：競技・駅伝層</td><td class="ok">4週後定着 55%</td></tr>
+              <tr><td class="l">OMTM</td><td>コア行動（メール開封）の継続率</td></tr>
+            </tbody>
+          </table>
+          <span class="gate">1枚に凝縮する ── 主張・根拠・次の一手</span>
+        </div>
+        <div class="ex-panel">
+          <button class="ex-toggle" data-ex="ex2">回答例を見る →</button>
+          <div class="ex-view" id="ex2-q"><div class="exq"><b>問い：</b>この1枚の“主張タイトル”は？　どの数字を主役にしますか？　次の一手（ask）をどう書きますか。</div></div>
+          <div class="ex-view" id="ex2-a" hidden><div class="exa">
+            <b>回答例：</b>タイトル（主張）＝「<b>競技層で定着55% ── 刺さる市場を見つけ、打ち手も実証済み</b>」。<br><br>
+            <b>主役の数字</b>＝セグメント別定着（競技55% vs ライト30%）を大きく。脇に<b>コホートの世代改善（42→64%）</b>＝成長、<b>A/Bの+11pt</b>＝学び。＝トラクションの3要素（<b>成長・熱量・学び</b>）が1枚に揃います。<br><br>
+            <b>次の一手（ask）</b>＝「駅伝チーム経由の獲得チャネルを開拓するための資金と紹介」。<b>Distribution</b>（届く仕組み）を語り、<b>収益予測ではなく獲得コスト</b>で示すのが鉄則。
+          </div></div>
+        </div>
+      </div>
+      <div class="tldr"><p class="tldr-sum">トラクション1枚には「成長・熱量・学び」を凝縮。主役はセグメント別定着、脇にコホートとA/Bを置きます。</p><button class="tldr-btn" type="button">もっと詳しく ▸</button><div class="tldr-full" hidden><p>このドリルは、今日の中心的な作業です。これまでの分析結果を、<b>投資家に見せる1枚</b>に凝縮します。</p><p>材料は3つ。コホート（W1定着が42→64%）、A/B（具体化メールで+11pt）、セグメント（競技層55% vs ライト層30%）。これらは第3〜4回で自分たちが積み上げてきたものです。</p><p><b>タイトル（主張）</b>は「競技層で定着55% ── 刺さる市場を見つけ、打ち手も実証済み」。<b>主役の数字</b>はセグメント別定着（55% vs 30%）を大きく。脇に<b>コホートの世代改善</b>（成長）と<b>A/Bの+11pt</b>（学び）を置く。これで<b>成長・熱量・学び</b>の3要素が1枚に揃います。</p><p>そして<b>次の一手（ask）</b>は「駅伝チーム経由の獲得チャネルを開拓するための資金と紹介」。ここで <b>Distribution</b>（届く仕組み）を語り、収益予測ではなく<b>獲得コスト</b>で示すのが鉄則です。</p></div></div>
     </div></section>
 
   <section class="slide" data-title="リハーサル">
-    <div class="in"><div class="eyebrow"><span class="num">07</span> リハーサル</div>
+    <div class="in"><div class="eyebrow"><span class="num">11</span> リハーサル</div>
       <h2 class="t">伝わるまで、声に出して練る</h2>
       <div class="steps" style="grid-template-columns:repeat(4,1fr)">
-        <div class="step"><div class="n">1</div><h3>声に出す</h3><p>読むと書くは別。実際に話す。</p></div>
-        <div class="step"><div class="n">2</div><h3>時間を計る</h3><p>持ち時間内に収める。</p></div>
-        <div class="step"><div class="n">3</div><h3>想定質問</h3><p>「証拠は？」に数字で即答。</p></div>
-        <div class="step"><div class="n">4</div><h3>相互FB</h3><p>仲間に見てもらい直す。</p></div>
+        <div class="step"><div class="n">1</div><h3>声に出す</h3><p>読むと話すは別。実際に話してみる。</p></div>
+        <div class="step"><div class="n">2</div><h3>時間を計る</h3><p>YCは2〜3分。持ち時間内に収める。</p></div>
+        <div class="step"><div class="n">3</div><h3>想定質問</h3><p>「証拠は？」に数字で即答できるか。</p></div>
+        <div class="step"><div class="n">4</div><h3>相互FB</h3><p>仲間に見てもらい、直す。</p></div>
       </div>
+      <div class="tldr"><p class="tldr-sum">読むと話すは別物。声に出し、時間を計り、「証拠は？」への即答を用意して、仲間に見てもらいます。</p><button class="tldr-btn" type="button">もっと詳しく ▸</button><div class="tldr-full" hidden><p>ピッチは、<b>書き上げた時点では半分</b>しか終わっていません。残り半分はリハーサルです。</p><p><b>①声に出す</b>：読むと話すはまったく別の行為です。書いたときは論理的だった文章が、話すと不自然になることがよくあります。<b>②時間を計る</b>：YC の Demo Day はわずか2〜3分。持ち時間に収まらないピッチは、それだけで失格です。</p><p><b>③想定質問に備える</b>：最も来る質問は「<b>その証拠は？</b>」です。ここで数字を即答できるかどうかが、信頼の分かれ目。「なぜ君たちなのか？」「競合は？」も定番です。<b>④相互フィードバック</b>：自分では気づけない飛びや曖昧さを、仲間が見つけてくれます。</p><p>投資家が見ているのは、完璧な発表ではありません。<b>質問に、事実で答えられるかどうか</b>です。そのためにこそ、私たちはデータを積み上げてきました。</p></div></div>
     </div></section>
 
-  <section class="slide" data-title="演習">
-    <div class="in">
-      <div class="eyebrow"><span class="num">08</span> 演習</div>
-      <h2 class="t">分析から「トラクション・スライド」を1枚設計する</h2>
-      <p class="lead" style="max-width:none">次の材料から、投資家に見せる1枚（主張タイトル＋根拠＋次の一手）を設計しましょう。<span style="color:var(--mute)">（教材上の例）</span></p>
-      <div class="ex-split">
-        <div class="ex-chart"><ul class="plain">
-        <li>・コホート：W1定着が 42% → 64%（世代ごとに改善）</li>
-        <li>・A/B：具体化メールで質疑往復 36% → 47%（+11pt）</li>
-        <li>・OMTM：コア行動（メール開封）の継続率</li>
-      </ul></div>
-        <div class="ex-panel">
-          <button class="ex-toggle" data-ex="ex1">回答例を見る →</button>
-          <div class="ex-view" id="ex1-q"><div class="exq"><b>問い：</b>この1枚の“主張タイトル”は？　どの数字を主役にし、次の一手をどう書きますか。</div></div>
-          <div class="ex-view" id="ex1-a" hidden><div class="exa"><b>回答例：</b>タイトル例：「<b>定着は世代ごとに改善し、打ち手も実証済み ── あとは横展開で伸ばす</b>」。主役＝コホートの改善（42→64%）を大きく、脇にA/Bの+11pt。次の一手＝「具体化メールを全ユーザーへ展開＋獲得強化」。1画面1メッセージで、成長・熱量・学びを1枚に凝縮。</div></div>
-        </div>
-      </div>
-    </div>
-  </section>
-
   <section class="slide" data-title="今日のワーク">
-    <div class="in">
-      <div class="eyebrow"><span class="num">09</span> 今日のワーク／次回までの課題</div>
-      <h2 class="t">学んだことを、自分のテーマで使ってみる</h2>
+    <div class="in"><div class="eyebrow"><span class="num">12</span> 今日のワーク／次回までの課題</div>
+      <h2 class="t">最終発表に向けて、ピッチを組み立てる</h2>
       <div class="task">
-        <div class="tcard review"><h3>🔁 復習</h3><ol><li>自分のテーマのトラクション・スライドを1枚作る（主張タイトル＋根拠＋次の一手）</li><li>ピッチの骨子（問題〜ask）を1枚に下書きする</li></ol></div>
-        <div class="tcard prep"><h3>📖 予習</h3><ol start="3"><li>最終発表に向けて、想定質問と数字での回答を準備する</li><li>教科書のトラクション／投資家への伝え方に関する箇所に目を通す</li></ol></div>
+        <div class="tcard review"><h3>🔁 復習</h3><ol>
+          <li>自分のテーマで、<b>Market / Product / Team / Customers / Revenue</b> の5要素を1枚ずつ書く</li>
+          <li>トラクション・スライドを1枚作る（主張タイトル＋根拠＋次の一手）</li>
+          <li>5つの原則（Problem／Customer／UX／Distribution／Acq cost）で自己点検する</li></ol></div>
+        <div class="tcard prep"><h3>📖 予習</h3><ol start="4">
+          <li>想定質問（「証拠は？」「なぜ君たちか？」）への回答を、数字で準備する</li>
+          <li>声に出して時間を計り、最終発表の持ち時間に収める</li></ol></div>
       </div>
       <div class="band">
         <div class="dl">提出締切：<span>次回授業まで</span></div>
         <a class="cr-submit" href="https://classroom.google.com/c/ODU5NjUzNDM0Njk0" target="_blank" rel="noopener">🎓 Classroomで提出 ↗</a>
-        <div class="next">次回予告 ── 第7回：最終発表 ── データドリブンな投資家向けピッチ＆振り返り</div>
+        <div class="next">次回予告 ── 第7回：最終発表 ── データドリブン投資家向けピッチ＆振り返り</div>
       </div>
-      <p class="srcnote">出典：A. クロール＆B. ヨスコビッツ『Lean Analytics』（オライリージャパン）を要約・再構成（逐語引用なし）。数値は教材上の例で、EKIDEN.AI の収益（Stripe）データは扱いません。</p>
-    </div>
-  </section>
+      <p class="srcnote">出典：A. クロール＆B. ヨスコビッツ『Lean Analytics』（オライリージャパン）、Dave McClure「How to Pitch a VC」（500 Startups）を要約・再構成（逐語引用なし）。数値は教材上の例で、EKIDEN.AI の収益（Stripe）データは扱いません。</p>
+      <div class="tldr"><p class="tldr-sum">5要素を1枚ずつ書き、トラクション・スライドを1枚作り、5つの原則で自己点検しましょう。</p><button class="tldr-btn" type="button">もっと詳しく ▸</button><div class="tldr-full" hidden><p>今日の課題は、<b>最終発表のピッチを組み立てる</b>ことです。</p><p><b>①5要素を1枚ずつ書く</b>：Market / Product / Team / Customers / Revenue。各1枚、主張をタイトルにして書きます。<b>②トラクション・スライドを1枚作る</b>：主張タイトル＋根拠（成長・熱量・学び）＋次の一手（ask）。これがピッチの心臓部になります。<b>③5つの原則で自己点検する</b>：Problem から入っているか。technology を語っていないか。PR と Distribution を混同していないか。収益予測に逃げていないか。</p><p>予習として、想定質問（「証拠は？」「なぜ君たちか？」）への回答を<b>数字で</b>準備し、声に出して時間を計ってください。次回はいよいよ<b>最終発表</b>です。</p></div></div>
+    </div></section>
+
+  <section class="slide" data-title="レポート課題の参考解答例">
+    <div class="in"><div class="eyebrow"><span class="num">13</span> レポート課題の参考解答例</div>
+      <h2 class="t">EKIDEN.AI でたどる「ピッチ」の参考解答例</h2>
+      <p class="lead">今日のケースの数値を使った参考解答です。<span style="color:var(--mute)">（教材上の数値例。収益データは扱いません）</span></p>
+      <h3 class="ans-h"><span class="ans-no">復習1</span> 5要素（各1枚）</h3>
+      <table class="rtab">
+        <tbody>
+          <tr><th style="width:130px">Market</th><td class="l">市民ランナー＋競技・駅伝チーム。<b>継続できない</b>という痛みが市場を規定する</td></tr>
+          <tr><th>Product</th><td class="l">ウォッチ連携＋日々のコーチングメール。<b>デモを1枚</b>（コード説明はしない＝UX, NOT code）</td></tr>
+          <tr><th>Team</th><td class="l">五輪選手・プロコーチとの共同開発＝<b>なぜ自分たちか</b>の答え</td></tr>
+          <tr><th>Customers</th><td class="l">競技・駅伝層で4週後定着 <b>55%</b>（ライト層30%）＝刺さる顧客が特定できている</td></tr>
+          <tr><th>Revenue</th><td class="l">収益モデルの構造を示す（※具体データは扱わない）</td></tr>
+        </tbody>
+      </table>
+      <h3 class="ans-h"><span class="ans-no">復習2</span> トラクション・スライド（1枚）</h3>
+      <div class="exa"><b>タイトル（主張）：</b>「競技層で定着55% ── 刺さる市場を見つけ、打ち手も実証済み」<br>
+      <b>根拠：</b>成長＝コホートW1が42→64%／熱量＝競技層の4週後定着55%／学び＝A/Bで+11pt（各n=1,000）<br>
+      <b>次の一手（ask）：</b>駅伝チーム経由の獲得チャネル開拓のための資金と紹介</div>
+      <h3 class="ans-h"><span class="ans-no">復習3</span> 5原則での自己点検</h3>
+      <div class="exa" style="border-left-color:var(--amber)"><b>Problem, NOT solution.</b> 冒頭は「7割が3か月でやめる」から入っているか。<br>
+      <b>Customer, NOT technology.</b> モデル名ではなく、使う人の変化を語っているか。<br>
+      <b>UX, NOT code.</b> 実装ではなくデモを見せているか。<br>
+      <b>Distribution, NOT PR.</b> 「話題になった」ではなく「届く仕組み」を示しているか。<br>
+      <b>Acq cost, NOT revenue projections.</b> 3年後の売上表ではなく、獲得コストの実測を出しているか。</div>
+      <div class="tldr"><p class="tldr-sum">EKIDEN.AI の数値で、5要素・トラクション1枚・5原則の点検をたどった解答例です。</p><button class="tldr-btn" type="button">もっと詳しく ▸</button><div class="tldr-full" hidden><p>参考解答例として、EKIDEN.AI の数値で3つの課題をたどります。</p><p><b>復習1（5要素）</b>：注目すべきは <b>Customers</b> です。「競技・駅伝層で4週後定着55%（ライト層30%）」という数字は、<b>刺さる顧客が特定できている</b>ことの証明。投資家にとって最も価値のある情報です。</p><p><b>復習2（トラクション1枚）</b>：タイトルは主張、根拠は成長（42→64%）・熱量（55%）・学び（+11pt）、次の一手は「駅伝チーム経由の獲得チャネル開拓」。3つの証拠が1枚に凝縮されています。</p><p><b>復習3（5原則の点検）</b>：これはチェックリストとして使ってください。自分のピッチを、5つの問いにかける。<b>1つでも「NOT」の側に落ちていたら、そこが弱点</b>です。技術の話に熱くなっていないか、メディア掲載を実績と呼んでいないか、将来の売上表でごまかしていないか──冷静に自己点検しましょう。</p></div></div>
+    </div></section>
+
+  <section class="slide" data-title="参考文献">
+    <div class="in"><div class="eyebrow"><span class="num">14</span> 参考資料</div>
+      <h2 class="t">ピッチをさらに磨くために</h2>
+      <div class="reflist">
+        <a class="refitem" href="https://www.slideshare.net/slideshow/dave-mcclure-how-2-pitch/32700536" target="_blank" rel="noopener">
+          <span class="rf-tag">SlideShare</span>
+          <div><b>How to Pitch a VC ── Dave McClure（500 Startups）</b>
+          <p>「10 Slides to an Awesome Pitch」の原典。Essential Elements（Market / Product / Team / Customers / Revenue）と「Pitch MY PROBLEM, not YOUR SOLUTION」。</p></div>
+        </a>
+        <a class="refitem" href="https://www.slideshare.net/slideshow/how-to-pitch-a-vc-redesigned/14749407" target="_blank" rel="noopener">
+          <span class="rf-tag">SlideShare</span>
+          <div><b>How to Pitch a VC, Redesigned（Slides That Rock）</b>
+          <p>同じ構成を、スライド設計だけ作り直した版。「見せ方で伝わり方が変わる」ことがよく分かる。</p></div>
+        </a>
+        <a class="refitem" href="https://www.ycombinator.com/library" target="_blank" rel="noopener">
+          <span class="rf-tag">Y Combinator</span>
+          <div><b>YC Startup Library</b>
+          <p>Demo Day のピッチ様式、資金調達、トラクションの示し方に関する解説記事・動画が揃っている。</p></div>
+        </a>
+        <a class="refitem" href="https://amzn.to/4vViLH6" target="_blank" rel="noopener">
+          <span class="rf-tag">教科書</span>
+          <div><b>Lean Analytics（A. クロール／B. ヨスコビッツ）</b>
+          <p>本講義の教科書。段階ごとの指標、ゲート、トラクションの考え方の土台。</p></div>
+        </a>
+      </div>
+      <p class="srcnote">※ 外部リンクです。内容は要約・再構成しており、スライドの複製は行っていません。</p>
+      <div class="tldr"><p class="tldr-sum">Dave McClure の原典、その再デザイン版、YC Startup Library、そして教科書。ピッチを磨くための4つの資料です。</p><button class="tldr-btn" type="button">もっと詳しく ▸</button><div class="tldr-full" hidden><p>ピッチをさらに磨くための資料を4つ挙げます。</p><p><b>How to Pitch a VC（Dave McClure / 500 Startups）</b>は原典です。「10 Slides to an Awesome Pitch」の構成と、本日学んだ5要素・5原則の出どころ。率直で歯に衣着せぬ語り口も含めて、一読の価値があります。</p><p><b>How to Pitch a VC, Redesigned（Slides That Rock）</b>は、同じ内容をスライド設計だけ作り直した版。<b>「同じ主張でも、見せ方で伝わり方が変わる」</b>ことが一目で分かります。第5回の1画面1メッセージの実践例としても優れています。</p><p><b>YC Startup Library</b> には、Demo Day のピッチ様式、資金調達、トラクションの示し方に関する解説記事や動画が揃っています。実際のピッチ動画を見ると、2〜3分という制約がいかに厳しいかが体感できます。</p><p>そして<b>教科書『Lean Analytics』</b>。段階ごとの指標、ゲート、トラクションという考え方は、すべてここが土台です。</p></div></div>
+    </div></section>
 
   <section class="slide" data-title="講師・教科書">
     <div class="in">
@@ -834,7 +1100,7 @@
   var GEMINI_API_KEY = (typeof window!=="undefined" && window.GEMINI_API_KEY) ? window.GEMINI_API_KEY : "";
   var GEMINI_MODEL   = (typeof window!=="undefined" && window.GEMINI_MODEL) ? window.GEMINI_MODEL : "gemini-3.5-flash";
 
-  var LECTURE_FOCUS = "投資家向けピッチの基本構成（問題・解決・市場・トラクション・ビジネスモデル・チーム・資金使途・ask）、トラクション（進捗の証拠）の示し方、分析（AARRR/ファネル/コホート/A-B）を1枚に凝縮する方法、リハーサルと相互フィードバック、EKIDEN.AIのピッチ骨子例";
+  var LECTURE_FOCUS = "投資家向けピッチの目的と構成、優れたピッチの5要素（Market/Product/Team/Customers/Revenue）、5つの原則（Problem not solution / Customer not technology / UX not code / Distribution not PR / Acq cost not revenue projections）、Dave McClure「How to Pitch a VC」と500 Startups・Y Combinator の Demo Day の実例、トラクション（成長・熱量・学び）の示し方、分析を1枚に凝縮する方法、リハーサル、EKIDEN.AIのピッチ骨子";
   var FALLBACK_QS = ["優れた指標の4条件をやさしく教えて","定性と定量はどう使い分ける？","虚栄指標と行動を促すの指標の見分け方は？","探索指標と報告指標の違いは？","先行指標と遅行指標の例は？","相関と因果はどう違う？","アイスと水難事故の例で相関と因果を説明して","『PV1万→So what?』と言われない報告は？"];
 
   var apiKey=GEMINI_API_KEY, history=[], busy=false, greeted=false;
@@ -941,6 +1207,48 @@
   btn.addEventListener("click",tryUnlock);
   pw.addEventListener("keydown",function(e){if(e.key==="Enter"){e.preventDefault();tryUnlock();}});
   setTimeout(function(){if(document.body.classList.contains("locked"))pw.focus();},200);
+})();
+</script>
+<script>
+(function(){
+  var btns=document.querySelectorAll('.ex-toggle');
+  Array.prototype.forEach.call(btns,function(btn){
+    btn.addEventListener('click',function(){
+      var k=btn.getAttribute('data-ex');
+      var q=document.getElementById(k+'-q'),a=document.getElementById(k+'-a');
+      if(!q||!a)return;
+      if(a.hidden){a.hidden=false;q.hidden=true;btn.textContent='← 演習に戻る';btn.classList.add('on');}
+      else{a.hidden=true;q.hidden=false;btn.textContent='回答例を見る →';btn.classList.remove('on');}
+    });
+  });
+  var cards=document.querySelectorAll('.dcard');
+  function lbl(c){var t=c.querySelector('.dc-hint'); if(t) t.textContent=c.classList.contains('open')?'▾ 閉じる':'▸ 要点とリンクを見る';}
+  Array.prototype.forEach.call(cards,function(c){
+    c.addEventListener('click',function(e){
+      if(e.target.closest('.dc-link'))return;
+      var was=c.classList.contains('open');
+      Array.prototype.forEach.call(cards,function(o){o.classList.remove('open');lbl(o);});
+      if(!was){c.classList.add('open');lbl(c);}
+    });
+  });
+})();
+</script>
+<script>
+(function(){
+  Array.prototype.forEach.call(document.querySelectorAll('.tldr-btn'),function(btn){
+    btn.addEventListener('click',function(){
+      var full=btn.parentNode.querySelector('.tldr-full');
+      if(!full)return;
+      var slide=btn.closest('.slide');
+      if(full.hidden){
+        full.hidden=false;btn.textContent='閉じる ▾';
+        if(slide)slide.classList.add('reading');
+      }else{
+        full.hidden=true;btn.textContent='もっと詳しく ▸';
+        if(slide){slide.classList.remove('reading');slide.scrollTop=0;}
+      }
+    });
+  });
 })();
 </script>
 </body>
