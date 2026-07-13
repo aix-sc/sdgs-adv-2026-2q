@@ -542,6 +542,15 @@
   .tldr-full p{margin:0 0 9px;font-size:12.5px;color:var(--ink);line-height:1.85}
   .tldr-full p:last-child{margin-bottom:0}
   .tldr-full b{color:var(--navy)}
+  
+  .step .n.n-lbl{width:auto;height:auto;min-width:0;border-radius:7px;padding:3px 9px;font-size:10.5px;letter-spacing:.02em;display:inline-flex;align-self:flex-start;background:var(--navy)}
+  .hz{cursor:pointer;transition:box-shadow .12s,border-color .12s}
+  .hz:hover{border-color:var(--teal);box-shadow:0 4px 14px rgba(21,50,79,.10)}
+  .hz-hint{margin-top:8px;font-size:11px;font-weight:700;color:var(--teal)}
+  .hz-fig{display:none;margin-top:8px;padding-top:8px;border-top:1px dashed var(--line)}
+  .hz.open{border-color:var(--teal)} .hz.open .hz-fig{display:block}
+  .hz-fig svg{width:100%;height:auto;display:block;background:#fff;border:1px solid var(--line);border-radius:8px}
+  #d2-bad,#d2-good{max-width:460px}
   </style>
   <script src="config.js"></script>
 </head>
@@ -722,11 +731,49 @@
   <section class="slide" data-title="誠実な可視化">
     <div class="in"><div class="eyebrow"><span class="num">06</span> 誠実な可視化</div>
       <h2 class="t">「盛らない」── データで嘘をつかないために</h2>
+      <p class="lead">各カードを<b>クリック</b>すると、具体的な図で確認できます。</p>
       <div class="aq" style="grid-template-columns:repeat(2,1fr)">
-        <div class="aqi"><h4><span class="en">累計</span>右肩上がりの罠</h4><p>累計は必ず増える。<b>期間ごとの実数・率</b>で見せる。</p></div>
-        <div class="aqi"><h4><span class="en">平均</span>平均は嘘をつく</h4><p>コホート・セグメントに分けて示す（第3回）。</p></div>
-        <div class="aqi"><h4><span class="en">軸</span>軸を切らない</h4><p>0から始めないと差が誇張される。</p></div>
-        <div class="aqi"><h4><span class="en">分母</span>率には分母を添える</h4><p>「+50%」も、母数が20人なら意味が違う。</p></div>
+        <div class="aqi hz"><h4><span class="en">累計</span>右肩上がりの罠</h4><p>累計は必ず増える。期間ごとの実数・率で見せる。</p><div class="hz-hint">▸ 図で見る</div><div class="hz-fig"><svg viewBox="0 0 300 130">
+<text x="72" y="12" font-size="9" fill="#C0392B" font-weight="700" text-anchor="middle">✕ 累計（必ず増える）</text>
+<line x1="16" y1="112" x2="140" y2="112" stroke="#dfe6ec"/><line x1="16" y1="22" x2="16" y2="112" stroke="#dfe6ec"/>
+<polyline points="24,104 44,92 64,78 84,62 104,44 134,26" fill="none" stroke="#C0392B" stroke-width="3" stroke-linecap="round"/>
+<text x="72" y="126" font-size="8" fill="#9aa8b3" text-anchor="middle">累計登録者数</text>
+<text x="228" y="12" font-size="9" fill="#3E7C53" font-weight="700" text-anchor="middle">◯ 期間ごとの実数</text>
+<line x1="168" y1="112" x2="292" y2="112" stroke="#dfe6ec"/><line x1="168" y1="22" x2="168" y2="112" stroke="#dfe6ec"/>
+<rect x="178" y="52" width="14" height="60" fill="#3E7C53" opacity=".75"/><rect x="198" y="58" width="14" height="54" fill="#3E7C53" opacity=".75"/><rect x="218" y="70" width="14" height="42" fill="#3E7C53" opacity=".75"/><rect x="238" y="84" width="14" height="28" fill="#C58B2B"/><rect x="258" y="92" width="14" height="20" fill="#C58B2B"/><rect x="278" y="98" width="10" height="14" fill="#C58B2B"/>
+<text x="228" y="126" font-size="8" fill="#9aa8b3" text-anchor="middle">月ごとの新規（実は減少中）</text></svg><span class="vz-cap">累計は伸びて見えるが、月ごとの新規は減少している</span></div></div><div class="aqi hz"><h4><span class="en">平均</span>平均は嘘をつく</h4><p>コホート・セグメントに分けて示す（第3回）。</p><div class="hz-hint">▸ 図で見る</div><div class="hz-fig"><svg viewBox="0 0 300 130">
+<text x="150" y="12" font-size="9" fill="#15324F" font-weight="700" text-anchor="middle">EKIDEN.AI ユーザー10人の月間走行距離</text>
+<line x1="20" y1="104" x2="284" y2="104" stroke="#dfe6ec"/>
+<rect x="26" y="42" width="20" height="62" fill="#1C7293"/>
+<rect x="52" y="98" width="20" height="6" fill="#b9c5cf"/><rect x="78" y="98" width="20" height="6" fill="#b9c5cf"/><rect x="104" y="98" width="20" height="6" fill="#b9c5cf"/><rect x="130" y="98" width="20" height="6" fill="#b9c5cf"/><rect x="156" y="98" width="20" height="6" fill="#b9c5cf"/><rect x="182" y="98" width="20" height="6" fill="#b9c5cf"/><rect x="208" y="98" width="20" height="6" fill="#b9c5cf"/><rect x="234" y="98" width="20" height="6" fill="#b9c5cf"/><rect x="260" y="98" width="20" height="6" fill="#b9c5cf"/>
+<text x="36" y="36" font-size="9" fill="#1C7293" font-weight="700" text-anchor="middle">100km</text>
+<text x="166" y="94" font-size="8" fill="#9aa8b3" text-anchor="middle">残り9人＝0km</text>
+<line x1="20" y1="86" x2="284" y2="86" stroke="#C0392B" stroke-width="1.5" stroke-dasharray="5 3"/>
+<text x="284" y="82" font-size="9" fill="#C0392B" font-weight="700" text-anchor="end">平均 10km（誰も該当しない）</text>
+<text x="150" y="124" font-size="8" fill="#C0392B" text-anchor="middle">この平均を信じて機能を作ると、誰も使わない</text></svg><span class="vz-cap">1人が100km、9人が0km → 平均10kmは実態を表さない</span></div></div><div class="aqi hz"><h4><span class="en">軸</span>軸を切らない</h4><p>0から始めないと差が誇張される。</p><div class="hz-hint">▸ 図で見る</div><div class="hz-fig"><svg viewBox="0 0 300 130">
+<text x="72" y="12" font-size="9" fill="#C0392B" font-weight="700" text-anchor="middle">✕ 軸を40%から</text>
+<line x1="30" y1="104" x2="140" y2="104" stroke="#dfe6ec"/><line x1="30" y1="24" x2="30" y2="104" stroke="#dfe6ec"/>
+<text x="26" y="106" font-size="7" fill="#9aa8b3" text-anchor="end">40%</text>
+<rect x="52" y="72" width="26" height="32" fill="#C0392B" opacity=".55"/><rect x="98" y="30" width="26" height="74" fill="#C0392B"/>
+<text x="65" y="66" font-size="8" fill="#6b7a87" text-anchor="middle">44%</text><text x="111" y="24" font-size="8" fill="#C0392B" font-weight="700" text-anchor="middle">47%</text>
+<text x="86" y="122" font-size="8" fill="#C0392B" text-anchor="middle">3ptの差が「2倍以上」に見える</text>
+<text x="228" y="12" font-size="9" fill="#3E7C53" font-weight="700" text-anchor="middle">◯ 軸を0から</text>
+<line x1="186" y1="104" x2="292" y2="104" stroke="#dfe6ec"/><line x1="186" y1="24" x2="186" y2="104" stroke="#dfe6ec"/>
+<text x="182" y="106" font-size="7" fill="#9aa8b3" text-anchor="end">0%</text>
+<rect x="206" y="34" width="26" height="70" fill="#3E7C53" opacity=".55"/><rect x="252" y="30" width="26" height="74" fill="#3E7C53"/>
+<text x="219" y="28" font-size="8" fill="#6b7a87" text-anchor="middle">44%</text><text x="265" y="24" font-size="8" fill="#3E7C53" font-weight="700" text-anchor="middle">47%</text>
+<text x="240" y="122" font-size="8" fill="#3E7C53" text-anchor="middle">実際の差は小さいと分かる</text></svg><span class="vz-cap">同じデータでも、軸の取り方で印象が激変する</span></div></div><div class="aqi hz"><h4><span class="en">分母</span>率には分母を添える</h4><p>「+50%」も、母数が20人なら意味が違う。</p><div class="hz-hint">▸ 図で見る</div><div class="hz-fig"><svg viewBox="0 0 300 130">
+<text x="150" y="12" font-size="9" fill="#15324F" font-weight="700" text-anchor="middle">同じ「+50%改善」でも意味が違う</text>
+<rect x="20" y="26" width="120" height="88" rx="6" fill="#fdf6f6" stroke="#e6c9c9"/>
+<text x="80" y="44" font-size="9" fill="#C0392B" font-weight="700" text-anchor="middle">n = 20</text>
+<circle cx="45" cy="64" r="5" fill="#C0392B" opacity=".5"/><circle cx="61" cy="64" r="5" fill="#C0392B" opacity=".5"/><circle cx="77" cy="64" r="5" fill="#dfe6ec"/><circle cx="93" cy="64" r="5" fill="#dfe6ec"/><circle cx="109" cy="64" r="5" fill="#dfe6ec"/>
+<text x="80" y="88" font-size="8" fill="#C0392B" text-anchor="middle">4人 → 6人</text>
+<text x="80" y="104" font-size="8" fill="#C0392B" text-anchor="middle">偶然の範囲かも</text>
+<rect x="160" y="26" width="120" height="88" rx="6" fill="#f5faf7" stroke="#cfe3d6"/>
+<text x="220" y="44" font-size="9" fill="#3E7C53" font-weight="700" text-anchor="middle">n = 1,000</text>
+<rect x="180" y="56" width="80" height="10" rx="2" fill="#dfe6ec"/><rect x="180" y="56" width="48" height="10" rx="2" fill="#3E7C53"/>
+<text x="220" y="88" font-size="8" fill="#3E7C53" text-anchor="middle">200人 → 300人</text>
+<text x="220" y="104" font-size="8" fill="#3E7C53" text-anchor="middle">効果と考えてよい</text></svg><span class="vz-cap">率だけでは判断できない。必ず n を書く</span></div></div>
       </div>
       <div class="why"><h3>悪い数字も、そのまま出す</h3>
         <p>ピボットが必要な事実を隠すと、意思決定を誤らせます。<b>正しい判断のための報告</b>である以上、都合の悪い結果ほど正直に、そして「だからどうするか」とセットで伝えます。</p></div>
@@ -737,9 +784,9 @@
     <div class="in"><div class="eyebrow"><span class="num">07</span> ケースで見る</div>
       <h2 class="t">EKIDEN.AI の分析を、1つの物語に</h2>
       <div class="steps" style="grid-template-columns:repeat(3,1fr)">
-        <div class="step"><div class="n">課題</div><h3>最大の漏れ</h3><p>ファネルで、質疑往復への転換が36%＝最大のボトルネック。</p></div>
-        <div class="step"><div class="n">分析</div><h3>実験で確かめた</h3><p>コホートで世代改善。A/Bで具体化メールが36%→47%（+11pt）。</p></div>
-        <div class="step"><div class="n">打ち手</div><h3>横展開する</h3><p>質問候補の具体化を全ユーザーへ。期待：質疑往復が月+約100人。</p></div>
+        <div class="step"><div class="n n-lbl">課題</div><h3>最大の漏れ</h3><p>ファネルで、質疑往復への転換が36%＝最大のボトルネック。</p></div>
+        <div class="step"><div class="n n-lbl">分析</div><h3>実験で確かめた</h3><p>コホートで世代改善。A/Bで具体化メールが36%→47%（+11pt）。</p></div>
+        <div class="step"><div class="n n-lbl">打ち手</div><h3>横展開する</h3><p>質問候補の具体化を全ユーザーへ。期待：質疑往復が月+約100人。</p></div>
       </div>
       <div class="tldr"><p class="tldr-sum">これまでの分析（ファネル36%→A/Bで47%→横展開）は、そのまま3幕の物語になります。1枚に凝縮して伝えます。</p><button class="tldr-btn" type="button">もっと詳しく ▸</button><div class="tldr-full" hidden><p>前回までの<b>ファネル・コホート・A/B</b>の結果は、そのまま物語の“分析”になります。<b>主張＝タイトル、根拠＝図、行動＝次の一手</b>の形で1枚に凝縮します。</p><p>ここまでの原則を、共通ケース EKIDEN.AI で具体的に見てみましょう。実は、私たちが第3回・第4回でやってきたことは、そのまま物語の材料になっています。</p><p><b>課題（第1幕）：</b>ファネル分析で、コーチングメールを開封した人のうち質疑往復へ進む転換が36%にとどまり、ここが最大の漏れ（ボトルネック）だと分かりました。手前の段（ウォッチ接続60%、メール開封70%）より落ち込みが大きく、最終的に価値を受け取る人が絞られてしまっています。</p><p><b>分析（第2幕）：</b>コホート分析では、後から入った世代ほど定着が良くなっており（W1が42%→64%）、製品自体は改善していることが確認できました。さらにA/Bテストで、質問候補をラン内容に合わせて具体化すると、質疑往復への転換が36%から47%へ、<b>+11ポイント</b>改善することが分かりました。各群1,000人で、事前に引いた線（+5pt以上で採用）も超えています。</p><p><b>打ち手（第3幕）：</b>だから、この施策を全ユーザーへ横展開します。期待効果は、質疑往復に到達する人が月あたり約100人増えること。ここまで書いて初めて、聞き手は「では進めよう」と判断できます。</p><p>重要なのは、この3幕が<b>新しい作業ではない</b>ことです。分析さえ正しくやっていれば、物語の材料はすでに手元にあります。あとは、それを相手が使える順番に並べ直し、「主張＝タイトル、根拠＝図、行動＝次の一手」の形に凝縮するだけです。</p><p>もう一つ強調したいのは、<b>物語にする過程で分析の穴が見つかる</b>ことです。「だから何をするか」を書こうとして書けないなら、分析が意思決定に届いていない証拠。「根拠は？」と問われて出せる図がないなら、検証が足りない証拠です。ストーリーテリングは、伝えるための技術であると同時に、<b>自分の分析を点検する道具</b>でもあります。</p></div></div>
     </div></section>
@@ -771,14 +818,29 @@
       <p class="lead" style="max-width:none">EKIDEN.AI のチームが出した報告スライドです。教科書の観点から、問題点を指摘し、書き直しましょう。<span style="color:var(--mute)">（教材上の例）</span></p>
       <div class="ex-split">
         <div class="ex-chart">
-          <div class="mini bad-ex" style="max-width:420px">
+          <div class="mini bad-ex" id="d2-bad">
             <div class="mini-ttl gray">サービスは順調に成長しています</div>
             <div class="mini-chart">
               <svg viewBox="0 0 260 110"><line x1="20" y1="94" x2="250" y2="94" stroke="#dfe6ec"/>
               <polyline points="30,86 70,74 110,60 150,46 190,32 240,16" fill="none" stroke="#b9c5cf" stroke-width="3"/>
               <text x="140" y="108" font-size="9" fill="#9aa8b3" text-anchor="middle">累計登録者数（4月〜9月）</text></svg>
             </div>
-            <div class="mini-note gray">「累計は右肩上がり」／打ち手の記載なし</div>
+            <div class="mini-note gray">✕ 累計＝虚栄の指標／主張なし／行動なし</div>
+          </div>
+          <div class="mini good-ex" id="d2-good" hidden>
+            <div class="mini-ttl">質疑往復への転換が36%で頭打ち ── 具体化メールで改善する</div>
+            <div class="mini-chart">
+              <svg viewBox="0 0 260 110"><line x1="24" y1="92" x2="250" y2="92" stroke="#dfe6ec"/><line x1="24" y1="16" x2="24" y2="92" stroke="#dfe6ec"/>
+              <text x="20" y="94" font-size="7" fill="#9aa8b3" text-anchor="end">0%</text>
+              <polyline points="36,60 68,58 100,61 132,59 164,60" fill="none" stroke="#C0392B" stroke-width="2.5" stroke-linecap="round"/>
+              <circle cx="164" cy="60" r="3.5" fill="#C0392B"/>
+              <text x="100" y="52" font-size="8" fill="#C0392B" text-anchor="middle">週次の転換率＝36%で横ばい</text>
+              <line x1="180" y1="16" x2="180" y2="92" stroke="#dfe6ec" stroke-dasharray="3 3"/>
+              <rect x="192" y="36" width="22" height="56" fill="#b9c5cf"/><rect x="222" y="26" width="22" height="66" fill="#3E7C53"/>
+              <text x="203" y="32" font-size="8" fill="#6b7a87" text-anchor="middle">36%</text><text x="233" y="22" font-size="8" fill="#3E7C53" font-weight="700" text-anchor="middle">47%</text>
+              <text x="218" y="104" font-size="7.5" fill="#6b7a87" text-anchor="middle">A/B（各n=1,000）</text></svg>
+            </div>
+            <div class="mini-act">▶ 全ユーザーへ横展開する（期待：質疑往復 月+約100人）</div>
           </div>
         </div>
         <div class="ex-panel">
@@ -1129,6 +1191,10 @@
       if(!q||!a)return;
       if(a.hidden){a.hidden=false;q.hidden=true;btn.textContent='← 演習に戻る';btn.classList.add('on');}
       else{a.hidden=true;q.hidden=false;btn.textContent='回答例を見る →';btn.classList.remove('on');}
+      if(k==='ex2'){
+        var bad=document.getElementById('d2-bad'),good=document.getElementById('d2-good');
+        if(bad&&good){var showGood=!a.hidden;bad.hidden=showGood;good.hidden=!showGood;}
+      }
     });
   });
   var lb=document.getElementById('lightbox'),lbimg=document.getElementById('lightbox-img');
@@ -1181,6 +1247,19 @@
       if(!full)return;
       if(full.hidden){full.hidden=false;btn.textContent='閉じる ▾';}
       else{full.hidden=true;btn.textContent='もっと詳しく ▸';}
+    });
+  });
+})();
+</script>
+<script>
+(function(){
+  var hzs=document.querySelectorAll('.hz');
+  function lbl(c){var t=c.querySelector('.hz-hint'); if(t) t.textContent=c.classList.contains('open')?'▾ 閉じる':'▸ 図で見る';}
+  Array.prototype.forEach.call(hzs,function(c){
+    c.addEventListener('click',function(){
+      var was=c.classList.contains('open');
+      Array.prototype.forEach.call(hzs,function(o){o.classList.remove('open');lbl(o);});
+      if(!was){c.classList.add('open');lbl(c);}
     });
   });
 })();
