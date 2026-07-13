@@ -551,6 +551,16 @@
   .hz.open{border-color:var(--teal)} .hz.open .hz-fig{display:block}
   .hz-fig svg{width:100%;height:auto;display:block;background:#fff;border:1px solid var(--line);border-radius:8px}
   #d2-bad,#d2-good{max-width:460px}
+  
+  .sw2{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:8px}
+  .sw{border:1px solid var(--line);border-radius:12px;padding:14px 16px;background:#fff}
+  .sw-down{border-left:4px solid var(--teal)} .sw-up{border-left:4px solid var(--green)}
+  .sw-h{display:flex;align-items:center;gap:8px;font-size:13.5px;font-weight:700;color:var(--navy);margin-bottom:7px}
+  .sw-h .tag{font-size:10px;color:#fff;background:var(--navy);border-radius:5px;padding:2px 7px;flex:none}
+  .sw p{margin:0 0 9px;font-size:12.5px;color:var(--ink);line-height:1.7}
+  .sw-ex{background:var(--soft);border-radius:9px;padding:10px 12px;font-size:11.5px;color:var(--mute);line-height:1.7}
+  .sw-ex b{color:var(--navy)}
+  @media(max-width:860px){ .sw2{grid-template-columns:1fr} }
   </style>
   <script src="config.js"></script>
 </head>
@@ -607,9 +617,10 @@
       <div class="steps">
         <div class="step"><div class="n">1</div><h3>なぜ物語か</h3><p>数字だけでは動かない</p></div>
         <div class="step"><div class="n">2</div><h3>3幕構成</h3><p>課題→分析→打ち手</p></div>
-        <div class="step"><div class="n">3</div><h3>1画面1メッセージ</h3><p>主張・根拠・次の行動</p></div>
-        <div class="step"><div class="n">4</div><h3>可視化と誠実さ</h3><p>誤解を招かない図</p></div>
-        <div class="step"><div class="n">5</div><h3>ケースとドリル</h3><p>EKIDEN.AIで実践</p></div>
+        <div class="step"><div class="n">3</div><h3>So What?/MECE</h3><p>飛びと漏れをなくす</p></div>
+        <div class="step"><div class="n">4</div><h3>1画面1メッセージ</h3><p>主張・根拠・次の行動</p></div>
+        <div class="step"><div class="n">5</div><h3>可視化と誠実さ</h3><p>誤解を招かない図</p></div>
+        <div class="step"><div class="n">6</div><h3>ケースとドリル</h3><p>EKIDEN.AIで実践</p></div>
       </div>
       <div class="tldr"><p class="tldr-sum">第5回は「分析結果を、人が動く形に翻訳する」回。3幕構成・1画面1メッセージ・誠実な可視化を学び、EKIDEN.AIで実践します。</p><button class="tldr-btn" type="button">もっと詳しく ▸</button><div class="tldr-full" hidden><p>第2回から第4回まで、私たちは「測る」「読む」「確かめる」を積み上げてきました。データ収集を設計し（第2回）、ファネルとコホートでどこで漏れ、どの世代が離れるかを読み（第3回）、A/Bテストで仮説を因果として確かめ、継続・改善・ピボットを意思決定しました（第4回）。しかし、ここで一つ見落としがちな事実があります。<b>分析は、それだけでは何も変えない</b>ということです。</p><p>どれほど精緻な分析も、意思決定者に伝わらなければ、行動は変わりません。「良い分析をしたのに、上司が動いてくれない」「グラフを見せたら、話題がそれてしまった」──これは分析力の問題ではなく、<b>伝える技術</b>の問題です。第5回で扱うのは、まさにその技術です。</p><p>今日の柱は4つあります。第一に、なぜ数字の羅列では人が動かないのか（虚栄の報告の問題）。第二に、分析を<b>「課題 → 分析 → 打ち手」の3幕</b>に構成する方法。第三に、1枚のスライドに主張を1つだけ置く<b>1画面1メッセージ</b>の設計原則。第四に、グラフで嘘をつかないための<b>誠実な可視化</b>です。教科書『Lean Analytics』が繰り返し説くのは「データは行動を変えるためにある」という一点で、伝え方もその延長線上にあります。</p><p>後半は、共通ケース EKIDEN.AI のデータでドリルを行います。バラバラの事実を3幕に並べ替え、虚栄の指標に頼った報告を書き直し、さらに「うまくいかなかった」というピボットの決断をどう物語にするかまで扱います。この回は、次回の<b>投資家向けピッチ</b>の土台になります。</p><p>この回を終えると、あなたの手元には「自分のテーマを、誰かに伝えて動かすための3枚」が残ります。分析はここまでで十分に積み上がっています。あとは、それを<b>相手の言葉に翻訳する</b>だけ。技術的に難しいことは何もありませんが、<b>訓練しないと必ず数字の羅列に戻ってしまう</b>のがこの分野の難しさです。だからこそ、今日は手を動かすドリルを多く用意しました。</p></div></div>
     </div></section>
@@ -635,8 +646,50 @@
       <div class="tldr"><p class="tldr-sum">課題（Why）→ 分析（What）→ 打ち手（So what）。この順番だから、聞き手は自分ごと化し、納得し、行動できます。</p><button class="tldr-btn" type="button">もっと詳しく ▸</button><div class="tldr-full" hidden><p>データを伝える物語には、鉄板の型があります。<b>課題 → 分析 → 打ち手</b>の3幕構成です。それぞれの幕には役割があり、順番にも意味があります。</p><p><b>第1幕：課題（Why）。</b>いま何が問題なのか、誰が困っているのか、放置するとどうなるのかを示します。ここで聞き手の関心を「自分ごと」に変えるのが目的です。いきなり分析結果から入ると、聞き手は「なぜこの話を聞かされているのか」が分からず、集中を失います。EKIDEN.AI なら「質疑往復への転換が36%で、ファネル最大の漏れになっている」が課題の提示です。</p><p><b>第2幕：分析（What）。</b>その課題が本当に存在すること、そして解けることを、データで裏づけます。ここで前回までのファネル・コホート・A/Bの結果が生きます。大切なのは、<b>主張を支えるのに必要な数字だけ</b>を出すこと。「せっかく分析したから」と全部見せると、焦点がぼやけます。</p><p><b>第3幕：打ち手（So what）。</b>だから何をするのか、相手に何を求めるのかを明記します。報告の目的は行動を変えることですから、ここが抜けた報告は未完成です。「具体化メールを全ユーザーへ横展開する。期待効果は質疑往復が月+約100人」まで書いて、初めて聞き手は判断できます。</p><p>この3幕は、スライド1枚のなかにも、資料全体のなかにも入れ子で使えます。迷ったら、自分の資料を「課題・分析・打ち手」の3つに仕分けてみてください。どれかが空白なら、そこが弱点です。</p><p>なお、3幕はいつも同じ長さである必要はありません。相手がすでに課題を痛感しているなら、第1幕は一言で済みます。逆に、相手が「問題があること自体」を知らないなら、第1幕に最も時間を使うべきです。<b>聞き手が今どこにいるか</b>によって、3幕の配分は変わります。これは脚色ではなく、相手に合わせた設計です。</p></div></div>
     </div></section>
 
+  <section class="slide" data-title="SoWhat_WhySo">
+    <div class="in"><div class="eyebrow"><span class="num">04</span> 話の飛びをなくす</div>
+      <h2 class="t">So What? / Why So? ── 「で、何が言えるのか」まで踏み込む</h2>
+      <div class="sw2">
+        <div class="sw sw-down">
+          <div class="sw-h"><span class="tag">↓ 縦</span>So What?（だから何？）</div>
+          <p>手持ちのデータから、<b>課題に照らして言えることのエキス</b>を絞り出す作業。図を出して終わりにせず、「<b>だから何が言えるのか</b>」を一文で書きます。これが<b>主張＝スライドのタイトル</b>になります。</p>
+          <div class="sw-ex"><b>✕ 弱い：</b>「質疑往復への転換は36%です」（事実の報告どまり）<br><b>◯ 強い：</b>「<b>質疑往復が最大の漏れ。ここを直せば最も効く</b>」（言えることを抽出）</div>
+        </div>
+        <div class="sw sw-up">
+          <div class="sw-h"><span class="tag">↑ 縦</span>Why So?（なぜそう言える？）</div>
+          <p>その主張が、<b>手持ちのデータで本当に証明できるか</b>を検証する作業。So What? の逆向きに問い直します。答えられない主張は、<b>話が飛んでいる</b>証拠です。</p>
+          <div class="sw-ex"><b>主張：</b>「具体化メールは効く」<br><b>Why So?：</b>「A/Bで36%→47%、各n=1,000、事前の線+5ptを超過」→ <b>証明できる＝飛びなし</b></div>
+        </div>
+      </div>
+      <div class="why"><h3>「観察」の So What? と「洞察」の So What?</h3>
+        <p>データを要約しただけ（＝<b>観察</b>）で止まらず、そこから<b>次の打ち手が導ける</b>ところ（＝<b>洞察</b>）まで進みます。「定着が世代ごとに上がっている」は観察。「<b>製品は改善している。だから獲得に投資すべきだ</b>」まで言えて洞察です。ただし、<b>観察なき洞察は思い込み</b>。必ずデータに戻って Why So? で検証します。</p>
+      </div>
+      <p class="srcnote">参考：照屋華子・岡田恵子『ロジカル・シンキング ── 論理的な思考と構成のスキル』（東洋経済新報社）を要約・再構成。</p>
+      <div class="tldr"><p class="tldr-sum">図を出して終わりにせず「だから何が言えるか（So What?）」を一文にし、「なぜそう言えるか（Why So?）」でデータに戻って検証します。</p><button class="tldr-btn" type="button">もっと詳しく ▸</button><div class="tldr-full" hidden><p>『ロジカル・シンキング』（照屋華子・岡田恵子）は、伝わらない話の原因を2つに整理します。<b>話の「飛び」</b>と<b>話の「重複・漏れ・ずれ」</b>です。前者を防ぐのが <b>So What? / Why So?</b>、後者を防ぐのが <b>MECE</b>です。今日のデータストーリーテリングは、この2つと深く結びついています。</p><p><b>So What?（だから何？）</b>は、手持ちのデータから、<b>いま答えるべき課題に照らして言えることのエキス</b>を絞り出す作業です。「質疑往復への転換は36%です」は、ただの事実の報告。そこから一歩踏み込んで「<b>質疑往復が最大の漏れであり、ここを直すのが最も効く</b>」まで言い切る。これが So What? であり、そのままスライドの<b>主張タイトル</b>になります。第4回で学んだ「事前に線を引く」も、So What? を出すための準備でした。</p><p><b>Why So?（なぜそう言える？）</b>は、その主張が手元のデータで本当に証明できるかを、逆向きに検証する作業です。「具体化メールは効く」と言うなら、「A/Bで36%→47%、各n=1,000、事前の線+5ptを超過」と答えられる必要があります。答えられないなら、それは<b>話が飛んでいる</b>のです。</p><p>さらに本書は、So What? を2段階に分けます。データを正しく要約するだけの<b>「観察」</b>と、そこから打ち手を導く<b>「洞察」</b>です。「定着が世代ごとに上がっている」は観察。「製品は改善している。だから今は獲得に投資すべきだ」まで進めば洞察です。ただし<b>観察なき洞察は、ただの思い込み</b>。必ずデータに戻って Why So? で確かめます。データ分析者にとって、この往復こそが仕事の核心です。</p></div></div>
+    </div></section>
+
+  <section class="slide" data-title="MECEと論理の型">
+    <div class="in"><div class="eyebrow"><span class="num">05</span> 構成の技術</div>
+      <h2 class="t">MECE と、2つの論理の型 ── 根拠を「漏れなく」「型どおり」に並べる</h2>
+      <p class="lead">縦方向は <b>So What? / Why So?</b>、横方向は <b>MECE</b>。この2軸で、結論と根拠を構造として組み立てます。</p>
+      <div class="lens3" style="grid-template-columns:1fr 1fr">
+        <div class="lens"><div class="lh"><span class="tag">MECE</span>重複・漏れ・ずれをなくす</div>
+          <p>根拠を並べるとき、<b>重なりなく、全体として漏れなく</b>。EKIDEN.AI なら、獲得・活性化・定着・継続（AARRRの段階）で切れば、ファネル全体を漏れなくカバーできます。切り口の例：<b>段階／セグメント／時間（過去・現在・未来）／事実と判断</b>。</p></div>
+        <div class="lens"><div class="lh"><span class="tag">注意</span>切り口は自分で決める</div>
+          <p>MECEは「全部言う」ことではありません。<b>課題に照らして意味のある切り口</b>を1つ選び、その中で漏れなく示します。切り口が変われば、見える結論も変わります。</p></div>
+      </div>
+      <div class="cmp2" style="margin-top:14px">
+        <div class="cmp"><h3><span class="ic">🧩</span>解説型（事実 → 判断基準 → 判断内容）</h3>
+          <p>相手を<b>納得させながら結論に導く</b>型。今日の<b>3幕構成（課題→分析→打ち手）</b>はこの型です。「36%で最大の漏れ（事実）→ +5pt以上なら採用と決めていた（判断基準）→ A/Bで+11pt。だから横展開する（判断内容）」。</p></div>
+        <div class="cmp good"><h3><span class="ic">📋</span>並列型（結論 ＋ 並列の根拠）</h3>
+          <p>結論を先に置き、<b>MECEな根拠を並べる</b>型。次回の<b>ピッチ</b>で使います。「投資する価値がある（結論）／① 成長している ② 深く使われている ③ 打ち手が効くと実証済み（並列の根拠）」。</p></div>
+      </div>
+      <p class="srcnote">参考：照屋華子・岡田恵子『ロジカル・シンキング』（東洋経済新報社）を要約・再構成。論理＝結論を頂点に、縦は So What?/Why So?、横は MECE で関係づけた構造。</p>
+      <div class="tldr"><p class="tldr-sum">根拠は縦（So What?/Why So?）と横（MECE＝重複・漏れなし）で組む。3幕は「解説型」、ピッチは「並列型」です。</p><button class="tldr-btn" type="button">もっと詳しく ▸</button><div class="tldr-full" hidden><p>『ロジカル・シンキング』は、<b>論理</b>を「結論を頂点に、根拠（または方法）が構造として組み立てられたもの」と定義します。その構造には2つの軸があります。<b>縦方向は So What? / Why So?</b>（結論と根拠が飛ばずにつながっているか）、<b>横方向は MECE</b>（根拠が重複・漏れ・ずれなく並んでいるか）です。</p><p><b>MECE</b>とは、ある事柄を<b>重なりなく、全体として漏れなく</b>とらえること。EKIDEN.AI なら、AARRRの段階（獲得・活性化・定着・継続）で切れば、ファネル全体を漏れなくカバーできます。切り口には、<b>プロセスやステップ／セグメント／時間（過去・現在・未来）／事実と判断</b>などがあります。注意したいのは、MECEは「思いつくことを全部言う」ことではない点です。<b>課題に照らして意味のある切り口を自分で選ぶ</b>ことが本質で、切り口が変われば見える結論も変わります。</p><p>そして論理構成には、基本の型が2つあります。<b>解説型</b>は「事実 → 判断基準 → 判断内容」と順に積み上げ、相手を納得させながら結論に導く型。今日の<b>3幕構成（課題→分析→打ち手）</b>は、まさにこの型です。<b>並列型</b>は、結論を先に置き、それを支えるMECEな根拠を並べる型。次回の<b>投資家向けピッチ</b>で使います──「投資する価値がある（結論）／①成長している ②深く使われている ③打ち手が効くと実証済み（並列の根拠）」。</p><p>相手が結論を急ぐ場面では並列型、納得のプロセスが必要な場面では解説型、と使い分けます。</p></div></div>
+    </div></section>
+
   <section class="slide" data-title="1画面1メッセージ">
-    <div class="in"><div class="eyebrow"><span class="num">04</span> 設計の原則</div>
+    <div class="in"><div class="eyebrow"><span class="num">06</span> 設計の原則</div>
       <h2 class="t">1画面に、主張は1つ ── スライドの実例で見る</h2>
       <div class="lens3">
         <div class="lens"><div class="lh"><span class="tag">主張</span>言いたいこと1つ</div><p>スライドのタイトルが結論。1枚で複数を欲張らない。</p></div>
@@ -690,7 +743,7 @@
     </div></section>
 
   <section class="slide" data-title="可視化の使い分け">
-    <div class="in"><div class="eyebrow"><span class="num">05</span> 可視化の使い分け</div>
+    <div class="in"><div class="eyebrow"><span class="num">07</span> 可視化の使い分け</div>
       <h2 class="t">伝えたいこと別・グラフの選び方 ── カードで実例と解説を見る</h2>
       <p class="lead">各カードを<b>クリック</b>すると、グラフのイメージと<b>詳しい解説</b>（EKIDEN.AI の例つき）が開きます。</p>
       <div class="aq" style="grid-template-columns:repeat(3,1fr)">
@@ -729,7 +782,7 @@
     </div></section>
 
   <section class="slide" data-title="誠実な可視化">
-    <div class="in"><div class="eyebrow"><span class="num">06</span> 誠実な可視化</div>
+    <div class="in"><div class="eyebrow"><span class="num">08</span> 誠実な可視化</div>
       <h2 class="t">「盛らない」── データで嘘をつかないために</h2>
       <p class="lead">各カードを<b>クリック</b>すると、具体的な図で確認できます。</p>
       <div class="aq" style="grid-template-columns:repeat(2,1fr)">
@@ -781,7 +834,7 @@
     </div></section>
 
   <section class="slide" data-title="EKIDEN.AIの物語">
-    <div class="in"><div class="eyebrow"><span class="num">07</span> ケースで見る</div>
+    <div class="in"><div class="eyebrow"><span class="num">09</span> ケースで見る</div>
       <h2 class="t">EKIDEN.AI の分析を、1つの物語に</h2>
       <div class="steps" style="grid-template-columns:repeat(3,1fr)">
         <div class="step"><div class="n n-lbl">課題</div><h3>最大の漏れ</h3><p>ファネルで、質疑往復への転換が36%＝最大のボトルネック。</p></div>
@@ -792,7 +845,7 @@
     </div></section>
 
   <section class="slide" data-title="ドリル①">
-    <div class="in"><div class="eyebrow"><span class="num">08</span> ドリル① 3幕に並べる</div>
+    <div class="in"><div class="eyebrow"><span class="num">10</span> ドリル① 3幕に並べる</div>
       <h2 class="t">バラバラの事実を「課題→分析→打ち手」に並べる</h2>
       <p class="lead" style="max-width:none">次の3つの事実を、伝わる順番（3幕）に並べ替え、タイトル（主張）を1つ付けましょう。<span style="color:var(--mute)">（教材上の例）</span></p>
       <div class="ex-split">
@@ -813,7 +866,7 @@
     </div></section>
 
   <section class="slide" data-title="ドリル②">
-    <div class="in"><div class="eyebrow"><span class="num">09</span> ドリル② 報告を書き直す</div>
+    <div class="in"><div class="eyebrow"><span class="num">11</span> ドリル② 報告を書き直す</div>
       <h2 class="t">この報告、どこが問題？</h2>
       <p class="lead" style="max-width:none">EKIDEN.AI のチームが出した報告スライドです。教科書の観点から、問題点を指摘し、書き直しましょう。<span style="color:var(--mute)">（教材上の例）</span></p>
       <div class="ex-split">
@@ -853,7 +906,7 @@
     </div></section>
 
   <section class="slide" data-title="ピボットの伝え方">
-    <div class="in"><div class="eyebrow"><span class="num">10</span> ケース ピボットを伝える</div>
+    <div class="in"><div class="eyebrow"><span class="num">12</span> ケース ピボットを伝える</div>
       <h2 class="t">「うまくいかなかった」を、どう物語にするか</h2>
       <p class="lead" style="max-width:none">第4回のシミュレーションで、EKIDEN.AI は定着ゲート（40%）に届かず頭打ち（37%）。セグメント別では競技・駅伝層が55%と判明し、<b>顧客セグメント・ピボット</b>を決めました。これをチーム／投資家にどう伝えますか。<span style="color:var(--mute)">（教材上の数値例）</span></p>
       <div class="ex-split">
@@ -879,7 +932,7 @@
     </div></section>
 
   <section class="slide" data-title="今日のワーク">
-    <div class="in"><div class="eyebrow"><span class="num">11</span> 今日のワーク／次回までの課題</div>
+    <div class="in"><div class="eyebrow"><span class="num">13</span> 今日のワーク／次回までの課題</div>
       <h2 class="t">自分の分析を「3枚の物語」にする</h2>
       <div class="task">
         <div class="tcard review"><h3>🔁 復習</h3><ol>
@@ -891,7 +944,7 @@
           <li>教科書のレポーティング・指標の伝え方に関する箇所に目を通す</li></ol></div>
       </div>
       <div class="band">
-        <div class="dl">提出締切：<span>次回授業まで</span></div>
+        <div class="dl">提出締切：<span>7/21（火）23:59</span></div>
         <a class="cr-submit" href="https://classroom.google.com/c/ODU5NjUzNDM0Njk0" target="_blank" rel="noopener">🎓 Classroomで提出 ↗</a>
         <div class="next">次回予告 ── 第6回：投資家向けピッチの準備 ── データで信頼を勝ち取る</div>
       </div>
@@ -900,7 +953,7 @@
     </div></section>
 
   <section class="slide" data-title="レポート課題の参考解答例">
-    <div class="in"><div class="eyebrow"><span class="num">12</span> レポート課題の参考解答例</div>
+    <div class="in"><div class="eyebrow"><span class="num">14</span> レポート課題の参考解答例</div>
       <h2 class="t">EKIDEN.AI でたどる「3枚の物語」の参考解答例</h2>
       <p class="lead">今日のケースの数値を使った参考解答です。自分のテーマでも同じ手順で組み立てましょう。<span style="color:var(--mute)">（教材上の数値例。収益データは扱いません）</span></p>
       <div class="mini-row">
@@ -1110,7 +1163,7 @@
   var GEMINI_API_KEY = (typeof window!=="undefined" && window.GEMINI_API_KEY) ? window.GEMINI_API_KEY : "";
   var GEMINI_MODEL   = (typeof window!=="undefined" && window.GEMINI_MODEL) ? window.GEMINI_MODEL : "gemini-3.5-flash";
 
-  var LECTURE_FOCUS = "データストーリーテリング（課題→分析→打ち手の3幕構成）、行動につながる報告と虚栄の指標（vanity metrics）の回避、1画面1メッセージ（主張=タイトル・根拠=図・行動=次の一手）、可視化の使い分け（比較・推移・内訳・分布・コホート）、誠実な可視化（累計の罠・平均の嘘・軸を切らない・分母を添える）、悪い数字も隠さず伝える、EKIDEN.AIのケース（ファネル36%→A/Bで47%→横展開）とピボット（競技・駅伝層への顧客セグメント・ピボット）の伝え方";
+  var LECTURE_FOCUS = "データストーリーテリング（課題→分析→打ち手の3幕構成）、行動につながる報告と虚栄の指標（vanity metrics）の回避、1画面1メッセージ（主張=タイトル・根拠=図・行動=次の一手）、可視化の使い分け（比較・推移・内訳・分布・コホート）、誠実な可視化（累計の罠・平均の嘘・軸を切らない・分母を添える）、悪い数字も隠さず伝える、EKIDEN.AIのケース（ファネル36%→A/Bで47%→横展開）とピボット（競技・駅伝層への顧客セグメント・ピボット）の伝え方、ロジカル・シンキング（照屋華子・岡田恵子）の So What?/Why So?（話の飛びをなくす）とMECE（重複・漏れ・ずれをなくす）、観察と洞察、論理の型（解説型＝3幕構成／並列型＝ピッチ）";
   var FALLBACK_QS = ["優れた指標の4条件をやさしく教えて","定性と定量はどう使い分ける？","虚栄指標と行動を促すの指標の見分け方は？","探索指標と報告指標の違いは？","先行指標と遅行指標の例は？","相関と因果はどう違う？","アイスと水難事故の例で相関と因果を説明して","『PV1万→So what?』と言われない報告は？"];
 
   var apiKey=GEMINI_API_KEY, history=[], busy=false, greeted=false;
