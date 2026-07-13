@@ -330,7 +330,17 @@
     .lineage .arrow{display:none} .lin{flex-basis:100%}
   }
   @media(prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
-</style>
+  .tldr{margin-top:20px;padding-top:14px;border-top:1px solid var(--line)}
+  .tldr-sum{margin:0;font-size:13px;color:var(--ink);line-height:1.8}
+  .tldr-btn{margin-top:6px;font-family:var(--jp);font-size:12px;font-weight:700;color:var(--teal);background:none;border:0;padding:0;cursor:pointer}
+  .tldr-btn:hover{text-decoration:underline}
+  .tldr-full{margin-top:8px}
+  .tldr-full p{margin:0 0 9px;font-size:12.5px;color:var(--ink);line-height:1.85}
+  .tldr-full p:last-child{margin-bottom:0}
+  .tldr-full b{color:var(--navy)}
+  .slide.reading{height:100vh;max-height:100vh;justify-content:flex-start;overflow-y:auto;-webkit-overflow-scrolling:touch;overscroll-behavior:contain;scroll-snap-align:start}
+  .slide.reading .in{margin:0 auto;padding-bottom:24px}
+  </style>
   <script src="config.js"></script>
 </head>
 <body>
@@ -368,6 +378,7 @@
         <span class="pill">形態：遠隔（同時双方向）</span>
         <span class="pill">教科書：<b>Lean Analytics</b>（クロール＆ヨスコビッツ）</span>
       </div>
+      <div class="tldr"><p class="tldr-sum">この授業は「データで確かめながら、身近な一人の課題を解く」ための実践講義。共通ケース EKIDEN.AI を題材に、最終回の投資家向けピッチを目指します。</p><button class="tldr-btn" type="button">もっと詳しく ▸</button><div class="tldr-full" hidden><p>SDGs発展2では、教科書『Lean Analytics』（A.クロール／B.ヨスコビッツ）に沿って、<b>データで確かめながら事業をつくる</b>方法を学びます。扱うのは壮大な理想論ではなく、<b>身近な一人の困りごと</b>から始める実践です。</p><p>共通ケースは <b>EKIDEN.AI</b>。オリンピック選手やプロコーチと共同開発している、ランナー向けのAIコーチです。実際のサービス設計を題材に、「何を測り、どう読み、どう確かめ、どう伝えるか」を7回かけて体験します。</p><p>ゴールは最終回の<b>データドリブンな投資家向けピッチ</b>。感想や思いつきではなく、<b>数字という証拠</b>で語れるようになることが、この授業の目標です。</p></div></div>
     </div>
   </section>
 
@@ -384,6 +395,7 @@
         <div class="step"><div class="n">4</div><h3>崖と底</h3><p>リテンションの“形”を見る</p></div>
         <div class="step"><div class="n">5</div><h3>OMTMを仮置き</h3><p>自分のテーマで一つ選ぶ</p></div>
       </div>
+      <div class="tldr"><p class="tldr-sum">第1回は全体像。Lean の系譜、事業の5段階、そして「今いちばん大事な1つの指標（OMTM）」の考え方を押さえます。</p><button class="tldr-btn" type="button">もっと詳しく ▸</button><div class="tldr-full" hidden><p>初回は、これから7回で使う<b>共通の地図</b>を手に入れる回です。</p><p>まず、Lean Startup から Lean Analytics に至る<b>系譜</b>を確認します。次に、事業が通る<b>5つの段階</b>（共感・定着・拡散・収益・拡大）を知り、「今どこにいるか」で見るべき数字が変わることを理解します。</p><p>そして最重要の概念が <b>OMTM（One Metric That Matters）</b>。<b>今いちばん大事な、たった1つの指標</b>です。指標を絞ることは、何を見ないかを決めることでもあります。なぜ絞るのか、どう決めるのかを、EKIDEN.AI のケースで具体的に見ていきます。</p></div></div>
     </div>
   </section>
 
@@ -405,6 +417,7 @@
         <div class="lin last"><div class="yr">2013</div><h4>Lean Analytics</h4><p>クロール＆ヨスコビッツ</p></div>
         <div class="note">流れはこうです。まず顧客に学ぶ「顧客開発」、ムダなく仮説を検証する「リーン・スタートアップ」、それを実践の手順に落とした「Running Lean」、使う人の体験を磨く「Lean UX」、そして検証を“数字”で支えるのが「Lean Analytics」です。一貫しているのは「アイデアの正しさは、机上ではなく顧客と数字で確かめる」という考え方。この授業はその最後の「数字で確かめる」部分を扱います。</div>
       </div>
+      <div class="tldr"><p class="tldr-sum">Lean Startup（仮説→検証のループ）を、データで測れる形にしたのが Lean Analytics。「作る前に確かめる」が共通の思想です。</p><button class="tldr-btn" type="button">もっと詳しく ▸</button><div class="tldr-full" hidden><p>エリック・リースの <b>Lean Startup</b> は、「構築→計測→学習」のループを高速で回し、<b>作る前に仮説を確かめる</b>という考え方を広めました。その源流には、トヨタ生産方式のムダの排除があります。</p><p>しかし「計測」と言われても、<b>何を測ればいいのか</b>は自明ではありません。そこを埋めるのが、この授業の教科書 <b>Lean Analytics</b> です。事業の段階ごとに「見るべき指標」を具体的に示し、仮説検証を<b>数字で回せる形</b>にしました。</p><p>共通するのは、<b>思い込みで作らない</b>という一点。「きっと売れる」ではなく「確かめてから進む」。その姿勢が、SDGsの課題解決にも同じく必要です。</p></div></div>
     </div>
   </section>
 
@@ -422,6 +435,7 @@
         <div class="stg"><div class="en">Scale</div><h4>規模化</h4><p class="sdesc">仕組みを保ったまま「もっと多くへ届ける」</p></div>
       </div>
       <p class="lead" style="margin-top:18px;margin-bottom:0">定着の段階では、新規獲得より<b>「戻ってきて使い続けるか」</b>を測ります。だからこの先のファネルやリテンションが効いてきます。</p>
+      <div class="tldr"><p class="tldr-sum">事業は「共感→定着→拡散→収益→拡大」の5段階を通る。今どの段階にいるかで、見るべき指標は変わります。</p><button class="tldr-btn" type="button">もっと詳しく ▸</button><div class="tldr-full" hidden><p>Lean Analytics は、事業が通る道のりを<b>5つの段階</b>に分けます。<b>共感</b>（本当に困っている人がいるか）→ <b>定着</b>（使い続けてもらえるか）→ <b>拡散</b>（人に勧めてもらえるか）→ <b>収益</b>（お金を払ってもらえるか）→ <b>拡大</b>（大きくできるか）。</p><p>重要なのは、<b>段階ごとに見るべき指標が違う</b>ことです。定着すらしていないのに売上を追いかけても、穴の空いたバケツに水を注ぐようなもの。「今どの段階にいるか」を正しく認識することが、指標選びの出発点になります。</p><p>EKIDEN.AI は現在<b>定着</b>の段階。だから今日以降の授業でも、定着に関わる数字を中心に扱っていきます。</p></div></div>
     </div>
   </section>
 
@@ -447,6 +461,7 @@
           <div class="stripe">⚠ 収益（Stripe）データは扱いません。指標の“形”を学ぶことに集中します。</div>
         </div>
       </div>
+      <div class="tldr"><p class="tldr-sum">共通ケースは EKIDEN.AI。ランナー向けのAIコーチで、オリンピック選手やプロコーチと共同開発しています。</p><button class="tldr-btn" type="button">もっと詳しく ▸</button><div class="tldr-full" hidden><p><b>EKIDEN.AI</b> は、ランナー一人ひとりに合わせたコーチングを行うAIサービスです。スポーツウォッチと連携して日々のラン記録を取り込み、それに基づくコーチングメールを届けます。オリンピック選手やプロコーチと共同で開発しています。</p><p>この授業では、EKIDEN.AI を<b>全7回の共通ケース</b>として使います。架空の事例ではなく実在のサービスを題材にすることで、「教科書の理屈」が「現場の判断」にどう変わるかを体感できます。</p><p>なお、授業で扱う数値は<b>教材上の例</b>であり、収益（決済）データは扱いません。皆さんも各自のテーマを持ち、同じ手順で分析を進めていきます。</p></div></div>
     </div>
   </section>
 
@@ -475,6 +490,7 @@
         </div>
       </div>
       <div class="typ" style="margin-top:16px;font-size:13px;color:var(--navy);background:var(--soft);border-radius:10px;padding:12px 15px">用語：<b>バニティ指標</b>＝見栄えはいいが行動が変わらない数字（たいてい累計・総数）。<b>OMTM</b>＝今いちばん大事にする“たった一つ”の指標（たいてい率・割合）。EKIDEN.AI は「定着」段階なので、新規の数より「使い続けているか」を映す指標を一つに絞ります。</div>
+      <div class="tldr"><p class="tldr-sum">OMTM＝One Metric That Matters。今いちばん大事な、たった1つの指標。絞ることで、判断も行動も速くなります。</p><button class="tldr-btn" type="button">もっと詳しく ▸</button><div class="tldr-full" hidden><p><b>OMTM（One Metric That Matters）</b>とは、<b>今この瞬間、いちばん大事な1つの指標</b>のことです。教科書がこれほど強調するのには理由があります。</p><p>指標を10個追いかけるチームは、10個とも中途半端になります。数字が動いても、どれを見て判断すべきか分からない。一方、OMTM を1つ決めたチームは、<b>全員が同じ数字を見て、同じ方向に動けます</b>。議論は「これは OMTM を上げるか？」の一点に絞られ、判断が速くなります。</p><p>OMTM は<b>段階によって変わります</b>。定着の段階なら「コア行動の継続率」、収益の段階なら「顧客あたり売上」。大切なのは、今の課題に照らして<b>1つに絞り切る勇気</b>です。</p></div></div>
     </div>
   </section>
 
@@ -502,6 +518,7 @@
         </div>
         <div class="flipmsg vanity" id="funMsg"></div>
       </div>
+      <div class="tldr"><p class="tldr-sum">入口の数字（登録者数）だけを見ると、実態を見誤ります。大事なのは「入った人が、その後どうなったか」です。</p><button class="tldr-btn" type="button">もっと詳しく ▸</button><div class="tldr-full" hidden><p>「登録者が1,000人を突破しました」──一見すばらしい報告ですが、これだけでは<b>何も分かりません</b>。その1,000人が、翌週も使っているのか。それとも全員去ったのか。</p><p>入口の数字（登録・ダウンロード・アクセス）は増えやすく、見ていて気持ちがいい数字です。だからこそ、教科書はこれを<b>虚栄の指標</b>と呼んで戒めます。本当に見るべきは、<b>入った人がその後どうなったか</b>です。</p><p>EKIDEN.AI で言えば、サインアップした人のうち何人がスポーツウォッチを接続し、何人がコーチングメールを開き続けているか。この<b>「その後」</b>にこそ、事業の健康状態が現れます。第3回では、これをファネルとコホートで詳しく見ていきます。</p></div></div>
     </div>
   </section>
 
@@ -528,6 +545,7 @@
           <div><b class="floor">底（投稿＝コア行動）</b>：11.4% → 3〜4%で横ばい。少数でも“定着するコア”が残る ── ここを太らせる。</div>
         </div>
       </div>
+      <div class="tldr"><p class="tldr-sum">利用者は最初に大きく減り（崖）、やがて下げ止まる（底）。底の厚みが、本当のコア・ユーザーの数です。</p><button class="tldr-btn" type="button">もっと詳しく ▸</button><div class="tldr-full" hidden><p>どんなサービスでも、登録した人は時間とともに減っていきます。その減り方には特徴的な形があります。</p><p>最初の1週間で大きく落ちる。これが<b>「崖」</b>です。「思っていたのと違った」「使い方が分からなかった」という人が去ります。しかし、ある時点から減り方が緩やかになり、下げ止まる。これが<b>「底」</b>。ここに残った人たちが、本当にサービスを必要としている<b>コア・ユーザー</b>です。</p><p>見るべきは2つ。<b>崖の深さ</b>（最初の体験に問題はないか）と、<b>底の厚み</b>（コアはどれだけいるか）。底が厚ければ、そこを起点に伸ばせます。底が薄ければ、そもそも刺さっていない可能性があります。</p></div></div>
     </div>
   </section>
 
@@ -543,6 +561,7 @@
         <div class="a3"><div class="tag">関与ではない</div><h4>受動的な状態</h4><p>連携が続いて同期されているだけ。来ている≠使っている。</p></div>
       </div>
       <div class="trap">⚠ <b>罠：</b>連携は永続なので「接続済み＝アクティブ」とするとほぼ全員がアクティブになり、定着の弱さを隠してしまう（バニティ）。連携は“節目”、アクティブは“価値への関与”で測る。</div>
+      <div class="tldr"><p class="tldr-sum">「アクティブユーザー」は定義次第で数字が何倍も変わります。ログインではなく、価値を受け取った瞬間で定義します。</p><button class="tldr-btn" type="button">もっと詳しく ▸</button><div class="tldr-full" hidden><p>「アクティブユーザー数」は、実は<b>非常に曖昧な言葉</b>です。アプリを開いただけでアクティブか。1分見ただけでアクティブか。定義次第で、数字は何倍にも変わります。</p><p>大切なのは、<b>ユーザーが価値を受け取った瞬間</b>で定義することです。EKIDEN.AI なら、ログインではなく<b>「コーチングメールを開封した」</b>こと。なぜならそれが、このサービスの価値そのものだからです。これを<b>コア行動</b>と呼びます。</p><p>コア行動を正しく定義できれば、「本当に使われているか」が数字で分かります。逆に定義を間違えると、都合のいい数字だけを見て<b>順調だと勘違いする</b>ことになります。</p></div></div>
     </div>
   </section>
 
@@ -557,6 +576,7 @@
         <div class="dstep"><div class="dn">2</div><div><h4>自分のプロジェクトの OMTM を仮置きする</h4><p>自分のSDGsプロジェクトで「今、最も重要な一つ」を選ぶ。</p></div></div>
         <div class="dstep"><div class="dn">3</div><div><h4>互いにツッコミ合う</h4><p>「その数字、ごまかせない？」「下がったら何を変える？」と問い、暫定OMTMを一つに絞る。</p></div></div>
       </div>
+      <div class="tldr"><p class="tldr-sum">自分のテーマで「誰の、どんな困りごとか」を書き、コア行動を1つ定義してみましょう。</p><button class="tldr-btn" type="button">もっと詳しく ▸</button><div class="tldr-full" hidden><p>今日のドリルは、これから7回使う<b>自分のテーマ</b>を決める作業です。</p><p>まず、<b>「誰の、どんな困りごとか」</b>を一文で書きます。「若者の環境意識」のような抽象論ではなく、<b>身近な一人</b>を思い浮かべてください。「一人暮らしの祖母が、買い物のたびに重い荷物で困っている」のように、顔が見えるレベルまで具体化します。</p><p>次に、そのテーマの<b>コア行動</b>を1つ定義します。ユーザーが価値を受け取った瞬間は何か。ログインでも訪問でもなく、<b>本当に役に立った瞬間</b>を言葉にしてください。これが、以降の全ての分析の出発点になります。</p></div></div>
     </div>
   </section>
 
@@ -577,6 +597,7 @@
         <p class="big">OMTM ＝ <em>One Metric That Matters</em>（最重要指標）</p>
         <p>今、いちばん大事にする “たった一つ” の指標。全部は追わず、「今いちばん知りたいこと」に答える一つの数字を選びます。</p>
       </div>
+      <div class="tldr"><p class="tldr-sum">OMTMは「今」の1つ。永久に変わらない指標ではなく、段階と課題に応じて選び直すものです。</p><button class="tldr-btn" type="button">もっと詳しく ▸</button><div class="tldr-full" hidden><p>OMTM でよくある誤解は、「一度決めたら変えてはいけない」というものです。実際は逆で、<b>OMTM は変わるもの</b>です。</p><p>大切なのは、<b>「今」いちばん大事な1つ</b>であること。定着の段階なら「コア行動の継続率」、収益の段階なら「顧客あたりの売上」というように、事業の段階と、今直面している課題によって選び直します。</p><p>ただし、<b>同時に複数を追ってはいけません</b>。「定着も収益も拡散も」と欲張った瞬間に、チームの焦点は失われます。いま1つに絞り、それが十分に伸びたら次へ移る。この<b>順番</b>こそが、Lean Analytics の核心です。</p></div></div>
     </div>
   </section>
 
@@ -592,6 +613,7 @@
         <div class="card r2"><div class="head">良い指標の4条件</div>
           <ul><li><b>分かりやすい</b> ── 一目で「何の数字か」</li><li><b>比較できる</b> ── 前週・他グループと比べられる</li><li><b>比率・割合</b> ── 合計でなく「〜率」で見る</li><li><b>行動が変わる</b> ── 下がったら次の一手が打てる</li></ul></div>
       </div>
+      <div class="tldr"><p class="tldr-sum">指標を絞ると、議論が「これはOMTMを上げるか？」の一点に集約され、判断も実行も速くなります。</p><button class="tldr-btn" type="button">もっと詳しく ▸</button><div class="tldr-full" hidden><p>なぜ1つに絞るのか。答えは<b>「速く動くため」</b>です。</p><p>指標が10個あると、会議は「あれも上がった、これは下がった」の報告会になります。どの施策を優先すべきかの判断がつかず、メンバーはそれぞれ違う数字を見て、違う方向に力を使います。</p><p>OMTM が1つに決まっていれば、議論は明快です。<b>「その施策は、OMTM を上げるのか？」</b>──イエスなら進める、ノーなら後回し。それだけです。無駄な議論が消え、限られた時間と人手を<b>最も効く一点</b>に集中できます。</p><p>絞ることは、<b>何を見ないかを決めること</b>でもあります。それは勇気のいる決断ですが、そこにこそ意味があります。</p></div></div>
     </div>
   </section>
 
@@ -613,6 +635,7 @@
         <div class="half o"><p class="lbl">OMTM の例</p><p class="val" id="sO"></p></div>
       </div>
       <div class="shint">授業のヒント：多くの学生プロジェクトは、まず「<b>共感</b>（課題は本物か）」か「<b>定着</b>（続けて使われるか）」の段階にいます。</div>
+      <div class="tldr"><p class="tldr-sum">段階が変われば、OMTMも変わります。定着していないのに収益を追うと、穴の空いたバケツに水を注ぐことになります。</p><button class="tldr-btn" type="button">もっと詳しく ▸</button><div class="tldr-full" hidden><p>OMTM は、事業の段階によって変わります。そして<b>順番を飛ばしてはいけません</b>。</p><p><b>共感</b>の段階では「本当に困っている人がいるか」（インタビュー数など）。<b>定着</b>では「使い続けてもらえるか」（コア行動の継続率）。<b>拡散</b>では「人に勧めてもらえるか」（紹介率）。<b>収益</b>では「お金を払ってもらえるか」（顧客あたり売上）。</p><p>ありがちな失敗は、<b>定着していないのに収益を追う</b>ことです。広告を打って人を集めても、使い続けてもらえなければ全員去っていきます。これは<b>穴の空いたバケツに水を注ぐ</b>のと同じ。まず穴を塞ぐ（定着させる）。それから水を注ぐ（集客する）。この順番を守ることが、限られた資源を活かす道です。</p></div></div>
     </div>
   </section>
 
@@ -633,6 +656,7 @@
         </tbody>
       </table>
       <p class="pt">ポイント：早い段階（共感）では「割合」で<b>“課題が本物か”</b>を測り、定着段階では「継続・関与の率」を測る。</p>
+      <div class="tldr"><p class="tldr-sum">有名サービスも、初期には1つの指標に集中していました。何を測るかが、何を作るかを決めます。</p><button class="tldr-btn" type="button">もっと詳しく ▸</button><div class="tldr-full" hidden><p>成功したサービスの多くは、初期に<b>たった1つの指標</b>に集中していました。</p><p>共通するのは、その指標が<b>「価値が届いた瞬間」</b>を捉えていたことです。登録者数でもページビューでもなく、「ユーザーが本当に役立ったと感じた回数」に近い数字を選んでいました。</p><p>ここから分かるのは、<b>何を測るかが、何を作るかを決める</b>ということです。登録者数を追えば、登録を増やす機能ばかり作ります。コア行動の継続率を追えば、使い続けてもらう工夫を作ります。指標は、ただの計測手段ではなく<b>チームの行動を規定する舵</b>なのです。</p><p>だからこそ、OMTM は慎重に、しかし<b>大胆に1つ</b>を選びます。</p></div></div>
     </div>
   </section>
 
@@ -647,6 +671,7 @@
         <button data-m="example">記入例（食品ロス削減）</button>
       </div>
       <div class="drill" id="stepList"></div>
+      <div class="tldr"><p class="tldr-sum">OMTMは「誰の・どの行動が・価値を表すか」から導きます。比率で表し、期限と目標値を決めます。</p><button class="tldr-btn" type="button">もっと詳しく ▸</button><div class="tldr-full" hidden><p>OMTM の決め方には、型があります。</p><p><b>①段階を確認する</b>：今は共感か、定着か。<b>②コア行動を特定する</b>：ユーザーが価値を受け取った瞬間は何か。<b>③比率で表す</b>：「500人」ではなく「登録者のうち◯%が継続」。絶対数は規模に左右されますが、<b>比率</b>なら質が見えます。<b>④期限を切る</b>：「4週間後の継続率」のように期間を明示。<b>⑤目標値（線）を決める</b>：「40%を超えたら次の段階へ」。</p><p>特に重要なのが<b>⑤の「線」</b>です。あらかじめ「この数字を超えたら成功」と決めておくことで、結果が出てから都合よく解釈することを防げます。この考え方は、第4回の A/Bテストでも再び登場します。</p></div></div>
     </div>
   </section>
 
@@ -672,6 +697,7 @@
           <div class="pititem">目標値（ライン）がない <b>→</b> 数字に“合格ライン”を決める</div>
         </div>
       </div>
+      <div class="tldr"><p class="tldr-sum">目標値（ライン）は事前に決める。よくあるつまずきは、虚栄の指標・指標の増やしすぎ・定義の曖昧さです。</p><button class="tldr-btn" type="button">もっと詳しく ▸</button><div class="tldr-full" hidden><p>OMTM 運用でつまずくポイントは、だいたい3つに集約されます。</p><p><b>①虚栄の指標を選んでしまう</b>：累計登録者数のような、必ず増える数字を追ってしまう。<b>②指標を増やしてしまう</b>：「これも大事」と足すうちに、焦点が失われる。<b>③定義が曖昧</b>：「アクティブユーザー」の定義が人によって違い、議論が噛み合わない。</p><p>そして最大の落とし穴が、<b>結果を見てから基準を決めること</b>です。「35%だったけど、まあ悪くない」と後付けで解釈すれば、数字を測る意味そのものが失われます。<b>始める前に線を引く</b>。これは第4回で詳しく扱う、この授業を貫く原則です。</p></div></div>
     </div>
   </section>
 
@@ -703,6 +729,7 @@
         <div class="next">次回予告 ── 第2回：データ収集の設計</div>
       </div>
       <p class="srcnote">出典：A. クロール＆B. ヨスコビッツ『Lean Analytics』（オライリージャパン）を要約・再構成（逐語引用なし）。数値はEKIDEN.AIの教材用データで、収益（Stripe）データは扱いません。</p>
+      <div class="tldr"><p class="tldr-sum">自分のテーマの「誰の困りごとか」を書き、コア行動を定義し、OMTMを1つ決めましょう。</p><button class="tldr-btn" type="button">もっと詳しく ▸</button><div class="tldr-full" hidden><p>次回までの課題は、今日学んだことを<b>自分のテーマに適用する</b>ことです。</p><p><b>①テーマを決める</b>：「誰の、どんな困りごとか」を一文で。身近な一人の顔が見えるレベルまで具体化してください。<b>②コア行動を定義する</b>：その人が「役に立った」と感じる瞬間は何か。ログインや訪問ではなく、<b>価値が届いた瞬間</b>を言葉にします。<b>③OMTMを1つ決める</b>：コア行動を比率で表し、期限と目標値（線）を添えます。</p><p>次回は、その指標を<b>どう測るか</b>（データ収集の設計）に進みます。定性データ（インタビュー）と定量データ（数字）をどう組み合わせるか。良い指標の条件とは何か。今日決めた OMTM が、次回の出発点になります。</p></div></div>
     </div>
   </section>
   <!-- FOOTER (講師・教科書) -->
@@ -1013,6 +1040,24 @@
   text.addEventListener("keydown",function(e){if(e.key==="Enter"&&!e.shiftKey){e.preventDefault();submit();}});
   function submit(){var v=text.value.trim();if(!v)return;text.value="";autoGrow();ask(v);}
   send.addEventListener("click",submit);
+})();
+</script>
+<script>
+(function(){
+  Array.prototype.forEach.call(document.querySelectorAll('.tldr-btn'),function(btn){
+    btn.addEventListener('click',function(){
+      var full=btn.parentNode.querySelector('.tldr-full');
+      if(!full)return;
+      var slide=btn.closest('.slide');
+      if(full.hidden){
+        full.hidden=false;btn.textContent='閉じる ▾';
+        if(slide)slide.classList.add('reading');
+      }else{
+        full.hidden=true;btn.textContent='もっと詳しく ▸';
+        if(slide){slide.classList.remove('reading');slide.scrollTop=0;}
+      }
+    });
+  });
 })();
 </script>
 </body>
