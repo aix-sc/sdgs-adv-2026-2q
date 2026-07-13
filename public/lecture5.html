@@ -570,6 +570,18 @@
   .mece-opt .mo-n{flex:none;width:22px;height:22px;border-radius:6px;background:var(--navy);color:#fff;font-size:11px;font-weight:700;display:flex;align-items:center;justify-content:center}
   .mece-opt b{font-size:12.5px;color:var(--navy);display:block}
   .mece-opt p{margin:2px 0 0;font-size:11px;color:var(--mute);line-height:1.5}
+  
+  .bk{display:flex;gap:22px;align-items:flex-start;margin-top:10px;background:#fff;border:1px solid var(--line);border-radius:14px;padding:20px 22px}
+  .bk-cover{flex:none;display:block}
+  .bk-cover img{width:150px;height:auto;border-radius:8px;box-shadow:0 6px 20px rgba(21,50,79,.20);display:block;transition:transform .15s,box-shadow .15s}
+  .bk-cover:hover img{transform:translateY(-3px);box-shadow:0 10px 28px rgba(21,50,79,.28)}
+  .bk-body{min-width:0}
+  .bk-body h3{margin:0 0 5px;font-size:16px;color:var(--navy);line-height:1.45}
+  .bk-meta{margin:0 0 10px;font-size:12px;color:var(--mute)}
+  .bk-desc{margin:0 0 12px;font-size:13px;color:var(--ink);line-height:1.75}
+  .bk-link{display:inline-block;font-size:12.5px;font-weight:700;color:#fff;background:var(--teal);border-radius:9px;padding:8px 15px;text-decoration:none;transition:background .15s}
+  .bk-link:hover{background:var(--navy)}
+  @media(max-width:860px){ .bk{flex-direction:column;align-items:center;text-align:center} .bk-cover img{width:120px} }
   </style>
   <script src="config.js"></script>
 </head>
@@ -1048,6 +1060,26 @@
       <div class="exa" style="margin-top:16px"><b>ポイント：</b>3枚とも<b>タイトルが主張（結論）</b>になっている。図は主張を支える<b>最小限</b>。各枚に<b>次の行動</b>がある。累計ではなく<b>率</b>で示し、A/Bには<b>分母（n）</b>を添える。＝「見せる」ではなく「<b>動かす</b>」報告。</div>
       <div class="tldr"><p class="tldr-sum">EKIDEN.AIの数値で作った3枚の解答例。タイトルが主張、図は最小限、各枚に次の行動。率と分母を必ず添えます。</p><button class="tldr-btn" type="button">もっと詳しく ▸</button><div class="tldr-full" hidden><p>参考解答例として、EKIDEN.AI の数値で「3枚の物語」を実際に組み立てました。自分のテーマに置き換えるときの手本にしてください。</p><p><b>1枚目（課題）：</b>タイトルは「質疑往復が最大の漏れ（36%）」。図はファネルの段階別バーだけ。ここで大切なのは、累計人数ではなく<b>段階ごとの転換率</b>で示していることです。「1,000人が登録しました」では良し悪しが分かりませんが、「最後の段で36%まで落ちる」と示せば、問題の所在が一目で伝わります。</p><p><b>2枚目（分析）：</b>タイトルは「具体化メールで +11pt（A/B）」。図はA群とB群の棒2本だけ。そして必ず<b>分母（各n=1,000）</b>と<b>事前に引いた線（+5pt以上で採用）</b>を添えます。これがないと、「たまたま良い数字が出ただけでは？」という疑問に答えられません。</p><p><b>3枚目（打ち手）：</b>タイトルは「全ユーザーへ横展開する」。図は期待効果の推移。そして「効果の大きい層から順に展開」という具体的な次の一手を書きます。</p><p>3枚に共通するポイントを確認してください。①<b>タイトルが主張（結論）</b>になっている。②図は主張を支える<b>最小限</b>だけ。③各枚に<b>次の行動</b>がある。④累計ではなく<b>率</b>、率には<b>分母</b>。これが「見せる」報告と「<b>動かす</b>」報告の違いです。</p><p>最後に一つ。この3枚は、そのまま次回の<b>投資家向けピッチ</b>の材料になります。第6回では、これを<b>1枚のトラクション・スライド</b>に凝縮する作業を行います。「成長している・使われている・改善できる」という3つの証拠を、限られた時間で示すための設計です。今日つくった3枚を、ぜひ手元に残しておいてください。</p></div></div>
     </div></section>
+
+  <section class="slide" data-title="参考文献">
+    <div class="in">
+      <div class="eyebrow"><span class="num">17</span> 参考文献</div>
+      <h2 class="t">今日の内容をさらに深めるために</h2>
+      <div class="bk">
+        <a class="bk-cover" href="https://amzn.to/3TxgVOK" target="_blank" rel="noopener">
+          <img src="assets/book-logical-thinking.jpg" alt="ロジカル・シンキング ── 論理的な思考と構成のスキル（照屋華子・岡田恵子）">
+        </a>
+        <div class="bk-body">
+          <h3>ロジカル・シンキング ── 論理的な思考と構成のスキル</h3>
+          <p class="bk-meta">照屋 華子・岡田 恵子 著／東洋経済新報社</p>
+          <p class="bk-desc">今日学んだ <b>So What? / Why So?</b>（話の飛びをなくす技術）と <b>MECE</b>（話の重複・漏れ・ずれをなくす技術）、そして <b>解説型・並列型</b>という2つの論理構成は、この本が出典です。マッキンゼーのエディターとして活躍した著者による、ロジカル・コミュニケーションの定番書。データを「伝わる形」に組み立てる技術を、体系的に学べます。</p>
+          <a class="bk-link" href="https://amzn.to/3TxgVOK" target="_blank" rel="noopener">📖 書籍の詳細を見る ↗</a>
+        </div>
+      </div>
+      <p class="srcnote">※ 本講義の教科書は A. クロール＆B. ヨスコビッツ『Lean Analytics』（オライリージャパン）です。上記は補助教材として紹介しています。いずれも本スライドでは要約・再構成のうえ参照しており、逐語引用は行っていません。</p>
+      <div class="tldr"><p class="tldr-sum">今日の So What? / Why So?、MECE、解説型・並列型はこの本が出典。データを「伝わる形」に組み立てる技術の定番書です。</p><button class="tldr-btn" type="button">もっと詳しく ▸</button><div class="tldr-full" hidden><p>『ロジカル・シンキング ── 論理的な思考と構成のスキル』（照屋華子・岡田恵子、東洋経済新報社）は、2001年の刊行以来読み継がれている、ロジカル・コミュニケーションの定番書です。著者はいずれもマッキンゼーでエディターを務めた経歴を持ち、「なぜあの人の話は伝わらないのか」を、才能ではなく<b>技術の問題</b>として解きほぐします。</p><p>本書の出発点は、伝わらない話には2つの原因がある、という整理です。一つは<b>話の「飛び」</b>──根拠と結論のあいだが埋まっていない状態。もう一つは<b>話の「重複・漏れ・ずれ」</b>──根拠の並べ方が雑な状態。前者を防ぐ技術が <b>So What? / Why So?</b>、後者を防ぐ技術が <b>MECE</b> です。今日の講義で扱ったのは、まさにこの2つでした。</p><p><b>So What?</b> は「手持ちのデータから、課題に照らして言えることのエキスを抽出する」作業。<b>Why So?</b> は「その主張が手持ちのデータで証明できるかを検証する」作業です。本書はさらに、データを要約しただけの<b>観察</b>と、そこから打ち手を導く<b>洞察</b>を区別し、「観察なき洞察はならず」と戒めます。データ分析者が図を出して満足せず、「だから何をするか」まで踏み込むための道具立てです。</p><p><b>MECE</b>（Mutually Exclusive, Collectively Exhaustive）は、重なりなく・漏れなく分けること。ただし本書が強調するのは、<b>切り口は自分で選ぶもの</b>だという点です。プロセス、セグメント、時間、事実と判断──どの軸で切るかによって、見える結論は変わります。</p><p>そして論理を、<b>結論を頂点に、縦は So What?/Why So?、横は MECE で関係づけた構造</b>と定義し、<b>解説型</b>（事実→判断基準→判断内容）と<b>並列型</b>（結論＋MECEな根拠）という2つの型を示します。今日の3幕構成は解説型、次回のピッチは並列型です。教科書『Lean Analytics』が「何を測り、どう判断するか」を教えるのに対し、本書は「<b>それをどう伝え、人を動かすか</b>」を教えてくれます。両輪で読むことをおすすめします。</p></div></div>
+    </div>
+  </section>
 
   <section class="slide" data-title="講師・教科書">
     <div class="in">
