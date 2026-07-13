@@ -512,6 +512,12 @@
   @media(max-width:860px){
     .ex-cmp{grid-template-columns:1fr} .mini-row{grid-template-columns:1fr}
   }
+  
+  .rtab{width:100%;border-collapse:collapse;font-size:12.5px;margin-top:6px}
+  .rtab th,.rtab td{border:1px solid var(--line);padding:7px 9px;text-align:center;font-variant-numeric:tabular-nums}
+  .rtab th{background:var(--soft);color:var(--navy);font-weight:700}
+  .rtab td.l{text-align:left}
+  .rtab .ok{color:var(--green);font-weight:800} .rtab .warn{color:var(--amber);font-weight:800}
   </style>
   <script src="config.js"></script>
 </head>
@@ -569,16 +575,19 @@
         <div class="step"><div class="n">1</div><h3>なぜ物語か</h3><p>数字だけでは動かない</p></div>
         <div class="step"><div class="n">2</div><h3>3幕構成</h3><p>課題→分析→打ち手</p></div>
         <div class="step"><div class="n">3</div><h3>1画面1メッセージ</h3><p>主張・根拠・次の行動</p></div>
-        <div class="step"><div class="n">4</div><h3>可視化の使い分け</h3><p>誤解を招かない図</p></div>
-        <div class="step"><div class="n">5</div><h3>演習</h3><p>数字を物語に並べる</p></div>
-      </div></div></section>
+        <div class="step"><div class="n">4</div><h3>可視化と誠実さ</h3><p>誤解を招かない図</p></div>
+        <div class="step"><div class="n">5</div><h3>ケースとドリル</h3><p>EKIDEN.AIで実践</p></div>
+      </div>
+      <p class="lead" style="margin-top:20px">前回までに、ファネル分析とコホート分析で「どこで漏れ、どの世代が離れるか」を読み、<b>A/Bテスト</b>で仮説を確かめ、<b>継続・改善・ピボット</b>を意思決定してきました。第5回で扱うのは、その<b>分析結果を「人が動く形」に翻訳する技術</b>です。どれほど良い分析も、伝わらなければ意思決定は変わりません。今日は、数字を<b>「課題 → 分析 → 打ち手」の物語</b>に構成し、<b>1画面1メッセージ</b>で示し、<b>誠実な可視化</b>で伝える方法を学びます。教科書『Lean Analytics』が繰り返す「<b>データは行動を変えるためにある</b>」という考え方に沿い、共通ケース EKIDEN.AI で実践します。次回の<b>投資家向けピッチ</b>の土台になる回です。</p>
+    </div></section>
 
   <section class="slide" data-title="なぜ物語か">
     <div class="in"><div class="eyebrow"><span class="num">02</span> なぜ物語か</div>
       <h2 class="t">人は「数字の羅列」では動かない</h2>
+      <p class="lead">教科書は、良い指標の条件として<b>「行動につながる（actionable）」</b>ことを挙げ、見て終わりの<b>虚栄の指標（vanity metrics）</b>を戒めます。伝え方も同じです。<b>相手の行動が変わらない報告は、虚栄の報告</b>にすぎません。<span style="color:var(--mute)">（参考：Lean Analytics）</span></p>
       <div class="cmp2">
-        <div class="cmp bad"><h3><span class="ic">📊</span>数字の羅列</h3><p>グラフを並べるだけ。相手は「何が言いたいのか」「自分は何をすべきか」が分からない。</p></div>
-        <div class="cmp good"><h3><span class="ic">📖</span>物語（ストーリー）</h3><p>課題→分析→打ち手の順で、相手が理解し・記憶し・行動できる形にする。</p></div>
+        <div class="cmp bad"><h3><span class="ic">📊</span>数字の羅列</h3><p>グラフを並べるだけ。「何が言いたいのか」「自分は何をすべきか」が分からない。＝虚栄の報告。</p></div>
+        <div class="cmp good"><h3><span class="ic">📖</span>物語（ストーリー）</h3><p>課題→分析→打ち手の順で、相手が理解し・納得し・行動できる形にする。＝行動につながる報告。</p></div>
       </div>
       <p class="lead" style="margin-top:14px">分析の目的は「見せること」ではなく、<b>相手の意思決定と行動を変えること</b>です。</p>
     </div></section>
@@ -685,44 +694,111 @@
       </div>
     </div></section>
 
-  <section class="slide" data-title="EKIDEN.AIの物語">
-    <div class="in"><div class="eyebrow"><span class="num">06</span> ケースで見る</div>
-      <h2 class="t">EKIDEN.AI の分析を、1つの物語に</h2>
-      <div class="steps" style="grid-template-columns:repeat(3,1fr)">
-        <div class="step"><div class="n">課題</div><h3>最大の漏れ</h3><p>ファネルで、質疑往復への転換が36%＝ここが最大のボトルネック。</p></div>
-        <div class="step"><div class="n">分析</div><h3>世代で改善</h3><p>コホートで6月世代のW1が改善。A/Bで具体化案が36%→47%に。</p></div>
-        <div class="step"><div class="n">打ち手</div><h3>全体へ横展開</h3><p>質問候補の具体化を全ユーザーへ。期待：質疑往復が月+約100人。</p></div>
+  <section class="slide" data-title="誠実な可視化">
+    <div class="in"><div class="eyebrow"><span class="num">06</span> 誠実な可視化</div>
+      <h2 class="t">「盛らない」── データで嘘をつかないために</h2>
+      <p class="lead">伝える技術は、<b>都合よく見せる技術ではありません</b>。教科書は、見栄えのする数字（累計・総登録数など）で実態を覆い隠すことを繰り返し戒めます。可視化でも同じ落とし穴があります。</p>
+      <div class="aq" style="grid-template-columns:repeat(2,1fr)">
+        <div class="aqi"><h4><span class="en">累計</span>右肩上がりの罠</h4><p>累計は必ず増える。<b>期間ごとの実数・率</b>で見せる。</p></div>
+        <div class="aqi"><h4><span class="en">平均</span>平均は嘘をつく</h4><p>コホート・セグメントに分けて示す（第3回）。</p></div>
+        <div class="aqi"><h4><span class="en">軸</span>軸を切らない</h4><p>0から始めないと差が誇張される。</p></div>
+        <div class="aqi"><h4><span class="en">分母</span>率には分母を添える</h4><p>「+50%」も、母数が20人なら意味が違う。</p></div>
       </div>
-      <p class="lead" style="margin-top:16px">前回までの<b>ファネル・コホート・A/B</b>の結果が、そのまま物語の“分析”になります。</p>
+      <div class="why"><h3>悪い数字も、そのまま出す</h3>
+        <p>ピボットが必要な事実を隠すと、意思決定を誤らせます。<b>正しい判断のための報告</b>である以上、都合の悪い結果ほど正直に、そして「だからどうするか」とセットで伝えます。</p></div>
     </div></section>
 
-  <section class="slide" data-title="演習">
-    <div class="in">
-      <div class="eyebrow"><span class="num">07</span> 演習</div>
+  <section class="slide" data-title="EKIDEN.AIの物語">
+    <div class="in"><div class="eyebrow"><span class="num">07</span> ケースで見る</div>
+      <h2 class="t">EKIDEN.AI の分析を、1つの物語に</h2>
+      <div class="steps" style="grid-template-columns:repeat(3,1fr)">
+        <div class="step"><div class="n">課題</div><h3>最大の漏れ</h3><p>ファネルで、質疑往復への転換が36%＝最大のボトルネック。</p></div>
+        <div class="step"><div class="n">分析</div><h3>実験で確かめた</h3><p>コホートで世代改善。A/Bで具体化メールが36%→47%（+11pt）。</p></div>
+        <div class="step"><div class="n">打ち手</div><h3>横展開する</h3><p>質問候補の具体化を全ユーザーへ。期待：質疑往復が月+約100人。</p></div>
+      </div>
+      <p class="lead" style="margin-top:16px">前回までの<b>ファネル・コホート・A/B</b>の結果が、そのまま物語の“分析”になります。<b>主張＝タイトル、根拠＝図、行動＝次の一手</b>の形で1枚に凝縮します。</p>
+    </div></section>
+
+  <section class="slide" data-title="ドリル①">
+    <div class="in"><div class="eyebrow"><span class="num">08</span> ドリル① 3幕に並べる</div>
       <h2 class="t">バラバラの事実を「課題→分析→打ち手」に並べる</h2>
       <p class="lead" style="max-width:none">次の3つの事実を、伝わる順番（3幕）に並べ替え、タイトル（主張）を1つ付けましょう。<span style="color:var(--mute)">（教材上の例）</span></p>
       <div class="ex-split">
-        <div class="ex-chart"><ul class="plain">
-        <li>① A/Bテストで、具体化メールは質疑往復を 36%→47% に上げた。</li>
-        <li>② 質疑往復への転換が 36% で、ファネル最大の漏れになっている。</li>
-        <li>③ 施策を全ユーザーに広げると、質疑往復は月+約100人の見込み。</li>
-      </ul></div>
+        <div class="ex-chart">
+          <ul class="plain">
+            <li>① A/Bテストで、具体化メールは質疑往復を 36%→47% に上げた。</li>
+            <li>② 質疑往復への転換が 36% で、ファネル最大の漏れになっている。</li>
+            <li>③ 施策を全ユーザーに広げると、質疑往復は月+約100人の見込み。</li>
+          </ul>
+        </div>
         <div class="ex-panel">
           <button class="ex-toggle" data-ex="ex1">回答例を見る →</button>
           <div class="ex-view" id="ex1-q"><div class="exq"><b>問い：</b>どの順番が「課題→分析→打ち手」ですか？　このスライド1枚に付ける“主張タイトル”は？</div></div>
           <div class="ex-view" id="ex1-a" hidden><div class="exa"><b>回答例：</b>順番は <b>②（課題）→ ①（分析）→ ③（打ち手）</b>。タイトル例：「<b>最大の漏れ『質疑往復』を、具体化メールで +11pt 改善できる</b>」。＝主張がタイトル、①が根拠、③が次の行動。</div></div>
         </div>
       </div>
-    </div>
-  </section>
+    </div></section>
+
+  <section class="slide" data-title="ドリル②">
+    <div class="in"><div class="eyebrow"><span class="num">09</span> ドリル② 報告を書き直す</div>
+      <h2 class="t">この報告、どこが問題？</h2>
+      <p class="lead" style="max-width:none">EKIDEN.AI のチームが出した報告スライドです。教科書の観点から、問題点を指摘し、書き直しましょう。<span style="color:var(--mute)">（教材上の例）</span></p>
+      <div class="ex-split">
+        <div class="ex-chart">
+          <div class="mini bad-ex" style="max-width:420px">
+            <div class="mini-ttl gray">サービスは順調に成長しています</div>
+            <div class="mini-chart">
+              <svg viewBox="0 0 260 110"><line x1="20" y1="94" x2="250" y2="94" stroke="#dfe6ec"/>
+              <polyline points="30,86 70,74 110,60 150,46 190,32 240,16" fill="none" stroke="#b9c5cf" stroke-width="3"/>
+              <text x="140" y="108" font-size="9" fill="#9aa8b3" text-anchor="middle">累計登録者数（4月〜9月）</text></svg>
+            </div>
+            <div class="mini-note gray">「累計は右肩上がり」／打ち手の記載なし</div>
+          </div>
+        </div>
+        <div class="ex-panel">
+          <button class="ex-toggle" data-ex="ex2">回答例を見る →</button>
+          <div class="ex-view" id="ex2-q"><div class="exq"><b>問い：</b>この報告の問題点は？（ヒント：虚栄の指標／主張／行動）　どう書き直しますか。</div></div>
+          <div class="ex-view" id="ex2-a" hidden><div class="exa"><b>回答例：</b>問題は3つ。①<b>累計＝虚栄の指標</b>（必ず増えるので、良し悪しが分からない）。②<b>主張がない</b>（「順調」は結論ではない）。③<b>次の行動がない</b>。<br>書き直し例：タイトル「<b>質疑往復への転換が36%で頭打ち ── 具体化メールで改善する</b>」＋根拠＝<b>週次の転換率</b>とA/B結果（36%→47%）＋行動＝「<b>全ユーザーへ横展開</b>」。累計ではなく<b>期間ごとの率</b>で示す。</div></div>
+        </div>
+      </div>
+    </div></section>
+
+  <section class="slide" data-title="ピボットの伝え方">
+    <div class="in"><div class="eyebrow"><span class="num">10</span> ケース ピボットを伝える</div>
+      <h2 class="t">「うまくいかなかった」を、どう物語にするか</h2>
+      <p class="lead" style="max-width:none">第4回のシミュレーションで、EKIDEN.AI は定着ゲート（40%）に届かず頭打ち（37%）。セグメント別では競技・駅伝層が55%と判明し、<b>顧客セグメント・ピボット</b>を決めました。これをチーム／投資家にどう伝えますか。<span style="color:var(--mute)">（教材上の数値例）</span></p>
+      <div class="ex-split">
+        <div class="ex-chart">
+          <table class="rtab">
+            <thead><tr><th>材料</th><th>数値</th></tr></thead>
+            <tbody>
+              <tr><td class="l">3回のA/B（伸び幅）</td><td>+5 → +3 → +1 pt</td></tr>
+              <tr><td class="l">全体の4週後定着</td><td class="warn">37%（ゲート40%未達）</td></tr>
+              <tr><td class="l">ライトランナー層</td><td>30%</td></tr>
+              <tr><td class="l">競技・駅伝チーム層</td><td class="ok">55%</td></tr>
+            </tbody>
+          </table>
+          <span class="gate">失敗ではなく「学び」として語る</span>
+        </div>
+        <div class="ex-panel">
+          <button class="ex-toggle" data-ex="ex3">回答例を見る →</button>
+          <div class="ex-view" id="ex3-q"><div class="exq"><b>問い：</b>この結果を3幕（課題→分析→打ち手）で語ると？　“主張タイトル”は？　悪い数字はどう扱いますか。</div></div>
+          <div class="ex-view" id="ex3-a" hidden><div class="exa"><b>回答例：</b><b>課題</b>＝定着がゲート40%に届かず37%で頭打ち（伸び幅も+5→+3→+1と縮小）。<b>分析</b>＝セグメントで分けると、競技・駅伝層は<b>すでに55%</b>、ライト層は30%＝製品は<b>特定の層に強く刺さっている</b>。<b>打ち手</b>＝AIコーチングのエンジンは残し、<b>競技・駅伝チーム層へピボット</b>。<br>タイトル例：「<b>製品は“競技層”に刺さっている ── ターゲットを絞って定着を伸ばす</b>」。悪い数字（37%）は<b>隠さず提示</b>し、「だから何をするか」とセットで語る。<b>実験で学んだから決められた</b>という筋書きが、信頼につながる。</div></div>
+        </div>
+      </div>
+    </div></section>
 
   <section class="slide" data-title="今日のワーク">
-    <div class="in">
-      <div class="eyebrow"><span class="num">08</span> 今日のワーク／次回までの課題</div>
-      <h2 class="t">学んだことを、自分のテーマで使ってみる</h2>
+    <div class="in"><div class="eyebrow"><span class="num">11</span> 今日のワーク／次回までの課題</div>
+      <h2 class="t">自分の分析を「3枚の物語」にする</h2>
       <div class="task">
-        <div class="tcard review"><h3>🔁 復習</h3><ol><li>自分のテーマの分析を「課題→分析→打ち手」の3枚に並べる</li><li>各スライドに“主張タイトル”を1つずつ付ける</li></ol></div>
-        <div class="tcard prep"><h3>📖 予習</h3><ol start="3"><li>自分の分析で使う可視化（比較/推移/内訳/分布）を選ぶ</li><li>教科書のレポーティング／指標の伝え方に関する箇所に目を通す</li></ol></div>
+        <div class="tcard review"><h3>🔁 復習</h3><ol>
+          <li>自分のテーマの分析を「課題→分析→打ち手」の3枚に並べる</li>
+          <li>各スライドに“主張タイトル”を1つずつ付ける（結論をタイトルに）</li>
+          <li>使う可視化（比較/推移/内訳/分布/コホート）を選び、軸・分母を確認する</li></ol></div>
+        <div class="tcard prep"><h3>📖 予習</h3><ol start="4">
+          <li>その3枚を、投資家に見せる1枚（トラクション）に凝縮するとどうなるか考える</li>
+          <li>教科書のレポーティング・指標の伝え方に関する箇所に目を通す</li></ol></div>
       </div>
       <div class="band">
         <div class="dl">提出締切：<span>次回授業まで</span></div>
@@ -730,8 +806,31 @@
         <div class="next">次回予告 ── 第6回：投資家向けピッチの準備 ── データで信頼を勝ち取る</div>
       </div>
       <p class="srcnote">出典：A. クロール＆B. ヨスコビッツ『Lean Analytics』（オライリージャパン）を要約・再構成（逐語引用なし）。数値は教材上の例で、EKIDEN.AI の収益（Stripe）データは扱いません。</p>
-    </div>
-  </section>
+    </div></section>
+
+  <section class="slide" data-title="レポート課題の参考解答例">
+    <div class="in"><div class="eyebrow"><span class="num">12</span> レポート課題の参考解答例</div>
+      <h2 class="t">EKIDEN.AI でたどる「3枚の物語」の参考解答例</h2>
+      <p class="lead">今日のケースの数値を使った参考解答です。自分のテーマでも同じ手順で組み立てましょう。<span style="color:var(--mute)">（教材上の数値例。収益データは扱いません）</span></p>
+      <div class="mini-row">
+        <div class="mini good-ex">
+          <div class="mini-ttl">① 課題：質疑往復が最大の漏れ（36%）</div>
+          <div class="mini-chart"><svg viewBox="0 0 220 90"><rect x="10" y="14" width="190" height="14" rx="3" fill="#15324F"/><rect x="10" y="34" width="114" height="14" rx="3" fill="#1C7293"/><rect x="10" y="54" width="80" height="14" rx="3" fill="#3E7C53"/><rect x="10" y="74" width="29" height="14" rx="3" fill="#C0392B"/></svg></div>
+          <div class="mini-act">▶ 根拠：段階別の転換率（率で示す）</div>
+        </div>
+        <div class="mini good-ex">
+          <div class="mini-ttl">② 分析：具体化メールで +11pt（A/B）</div>
+          <div class="mini-chart"><svg viewBox="0 0 220 90"><rect x="40" y="42" width="46" height="44" rx="3" fill="#b9c5cf"/><rect x="130" y="18" width="46" height="68" rx="3" fill="#3E7C53"/><text x="63" y="36" font-size="10" fill="#6b7a87" text-anchor="middle">36%</text><text x="153" y="12" font-size="10" fill="#3E7C53" font-weight="700" text-anchor="middle">47%</text></svg></div>
+          <div class="mini-act">▶ 根拠：各n=1,000、事前の線+5ptを超過</div>
+        </div>
+        <div class="mini good-ex">
+          <div class="mini-ttl">③ 打ち手：全ユーザーへ横展開する</div>
+          <div class="mini-chart"><svg viewBox="0 0 220 90"><polyline points="16,74 60,64 104,50 148,36 206,22" fill="none" stroke="#1C7293" stroke-width="3" stroke-linecap="round"/><circle cx="206" cy="22" r="4.5" fill="#1C7293"/><text x="196" y="14" font-size="9" fill="#1C7293" font-weight="700">+100人/月</text></svg></div>
+          <div class="mini-act">▶ 次の一手：効果の大きい層から順に展開</div>
+        </div>
+      </div>
+      <div class="exa" style="margin-top:16px"><b>ポイント：</b>3枚とも<b>タイトルが主張（結論）</b>になっている。図は主張を支える<b>最小限</b>。各枚に<b>次の行動</b>がある。累計ではなく<b>率</b>で示し、A/Bには<b>分母（n）</b>を添える。＝「見せる」ではなく「<b>動かす</b>」報告。</div>
+    </div></section>
 
   <section class="slide" data-title="講師・教科書">
     <div class="in">
@@ -919,7 +1018,7 @@
   var GEMINI_API_KEY = (typeof window!=="undefined" && window.GEMINI_API_KEY) ? window.GEMINI_API_KEY : "";
   var GEMINI_MODEL   = (typeof window!=="undefined" && window.GEMINI_MODEL) ? window.GEMINI_MODEL : "gemini-3.5-flash";
 
-  var LECTURE_FOCUS = "データストーリーテリング（課題→分析→打ち手の3幕構成）、1画面1メッセージのスライド/ダッシュボード設計、可視化の使い分け（比較・推移・内訳・分布）、誤解を招く表現の回避、分析を意思決定と行動につなげる伝え方、EKIDEN.AIの分析を物語にする例";
+  var LECTURE_FOCUS = "データストーリーテリング（課題→分析→打ち手の3幕構成）、行動につながる報告と虚栄の指標（vanity metrics）の回避、1画面1メッセージ（主張=タイトル・根拠=図・行動=次の一手）、可視化の使い分け（比較・推移・内訳・分布・コホート）、誠実な可視化（累計の罠・平均の嘘・軸を切らない・分母を添える）、悪い数字も隠さず伝える、EKIDEN.AIのケース（ファネル36%→A/Bで47%→横展開）とピボット（競技・駅伝層への顧客セグメント・ピボット）の伝え方";
   var FALLBACK_QS = ["優れた指標の4条件をやさしく教えて","定性と定量はどう使い分ける？","虚栄指標と行動を促すの指標の見分け方は？","探索指標と報告指標の違いは？","先行指標と遅行指標の例は？","相関と因果はどう違う？","アイスと水難事故の例で相関と因果を説明して","『PV1万→So what?』と言われない報告は？"];
 
   var apiKey=GEMINI_API_KEY, history=[], busy=false, greeted=false;
