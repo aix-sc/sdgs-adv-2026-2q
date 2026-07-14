@@ -493,6 +493,10 @@
   .tldr-full b{color:var(--navy)}
   .slide.reading{height:100vh;max-height:100vh;justify-content:flex-start;overflow-y:auto;-webkit-overflow-scrolling:touch;overscroll-behavior:contain;scroll-snap-align:start}
   .slide.reading .in{margin:0 auto;padding-bottom:24px}
+  
+  .ikey{position:fixed;left:16px;bottom:16px;z-index:120;display:flex;align-items:center;gap:6px;background:rgba(255,255,255,.92);border:1px solid var(--line);border-radius:20px;padding:6px 12px;font-size:11px;color:var(--mute);box-shadow:0 2px 10px rgba(21,50,79,.10);pointer-events:none}
+  .ikey kbd{font-family:var(--jp);font-size:10.5px;font-weight:700;color:var(--navy);background:var(--soft);border:1px solid var(--line);border-radius:5px;padding:2px 7px;box-shadow:0 1px 0 rgba(21,50,79,.12)}
+  @media(max-width:860px){ .ikey{display:none} }
   </style>
   <script src="config.js"></script>
 </head>
@@ -1058,6 +1062,44 @@
         if(slide){slide.classList.remove('reading');slide.scrollTop=0;}
       }
     });
+  });
+})();
+</script>
+<div class="ikey"><kbd>i</kbd><span>キーで解説を開閉</span></div>
+<script>
+(function(){
+  /* ===== "i" キーで、表示中スライドの「もっと詳しく」を開閉 ===== */
+  function isTyping(el){
+    if(!el) return false;
+    var t=(el.tagName||'').toLowerCase();
+    return t==='input'||t==='textarea'||t==='select'||el.isContentEditable;
+  }
+  function currentSlide(){
+    var deck=document.querySelector('.deck');
+    if(!deck) return null;
+    var slides=deck.querySelectorAll('.slide');
+    var best=null,bestDist=Infinity;
+    var mid=deck.scrollTop+deck.clientHeight/2;
+    Array.prototype.forEach.call(slides,function(s){
+      var c=s.offsetTop+s.offsetHeight/2;
+      var d=Math.abs(c-mid);
+      if(d<bestDist){bestDist=d;best=s;}
+    });
+    return best;
+  }
+  document.addEventListener('keydown',function(e){
+    if(e.key!=='i'&&e.key!=='I') return;
+    if(e.metaKey||e.ctrlKey||e.altKey) return;
+    if(isTyping(document.activeElement)) return;
+    var lb=document.getElementById('lightbox');
+    if(lb&&!lb.hidden) return;
+    var s=currentSlide();
+    if(!s) return;
+    var btn=s.querySelector('.tldr-btn');
+    if(!btn) return;
+    e.preventDefault();
+    btn.click();
+    if(s.classList.contains('reading')) s.scrollTop=0;
   });
 })();
 </script>
