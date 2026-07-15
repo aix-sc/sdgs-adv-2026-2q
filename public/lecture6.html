@@ -496,6 +496,19 @@
   .pnot li{margin:0 0 9px;font-size:13px;color:var(--navy);font-weight:700;padding-left:14px;border-left:3px solid var(--amber)}
   .pnot li b{color:var(--green)}
   .pnot li span{display:block;font-size:11.5px;color:var(--mute);font-weight:400;margin-top:2px}
+  .ncards{margin:0;display:flex;flex-direction:column;gap:8px}
+  .ncard{display:block;width:100%;text-align:left;font-family:var(--jp);cursor:pointer;background:#fff;border:1px solid var(--line);border-left:3px solid var(--amber);border-radius:9px;padding:9px 12px;transition:border-color .15s,box-shadow .15s,background .15s}
+  .ncard:hover{border-left-color:var(--green);box-shadow:0 2px 10px rgba(21,50,79,.08)}
+  .ncard.open{border-left-color:var(--green);background:var(--soft)}
+  .nc-h{display:flex;align-items:baseline;gap:6px;font-size:13px;font-weight:700;color:var(--navy)}
+  .nc-h b{color:var(--green)}
+  .nc-h .nc-car{margin-left:auto;flex:none;font-size:10.5px;color:var(--teal);font-weight:700}
+  .ncard.open .nc-car{color:var(--green)}
+  .nc-sub{display:block;font-size:11.5px;color:var(--mute);margin-top:3px}
+  .nc-why{display:none;font-size:11.5px;color:var(--ink);margin-top:7px;padding-top:7px;border-top:1px dashed var(--line);line-height:1.6}
+  .nc-why b{color:var(--navy)}
+  .ncard.open .nc-why{display:block}
+  .nc-hint{margin:8px 0 0;font-size:11px;color:var(--teal);font-weight:700}
   .deckcards{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:8px}
   .dcard{background:var(--soft);border:1px solid var(--line);border-radius:12px;padding:14px 15px;cursor:pointer;transition:border-color .12s,box-shadow .12s}
   .dcard:hover{border-color:var(--teal);box-shadow:0 4px 14px rgba(21,50,79,.10)}
@@ -523,7 +536,7 @@
   .rtab th{background:var(--soft);color:var(--navy);font-weight:700}
   .rtab td.l{text-align:left}
   .rtab .ok{color:var(--green);font-weight:800} .rtab .warn{color:var(--amber);font-weight:800}
-  .gate{display:inline-block;background:var(--amber-soft);border:1px solid #e8d3a8;color:#7a531a;border-radius:8px;padding:6px 12px;font-size:12px;font-weight:700;margin-top:10px}
+  .takeaway{display:inline-block;background:var(--amber-soft);border:1px solid #e8d3a8;color:#7a531a;border-radius:8px;padding:6px 12px;font-size:12px;font-weight:700;margin-top:10px}
   .ans-h{font-size:14px;color:var(--navy);margin:22px 0 6px;display:flex;align-items:center;gap:9px}
   .ans-no{flex:none;font-size:11px;font-weight:700;color:#fff;background:var(--green);border-radius:6px;padding:3px 9px}
   .exa{margin-top:14px;max-width:none;background:var(--soft);border:1px solid var(--line);border-left:4px solid var(--green);border-radius:11px;padding:14px 16px;font-size:13px;color:var(--ink);line-height:1.75}
@@ -643,13 +656,14 @@
         </div>
         <div class="pcol">
           <h3 class="pch"><span class="pnum">B</span> 5つの「◯◯ではなく、△△」</h3>
-          <ul class="pnot">
-            <li><b>Problem</b>, NOT solution.<span>解決策より、まず「痛み」を語れ</span></li>
-            <li><b>Customer</b>, NOT technology.<span>技術より、それを使う人を語れ</span></li>
-            <li><b>UX</b>, NOT code.<span>実装より、体験を見せろ</span></li>
-            <li><b>Distribution</b>, NOT PR.<span>話題より、届く仕組みを示せ</span></li>
-            <li><b>Acq cost</b>, NOT revenue projections.<span>皮算用より、獲得コストの実測を</span></li>
-          </ul>
+          <div class="ncards" id="pnotCards">
+            <button class="ncard" type="button"><span class="nc-h"><b>Problem</b>, NOT solution.<span class="nc-car">なぜ？ ▸</span></span><span class="nc-sub">解決策より、まず「痛み」を語れ</span><span class="nc-why">聞き手は、自分ごとの<b>痛み</b>に共感して初めて解決策を聞く姿勢になる。いきなり機能を並べても「で、誰が困るの？」で止まる。</span></button>
+            <button class="ncard" type="button"><span class="nc-h"><b>Customer</b>, NOT technology.<span class="nc-car">なぜ？ ▸</span></span><span class="nc-sub">技術より、それを使う人を語れ</span><span class="nc-why">投資家が買うのは技術ではなく「<b>誰が、実際に使い続けているか</b>」。第3回のコホート定着こそ、ここで見せる証拠になる。</span></button>
+            <button class="ncard" type="button"><span class="nc-h"><b>UX</b>, NOT code.<span class="nc-car">なぜ？ ▸</span></span><span class="nc-sub">実装より、体験を見せろ</span><span class="nc-why">数分のピッチで伝わるのは、コードの中身ではなく<b>1画面の体験</b>。第5回「1画面1メッセージ」がそのまま効く。</span></button>
+            <button class="ncard" type="button"><span class="nc-h"><b>Distribution</b>, NOT PR.<span class="nc-car">なぜ？ ▸</span></span><span class="nc-sub">話題より、届く仕組みを示せ</span><span class="nc-why">一時のメディア露出は消える。<b>再現性のある獲得チャネル</b>だけが成長を支える。第4回で見つけた効く打ち手が答えになる。</span></button>
+            <button class="ncard" type="button"><span class="nc-h"><b>Acq cost</b>, NOT revenue projections.<span class="nc-car">なぜ？ ▸</span></span><span class="nc-sub">皮算用より、獲得コストの実測を</span><span class="nc-why">3年後の売上表は誰でも書ける。信用されるのは「<b>1人を獲得する実測コスト</b>」という、いま持っている数字だけ。</span></button>
+          </div>
+          <p class="nc-hint">▸ 各カードをクリックすると「なぜそう言えるか」が開きます。</p>
         </div>
       </div>
       <p class="srcnote">参考：Dave McClure「How to Pitch a VC」（500 Startups）の Essential Elements ／「Pitch MY PROBLEM, not YOUR SOLUTION」の考え方を再構成。</p>
@@ -659,6 +673,7 @@
   <section class="slide" data-title="実例に学ぶ">
     <div class="in"><div class="eyebrow"><span class="num">04</span> 実例に学ぶ</div>
       <h2 class="t">500 Startups / Y Combinator の Demo Day に学ぶ</h2>
+      <div class="dmc"><img class="dmc-photo" src="assets/dave-mcclure.jpg" alt="Dave McClure"><p>案内役は <b>Dave McClure</b>。PayPal を経てシードアクセラレーター <b>500 Startups</b> を創業し、「How to Pitch a VC（10 Slides to an Awesome Pitch）」でピッチの型を広めた人物です。彼の <b>「Pitch MY PROBLEM, not YOUR SOLUTION」</b>は、いまも投資家ピッチの第一原則として引用されます。</p></div>
       <p class="lead">実際に使われているピッチ・デッキを見て、構成の型を体で覚えましょう。各カードをクリックすると、要点と<b>元資料へのリンク</b>が開きます。</p>
       <div class="deckcards">
         <div class="dcard">
@@ -814,7 +829,7 @@
               <tr><td class="l">OMTM</td><td>コア行動（メール開封）の継続率</td></tr>
             </tbody>
           </table>
-          <span class="gate">1枚に凝縮する ── 主張・根拠・次の一手</span>
+          <span class="takeaway">1枚に凝縮する ── 主張・根拠・次の一手</span>
         </div>
         <div class="ex-panel">
           <button class="ex-toggle" data-ex="ex2">回答例を見る →</button>
@@ -1252,6 +1267,25 @@
         if(slide){slide.classList.remove('reading');slide.scrollTop=0;}
       }
     });
+  });
+})();
+</script>
+<script>
+(function(){
+  var g=document.getElementById('pnotCards');
+  if(!g)return;
+  g.addEventListener('click',function(e){
+    var c=e.target.closest('.ncard');
+    if(!c)return;
+    var was=c.classList.contains('open');
+    Array.prototype.forEach.call(g.querySelectorAll('.ncard'),function(o){
+      o.classList.remove('open');
+      var car=o.querySelector('.nc-car'); if(car)car.textContent='なぜ？ ▸';
+    });
+    if(!was){
+      c.classList.add('open');
+      var car=c.querySelector('.nc-car'); if(car)car.textContent='閉じる ▾';
+    }
   });
 })();
 </script>
