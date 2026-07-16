@@ -1,9 +1,237 @@
 <!DOCTYPE html>
-<html lang="ja"><head>
+<html lang="ja">
+<head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA2NCA2NCI+PHJlY3Qgd2lkdGg9IjY0IiBoZWlnaHQ9IjY0IiByeD0iMTQiIGZpbGw9IiMxNTMyNEYiLz48cmVjdCB4PSIxNCIgeT0iMzQiIHdpZHRoPSI4IiBoZWlnaHQ9IjE2IiByeD0iMiIgZmlsbD0iIzFDNzI5MyIvPjxyZWN0IHg9IjI4IiB5PSIyNiIgd2lkdGg9IjgiIGhlaWdodD0iMjQiIHJ4PSIyIiBmaWxsPSIjM0U3QzUzIi8+PHJlY3QgeD0iNDIiIHk9IjE2IiB3aWR0aD0iOCIgaGVpZ2h0PSIzNCIgcng9IjIiIGZpbGw9IiNDNThCMkIiLz48L3N2Zz4=">
-  <link rel="alternate icon" href="/favicon.ico" sizes="any">
-<meta http-equiv="refresh" content="0; url=lecture1.html">
-<title>SDGs発展2［a1］ 講義資料</title>
-<style>body{font-family:"Yu Gothic",sans-serif;display:flex;height:100vh;margin:0;align-items:center;justify-content:center;color:#15324F}a{color:#1C7293}</style>
-</head><body><p>SDGs発展2 講義資料ページへ移動します… <a href="lecture1.html">第1回を開く</a></p></body></html>
+<link rel="alternate icon" href="/favicon.ico" sizes="any">
+<title>SDGs発展2［a1］ 講義資料 ── データで確かめる、SDGsの一歩</title>
+<style>
+  :root{
+    --navy:#15324F; --teal:#1C7293; --green:#3E7C53; --amber:#C58B2B; --red:#C0392B;
+    --bg:#FFFFFF; --soft:#F5F8FB; --softa:#FBF5EA; --line:#E3E8ED; --ink:#2A2E33; --mute:#5C6670;
+    --amber-soft:#F8EFDD; --green-soft:#E9F2EC; --teal-soft:#E7F0F5;
+    --jp:"Yu Gothic","游ゴシック体",YuGothic,"Hiragino Sans","Hiragino Kaku Gothic ProN",Meiryo,sans-serif;
+    --hd:54px;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0}
+  body{font-family:var(--jp);color:var(--ink);background:var(--bg);line-height:1.7;-webkit-font-smoothing:antialiased}
+  a{color:var(--teal);text-decoration:none}
+
+  .hd{position:fixed;top:0;left:0;right:0;height:var(--hd);z-index:100;background:rgba(255,255,255,.93);backdrop-filter:blur(8px);border-bottom:1px solid var(--line);display:flex;align-items:center;gap:14px;padding:0 18px}
+  .hd .brand{font-weight:700;color:var(--navy);font-size:13.5px;white-space:nowrap}
+  .hd .brand span{color:var(--teal)}
+  .hd-cr{margin-left:auto;display:inline-flex;align-items:center;gap:7px;font-size:12.5px;font-weight:700;color:var(--green);background:var(--green-soft);border:1px solid #cfe3d4;border-radius:9px;padding:7px 13px;white-space:nowrap}
+  .hd-cr:hover{background:#dcebe0}
+
+  .wrap{max-width:1000px;margin:0 auto;padding:0 22px}
+
+  .hero{padding:calc(var(--hd) + 54px) 0 28px}
+  .hero .eyebrow{font-size:12.5px;font-weight:700;color:var(--teal);letter-spacing:.02em}
+  .hero .code{display:inline-block;margin:12px 0 4px;font-size:12px;font-weight:700;color:#fff;background:var(--navy);border-radius:7px;padding:4px 11px;letter-spacing:.04em}
+  .hero h1{font-size:38px;line-height:1.28;color:var(--navy);margin:12px 0 6px;font-weight:800;letter-spacing:.01em}
+  .hero h1 em{font-style:normal;color:var(--teal)}
+  .hero .tagline{font-size:17px;color:var(--ink);font-weight:700;margin:0 0 18px}
+  .hero .tagline b{color:var(--red)}
+  .meta{display:flex;flex-wrap:wrap;gap:9px;margin:0 0 20px}
+  .meta .pill{font-size:12.5px;background:#fff;border:1px solid var(--line);border-radius:999px;padding:6px 14px;color:var(--mute)}
+  .meta .pill b{color:var(--navy)}
+  .lead{font-size:14.5px;color:var(--ink);max-width:760px;margin:0}
+  .lead b{color:var(--navy)}
+
+  .sec{padding:22px 0}
+  .sec-h{display:flex;align-items:baseline;gap:12px;margin:0 0 16px}
+  .sec-h h2{font-size:20px;color:var(--navy);font-weight:800;margin:0}
+  .sec-h .cnt{font-size:12px;color:var(--mute);font-weight:700}
+  .divider{height:1px;background:var(--line);border:0;margin:6px 0 0}
+
+  .lec-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}
+  .lec-card{display:flex;flex-direction:column;background:var(--soft);border:1px solid var(--line);border-radius:14px;padding:18px 18px 16px;transition:transform .14s,box-shadow .14s,border-color .14s;position:relative;overflow:hidden}
+  .lec-card::before{content:"";position:absolute;left:0;top:0;bottom:0;width:4px;background:var(--teal)}
+  .lec-card:hover{transform:translateY(-2px);box-shadow:0 8px 22px rgba(21,50,79,.10);border-color:#cdd8e1}
+  .lec-card.gated::before{background:var(--amber)}
+  .lc-top{display:flex;align-items:center;gap:11px;margin-bottom:9px}
+  .lc-num{flex:none;width:34px;height:34px;border-radius:9px;background:var(--navy);color:#fff;font-weight:800;font-size:15px;display:flex;align-items:center;justify-content:center}
+  .lec-card.gated .lc-num{background:var(--amber)}
+  .lc-badge{margin-left:auto;font-size:10px;border-radius:5px;padding:3px 8px;font-weight:700}
+  .lc-badge.ready{background:var(--green-soft);color:var(--green)}
+  .lc-badge.lim{background:var(--amber-soft);color:#7a531a}
+  .lc-title{font-size:15.5px;font-weight:800;color:var(--navy);line-height:1.4;margin:0 0 5px}
+  .lc-desc{font-size:12.5px;color:var(--mute);line-height:1.6;margin:0}
+  .lc-go{margin-top:12px;font-size:12px;font-weight:700;color:var(--teal)}
+  .lec-card.gated .lc-go{color:var(--amber)}
+
+  .cr-band{display:flex;flex-wrap:wrap;align-items:center;gap:14px;background:var(--navy);border-radius:16px;padding:20px 24px;color:#fff;margin-top:6px}
+  .cr-band .cr-t{font-size:15px;font-weight:800}
+  .cr-band .cr-s{font-size:12.5px;color:#c7d3de;margin-top:2px}
+  .cr-band .cr-btn{margin-left:auto;background:var(--green);color:#fff;font-weight:700;font-size:13.5px;border-radius:10px;padding:11px 20px;white-space:nowrap}
+  .cr-band .cr-btn:hover{filter:brightness(1.07)}
+
+  .foot-grid{display:grid;grid-template-columns:1.45fr 1fr;gap:18px;align-items:start}
+  .foot-prof{display:flex;gap:16px;background:var(--soft);border:1px solid var(--line);border-radius:14px;padding:18px}
+  .prof-img{flex:none;width:82px;height:82px;border-radius:50%;object-fit:cover;border:2px solid #fff;box-shadow:0 3px 10px rgba(21,50,79,.15)}
+  .prof-name{font-size:16px;font-weight:700;color:var(--navy)}
+  .prof-name span{font-size:12px;color:var(--mute);font-weight:600;margin-left:6px}
+  .prof-title{font-size:12.5px;color:var(--teal);font-weight:700;margin:2px 0 8px}
+  .prof-bio{font-size:12px;color:var(--ink);margin:0 0 10px;line-height:1.7}
+  .prof-links{display:flex;flex-wrap:wrap;gap:7px}
+  .prof-links a{font-size:11.5px;background:#fff;border:1px solid var(--line);border-radius:8px;padding:5px 10px;color:var(--teal)}
+  .prof-links a:hover{border-color:var(--teal)}
+  .foot-book{display:flex;flex-direction:column;background:#fff;border:1px solid var(--line);border-radius:14px;padding:18px}
+  .book-label{font-size:10.5px;font-weight:700;letter-spacing:.08em;color:var(--mute);margin-bottom:10px}
+  .book-row{display:flex;gap:15px}
+  .bk-cover{flex:none;width:92px;height:126px;border-radius:8px;overflow:hidden;border:1px solid var(--line);background:var(--navy);display:flex;align-items:center;justify-content:center;position:relative}
+  .bk-cover img{width:100%;height:100%;object-fit:cover;display:block}
+  .bk-fallback{display:none;color:#fff;font-weight:800;font-size:15px;text-align:center;line-height:1.3}
+  .noimg{background:linear-gradient(160deg,#1C7293,#15324F)}
+  .noimg .bk-cover img{display:none}
+  .noimg .bk-fallback{display:flex;align-items:center;justify-content:center}
+  .book-info{display:flex;flex-direction:column}
+  .book-title{font-size:16px;font-weight:700;color:var(--navy)}
+  .book-sub{font-size:11.5px;color:var(--mute);margin:1px 0 8px;line-height:1.4}
+  .book-meta{font-size:11.5px;color:var(--mute);line-height:1.7}
+  .book-amz{margin-top:10px;align-self:flex-start;background:var(--amber);color:#fff;font-weight:700;font-size:12.5px;border-radius:9px;padding:8px 14px}
+  .book-amz:hover{filter:brightness(1.05)}
+  .foot-copy{margin:18px 0 40px;font-size:11.5px;color:#9aa4ad;text-align:center;border-top:1px solid var(--line);padding-top:16px}
+
+  @media(max-width:760px){
+    .hero{padding-top:calc(var(--hd) + 34px)}
+    .hero h1{font-size:29px}
+    .lec-grid{grid-template-columns:1fr}
+    .foot-grid{grid-template-columns:1fr}
+    .cr-band .cr-btn{margin-left:0}
+  }
+</style>
+</head>
+<body>
+
+<header class="hd">
+  <div class="brand">SDGs発展2 <span>講義資料</span></div>
+  <a class="hd-cr" href="https://classroom.google.com/c/ODU5NjUzNDM0Njk0" target="_blank" rel="noopener">🎓 Classroom</a>
+</header>
+
+<div class="wrap">
+
+  <section class="hero">
+    <div class="eyebrow">2026年度　／　武蔵野大学 データサイエンス学部</div>
+    <span class="code">SDGs発展2［a1］</span>
+    <h1>データで確かめる、<br><em>SDGsの一歩</em></h1>
+    <p class="tagline">合言葉は「<b>語るな、示せ</b>」。</p>
+    <div class="meta">
+      <span class="pill">担当：<b>高橋 雄介</b></span>
+      <span class="pill">教科書：<b>Lean Analytics</b></span>
+      <span class="pill">形態：オンライン（同時双方向）</span>
+      <span class="pill">共通ケース：<b>EKIDEN.AI</b></span>
+    </div>
+    <p class="lead">この授業では、教科書『Lean Analytics』（A. クロール &amp; B. ヨスコビッツ）を土台に、SDGsの課題を題材としながら、<b>データで事業の仮説を確かめる力</b>を身につけます。共通ケースはランナー向けAIコーチ <b>EKIDEN.AI</b>。全7回を通じて、指標の設計からデータドリブンな投資家向けピッチまでを、一つの物語としてたどります。</p>
+  </section>
+
+  <section class="sec">
+    <div class="sec-h"><h2>全7回</h2><span class="cnt">講義資料ページ一覧</span></div>
+    <hr class="divider">
+    <div class="lec-grid" style="margin-top:16px">
+
+      <a class="lec-card" href="lecture1.html">
+        <div class="lc-top"><span class="lc-num">1</span><span class="lc-badge ready">公開</span></div>
+        <div class="lc-title">Lean Analyticsの全体像 ── OMTMとビジネスモデル</div>
+        <p class="lc-desc">唯一重要な指標（OMTM）とは何か。9つのビジネスモデルと、分析でたどる5つの段階を俯瞰する。</p>
+        <div class="lc-go">開く →</div>
+      </a>
+
+      <a class="lec-card" href="lecture2.html">
+        <div class="lc-top"><span class="lc-num">2</span><span class="lc-badge ready">公開</span></div>
+        <div class="lc-title">データ収集の設計 ── 定性と定量</div>
+        <p class="lc-desc">「行動を促す（Actionable）」指標をどう選び、どう測るか。良い指標の4条件と5つの対比で考える。</p>
+        <div class="lc-go">開く →</div>
+      </a>
+
+      <a class="lec-card" href="lecture3.html">
+        <div class="lc-top"><span class="lc-num">3</span><span class="lc-badge ready">公開</span></div>
+        <div class="lc-title">コホート分析とファネル分析</div>
+        <p class="lc-desc">「平均は、嘘をつく」。時間（コホート）と段階（ファネル）で分けて、数字の本当の姿を読む。</p>
+        <div class="lc-go">開く →</div>
+      </a>
+
+      <a class="lec-card" href="lecture4.html">
+        <div class="lc-top"><span class="lc-num">4</span><span class="lc-badge ready">公開</span></div>
+        <div class="lc-title">A/Bテストとピボット ── 実験と意思決定</div>
+        <p class="lc-desc">事前に線を引き、実験で確かめる。うまくいかない時に、どう方向（ピボット）を選び直すか。</p>
+        <div class="lc-go">開く →</div>
+      </a>
+
+      <a class="lec-card" href="lecture5.html">
+        <div class="lc-top"><span class="lc-num">5</span><span class="lc-badge ready">公開</span></div>
+        <div class="lc-title">データストーリーテリング</div>
+        <p class="lc-desc">分析を、人を動かす物語に変える。「課題 → 分析 → 打ち手」の3幕構成と、So What? / Why So?。</p>
+        <div class="lc-go">開く →</div>
+      </a>
+
+      <a class="lec-card gated" href="lecture6.html">
+        <div class="lc-top"><span class="lc-num">6</span><span class="lc-badge lim">限定公開</span></div>
+        <div class="lc-title">投資家向けピッチの準備</div>
+        <p class="lc-desc">「語るな、示せ」。5つの必須要素と5つの原則で、トラクションを1枚のスライドに凝縮する。</p>
+        <div class="lc-go">開く（要パスワード）→</div>
+      </a>
+
+      <a class="lec-card gated" href="lecture7.html">
+        <div class="lc-top"><span class="lc-num">7</span><span class="lc-badge lim">限定公開</span></div>
+        <div class="lc-title">最終回：ピッチ講評会 &amp; 表彰</div>
+        <p class="lc-desc">提出された「1分間のピッチ動画」をみんなで講評し、優れた発表を表彰。代表者はライブ発表する。</p>
+        <div class="lc-go">開く（要パスワード）→</div>
+      </a>
+
+    </div>
+  </section>
+
+  <section class="sec">
+    <div class="cr-band">
+      <div>
+        <div class="cr-t">課題の提出は Google Classroom へ</div>
+        <div class="cr-s">各回のワーク・レポート、最終の「1分間ピッチ動画」もこちらから提出します。</div>
+      </div>
+      <a class="cr-btn" href="https://classroom.google.com/c/ODU5NjUzNDM0Njk0" target="_blank" rel="noopener">Classroom を開く ↗</a>
+    </div>
+  </section>
+
+  <section class="sec">
+    <div class="sec-h"><h2>講師と教科書</h2><span class="cnt">この講義について</span></div>
+    <hr class="divider">
+    <div class="foot-grid" style="margin-top:16px">
+      <div class="foot-prof">
+        <img class="prof-img" src="https://tensenses-model.web.app/assets/yt.jpg" alt="高橋 雄介" onerror="this.style.display='none'">
+        <div class="prof-body">
+          <div class="prof-name">高橋 雄介 <span>Yusuke Takahashi, PhD</span></div>
+          <div class="prof-title">武蔵野大学 データサイエンス学部 准教授</div>
+          <p class="prof-bio">計算機科学者・連続起業家。AIx{ } 共同創業。直交化した意味空間に基づく適応的なセマンティック基盤と知識ベースを研究。シリコンバレーと東京でソフトウェアのスタートアップを創業し、プロダクト設計・グロース・顧客開発に従事。500 Startups 出身。慶應義塾大学にて博士（政策・メディア）。</p>
+          <div class="prof-links">
+            <a href="https://www.linkedin.com/in/yusuketakahashiphd/" target="_blank" rel="noopener">LinkedIn ↗</a>
+            <a href="https://orcid.org/0009-0006-8351-2280" target="_blank" rel="noopener">ORCID ↗</a>
+            <a href="https://mids.ac/" target="_blank" rel="noopener">武蔵野大学データサイエンス ↗</a>
+            <a href="https://aix.sc" target="_blank" rel="noopener">AIx ↗</a>
+          </div>
+        </div>
+      </div>
+      <div class="foot-book">
+        <div class="book-label">教科書 ／ TEXTBOOK</div>
+        <div class="book-row">
+          <a class="bk-cover" href="https://amzn.to/4vViLH6" target="_blank" rel="noopener" aria-label="Amazonで購入する">
+            <img src="https://m.media-amazon.com/images/P/4873117119.01._SCLZZZZZZZ_.jpg" alt="Lean Analytics 表紙" onerror="if(!this.dataset.f){this.dataset.f='1';this.src='https://www.oreilly.co.jp/books/images/picture_large978-4-87311-711-9.jpeg';}else{this.style.display='none';this.parentNode.classList.add('noimg');}">
+            <span class="bk-fallback">Lean<br>Analytics</span>
+          </a>
+          <div class="book-info">
+            <div class="book-title">Lean Analytics</div>
+            <div class="book-sub">スタートアップのためのデータ解析と活用法</div>
+            <div class="book-meta">アリスター・クロール ＆ ベンジャミン・ヨスコビッツ<br>オライリージャパン<br>ISBN 978-4-87311-711-9</div>
+            <a class="book-amz" href="https://amzn.to/4vViLH6" target="_blank" rel="noopener">Amazonで購入する ↗</a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="foot-copy">SDGs発展2［a1］　2026年度　担当：高橋 雄介　／　教科書：A. クロール &amp; B. ヨスコビッツ『Lean Analytics』（オライリージャパン）</div>
+  </section>
+
+</div>
+
+</body>
+</html>
