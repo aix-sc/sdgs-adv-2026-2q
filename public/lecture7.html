@@ -2,14 +2,16 @@
 <html lang="ja">
 <head>
 <meta charset="UTF-8">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA2NCA2NCI+PHJlY3Qgd2lkdGg9IjY0IiBoZWlnaHQ9IjY0IiByeD0iMTQiIGZpbGw9IiMxNTMyNEYiLz48cmVjdCB4PSIxNCIgeT0iMzQiIHdpZHRoPSI4IiBoZWlnaHQ9IjE2IiByeD0iMiIgZmlsbD0iIzFDNzI5MyIvPjxyZWN0IHg9IjI4IiB5PSIyNiIgd2lkdGg9IjgiIGhlaWdodD0iMjQiIHJ4PSIyIiBmaWxsPSIjM0U3QzUzIi8+PHJlY3QgeD0iNDIiIHk9IjE2IiB3aWR0aD0iOCIgaGVpZ2h0PSIzNCIgcng9IjIiIGZpbGw9IiNDNThCMkIiLz48L3N2Zz4=">
+  <link rel="alternate icon" href="/favicon.ico" sizes="any">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>SDGs発展2 第7回｜最終発表 ── データドリブン投資家向けピッチ＆振り返り</title>
+<title>SDGs発展2 第7回｜最終回：ピッチ講評会 &amp; 表彰</title>
 <style>
   :root{
     --navy:#15324F; --teal:#1C7293; --green:#3E7C53; --amber:#C58B2B;
     --ink:#2A2E33; --mute:#5C6670; --line:#E3E8ED;
     --bg:#FFFFFF; --soft:#F5F8FB; --softg:#F1F6F2; --softa:#FBF5EA;
-    --teal-soft:#E7F0F5; --green-soft:#E9F2EC; --amber-soft:#F8EFDD; --red:#C0392B;
+    --teal-soft:#E7F0F5; --green-soft:#E9F2EC; --amber-soft:#F8EFDD; --red:#C0392B; --red-soft:#FBEAE7;
     --jp:"Yu Gothic","游ゴシック体",YuGothic,"Hiragino Sans","Hiragino Kaku Gothic ProN",Meiryo,sans-serif;
     --hd:54px;
   }
@@ -17,45 +19,192 @@
   html,body{margin:0;height:100%}
   body{font-family:var(--jp);color:var(--ink);line-height:1.65;background:var(--bg);-webkit-font-smoothing:antialiased}
   a{color:var(--teal);text-decoration:none}
+
+  /* header + dropdown */
   .hd{position:fixed;top:0;left:0;right:0;height:var(--hd);z-index:100;background:rgba(255,255,255,.93);backdrop-filter:blur(8px);border-bottom:1px solid var(--line);display:flex;align-items:center;gap:14px;padding:0 18px}
   .hd .brand{font-weight:700;color:var(--navy);font-size:13.5px;white-space:nowrap}
   .hd .brand span{color:var(--teal)}
-  .hd-cr{margin-left:auto;display:inline-flex;align-items:center;gap:7px;font-size:12.5px;font-weight:700;color:var(--green);background:var(--green-soft);border:1px solid #cfe3d4;border-radius:9px;padding:7px 13px;white-space:nowrap}
-  .hd-cr:hover{background:#dcebe0}
   .dropdown{position:relative}
   .dd-btn{font-family:var(--jp);font-size:13px;border:1px solid var(--line);background:#fff;border-radius:9px;padding:8px 13px;cursor:pointer;color:var(--navy);display:flex;align-items:center;gap:8px}
   .dd-btn .caret{transition:.2s;font-size:10px;color:var(--mute)}
   .dd-btn[aria-expanded="true"] .caret{transform:rotate(180deg)}
-  .dd-menu{position:absolute;right:0;top:calc(100% + 8px);background:#fff;border:1px solid var(--line);border-radius:12px;box-shadow:0 14px 36px rgba(21,50,79,.16);padding:6px;min-width:280px;display:none}
+  .dd-menu{position:absolute;right:0;top:calc(100% + 8px);background:#fff;border:1px solid var(--line);border-radius:12px;box-shadow:0 14px 36px rgba(21,50,79,.16);padding:6px;min-width:268px;display:none}
   .dd-menu.open{display:block}
   .dd-menu .grp{font-size:10.5px;font-weight:700;letter-spacing:.08em;color:var(--mute);padding:8px 12px 4px}
   .dd-menu a{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:9px 12px;border-radius:8px;font-size:13px;color:var(--ink)}
   .dd-menu a:hover{background:var(--soft)}
   .dd-menu a.current{background:var(--teal-soft);color:var(--navy);font-weight:700}
+  .dd-menu a.soon{color:#9aa4ad} .dd-menu a.soon:hover{background:transparent;cursor:default}
   .dd-menu a .ttl{display:flex;gap:9px;align-items:center}
   .dd-menu a .badge{font-size:10px;border-radius:5px;padding:2px 7px;font-weight:700}
   .badge.ready{background:var(--green-soft);color:var(--green)}
+  .badge.soon{background:#eef1f3;color:#9aa4ad}
+
+  /* deck / slides */
   .deck{height:100vh;overflow-y:scroll;scroll-snap-type:y mandatory;scroll-behavior:smooth}
   .slide{min-height:100vh;scroll-snap-align:start;display:flex;flex-direction:column;justify-content:center;padding:calc(var(--hd) + 22px) 22px 92px;position:relative}
   .in{max-width:840px;margin:0 auto;width:100%}
   .eyebrow{display:inline-flex;align-items:center;gap:9px;font-size:11.5px;font-weight:700;letter-spacing:.13em;color:var(--teal);margin:0 0 12px}
   .eyebrow .num{font-variant-numeric:tabular-nums;background:var(--navy);color:#fff;border-radius:6px;padding:2px 8px;font-size:10.5px}
-  .eyebrow .num.plan{background:var(--amber)}
   h2.t{font-size:clamp(20px,3.1vw,28px);color:var(--navy);margin:0 0 8px;line-height:1.32;font-weight:700}
   .lead{color:var(--mute);max-width:64ch;margin:0 0 22px;font-size:14.5px}
+
+  /* hero */
   .hero{background:radial-gradient(900px 360px at 86% -12%,var(--teal-soft),transparent 60%),radial-gradient(700px 320px at -6% 112%,var(--green-soft),transparent 60%)}
   .hero .kick{font-size:13px;font-weight:700;letter-spacing:.1em;color:var(--teal)}
-  .hero h1{font-size:clamp(26px,4.6vw,42px);line-height:1.22;color:var(--navy);margin:14px 0 12px;font-weight:700;letter-spacing:-.01em}
-  .hero .sub{font-size:clamp(15px,2.1vw,17px);max-width:62ch;margin:0 0 22px}
-  .hero .meta{display:flex;gap:9px;flex-wrap:wrap;font-size:12.5px;color:var(--mute)}
+  .hero h1{font-size:clamp(27px,5vw,46px);line-height:1.2;color:var(--navy);margin:14px 0 10px;font-weight:700;letter-spacing:-.01em}
+  .hero h1 em{font-style:normal;color:var(--teal)}
+  .hero .sub{font-size:clamp(15px,2.1vw,18px);max-width:60ch;margin:0 0 22px}
+  .hero .meta{display:flex;gap:9px;flex-wrap:wrap;font-size:12.5px;color:var(--mute);margin-bottom:24px}
   .hero .meta b{color:var(--navy)}
   .pill{display:inline-block;background:#fff;border:1px solid var(--line);border-radius:999px;padding:6px 13px}
-  .plan-chip{display:inline-block;font-size:11.5px;font-weight:700;color:#7a531a;background:var(--amber-soft);border:1px solid #e8d3a8;border-radius:999px;padding:5px 12px;margin-bottom:14px}
-  .toc{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
-  .titem{display:flex;gap:13px;background:var(--soft);border:1px solid var(--line);border-radius:12px;padding:14px 15px}
-  .titem .tn{flex:none;width:26px;height:26px;border-radius:50%;background:var(--teal);color:#fff;font-weight:700;font-size:12.5px;display:flex;align-items:center;justify-content:center}
-  .titem h4{margin:0 0 3px;font-size:14px;color:var(--navy);line-height:1.4}
-  .titem p{margin:0;font-size:12px;color:var(--mute);line-height:1.5}
+  .sowhat{display:flex;border:1px solid var(--line);border-radius:14px;overflow:hidden;background:#fff;max-width:660px}
+  .sowhat .you,.sowhat .boss,.sowhat .good{flex:1 1 0;min-width:0;padding:16px 19px}
+  .sowhat .boss{background:var(--amber-soft);border-left:1px solid var(--line)}
+  .sowhat .good{background:#f4faf6;border-left:1px solid var(--line)}
+  .sowhat .lbl{font-size:11px;font-weight:700;letter-spacing:.06em;margin-bottom:6px}
+  .sowhat .you .lbl{color:var(--teal)} .sowhat .boss .lbl{color:var(--amber)}
+  .sowhat .good .lbl{color:var(--green)}
+  .sowhat p{margin:0;font-size:15px;color:var(--navy);font-weight:600}
+
+  /* steps */
+  .steps{display:grid;grid-template-columns:repeat(5,1fr);gap:11px}
+  .step{background:var(--soft);border:1px solid var(--line);border-radius:12px;padding:15px 13px}
+  .step .n{font-size:12px;font-weight:700;color:#fff;background:var(--teal);width:23px;height:23px;border-radius:50%;display:flex;align-items:center;justify-content:center;margin-bottom:9px}
+  .step h3{margin:0 0 5px;font-size:13.5px;color:var(--navy);line-height:1.4}
+  .step p{margin:0;font-size:11.5px;color:var(--mute);line-height:1.5}
+
+  /* vs + conditions + checker */
+  .vs{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+  .card{border:1px solid var(--line);border-radius:13px;overflow:hidden}
+  .card .head{padding:13px 17px;font-weight:700;color:#fff;font-size:14.5px}
+  .card.vanity .head{background:var(--amber)} .card.action .head{background:var(--teal)}
+  .card ul{margin:0;padding:14px 17px;list-style:none}
+  .card li{font-size:13px;padding:6px 0 6px 20px;position:relative;border-bottom:1px dashed var(--line)}
+  .card li:last-child{border-bottom:0}
+  .card li::before{content:"";position:absolute;left:2px;top:13px;width:8px;height:8px;border-radius:2px}
+  .card.vanity li::before{background:var(--amber)} .card.action li::before{background:var(--teal)}
+  .typ{margin-top:16px;font-size:13.5px;color:var(--navy);font-style:italic;background:var(--soft);border-radius:10px;padding:12px 15px}
+
+  .four{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:22px}
+  .cond{background:var(--soft);border:1px solid var(--line);border-radius:12px;padding:15px 14px}
+  .cond .ic{font-size:18px} .cond h4{margin:8px 0 4px;font-size:13.5px;color:var(--navy)}
+  .cond p{margin:0;font-size:12px;color:var(--mute)}
+  .checker{border:1px solid var(--line);border-radius:14px;padding:18px}
+  .checker .q{font-size:14px;color:var(--navy);font-weight:700;margin:0 0 12px}
+  .chips{display:flex;flex-wrap:wrap;gap:8px}
+  .chip{font-size:13px;border:1px solid var(--line);background:#fff;border-radius:999px;padding:8px 15px;cursor:pointer;transition:.15s;color:var(--ink)}
+  .chip:hover{border-color:var(--teal);color:var(--teal)}
+  .chip.on{background:var(--navy);color:#fff;border-color:var(--navy)}
+  .verdict{margin-top:14px;font-size:13.5px;padding:12px 15px;border-radius:10px;display:none}
+  .verdict.show{display:block}
+  .verdict.v-vanity{background:var(--amber-soft);color:#7a531a;border:1px solid #e8d3a8}
+  .verdict.v-action{background:var(--teal-soft);color:#0f4a63;border:1px solid #bcdae6}
+  .verdict b{font-weight:700}
+
+  /* explorer */
+  .explorer{background:var(--navy);border-radius:16px;padding:15px 18px;color:#EAF1F7}
+  .explorer h3{margin:0;font-size:16px;color:#fff} .explorer .x-sub{font-size:12px;color:#AFC4D7;margin:3px 0 0}
+  .toggles{display:flex;gap:14px;flex-wrap:wrap;align-items:center;margin:11px 0 4px}
+  .lensgroup{display:inline-flex;background:#0d2436;border:1px solid #2b4b66;border-radius:11px;padding:4px}
+  .lensgroup button{font-family:var(--jp);font-size:12.5px;color:#AFC4D7;background:transparent;border:0;padding:8px 14px;border-radius:8px;cursor:pointer;font-weight:600;transition:.15s}
+  .lensgroup button.on{background:var(--teal);color:#fff}
+  .lensgroup.vanity-on button.on{background:var(--amber)}
+  .bm-toggle{display:inline-flex;align-items:center;gap:9px;font-size:12.5px;color:#cfe0ec;cursor:pointer;user-select:none}
+  .bm-toggle input{display:none}
+  .bm-toggle .sw{width:40px;height:22px;background:#0d2436;border:1px solid #2b4b66;border-radius:999px;position:relative;transition:.2s}
+  .bm-toggle .sw::after{content:"";position:absolute;top:2px;left:2px;width:16px;height:16px;border-radius:50%;background:#7e97ab;transition:.2s}
+  .bm-toggle input:checked + .sw{background:var(--green)}
+  .bm-toggle input:checked + .sw::after{left:20px;background:#fff}
+  .lens-note{font-size:12px;color:#AFC4D7;margin:2px 0 9px;min-height:0;line-height:1.45} .lens-note b{color:#fff}
+  .funnel{display:flex;flex-direction:column;gap:6px}
+  .frow{display:grid;grid-template-columns:120px 1fr 112px;align-items:center;gap:12px;cursor:pointer;background:#0d2436;border:1px solid #234156;border-radius:9px;padding:7px 12px;transition:.15s}
+  .frow:hover{border-color:var(--teal)} .frow.sel{border-color:#fff}
+  .frow .fname{font-size:12.5px;font-weight:700;color:#fff;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;line-height:1.3}
+  .frow .fval{font-size:11px;color:#cfe0ec;font-variant-numeric:tabular-nums;text-align:right;white-space:nowrap;line-height:1.25}
+  .frow .fval .big{font-size:13.5px;font-weight:700;color:#fff}
+  .bar-wrap{position:relative;height:16px;background:#0a1c2b;border-radius:5px;overflow:visible}
+  .bar{height:100%;border-radius:5px;width:0;transition:width .6s cubic-bezier(.22,.61,.36,1);background:var(--teal)}
+  .frow[data-flag="low"] .bar{background:var(--red)} .frow[data-flag="high"] .bar{background:var(--green)}
+  .vanity-mode .bar{background:var(--amber)}
+  .bm-line{position:absolute;top:-2px;height:20px;width:2px;background:#fff;opacity:0;transition:.3s;z-index:2}
+  .bm-on .bm-line{opacity:.9}
+  .frow .ftag{display:none;position:absolute;right:6px;top:50%;transform:translateY(-50%);font-size:9.5px;font-weight:700;padding:1px 7px;border-radius:5px;white-space:nowrap;z-index:3}
+  .bm-on .frow[data-flag="low"] .ftag.low{display:block;background:var(--red);color:#fff}
+  .bm-on .frow[data-flag="high"] .ftag.high{display:block;background:var(--green);color:#fff}
+  .x-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:11px}
+  .x-top{margin-bottom:2px}
+  .x-split{display:grid;grid-template-columns:1.12fr .88fr;gap:14px;margin-top:11px;align-items:start}
+  .x-left{display:flex;flex-direction:column;gap:9px;min-width:0}
+  .x-right{display:flex;flex-direction:column;gap:12px;min-width:0}
+  .panel{background:#fff;color:var(--ink);border-radius:11px;padding:12px 14px}
+  .panel .ph{font-size:11.5px;font-weight:700;letter-spacing:.05em;color:var(--mute);margin:0 0 8px}
+  .detail .dname{font-size:14px;font-weight:700;color:var(--navy);margin:0 0 6px}
+  .detail table{width:100%;border-collapse:collapse;font-size:12.5px}
+  .detail td{padding:4px 0;border-bottom:1px dashed var(--line)}
+  .detail td:last-child{text-align:right;font-variant-numeric:tabular-nums;font-weight:700;color:var(--navy)}
+  .detail .gap-low{color:var(--red)} .detail .gap-high{color:var(--green)}
+  .report .rbody{font-size:13px;color:var(--ink);min-height:0}
+  .boss-bubble{margin-top:8px;border-radius:10px;padding:9px 12px;font-size:13px;font-weight:600;display:flex;gap:9px;align-items:flex-start}
+  .boss-bubble .face{font-size:17px;line-height:1}
+  .boss-bubble.bad{background:var(--amber-soft);color:#7a531a}
+  .boss-bubble.good{background:var(--green-soft);color:#2c5a3c}
+
+  /* qual x quant */
+  .two{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+  .qbox{border:1px solid var(--line);border-radius:13px;padding:18px}
+  .qbox.qual{background:var(--softg);border-color:#cfe3d4} .qbox.quant{background:var(--soft);border-color:#cfe0ec}
+  .qbox h3{margin:0 0 4px;font-size:16px;color:var(--navy)}
+  .qbox .tag{font-size:11px;font-weight:700;letter-spacing:.05em}
+  .qbox.qual .tag{color:var(--green)} .qbox.quant .tag{color:var(--teal)}
+  .qbox p{font-size:13px;color:var(--ink);margin:9px 0 0}
+  .qbox ul{margin:9px 0 0;padding-left:18px;font-size:12.5px;color:var(--mute)}
+  .bridge{margin-top:15px;text-align:center;font-size:13.5px;color:var(--navy);background:#fff;border:1px dashed var(--line);border-radius:10px;padding:12px}
+  .bridge b{color:var(--green)}
+
+  /* events + tiers */
+  .events{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+  .ev{border:1px solid var(--line);border-radius:12px;padding:15px 14px;background:var(--soft);position:relative}
+  .ev .estep{font-size:11px;font-weight:700;color:var(--teal);letter-spacing:.04em}
+  .ev h4{margin:7px 0 5px;font-size:13.5px;color:var(--navy)}
+  .ev p{margin:0;font-size:12px;color:var(--mute)}
+  .ev .aarrr{position:absolute;top:12px;right:12px;font-size:10px;font-weight:700;color:#fff;background:var(--navy);border-radius:5px;padding:2px 6px}
+  /* EKIDEN.AI サンプル計測ファネル（各ステップにスクショ内包） */
+  .ekf-card{background:var(--soft);border:1px solid var(--line);border-radius:14px;padding:16px 18px;margin-top:16px}
+  .ekf-top h3{margin:0;font-size:15px;color:var(--navy)} .ekf-top .x-sub{margin:3px 0 0;font-size:12px;color:var(--mute)}
+  .ekfunnel{display:flex;align-items:stretch;gap:8px;margin-top:14px}
+  .ekstep{flex:1;min-width:0;background:#fff;border:1px solid var(--line);border-radius:12px;padding:12px;display:flex;flex-direction:column;gap:9px}
+  .eks-img{width:100%;height:auto;border-radius:10px;border:1px solid var(--line);box-shadow:0 4px 14px rgba(21,50,79,.10);display:block}
+  .eks-info{display:flex;flex-direction:column;gap:6px;min-width:0}
+  .eks-head{display:flex;align-items:center;gap:7px;font-size:11px;font-weight:700;color:var(--navy)}
+  .eks-head .aarrr{font-size:9.5px;font-weight:700;color:#fff;background:var(--navy);border-radius:5px;padding:2px 6px}
+  .eks-name{font-size:12.5px;font-weight:700;color:var(--navy);line-height:1.35}
+  .eks-metric{font-size:13px;color:var(--ink);font-variant-numeric:tabular-nums} .eks-metric b{font-size:20px;color:var(--navy)}
+  .eks-bar{height:10px;background:#e7edf2;border-radius:5px;overflow:hidden}
+  .eks-bar span{display:block;height:100%;border-radius:5px}
+  .eks-bar .b1{background:var(--navy)} .eks-bar .b2{background:var(--teal)} .eks-bar .b3{background:var(--green)} .eks-bar .b4{background:var(--amber)}
+  .eks-rate{font-size:11px;color:var(--mute)} .eks-rate.low{color:var(--amber);font-weight:700}
+  .ekarrow{flex:none;align-self:center;color:#b9c5cf;font-size:20px;font-weight:700}
+  .ekf-note{margin:13px 0 0;font-size:12.5px;color:var(--mute);line-height:1.6}
+  .ekf-link{display:flex;align-items:center;gap:14px;margin-top:16px;background:var(--soft);border:1px solid var(--line);border-radius:14px;padding:15px 18px;text-decoration:none;color:var(--ink);transition:border-color .15s,box-shadow .15s}
+  .ekf-link:hover{border-color:var(--teal);box-shadow:0 6px 18px rgba(21,50,79,.08)}
+  .ekf-link-ic{font-size:22px;flex:none}
+  .ekf-link-t{flex:1;display:flex;flex-direction:column;gap:2px;min-width:0} .ekf-link-t b{font-size:14px;color:var(--navy)} .ekf-link-t span{font-size:12px;color:var(--mute)}
+  .ekf-link-ar{flex:none;color:var(--teal);font-size:18px;font-weight:700}
+  .tiers{display:flex;flex-direction:column;gap:10px}
+  .tier{display:flex;align-items:center;gap:14px;border:1px solid var(--line);border-radius:12px;padding:12px 16px}
+  .tier .tnum{flex:none;width:30px;height:30px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700;color:#fff;font-size:13px}
+  .tier:nth-child(1) .tnum{background:#9fb0bd} .tier:nth-child(2) .tnum{background:var(--teal)} .tier:nth-child(3) .tnum{background:var(--green)}
+  .tier h4{margin:0;font-size:14px;color:var(--navy)} .tier p{margin:2px 0 0;font-size:12.5px;color:var(--mute)}
+  .tier .tbar{flex:none;width:clamp(60px,16vw,140px);text-align:right}
+  .tier .tbar span{display:inline-block;height:10px;border-radius:5px}
+  .tier:nth-child(1) .tbar span{width:100%;background:#cdd6dd}
+  .tier:nth-child(2) .tbar span{width:55%;background:var(--teal)}
+  .tier:nth-child(3) .tbar span{width:22%;background:var(--green)}
+  .trap{margin-top:14px;font-size:12.5px;color:#7a531a;background:var(--amber-soft);border-radius:10px;padding:11px 14px}
+  .trap b{font-weight:700}
+
+  /* task */
   .task{display:grid;grid-template-columns:1fr 1fr;gap:15px}
   .tcard{border-radius:13px;padding:18px;color:#fff}
   .tcard.review{background:var(--teal)} .tcard.prep{background:var(--green)}
@@ -63,21 +212,17 @@
   .tcard ol{margin:0;padding-left:19px}
   .tcard li{font-size:13px;margin-bottom:7px;line-height:1.5}
   .band{margin-top:15px;background:var(--navy);color:#fff;border-radius:12px;padding:15px 18px;display:flex;justify-content:space-between;align-items:center;gap:14px;flex-wrap:wrap}
-  .band .dl{font-size:13.5px;font-weight:700}
+  .band .dl{font-size:14px;font-weight:700} .band .dl span{color:var(--amber)}
   .band .next{font-size:12.5px;color:#AFC4D7}
+  .srcnote{font-size:11.5px;color:#9aa4ad;margin-top:16px}
+
+  /* ===== Classroom リンク ===== */
+  .hd-cr{margin-left:auto;display:inline-flex;align-items:center;gap:7px;font-size:12.5px;font-weight:700;color:var(--green);background:var(--green-soft);border:1px solid #cfe3d4;border-radius:9px;padding:7px 13px;white-space:nowrap}
+  .hd-cr:hover{background:#dcebe0}
   .cr-submit{display:inline-flex;align-items:center;gap:8px;background:#fff;color:var(--green);font-weight:700;font-size:13.5px;border-radius:10px;padding:10px 16px;white-space:nowrap}
   .cr-submit:hover{background:var(--green-soft)}
-  .srcnote{font-size:11.5px;color:#9aa4ad;margin-top:16px}
-  .dots{position:fixed;right:16px;top:50%;transform:translateY(-50%);z-index:90;display:flex;flex-direction:column;gap:10px}
-  .dots button{width:11px;height:11px;border-radius:50%;border:1.5px solid #b9c5cf;background:transparent;cursor:pointer;padding:0;position:relative;transition:.2s}
-  .dots button.on{background:var(--teal);border-color:var(--teal);transform:scale(1.3)}
-  .dots button .tip{position:absolute;right:22px;top:50%;transform:translateY(-50%);white-space:nowrap;background:var(--navy);color:#fff;font-size:11px;padding:4px 9px;border-radius:6px;opacity:0;pointer-events:none;transition:.15s}
-  .dots button:hover .tip{opacity:1}
-  .navbtns{position:fixed;bottom:18px;left:50%;transform:translateX(-50%);z-index:90;display:flex;gap:10px}
-  .navbtns button{width:42px;height:42px;border-radius:50%;border:1px solid var(--line);background:rgba(255,255,255,.96);cursor:pointer;font-size:15px;color:var(--navy);box-shadow:0 5px 16px rgba(21,50,79,.14);display:flex;align-items:center;justify-content:center;transition:.15s}
-  .navbtns button:disabled{opacity:.28;cursor:default;box-shadow:none}
-  .navbtns button:hover:not(:disabled){border-color:var(--teal);color:var(--teal)}
-  /* AI相談 */
+
+  /* ===== AI相談（Gemini） ===== */
     .ai-fab{position:fixed;right:22px;bottom:22px;z-index:120;display:inline-flex;align-items:center;gap:9px;background:var(--navy);color:#fff;border:0;border-radius:999px;padding:13px 18px;font-family:var(--jp);font-size:13.5px;font-weight:700;cursor:pointer;box-shadow:0 8px 24px rgba(21,50,79,.28);transition:transform .18s,box-shadow .18s}
   .ai-fab:hover{transform:translateY(-2px);box-shadow:0 12px 30px rgba(21,50,79,.34)}
   .ai-fab svg{width:18px;height:18px;flex:none;color:var(--amber)}
@@ -116,6 +261,34 @@
   .ai-send{flex:none;width:39px;height:39px;border-radius:11px;border:0;background:var(--navy);color:#fff;font-size:18px;cursor:pointer;transition:opacity .2s;display:flex;align-items:center;justify-content:center}
   .ai-send:disabled{opacity:.4;cursor:default}
   .ai-disclaimer{padding:0 16px 12px;font-size:10.5px;color:#9aa4ad;line-height:1.5;background:#fff}
+
+  /* ===== 教科書 第2章：指標の対比 ===== */
+  .ent{color:var(--mute);font-size:.58em;font-weight:700}
+  .rules{display:grid;grid-template-columns:repeat(2,1fr);gap:11px;margin-bottom:16px}
+  .rule{display:flex;gap:12px;align-items:flex-start;background:var(--soft);border:1px solid var(--line);border-radius:11px;padding:13px 15px}
+  .rule .ic{font-size:17px;line-height:1.2}
+  .rule .en{font-size:10.5px;font-weight:700;letter-spacing:.05em;color:var(--teal);text-transform:uppercase}
+  .rule h4{margin:1px 0 2px;font-size:14px;color:var(--navy)}
+  .rule p{margin:0;font-size:12px;color:var(--mute)}
+  .ch2chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px}
+  .ch2chip{font-size:12px;border:1px solid var(--line);background:var(--soft);border-radius:999px;padding:6px 13px;color:var(--ink)}
+  .ch2chip b{color:var(--teal)}
+  .pair{display:grid;grid-template-columns:1fr 36px 1fr;align-items:stretch;gap:4px}
+  .pcol{border:1px solid var(--line);border-radius:14px;padding:18px 18px;background:#fff;box-shadow:0 2px 12px rgba(21,50,79,.06)}
+  .pcol .en{display:inline-block;font-size:10.5px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;padding:3px 10px;border-radius:999px;background:#eef1f3;color:#6b7681}
+  .pcol .jp{font-size:23px;font-weight:800;color:var(--navy);margin:9px 0 10px;line-height:1.2;letter-spacing:.01em}
+  .pcol .df{font-size:12.5px;color:var(--ink);margin:0 0 8px;line-height:1.55}
+  .pcol ul{margin:0;padding-left:16px;font-size:12px;color:var(--mute);line-height:1.5}
+  .pcol .ex{margin:8px 0 0;font-size:11.5px;color:var(--mute)} .pcol .ex b{color:var(--navy)}
+  .pcol.amber .en{background:var(--amber-soft);color:#8a5a12} .pcol.amber .jp{color:var(--amber)}
+  .pcol.teal .en{background:var(--teal-soft);color:#0f4a63} .pcol.teal .jp{color:var(--teal)}
+  .pcol.green .en{background:var(--green-soft);color:#2c5a3c} .pcol.green .jp{color:var(--green)}
+  .pcol.mute .en{background:#eef1f3;color:#6b7681} .pcol.mute .jp{color:#5c6670}
+  .pvs{display:flex;align-items:center;justify-content:center;background:none;color:#aeb7c0;font-weight:600;font-style:italic;font-size:13px}
+  .take{margin-top:14px;background:var(--teal-soft);border-radius:11px;padding:12px 16px;font-size:13px;color:#0f4a63;line-height:1.6}
+  .take b{color:var(--navy)}
+  @media(max-width:640px){.rules{grid-template-columns:1fr} .pair{grid-template-columns:1fr} .pvs{padding:6px;font-size:11px} .ent{display:block;margin-top:2px}}
+
   /* フッター（講師・教科書） */
   .foot-grid{display:grid;grid-template-columns:1.45fr 1fr;gap:18px;align-items:start}
   .foot-prof{display:flex;gap:16px;background:var(--soft);border:1px solid var(--line);border-radius:14px;padding:18px}
@@ -143,8 +316,163 @@
   @media(max-width:860px){.foot-grid{grid-template-columns:1fr}}
   @media(max-width:640px){.foot-prof{flex-direction:column} .book-row{flex-direction:column}}
 
-  /* パスワードゲート */
-  .gate{display:none;position:fixed;inset:0;z-index:500;background:linear-gradient(160deg,#15324F,#0d2436);align-items:center;justify-content:center;padding:24px}
+  /* 演習：数値テーブル */
+  .numtable{width:100%;max-width:560px;border-collapse:collapse;font-size:14px;border:1px solid var(--line);border-radius:12px;overflow:hidden}
+  .numtable th{background:var(--navy);color:#fff;text-align:left;padding:11px 14px;font-size:13px}
+  .numtable th.r,.numtable td.num{text-align:right}
+  .numtable td{padding:11px 14px;border-top:1px solid var(--line)}
+  .numtable tr:nth-child(even) td{background:var(--soft)}
+  .numtable td.num{font-variant-numeric:tabular-nums;font-weight:700;color:var(--navy)}
+  .numtable .stg{font-weight:700;color:var(--navy)}
+  .numtable .arrowcell{color:#b9c5cf;text-align:center;font-size:12px}
+  .exq{margin-top:16px;max-width:560px;background:var(--amber-soft);border:1px solid #e8d3a8;border-radius:11px;padding:14px 16px;font-size:13px;color:#7a531a}
+  .exq b{color:#5a3d12}
+  .exq ol{margin:8px 0 0;padding-left:20px} .exq li{margin-bottom:4px}
+  .exq .nextnote{margin:10px 0 0;font-size:12px;color:#8a6a2a}
+
+  /* dots */
+  .dots{position:fixed;right:16px;top:50%;transform:translateY(-50%);z-index:90;display:flex;flex-direction:column;gap:10px}
+  .dots button{width:11px;height:11px;border-radius:50%;border:1.5px solid #b9c5cf;background:transparent;cursor:pointer;padding:0;position:relative;transition:.2s}
+  .dots button.on{background:var(--teal);border-color:var(--teal);transform:scale(1.3)}
+  .dots button .tip{position:absolute;right:22px;top:50%;transform:translateY(-50%);white-space:nowrap;background:var(--navy);color:#fff;font-size:11px;padding:4px 9px;border-radius:6px;opacity:0;pointer-events:none;transition:.15s}
+  .dots button:hover .tip{opacity:1}
+
+  /* nav buttons */
+  .navbtns{position:fixed;bottom:18px;left:50%;transform:translateX(-50%);z-index:90;display:flex;gap:10px}
+  .navbtns button{width:42px;height:42px;border-radius:50%;border:1px solid var(--line);background:rgba(255,255,255,.96);cursor:pointer;font-size:15px;color:var(--navy);box-shadow:0 5px 16px rgba(21,50,79,.14);display:flex;align-items:center;justify-content:center;transition:.15s}
+  .navbtns button:disabled{opacity:.28;cursor:default;box-shadow:none}
+  .navbtns button:hover:not(:disabled){border-color:var(--teal);color:var(--teal)}
+
+  @media(max-width:860px){
+    .steps{grid-template-columns:repeat(3,1fr)} .events{grid-template-columns:1fr 1fr} .dots{display:none}
+    .x-split{grid-template-columns:1fr}
+    .aq{grid-template-columns:repeat(2,1fr)}
+    .ekfunnel{flex-direction:column}
+    .ekstep{flex-direction:row;align-items:center;gap:13px}
+    .eks-img{width:104px;flex:none} .eks-info{flex:1}
+    .ekarrow{transform:rotate(90deg);margin:0}
+  }
+  @media(max-width:640px){
+    .vs,.four,.x-grid,.two,.task{grid-template-columns:1fr} .steps{grid-template-columns:1fr 1fr}
+    .sowhat{flex-direction:column} .sowhat .boss,.sowhat .good{border-left:0;border-top:1px solid var(--line)}
+    .frow{grid-template-columns:80px 1fr 90px;gap:8px} .frow .fname{font-size:11px} .frow .fval{font-size:10px} .frow .fval .big{font-size:12px}
+  }
+  @media(prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
+
+  /* ===== 第3回：合言葉・コホート・ファネル・比較 ===== */
+  .creed{display:inline-block;margin:6px 0 4px;font-size:clamp(20px,3.2vw,30px);font-weight:800;color:var(--navy);letter-spacing:.01em}
+  .creed em{color:var(--red);font-style:normal}
+  .lens3{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:6px}
+  .lens{background:var(--soft);border:1px solid var(--line);border-radius:12px;padding:14px 15px}
+  .lens .lh{display:flex;align-items:center;gap:8px;font-size:13.5px;font-weight:700;color:var(--navy);margin-bottom:6px}
+  .lens .lh .tag{font-size:10px;color:#fff;background:var(--teal);border-radius:5px;padding:2px 7px}
+  .lens p{margin:0;font-size:12.5px;color:var(--mute);line-height:1.6}
+  .cohort{border-collapse:separate;border-spacing:3px;font-size:13px;font-variant-numeric:tabular-nums;margin-top:8px}
+  .cohort th{font-size:11.5px;color:var(--navy);font-weight:700;padding:6px 8px;text-align:center;white-space:nowrap}
+  .cohort th.ct-row{text-align:left;background:var(--soft);border-radius:7px}
+  .cohort td{width:60px;height:34px;text-align:center;border-radius:7px;font-weight:700}
+  .cohort td.ct-empty{background:#f1f4f7;color:#c2ccd4;font-weight:400}
+  .ct-legend{display:flex;align-items:center;gap:8px;margin-top:10px;font-size:11px;color:var(--mute)}
+  .ct-legend .bar{flex:1;max-width:180px;height:9px;border-radius:5px;background:linear-gradient(90deg,rgba(28,114,147,.1),rgba(28,114,147,.9))}
+  .cmp2{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:6px}
+  .cmp{border:1px solid var(--line);border-radius:13px;padding:15px 17px;background:#fff}
+  .cmp.bad{border-color:#e6c9c9;background:#fdf6f6} .cmp.good{border-color:#cfe3d6;background:#f5faf7}
+  .cmp h3{margin:0 0 7px;font-size:13.5px;color:var(--navy);display:flex;align-items:center;gap:7px}
+  .cmp h3 .ic{font-size:16px}
+  .cmp p{margin:0;font-size:12.5px;color:var(--ink);line-height:1.65}
+  .fn{display:flex;flex-direction:column;gap:9px;margin-top:8px;max-width:640px}
+  .fn-row{display:grid;grid-template-columns:210px 1fr 132px;align-items:center;gap:12px}
+  .fn-name{font-size:12.5px;color:var(--ink);display:flex;align-items:center;gap:7px;line-height:1.3} .fn-name b{color:var(--navy)}
+  .fn-name .aarrr{font-size:9.5px;font-weight:700;color:#fff;background:var(--navy);border-radius:5px;padding:2px 6px;flex:none}
+  .fn-bar{height:18px;background:#e7edf2;border-radius:6px;overflow:hidden}
+  .fn-bar span{display:block;height:100%;border-radius:6px}
+  .fn-bar .b1{background:var(--navy)} .fn-bar .b2{background:var(--teal)} .fn-bar .b3{background:var(--green)} .fn-bar .b4{background:var(--amber)}
+  .fn-val{font-size:12.5px;text-align:right;font-variant-numeric:tabular-nums;color:var(--ink)} .fn-val b{color:var(--navy);font-size:14px}
+  .fn-val .fn-rt{display:block;font-size:11px;color:var(--mute)} .fn-val .fn-rt.low{color:var(--amber);font-weight:700}
+  .matrix{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:6px}
+  .mx{background:var(--soft);border:1px solid var(--line);border-radius:12px;padding:14px 15px}
+  .mx h3{margin:0 0 5px;font-size:13px;color:var(--teal)} .mx p{margin:0;font-size:12.5px;color:var(--ink);line-height:1.6}
+  .exq{margin-top:14px;max-width:640px;background:var(--amber-soft);border:1px solid #e8d3a8;border-radius:11px;padding:14px 16px;font-size:13px;color:#7a531a}
+  .exq b{color:#7a531a}
+  @media(max-width:860px){
+    .lens3{grid-template-columns:1fr} .cmp2{grid-template-columns:1fr} .matrix{grid-template-columns:1fr} .fn-row{grid-template-columns:1fr;gap:4px}
+    .cohort{font-size:12px} .cohort td{width:auto;min-width:42px}
+  }
+
+  
+  .ex-bar{display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap;margin-bottom:12px}
+  .ex-toggle{flex:none;font-family:var(--jp);font-weight:700;font-size:13px;border:1px solid var(--teal);background:#fff;color:var(--teal);border-radius:9px;padding:8px 15px;cursor:pointer;transition:background .15s,color .15s,border-color .15s}
+  .ex-toggle:hover{background:var(--teal);color:#fff}
+  .ex-toggle.on{background:var(--navy);border-color:var(--navy);color:#fff}
+  .exa{margin-top:14px;max-width:640px;background:var(--soft);border:1px solid var(--line);border-left:4px solid var(--green);border-radius:11px;padding:14px 16px;font-size:13px;color:var(--ink);line-height:1.75}
+  .exa b{color:var(--green)}
+  
+  .ans-h{font-size:14px;color:var(--navy);margin:22px 0 6px;display:flex;align-items:center;gap:9px}
+  .ans-no{flex:none;font-size:11px;font-weight:700;color:#fff;background:var(--green);border-radius:6px;padding:3px 9px}
+  
+  .pfig{margin:14px 0 4px}
+  .pfig img{width:100%;max-width:680px;height:auto;border:1px solid var(--line);border-radius:12px;box-shadow:0 6px 20px rgba(21,50,79,.10);display:block;margin:0 auto;background:#fff}
+  .pfig.wide img{max-width:560px}
+  .pcap{font-size:11.5px;color:var(--mute);margin:8px 0 0;text-align:center;line-height:1.5}
+  .aq{display:grid;grid-template-columns:repeat(5,1fr);gap:9px;margin-top:8px}
+  .aqi{background:var(--soft);border:1px solid var(--line);border-radius:11px;padding:11px 11px}
+  .aqi h4{margin:0 0 6px;font-size:12.5px;color:var(--navy);display:flex;flex-direction:column;align-items:flex-start;gap:5px}
+  .aqi h4 .en{font-size:10px;color:#fff;background:var(--teal);border-radius:5px;padding:2px 7px;font-weight:700;letter-spacing:.02em}
+  .aqi p{margin:0;font-size:11px;color:var(--mute);line-height:1.55}
+  .dmc{display:flex;gap:12px;align-items:flex-start;background:#fff;border:1px solid var(--line);border-left:4px solid var(--teal);border-radius:11px;padding:13px 15px;margin-top:8px}
+  .dmc .ic{font-size:20px;flex:none}
+  .dmc p{margin:0;font-size:12.5px;color:var(--ink);line-height:1.65}
+  
+  .fnl-illust{display:flex;flex-direction:column;align-items:center;gap:3px;margin:14px 0 4px;max-width:660px}
+  .fnl-tier{width:100%;display:flex;justify-content:center}
+  .fnl-bar{height:46px;border-radius:8px;display:flex;align-items:center;justify-content:space-between;padding:0 16px;color:#fff;box-shadow:0 2px 8px rgba(21,50,79,.12);min-width:180px}
+  .fnl-bar .fnl-stage{font-size:13px;font-weight:700} .fnl-bar .fnl-stage em{font-style:normal;font-weight:600;opacity:.8;font-size:11px;margin-left:4px}
+  .fnl-bar .fnl-num{font-size:16px;font-weight:800;font-variant-numeric:tabular-nums;margin-left:14px}
+  .fnl-bar.b-nv{background:var(--navy)} .fnl-bar.b-tl{background:var(--teal)} .fnl-bar.b-gr{background:var(--green)} .fnl-bar.b-am{background:var(--amber)} .fnl-bar.b-rd{background:var(--red)}
+  .fnl-drop{color:#b9c5cf;font-size:16px;line-height:1}
+  .dmc-photo{width:62px;height:62px;border-radius:50%;object-fit:cover;flex:none;border:2px solid #fff;box-shadow:0 2px 10px rgba(21,50,79,.2)}
+  
+  /* AARRR分割・EKIDEN・why・演習2カラム */
+  .aarrr-row{display:flex;gap:14px;align-items:stretch;margin-top:6px}
+  .aarrr-row .dmc{flex:1;margin-top:0}
+  .aarrr-row .pfig img{max-width:300px}
+  .ek-head{display:flex;align-items:center;gap:16px;margin-bottom:14px}
+  .ek-logo{width:120px;height:auto;border-radius:12px;flex:none;box-shadow:0 4px 14px rgba(21,50,79,.15)}
+  .ek-steps{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+  .ek-step{background:#fff;border:1px solid var(--line);border-radius:12px;padding:10px;display:flex;flex-direction:column;gap:8px}
+  .ek-step>img{width:100%;height:auto;border-radius:9px;border:1px solid var(--line);display:block}
+  .ek-info{display:flex;flex-direction:column;gap:3px}
+  .ek-info .aarrr{align-self:flex-start;font-size:9.5px;font-weight:700;color:#fff;background:var(--navy);border-radius:5px;padding:2px 7px}
+  .ek-info .ek-no{font-size:10.5px;font-weight:700;color:var(--teal)}
+  .ek-info h4{margin:0;font-size:12.5px;color:var(--navy)} .ek-info p{margin:0;font-size:11px;color:var(--mute);line-height:1.5}
+  .why{background:#fff;border:1px solid var(--line);border-left:4px solid var(--amber);border-radius:12px;padding:14px 17px;margin-top:14px}
+  .why h3{margin:0 0 6px;font-size:14px;color:var(--navy)}
+  .why p{margin:0 0 7px;font-size:12.5px;color:var(--ink);line-height:1.7} .why p:last-child{margin-bottom:0}
+  .why .why-ex{background:var(--soft);border-radius:9px;padding:10px 12px;color:var(--mute)}
+  .ex-split{display:grid;grid-template-columns:1fr 38%;gap:18px;align-items:start;margin-top:10px}
+  .ex-chart{min-width:0}
+  .ex-chart .fn{max-width:none} .ex-chart .fn-row{grid-template-columns:118px 1fr 92px;gap:8px}
+  .ex-chart .fn-name{font-size:11.5px} .ex-chart .fn-val{font-size:11.5px} .ex-chart .fn-val b{font-size:13px}
+  .ex-chart .cohort{font-size:12px} .ex-chart .cohort td{width:auto;min-width:40px;height:30px}
+  .ex-panel{position:sticky;top:74px;display:flex;flex-direction:column;gap:10px;min-width:0}
+  .ex-panel .ex-toggle{align-self:flex-start}
+  .ex-panel .exq,.ex-panel .exa{margin-top:0;max-width:none}
+  @media(max-width:860px){
+    .aarrr-row{flex-direction:column} .aarrr-row .pfig{width:100%!important} .aarrr-row .pfig img{max-width:420px}
+    .ek-steps{grid-template-columns:1fr 1fr} .ek-head{flex-direction:column;align-items:flex-start;gap:10px}
+    .ex-split{grid-template-columns:1fr} .ex-panel{position:static}
+  }
+  
+  .aarrr-figs{display:flex;gap:14px;flex-wrap:wrap;margin-top:12px}
+  .aarrr-figs figure{margin:0;flex:1 1 260px;max-width:340px}
+  .aarrr-figs img{width:100%;height:auto;border:1px solid var(--line);border-radius:11px;box-shadow:0 4px 14px rgba(21,50,79,.10);display:block;background:#fff}
+  .zoomable{cursor:zoom-in;transition:transform .12s,box-shadow .12s}
+  .zoomable:hover{transform:translateY(-2px);box-shadow:0 8px 22px rgba(21,50,79,.16)}
+  .lightbox[hidden]{display:none}
+  .lightbox{position:fixed;inset:0;z-index:400;background:rgba(13,36,54,.86);display:flex;align-items:center;justify-content:center;padding:24px;cursor:zoom-out}
+  .lightbox img{max-width:94vw;max-height:90vh;border-radius:10px;box-shadow:0 24px 70px rgba(0,0,0,.45);background:#fff}
+    .plain{margin:6px 0 0;padding-left:1.1em} .plain li{margin:6px 0;font-size:13px;color:var(--ink);line-height:1.6}
+    .gate{display:none;position:fixed;inset:0;z-index:500;background:linear-gradient(160deg,#15324F,#0d2436);align-items:center;justify-content:center;padding:24px}
   body.locked .gate{display:flex}
   body.locked .deck,body.locked .dots,body.locked .navbtns,body.locked .ai-fab,body.locked .ai-panel,body.locked .hd{display:none!important}
   .gate-card{width:100%;max-width:390px;background:#fff;border-radius:18px;padding:30px 28px;text-align:center;box-shadow:0 24px 60px rgba(0,0,0,.32)}
@@ -157,19 +485,101 @@
   .gate-row button{flex:none;font-family:var(--jp);font-weight:700;font-size:14px;border:0;background:var(--navy);color:#fff;border-radius:10px;padding:11px 18px;cursor:pointer}
   .gate-err{min-height:18px;margin:10px 0 0;font-size:12.5px;color:var(--red);font-weight:700}
   .gate-back{display:inline-block;margin-top:12px;font-size:12.5px;color:var(--teal)}
-  @media(max-width:860px){.toc{grid-template-columns:1fr} .dots{display:none}}
-  @media(max-width:640px){.task{grid-template-columns:1fr}}
-  @media(prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
-</style>
+  
+  /* 第7回：最終回・講評会・表彰・全7回の振り返り */
+  .pitch2{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:8px}
+  .pcol{background:#fff;border:1px solid var(--line);border-radius:13px;padding:16px 18px}
+  .pch{margin:0 0 10px;font-size:14px;color:var(--navy);display:flex;align-items:center;gap:8px}
+  .pnum{flex:none;width:22px;height:22px;border-radius:6px;background:var(--teal);color:#fff;font-size:11px;font-weight:700;display:flex;align-items:center;justify-content:center}
+  .p5{margin:0;padding-left:1.2em}
+  .p5 li{margin:0 0 8px;font-size:13px;color:var(--navy);font-weight:700}
+  .p5 li span{display:block;font-size:11.5px;color:var(--mute);font-weight:400;margin-top:2px}
+  .pnot{margin:0;padding:0;list-style:none}
+  .pnot li{margin:0 0 9px;font-size:13px;color:var(--navy);font-weight:700;padding-left:14px;border-left:3px solid var(--amber)}
+  .pnot li b{color:var(--green)}
+  .pnot li span{display:block;font-size:11.5px;color:var(--mute);font-weight:400;margin-top:2px}
+  .ncards{margin:0;display:flex;flex-direction:column;gap:8px}
+  .ncard{display:block;width:100%;text-align:left;font-family:var(--jp);cursor:pointer;background:#fff;border:1px solid var(--line);border-left:3px solid var(--amber);border-radius:9px;padding:9px 12px;transition:border-color .15s,box-shadow .15s,background .15s}
+  .ncard:hover{border-left-color:var(--green);box-shadow:0 2px 10px rgba(21,50,79,.08)}
+  .ncard.open{border-left-color:var(--green);background:var(--soft)}
+  .nc-h{display:flex;align-items:baseline;gap:6px;font-size:13px;font-weight:700;color:var(--navy)}
+  .nc-h b{color:var(--green)}
+  .nc-h .nc-car{margin-left:auto;flex:none;font-size:10.5px;color:var(--teal);font-weight:700}
+  .ncard.open .nc-car{color:var(--green)}
+  .nc-sub{display:block;font-size:11.5px;color:var(--mute);margin-top:3px}
+  .nc-why{display:none;font-size:11.5px;color:var(--ink);margin-top:7px;padding-top:7px;border-top:1px dashed var(--line);line-height:1.6}
+  .nc-why b{color:var(--navy)}
+  .ncard.open .nc-why{display:block}
+  .nc-hint{margin:8px 0 0;font-size:11px;color:var(--teal);font-weight:700}
+  .deckcards{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:8px}
+  .dcard{background:var(--soft);border:1px solid var(--line);border-radius:12px;padding:14px 15px;cursor:pointer;transition:border-color .12s,box-shadow .12s}
+  .dcard:hover{border-color:var(--teal);box-shadow:0 4px 14px rgba(21,50,79,.10)}
+  .dcard.open{border-color:var(--teal);background:#fff}
+  .dc-h{font-size:13px;font-weight:700;color:var(--navy);line-height:1.5}
+  .dc-tag{display:inline-block;font-size:9.5px;color:#fff;background:var(--navy);border-radius:5px;padding:2px 7px;margin-right:6px;vertical-align:middle}
+  .dc-hint{margin-top:8px;font-size:11px;font-weight:700;color:var(--teal)}
+  .dc-body{display:none;margin-top:9px;padding-top:9px;border-top:1px dashed var(--line)}
+  .dcard.open .dc-body{display:block}
+  .dc-body p{margin:0 0 8px;font-size:11.5px;color:var(--ink);line-height:1.7}
+  .dc-warn{background:var(--amber-soft);border-radius:8px;padding:8px 10px;color:#7a531a!important}
+  .dc-link{display:inline-block;margin-top:4px;font-size:11.5px;font-weight:700;color:#fff;background:var(--teal);border-radius:8px;padding:6px 12px;text-decoration:none}
+  .dc-link:hover{background:var(--navy)}
+  .quote-box{background:#fdf6f6;border:1px solid #e6c9c9;border-left:4px solid var(--red);border-radius:11px;padding:14px 16px}
+  .quote-box p{margin:0 0 8px;font-size:13px;color:var(--ink);line-height:1.75}
+  .quote-box p:last-child{margin-bottom:0}
+  .reflist{display:flex;flex-direction:column;gap:10px;margin-top:8px}
+  .refitem{display:flex;gap:12px;align-items:flex-start;background:#fff;border:1px solid var(--line);border-radius:11px;padding:13px 15px;text-decoration:none;transition:border-color .12s,box-shadow .12s}
+  .refitem:hover{border-color:var(--teal);box-shadow:0 4px 14px rgba(21,50,79,.10)}
+  .rf-tag{flex:none;font-size:9.5px;font-weight:700;color:#fff;background:var(--teal);border-radius:5px;padding:3px 8px;margin-top:2px}
+  .refitem b{font-size:13px;color:var(--navy);display:block}
+  .refitem p{margin:3px 0 0;font-size:11.5px;color:var(--mute);line-height:1.6}
+  .rtab{width:100%;border-collapse:collapse;font-size:12.5px;margin-top:6px}
+  .rtab th,.rtab td{border:1px solid var(--line);padding:7px 9px;text-align:center;font-variant-numeric:tabular-nums}
+  .rtab th{background:var(--soft);color:var(--navy);font-weight:700}
+  .rtab td.l{text-align:left}
+  .rtab .ok{color:var(--green);font-weight:800} .rtab .warn{color:var(--amber);font-weight:800}
+  .takeaway{display:inline-block;background:var(--amber-soft);border:1px solid #e8d3a8;color:#7a531a;border-radius:8px;padding:6px 12px;font-size:12px;font-weight:700;margin-top:10px}
+  .ans-h{font-size:14px;color:var(--navy);margin:22px 0 6px;display:flex;align-items:center;gap:9px}
+  .ans-no{flex:none;font-size:11px;font-weight:700;color:#fff;background:var(--green);border-radius:6px;padding:3px 9px}
+  .exa{margin-top:14px;max-width:none;background:var(--soft);border:1px solid var(--line);border-left:4px solid var(--green);border-radius:11px;padding:14px 16px;font-size:13px;color:var(--ink);line-height:1.75}
+  .exa b{color:var(--green)}
+  .exq{margin-top:0;max-width:none;background:var(--amber-soft);border:1px solid #e8d3a8;border-radius:11px;padding:14px 16px;font-size:13px;color:#7a531a}
+  .ex-split{display:grid;grid-template-columns:1fr 38%;gap:18px;align-items:start;margin-top:10px}
+  .ex-chart{min-width:0}
+  .ex-panel{position:sticky;top:74px;display:flex;flex-direction:column;gap:10px;min-width:0}
+  .ex-toggle{align-self:flex-start;font-family:var(--jp);font-weight:700;font-size:13px;border:1px solid var(--teal);background:#fff;color:var(--teal);border-radius:9px;padding:8px 15px;cursor:pointer;transition:background .15s,color .15s}
+  .ex-toggle:hover{background:var(--teal);color:#fff}
+  .ex-toggle.on{background:var(--navy);border-color:var(--navy);color:#fff}
+  .why{background:#fff;border:1px solid var(--line);border-left:4px solid var(--amber);border-radius:12px;padding:14px 17px;margin-top:14px}
+  .why h3{margin:0 0 6px;font-size:14px;color:var(--navy)}
+  .why p{margin:0;font-size:12.5px;color:var(--ink);line-height:1.7}
+  @media(max-width:860px){
+    .pitch2{grid-template-columns:1fr} .deckcards{grid-template-columns:1fr}
+    .ex-split{grid-template-columns:1fr} .ex-panel{position:static}
+  }
+  .tldr{margin-top:20px;padding-top:14px;border-top:1px solid var(--line)}
+  .tldr-sum{margin:0;font-size:13px;color:var(--ink);line-height:1.8}
+  .tldr-btn{margin-top:6px;font-family:var(--jp);font-size:12px;font-weight:700;color:var(--teal);background:none;border:0;padding:0;cursor:pointer}
+  .tldr-btn:hover{text-decoration:underline}
+  .tldr-full{margin-top:8px}
+  .tldr-full p{margin:0 0 9px;font-size:12.5px;color:var(--ink);line-height:1.85}
+  .tldr-full p:last-child{margin-bottom:0}
+  .tldr-full b{color:var(--navy)}
+  .slide.reading{height:100vh;max-height:100vh;justify-content:flex-start;overflow-y:auto;-webkit-overflow-scrolling:touch;overscroll-behavior:contain;scroll-snap-align:start}
+  .slide.reading .in{margin:0 auto;padding-bottom:24px}
+  
+  .ikey{position:fixed;left:16px;bottom:16px;z-index:120;display:flex;align-items:center;gap:6px;background:rgba(255,255,255,.92);border:1px solid var(--line);border-radius:20px;padding:6px 12px;font-size:11px;color:var(--mute);box-shadow:0 2px 10px rgba(21,50,79,.10);pointer-events:none}
+  .ikey kbd{font-family:var(--jp);font-size:10.5px;font-weight:700;color:var(--navy);background:var(--soft);border:1px solid var(--line);border-radius:5px;padding:2px 7px;box-shadow:0 1px 0 rgba(21,50,79,.12)}
+  @media(max-width:860px){ .ikey{display:none} }
+  </style>
   <script src="config.js"></script>
 </head>
 <body class="locked">
-
 <div class="gate" id="gate">
   <div class="gate-card">
     <div class="gate-ic">🔒</div>
-    <h2>第7回は準備中です</h2>
-    <p class="desc">このページの資料は現在準備中です。閲覧にはパスワードが必要です。担当教員にご確認ください。</p>
+    <h2>第7回は限定公開です</h2>
+    <p class="desc">この回の資料は授業の進行に合わせて公開します。閲覧にはパスワードが必要です。担当教員にご確認ください。</p>
     <div class="gate-row">
       <input type="password" id="gatePw" placeholder="パスワード" autocomplete="off">
       <button id="gateBtn">開く</button>
@@ -179,28 +589,11 @@
   </div>
 </div>
 
-<script>
-(function(){
-  "use strict";
-  /* ===== 閲覧パスワード（変更可）。第3回以降の「準備中」ページの解錠に使います。 ===== */
-  var PAGE_PASSWORD = "sdgs2026";
-  /* ============================================================================ */
-  var pw=document.getElementById("gatePw"),btn=document.getElementById("gateBtn"),err=document.getElementById("gateErr");
-  function tryUnlock(){
-    if(pw.value===PAGE_PASSWORD){document.body.classList.remove("locked");err.textContent="";}
-    else{err.textContent="パスワードが違います。";pw.select();}
-  }
-  btn.addEventListener("click",tryUnlock);
-  pw.addEventListener("keydown",function(e){if(e.key==="Enter"){e.preventDefault();tryUnlock();}});
-  setTimeout(function(){if(document.body.classList.contains("locked"))pw.focus();},200);
-})();
-</script>
-
 <header class="hd">
   <div class="brand">SDGs発展2 <span>講義資料</span></div>
   <a class="hd-cr" href="https://classroom.google.com/c/ODU5NjUzNDM0Njk0" target="_blank" rel="noopener">🎓 Classroom</a>
   <div class="dropdown">
-    <button class="dd-btn" id="ddBtn" aria-expanded="false">第7回：最終発表＆振り返り <span class="caret">▼</span></button>
+    <button class="dd-btn" id="ddBtn" aria-expanded="false">第7回：講評会 &amp; 表彰 <span class="caret">▼</span></button>
     <div class="dd-menu" id="ddMenu">
       <div class="grp">全7回</div>
       <a href="lecture1.html"><span class="ttl">第1回　全体像 ── OMTMとビジネスモデル</span><span class="badge ready">公開</span></a>
@@ -208,61 +601,161 @@
       <a href="lecture3.html"><span class="ttl">第3回　コホート分析とファネル分析</span><span class="badge ready">公開</span></a>
       <a href="lecture4.html"><span class="ttl">第4回　A/Bテストとピボット ── 実験と意思決定</span><span class="badge ready">公開</span></a>
       <a href="lecture5.html"><span class="ttl">第5回　データストーリーテリング</span><span class="badge ready">公開</span></a>
-      <a href="lecture6.html"><span class="ttl">第6回　投資家向けピッチの準備</span><span class="badge soon">準備中</span></a>
-      <a class="current" href="#"><span class="ttl">第7回　最終発表＆振り返り</span><span class="badge ready">表示中</span></a>
+      <a href="lecture6.html"><span class="ttl">第6回　投資家向けピッチの準備</span><span class="badge ready">公開</span></a>
+      <a class="current" href="#"><span class="ttl">第7回　最終回：講評会 &amp; 表彰</span><span class="badge ready">表示中</span></a>
     </div>
   </div>
 </header>
 
 <main class="deck" id="deck">
 
+  <!-- 1 HERO -->
   <section class="slide hero" data-title="タイトル">
     <div class="in">
-      <div class="kick">2026年度　SDGs発展2［a1］　第7回</div>
-      <h1>最終発表 ── データドリブン投資家向けピッチ＆振り返り</h1>
-      <p class="sub">各チーム／個人がデータに基づく投資家向けプレゼンテーションを実施します。質疑応答と相互フィードバックを行い、全体を振り返って学びと意義をまとめます。</p>
-      <div class="meta">
-        <span class="pill">担当：<b>高橋 雄介</b></span>
-        <span class="pill">教科書：<b>Lean Analytics</b></span>
-        <span class="pill">形態：オンライン（同時双方向）</span>
-      </div>
+      <div class="kick">2026年度　SDGs発展2［a1］　第7回（最終回）</div>
+      <h1>ピッチ講評会 &amp; 表彰<br><em>── みんなの「1分」を、みんなで磨く</em></h1>
+      <div class="creed">語るな、<em>示せ。</em></div>
+      <div class="meta"><span class="pill">担当：<b>高橋 雄介</b></span><span class="pill">教科書：<b>Lean Analytics</b></span><span class="pill">形態：オンライン（同時双方向）</span></div>
+      <div class="sowhat"><div class="you"><div class="lbl">これまで</div><p>分析を積み上げ、1分のピッチ動画にまとめた。</p></div><div class="good"><div class="lbl">最終回</div><p>その動画を全員で講評し、優れた発表を表彰する。</p></div></div>
+      <div class="tldr"><p class="tldr-sum">最終発表会は行いません。提出された「1分ピッチ動画」をみんなで講評し、優れた発表を表彰。代表者はライブ発表します。</p><button class="tldr-btn" type="button">もっと詳しく ▸</button><div class="tldr-full" hidden><p>この講義の締めくくりです。第6回までに、あなたは指標を設計し（第1・2回）、ファネルとコホートで読み（第3回）、A/Bとピボットで確かめ（第4回）、物語に変え（第5回）、投資家向けピッチに凝縮しました（第6回）。その成果が、提出された<b>1分間のピッチ動画</b>です。</p><p>今日は、この動画を題材に<b>みんなで講評</b>します。互いに「So What?／Why So?」を問い合い、良かった点と、あと一歩の点を言葉にします。そして、いくつかの観点で<b>優れた発表を表彰</b>し、代表者には実際にみんなの前で発表してもらいます。</p><p>採点のためではありません。<b>「語るな、示せ」を、最後に体で確かめる</b>ための時間です。</p></div></div>
     </div>
   </section>
 
-  <section class="slide" data-title="この回の内容（予定）">
-    <div class="in">
-      <div class="eyebrow"><span class="num plan">予定</span> この回の内容</div>
-      <span class="plan-chip">シラバスに基づく構成案 ── 内容は精査中です</span>
-      <h2 class="t">この回の内容（予定）</h2>
-      <p class="lead">全7回の集大成です。下は予定の構成です（精査中）。</p>
-      <div class="toc">
-        <div class="titem"><div class="tn">1</div><div><h4>最終発表の進め方・評価観点</h4><p>当日の流れと見られるポイント</p></div></div>
-        <div class="titem"><div class="tn">2</div><div><h4>各チーム／個人のピッチ</h4><p>データドリブンな発表</p></div></div>
-        <div class="titem"><div class="tn">3</div><div><h4>質疑応答と相互フィードバック</h4><p>問いを通じて磨く</p></div></div>
-        <div class="titem"><div class="tn">4</div><div><h4>全体の振り返り</h4><p>Lean Analyticsの学びを整理</p></div></div>
-        <div class="titem"><div class="tn">5</div><div><h4>データでSDGsに取り組む意義</h4><p>学びの位置づけ</p></div></div>
-        <div class="titem"><div class="tn">6</div><div><h4>次の一歩</h4><p>学びを実践へつなぐ</p></div></div>
+  <!-- 01 今日の流れ -->
+  <section class="slide" data-title="今日の流れ">
+    <div class="in"><div class="eyebrow"><span class="num">01</span> 今日の流れ</div>
+      <h2 class="t">1分の動画を、学びの総まとめに変える</h2>
+      <div class="steps">
+        <div class="step"><div class="n">1</div><h3>提出のおさらい</h3><p>1分ピッチ動画</p></div>
+        <div class="step"><div class="n">2</div><h3>評価の観点</h3><p>何を見て講評するか</p></div>
+        <div class="step"><div class="n">3</div><h3>みんなで講評</h3><p>So What?で問い合う</p></div>
+        <div class="step"><div class="n">4</div><h3>表彰＆代表発表</h3><p>優れた発表を称える</p></div>
+        <div class="step"><div class="n">5</div><h3>全7回の振り返り</h3><p>1つの物語として</p></div>
       </div>
-    </div>
-  </section>
+      <div class="tldr"><p class="tldr-sum">提出のおさらい → 評価の観点 → 講評 → 表彰＆代表発表 → 全7回の振り返り、の順に進みます。</p><button class="tldr-btn" type="button">もっと詳しく ▸</button><div class="tldr-full" hidden><p>まず、提出物（1分ピッチ動画）と3つの提出方法をおさらいします。次に、<b>何を見て講評するのか</b>という評価の観点を共有します。これは第3〜6回で学んだことの総点検でもあります。</p><p>その観点をもって<b>みんなで講評</b>し合い、いくつかの部門で<b>表彰</b>します。代表者にはライブで発表してもらいます。最後に、<b>全7回を1つの物語として振り返り</b>、これからの一歩につなげます。</p></div></div>
+    </div></section>
 
-  <section class="slide" data-title="予習・復習と提出">
-    <div class="in">
-      <div class="eyebrow"><span class="num">提出</span> 予習・復習</div>
-      <h2 class="t">次回までの準備と提出</h2>
+  <!-- 02 提出のおさらい -->
+  <section class="slide" data-title="提出のおさらい">
+    <div class="in"><div class="eyebrow"><span class="num">02</span> 提出物のおさらい</div>
+      <h2 class="t">提出物は「1分間のピッチ動画」</h2>
+      <p class="lead">尺は<b>1分（±10秒）</b>。1画面1メッセージで、数字には<b>分母 n</b> を添える——第5回・第6回の原則がそのまま活きます。提出は次の3通りのいずれでもOK。<b>各カードをクリック</b>すると手順が開きます。</p>
+      <div class="deckcards">
+        <div class="dcard">
+          <div class="dc-h"><span class="dc-tag">方法A</span>Classroom に直接アップロード</div>
+          <div class="dc-hint">▸ 手順を見る</div>
+          <div class="dc-body">
+            <p><b>いちばん簡単な方法です。</b>動画ファイル（mp4 など）をそのまま課題に添付します。</p>
+            <p>① Classroom の課題を開く → ②「追加または作成」→「ファイル」→ ③ 動画を選択 → ④「提出」。</p>
+            <p class="dc-warn">⚠️ ファイルが大きすぎるとアップロードに時間がかかります。長辺 720p 程度で十分です。うまくいかないときは方法B・Cへ。</p>
+          </div>
+        </div>
+        <div class="dcard">
+          <div class="dc-h"><span class="dc-tag">方法B</span>Google Drive で公開リンク</div>
+          <div class="dc-hint">▸ 手順を見る</div>
+          <div class="dc-body">
+            <p><b>大きい動画でも安定します。</b>Drive にアップして、<b>公開リンク</b>を課題に貼ります。</p>
+            <p>① Drive に動画をアップ → ② 右クリック「共有」→ ③「リンクを知っている全員」→ 権限は<b>閲覧者</b> → ④「リンクをコピー」→ ⑤ 課題にURLを貼って提出。</p>
+            <p class="dc-warn">⚠️「制限付き」のままだと教員が見られません。必ず<b>「リンクを知っている全員」</b>に変更してください。</p>
+          </div>
+        </div>
+        <div class="dcard">
+          <div class="dc-h"><span class="dc-tag">方法C</span>YouTube 等にアップして URL</div>
+          <div class="dc-hint">▸ 手順を見る</div>
+          <div class="dc-body">
+            <p><b>共有・再生がいちばん軽い方法です。</b>YouTube 等にアップし、URL を貼ります。</p>
+            <p>① 動画をアップロード → ② 公開設定を<b>「限定公開（リンクを知る人のみ）」</b>または「公開」に → ③ 共有URLをコピー → ④ 課題にURLを貼って提出。</p>
+            <p class="dc-warn">⚠️「非公開」だと教員が見られません。少なくとも<b>限定公開</b>にしてください。</p>
+          </div>
+        </div>
+      </div>
+      <p class="srcnote">※ 提出方法はいずれか1つでOK。締切・詳細は Google Classroom の課題に従ってください。</p>
+      <div class="tldr"><p class="tldr-sum">1分のピッチ動画を、①直接アップロード ②Google Drive公開リンク ③YouTube等のURL のいずれかで提出します。</p><button class="tldr-btn" type="button">もっと詳しく ▸</button><div class="tldr-full" hidden><p>提出物は<b>1分間のピッチ動画</b>です。長さは1分を基準に、±10秒に収めましょう。内容は第6回で組み立てた<b>トラクション・スライド</b>（主張タイトル＋根拠＋次の一手）が中心です。</p><p>提出方法は3通り。<b>A：Classroom に直接アップロード</b>（手軽・小さめ動画向き）、<b>B：Google Drive の公開リンク</b>（大きい動画も安定。共有を「リンクを知っている全員／閲覧者」に）、<b>C：YouTube 等のURL</b>（再生が軽い。限定公開でOK）。共有設定のミスで「見られない」事故が一番多いので、提出前に<b>別アカウントやシークレットウィンドウで開けるか</b>を必ず確認してください。</p></div></div>
+    </div></section>
+
+  <!-- 03 評価の観点 -->
+  <section class="slide" data-title="評価の観点">
+    <div class="in"><div class="eyebrow"><span class="num">03</span> 何を見て講評するか</div>
+      <h2 class="t">良いピッチの5つの観点 ── これまでの学びの総点検</h2>
+      <div class="aq">
+        <div class="aqi"><h4><span class="en">1</span>主張＝タイトル</h4><p>1枚の主張が言い切れているか。<br><span style="color:var(--mute)">（第5回）</span></p></div>
+        <div class="aqi"><h4><span class="en">2</span>トラクション</h4><p>成長・熱量・学びが<b>数字＋分母n</b>で示せているか。<br><span style="color:var(--mute)">（第3・6回）</span></p></div>
+        <div class="aqi"><h4><span class="en">3</span>1画面1メッセージ</h4><p>盛り込みすぎず、要点が1つに絞れているか。<br><span style="color:var(--mute)">（第5回）</span></p></div>
+        <div class="aqi"><h4><span class="en">4</span>次の一手（ask）</h4><p>「何を求めるか」が明確か。<br><span style="color:var(--mute)">（第6回）</span></p></div>
+        <div class="aqi"><h4><span class="en">5</span>誠実さ</h4><p>盛らない・分母を隠さない・都合の悪い数字も出す。<br><span style="color:var(--mute)">（第5回）</span></p></div>
+      </div>
+      <div class="dmc" style="border-left-color:var(--amber)"><p>💡 講評は<b>減点さがし</b>ではありません。<b>「どこが一番刺さったか」</b>をまず言葉にし、その上で「あと一歩なら、どの観点を足すか」を伝えます。第4回の <b>「事前に線を引く」</b>——見る前に観点を決めておく——が、フェアな講評のコツです。</p></div>
+      <div class="tldr"><p class="tldr-sum">①主張＝タイトル ②トラクション（数字＋n）③1画面1メッセージ ④次の一手 ⑤誠実さ、の5観点で見ます。</p><button class="tldr-btn" type="button">もっと詳しく ▸</button><div class="tldr-full" hidden><p>講評の観点は、第3〜6回の学びをそのまま並べたものです。<b>①主張＝タイトル</b>：スライドのタイトルが「観察」ではなく「主張」になっているか（第5回）。<b>②トラクション</b>：成長・熱量・学びが、率だけでなく<b>分母 n</b> つきで示せているか（第3・6回）。<b>③1画面1メッセージ</b>：一度に伝えることを1つに絞れているか（第5回）。<b>④次の一手</b>：ask（何を求めるか）が明確か（第6回）。<b>⑤誠実さ</b>：都合の悪い数字も隠さず、盛っていないか（第5回）。</p><p>この5つは、そのまま<b>自分の動画のチェックリスト</b>にもなります。人の発表を見る目は、自分の発表を見直す目でもあります。</p></div></div>
+    </div></section>
+
+  <!-- 04 講評の見方 -->
+  <section class="slide" data-title="講評の見方">
+    <div class="in"><div class="eyebrow"><span class="num">04</span> 講評の作法</div>
+      <h2 class="t">「So What? / Why So?」で、互いに問い合う</h2>
+      <div class="sowhat"><div class="you"><div class="lbl">✕ ただの感想</div><p>「良かったです」「わかりやすかったです」──何が良かったのか、次にどうすればいいのかが残らない。</p></div><div class="good"><div class="lbl">◯ 使える講評</div><p>「トラクションの<b>55%</b>が一番刺さった（Why So?）。母数nを添えれば、もっと信用できる（次の一手）」</p></div></div>
+      <p class="lead" style="margin-top:14px">第5回で学んだ <b>So What?（で、何が言えるの？）</b> と <b>Why So?（なぜそう言えるの？）</b> を、互いの動画に向けてみましょう。良い講評は、必ず<b>具体</b>（どの数字・どの1枚）に触れています。</p>
+      <div class="tldr"><p class="tldr-sum">感想で終わらせず、「どの数字が・なぜ効いたか」「次に何を足すか」まで具体に踏み込むのが良い講評です。</p><button class="tldr-btn" type="button">もっと詳しく ▸</button><div class="tldr-full" hidden><p>講評でいちばんもったいないのは、「良かったです」で終わることです。それでは、褒められた人も、聞いていた人も、<b>次に活かせる学びが残りません</b>。</p><p>第5回の枠組みを使いましょう。<b>Why So?</b>——「どこが、なぜ効いたのか」を具体に指さす。たとえば「競技層の定着<b>55%</b>という数字が主張を支えていて説得力があった」。そして<b>次の一手</b>——「母数 n を添えると、さらに信用が増す」。この<b>具体＋次の一手</b>の形にすると、講評が贈り物になります。</p><p>受け取る側も同じです。指摘を<b>減点</b>ではなく<b>改善の材料</b>として受け取る。これは、投資家からの厳しい質問への向き合い方（第6回）とまったく同じ姿勢です。</p></div></div>
+    </div></section>
+
+  <!-- 05 表彰 -->
+  <section class="slide" data-title="表彰">
+    <div class="in"><div class="eyebrow"><span class="num">05</span> アワード</div>
+      <h2 class="t">優れた発表を、5つの観点で表彰する</h2>
+      <div class="aq">
+        <div class="aqi"><h4>🎯 ベスト「痛み」賞</h4><p>誰の・どんな痛みかが鮮明。<br>Problem, NOT solution.</p></div>
+        <div class="aqi"><h4>📈 ベスト・トラクション賞</h4><p>成長・熱量・学びが数字で説得的。</p></div>
+        <div class="aqi"><h4>🔍 ベスト・データ誠実賞</h4><p>分母を示し、盛らない誠実な発表。</p></div>
+        <div class="aqi"><h4>🎬 ベスト・ストーリー賞</h4><p>1画面1メッセージで、物語として伝わる。</p></div>
+        <div class="aqi"><h4>👑 総合ベストピッチ賞</h4><p>5観点を高い水準で満たす。</p></div>
+      </div>
+      <p class="srcnote">※ 部門・受賞は当日の講評をふまえて決定します。順位づけが目的ではなく、<b>良い実例をみんなで共有する</b>ための表彰です。</p>
+      <div class="tldr"><p class="tldr-sum">「痛み」「トラクション」「データ誠実」「ストーリー」「総合」の5部門で、優れた発表を表彰します。</p><button class="tldr-btn" type="button">もっと詳しく ▸</button><div class="tldr-full" hidden><p>表彰は、<b>順位をつけるため</b>ではありません。「こういう見せ方があるのか」という<b>良い実例を、みんなで共有する</b>ための仕掛けです。</p><p>5つの部門は、そのまま評価の観点に対応しています。<b>ベスト「痛み」賞</b>（Problem, NOT solution が効いている）、<b>ベスト・トラクション賞</b>（数字が説得的）、<b>ベスト・データ誠実賞</b>（盛らず、分母を示す）、<b>ベスト・ストーリー賞</b>（1画面1メッセージで物語になっている）、そして<b>総合ベストピッチ賞</b>。受賞作は、次に自分が撮り直すときの手本になります。</p></div></div>
+    </div></section>
+
+  <!-- 06 代表者ライブ発表 -->
+  <section class="slide" data-title="代表発表">
+    <div class="in"><div class="eyebrow"><span class="num">06</span> ライブ発表</div>
+      <h2 class="t">代表者は、みんなの前で1分</h2>
       <div class="task">
-        <div class="tcard review"><h3>🔁 復習</h3><ol><li>授業全体を振り返る</li><li>学びと今後の展望をレポートにまとめる</li></ol></div>
-        <div class="tcard prep"><h3>📖 予習</h3><ol><li>プレゼンテーションの最終準備を行う</li></ol></div>
+        <div class="tcard review"><h3>🎤 発表する人へ</h3><ol>
+          <li>動画と同じ<b>1分</b>を、声に出して届ける</li>
+          <li>スライドは<b>1画面1メッセージ</b>。主役の数字を大きく</li>
+          <li>最後は必ず<b>次の一手（ask）</b>で締める</li></ol></div>
+        <div class="tcard prep"><h3>👂 聞く人へ</h3><ol>
+          <li>まず<b>一番刺さった点</b>を見つける（Why So?）</li>
+          <li>「あと一歩」は<b>観点</b>で伝える（どの数字・どの1枚）</li>
+          <li>感想で終わらせず、<b>次の一手</b>まで言葉にする</li></ol></div>
       </div>
-      <div class="band">
-        <div class="dl">提出：締切は授業内で指定します</div>
-        <a class="cr-submit" href="https://classroom.google.com/c/ODU5NjUzNDM0Njk0" target="_blank" rel="noopener">🎓 Classroomで提出 ↗</a>
-        <div class="next">次回予告 ── 全7回 ── これで最終回です</div>
+      <div class="tldr"><p class="tldr-sum">代表者は動画と同じ1分をライブで発表。聞く側は「刺さった点＋次の一手」を具体で返します。</p><button class="tldr-btn" type="button">もっと詳しく ▸</button><div class="tldr-full" hidden><p>選ばれた代表者には、提出動画と同じ<b>1分のピッチ</b>を、みんなの前でライブでやってもらいます。画面ではなく<b>人に向かって</b>話すと、間の取り方や強弱が変わります。これも大事な練習です。</p><p>聞く側の役割も同じくらい重要です。第5回・第6回で学んだ<b>具体＋次の一手</b>の講評を返しましょう。全員が「良い問いを投げる人」になれば、教室そのものが<b>ピッチを磨く場</b>になります。</p></div></div>
+    </div></section>
+
+  <!-- 07 全7回の振り返り -->
+  <section class="slide" data-title="全7回の振り返り">
+    <div class="in"><div class="eyebrow"><span class="num">07</span> コースの総まとめ</div>
+      <h2 class="t">全7回は、1つの物語だった</h2>
+      <div class="steps" style="grid-template-columns:repeat(7,1fr)">
+        <div class="step"><div class="n">1</div><h3>全体像</h3><p>OMTMとBM</p></div>
+        <div class="step"><div class="n">2</div><h3>データ収集</h3><p>定性と定量</p></div>
+        <div class="step"><div class="n">3</div><h3>コホート/ファネル</h3><p>どこで・誰が</p></div>
+        <div class="step"><div class="n">4</div><h3>A/B・ピボット</h3><p>確かめて決める</p></div>
+        <div class="step"><div class="n">5</div><h3>ストーリー</h3><p>動く物語に</p></div>
+        <div class="step"><div class="n">6</div><h3>ピッチ</h3><p>1枚に凝縮</p></div>
+        <div class="step"><div class="n">7</div><h3>講評・表彰</h3><p>示して、磨く</p></div>
       </div>
-      <p class="srcnote">出典：本学シラバス『SDGs発展2[a1]』（2026年度）に基づく構成案。見出し・項目は今後精査して更新します。教科書『Lean Analytics』(A. クロール&B. ヨスコビッツ)を要約・再構成（逐語引用なし）。</p>
-    </div>
-  </section>
-  <!-- FOOTER (講師・教科書) -->
+      <p class="lead" style="margin-top:14px">指標を決め（1・2）、データで現在地を読み（3）、実験で打ち手を確かめ（4）、物語に変え（5）、投資家に凝縮して伝え（6）、最後にみんなで磨く（7）。<b>バラバラの技術ではなく、1本の道</b>でした。</p>
+      <div class="tldr"><p class="tldr-sum">OMTM→データ収集→コホート/ファネル→A/B・ピボット→ストーリー→ピッチ→講評。7回は1本の道でした。</p><button class="tldr-btn" type="button">もっと詳しく ▸</button><div class="tldr-full" hidden><p>振り返ると、7回はすべてつながっていました。<b>第1・2回</b>で「何を測るか（OMTM）」を決め、<b>第3回</b>でファネルとコホートから「どこで・誰が」つまずくかを読み、<b>第4回</b>でA/Bとピボットにより「打ち手」を確かめました。<b>第5回</b>でそれを<b>動く物語</b>に変え、<b>第6回</b>で投資家に伝わる<b>1枚</b>へ凝縮し、<b>第7回</b>でみんなの前に示して磨きました。</p><p>共通するのは<b>「語るな、示せ」</b>という一点です。思いつきや勢いではなく、<b>身近な一人のデータ</b>から出発して確かめる——これが、SDGsのような大きな課題に、地に足をつけて取り組むための作法です。</p></div></div>
+    </div></section>
+
+  <!-- 08 これからの一歩 -->
+  <section class="slide" data-title="これからの一歩">
+    <div class="in"><div class="eyebrow"><span class="num">08</span> 次の一手</div>
+      <h2 class="t">身近な一人から、確かめながら進む</h2>
+      <div class="sowhat"><div class="you"><div class="lbl">大きな課題</div><p>「SDGs」「社会を変える」は、大きすぎて動けなくなりがち。</p></div><div class="good"><div class="lbl">この講義の答え</div><p>まず<b>一人</b>の行動データを測り、小さく確かめ、示す。そこから広げる。</p></div></div>
+      <p class="lead" style="margin-top:14px">EKIDEN.AI も、最初は「一人のランナーが続けられるか」から始まりました。あなたのテーマも同じです。<b>測れる一人</b>を見つけ、<b>1つの指標</b>を決め、<b>小さく確かめて</b>、<b>示す</b>。今日つくった1分の動画は、その最初の一歩です。</p>
+      <div class="dmc" style="border-left-color:var(--green)"><p>🎓 7回、おつかれさまでした。ここで身につけた「確かめてから示す」姿勢は、卒業研究でも、仕事でも、そのまま武器になります。困ったら、いつでも <b>OMTM は何か？</b> に立ち返ってください。</p></div>
+      <div class="tldr"><p class="tldr-sum">大きな課題も、測れる一人・1つの指標から。小さく確かめて示す——それがこの講義の結論です。</p><button class="tldr-btn" type="button">もっと詳しく ▸</button><div class="tldr-full" hidden><p>「社会を変える」「SDGsに取り組む」という言葉は、立派ですが大きすぎて、しばしば人を立ちすくませます。この講義の答えはシンプルでした。<b>まず、測れる一人から始める。</b></p><p>一人の行動を測り（第2回）、続くかどうかを読み（第3回）、効く打ち手を確かめ（第4回）、それを物語と1枚のピッチにして伝える（第5・6回）。小さく確かめて、示す。その積み重ねが、やがて大きな変化になります。</p><p>今日提出した1分の動画は、その<b>最初の証拠</b>です。ここから、あなた自身のテーマで、確かめながら進んでいってください。</p></div></div>
+    </div></section>
+
   <section class="slide" data-title="講師・教科書">
     <div class="in">
       <div class="eyebrow"><span class="num">INFO</span> この講義について</div>
@@ -310,6 +803,119 @@
   <button id="downBtn" aria-label="次のスライド">▼</button>
 </div>
 
+<script>
+(function(){
+  "use strict";
+
+  /* dropdown */
+  var ddBtn=document.getElementById("ddBtn"), ddMenu=document.getElementById("ddMenu");
+  ddBtn.addEventListener("click",function(e){e.stopPropagation();var o=ddMenu.classList.toggle("open");ddBtn.setAttribute("aria-expanded",o);});
+  document.addEventListener("click",function(e){ if(!ddMenu.contains(e.target)&&e.target!==ddBtn){ddMenu.classList.remove("open");ddBtn.setAttribute("aria-expanded","false");}});
+
+  /* deck / dots / buttons */
+  var deck=document.getElementById("deck");
+  var slides=Array.prototype.slice.call(deck.querySelectorAll(".slide"));
+  var dotsWrap=document.getElementById("dots");
+  var upBtn=document.getElementById("upBtn"), downBtn=document.getElementById("downBtn");
+  var current=0;
+  slides.forEach(function(s,i){
+    var b=document.createElement("button");
+    b.innerHTML='<span class="tip">'+(i+1)+'. '+(s.dataset.title||"")+'</span>';
+    b.setAttribute("aria-label",(i+1)+". "+(s.dataset.title||""));
+    b.addEventListener("click",function(){go(i);});
+    dotsWrap.appendChild(b);
+  });
+  var dotBtns=Array.prototype.slice.call(dotsWrap.children);
+  function setActive(i){current=i;dotBtns.forEach(function(d,k){d.classList.toggle("on",k===i);});upBtn.disabled=(i===0);downBtn.disabled=(i===slides.length-1);}
+  function go(i){i=Math.max(0,Math.min(slides.length-1,i));slides[i].scrollIntoView({behavior:"smooth",block:"start"});}
+  upBtn.addEventListener("click",function(){go(current-1);});
+  downBtn.addEventListener("click",function(){go(current+1);});
+  var io=new IntersectionObserver(function(es){es.forEach(function(en){if(en.isIntersecting)setActive(slides.indexOf(en.target));});},{root:deck,threshold:0.55});
+  slides.forEach(function(s){io.observe(s);});
+  setActive(0);
+  document.addEventListener("keydown",function(e){
+    if(e.key==="ArrowDown"||e.key==="PageDown"){e.preventDefault();go(current+1);}
+    if(e.key==="ArrowUp"||e.key==="PageUp"){e.preventDefault();go(current-1);}
+  });
+
+  /* metric checker */
+  var verdicts={
+    pv:{v:"vanity",t:"<b>これはバニティ（虚栄）寄りです。</b>累計ページビューは“これまでの合計”なので増える一方で、減ることがありません。数字が大きくなっても「次に何をすべきか」は分からず、改善につながりにくいのです。これが「PV1万 → So what?（で、何をするの？）」と言われてしまう罠です。"},
+    dl:{v:"vanity",t:"<b>これはバニティ（虚栄）寄りです。</b>累計ダウンロード数も“過去の合計”。入れたけれど使っていない人も数に含まれるため、「今、実際に使われているか」は分かりません。実態は『継続率（リテンション）』のような“率”で測る必要があります。"},
+    cvr:{v:"action",t:"<b>これは行動を促す（アクショナブル）指標です。</b>登録した人のうち何％が初回購入まで進んだか、という“率”なので上がり下がりします。低ければ「登録後の案内や購入導線を直す」など打ち手が直結し、どこで人がつまずいているか（ボトルネック）を見つけられます。"},
+    ret:{v:"action",t:"<b>これは行動を促す（アクショナブル）指標です。</b>一定期間後にどれだけの人が戻ってきたかを“率”で測るため、定着しているか・離れているかがすぐ分かります。下がったら「使い続けてもらう工夫」を打つ、と次の行動に直結します。"},
+    reg:{v:"vanity",t:"<b>これはバニティ（虚栄）寄りです。</b>登録ユーザー“総数”は累計なので増える一方。しかも「登録した＝使っている」ではありません（接続済み≠アクティブ）。本当に価値を受け取っている人の割合は、別に“率”で測る必要があります。"}
+  };
+  var chips=document.getElementById("chips"), verdict=document.getElementById("verdict");
+  chips&&chips.addEventListener("click",function(e){var b=e.target.closest(".chip");if(!b)return;
+    Array.prototype.forEach.call(chips.children,function(c){c.classList.remove("on");});b.classList.add("on");
+    var d=verdicts[b.dataset.k];verdict.className="verdict show "+(d.v==="vanity"?"v-vanity":"v-action");verdict.innerHTML=d.t;});
+
+  /* explorer */
+  var STAGES=[
+    {key:"visit",name:"来訪",count:1000000,rate:null,bench:null,flag:null,note:"流入の入口。ここが分母。広告・SEO・SNSなどの合計。"},
+    {key:"reg",name:"会員登録",count:100000,rate:10,bench:8,flag:"high",note:"来訪のうち登録した割合。入口の関心の強さを映す。"},
+    {key:"buy",name:"初回購入",count:10000,rate:10,bench:30,flag:"low",note:"登録から初めて買った割合。ここが最大のボトルネック。"},
+    {key:"rep",name:"リピート購入",count:4000,rate:40,bench:35,flag:"high",note:"初回購入者が2回目を買った割合。商品の満足度を映す。"},
+    {key:"ret",name:"6か月後再購入",count:2000,rate:50,bench:30,flag:"high",note:"半年後も戻って買った割合＝継続。ここが強み。"}
+  ];
+  var state={lens:"count",bench:false,sel:1};
+  var funnel=document.getElementById("funnel"),lensgroup=document.getElementById("lensgroup"),bmInput=document.getElementById("bm"),
+      lensNote=document.getElementById("lensNote"),exp=document.getElementById("exp"),detail=document.getElementById("detail"),
+      reportHead=document.getElementById("reportHead"),reportBody=document.getElementById("reportBody"),bossBubble=document.getElementById("bossBubble");
+  if(funnel&&lensgroup){
+  function fmt(n){return n.toLocaleString("ja-JP");}
+  STAGES.forEach(function(s,i){
+    var row=document.createElement("div");row.className="frow";row.dataset.i=i;if(s.flag)row.dataset.flag=s.flag;
+    row.innerHTML='<span class="fname">'+s.name+'</span><div class="bar-wrap"><div class="bar"></div><div class="bm-line"></div><span class="ftag low">緊急改善</span><span class="ftag high">強み</span></div><span class="fval" data-fval></span>';
+    row.addEventListener("click",function(){state.sel=i;render();});
+    funnel.appendChild(row);
+  });
+  function maxCount(){return STAGES[0].count;}
+  function render(){
+    exp.classList.toggle("vanity-mode",state.lens==="count");
+    exp.classList.toggle("bm-on",state.bench&&state.lens==="rate");
+    lensgroup.classList.toggle("vanity-on",state.lens==="count");
+    if(state.lens==="count"){lensNote.innerHTML="<b>累計レンズ：</b>大きい数字が目立ちます。見栄えは良いが「次に何をするか」は見えません。";}
+    else{lensNote.innerHTML="<b>率レンズ：</b>各段の転換率で見ると、低い段＝ボトルネックが一目で。"+(state.bench?"業界平均との差で打ち手の優先度が決まります。":"「業界平均と比べる」をオンにすると、どこを直すべきかがさらに明確に。");}
+    Array.prototype.forEach.call(funnel.children,function(row,i){
+      var s=STAGES[i],bar=row.querySelector(".bar"),bmline=row.querySelector(".bm-line"),fval=row.querySelector("[data-fval]");
+      row.classList.toggle("sel",i===state.sel);
+      if(state.lens==="count"){bar.style.width=(s.count/maxCount()*100)+"%";bmline.style.display="none";fval.innerHTML='<span class="big">'+fmt(s.count)+'</span> 人';}
+      else{bmline.style.display="";
+        if(s.rate===null){bar.style.width="100%";bmline.style.opacity=0;fval.innerHTML='<span class="big">基準</span> （分母）';}
+        else{bar.style.width=s.rate+"%";bmline.style.left=s.bench+"%";fval.innerHTML='<span class="big">'+s.rate+'%</span> '+(state.bench?'<span style="color:#9fb6c7">／ 業界 '+s.bench+'%</span>':'前段から');}}
+    });
+    renderDetail();renderReport();
+  }
+  function renderDetail(){
+    var s=STAGES[state.sel],rows='';
+    rows+='<tr><td>人数</td><td>'+fmt(s.count)+' 人</td></tr>';
+    if(s.rate!==null){rows+='<tr><td>前段からの転換率</td><td>'+s.rate+'%</td></tr><tr><td>業界平均</td><td>'+s.bench+'%</td></tr>';
+      var diff=s.rate-s.bench,cls=diff<0?"gap-low":"gap-high";rows+='<tr><td>業界平均との差</td><td class="'+cls+'">'+(diff>0?"+":"")+diff+' pt</td></tr>';}
+    else{rows+='<tr><td>位置づけ</td><td>分母（出発点）</td></tr>';}
+    detail.innerHTML='<p class="ph">選んだ段の内訳</p><p class="dname">'+s.name+'</p><table>'+rows+'</table><p style="font-size:12px;color:var(--mute);margin:10px 0 0">'+s.note+'</p>';
+  }
+  function renderReport(){
+    if(state.lens==="count"){
+      reportHead.textContent="この指標での報告（累計レンズ）";
+      reportBody.innerHTML='「今月の来訪は<b>100万</b>！会員登録<b>10万</b>、購入<b>1万</b>、半年後も<b>2千人</b>が戻ってきました。<b>過去最高</b>です。」';
+      bossBubble.className="boss-bubble bad";
+      bossBubble.innerHTML='<span class="face">🤨</span><div>上司「数字は大きいけど…<b>で、次は何をするの？（So what?）</b>」</div>';
+    }else{
+      reportHead.textContent="この指標での報告（率レンズ）";
+      reportBody.innerHTML='「来訪→登録は<b>10%</b>で業界＋2pt と健闘。一方、<b style="color:var(--red)">登録→初回購入が10%</b>で業界平均30%を<b style="color:var(--red)">20pt下回る</b>最大のボトルネックです。ここを直せば購入数が最も伸びます。継続は業界30%に対し<b style="color:var(--green)">50%</b>で強みです。」';
+      bossBubble.className="boss-bubble good";
+      bossBubble.innerHTML='<span class="face">👍</span><div>上司「いいね！<b>初回購入の導線をすぐ直そう。</b>」データの向こうには人がいる。</div>';
+    }
+  }
+  lensgroup.addEventListener("click",function(e){var b=e.target.closest("button");if(!b)return;state.lens=b.dataset.lens;
+    Array.prototype.forEach.call(lensgroup.children,function(x){x.classList.remove("on");});b.classList.add("on");render();});
+  bmInput.addEventListener("change",function(){state.bench=bmInput.checked;render();});
+  render();
+  }
+})();
+</script>
 <!-- AI相談（Gemini） -->
 <button class="ai-fab" id="aiFab" aria-label="AIに相談"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 3l1.9 5.1L19 10l-5.1 1.9L12 17l-1.9-5.1L5 10l5.1-1.9L12 3z" fill="currentColor"/></svg>AIに相談</button>
 <aside class="ai-panel" id="aiPanel" aria-hidden="true">
@@ -323,7 +929,7 @@
     <button class="sg-reload" id="sgReload" aria-label="質問候補を再生成" title="質問候補を再生成"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12a9 9 0 1 1-2.6-6.3"/><path d="M21 4v5h-5"/></svg></button>
   </div>
   <div class="ai-input">
-    <textarea id="aiText" rows="1" placeholder="質問を入力…（例：良いピッチの条件は？）"></textarea>
+    <textarea id="aiText" rows="1" placeholder="質問を入力…（例：コホートと平均の違いは？）"></textarea>
     <button class="ai-send" id="aiSend" aria-label="送信">&uarr;</button>
   </div>
   <div class="ai-disclaimer">AIの回答には誤りが含まれることがあります。最終判断は教科書と授業で確認してください。</div>
@@ -332,43 +938,25 @@
 <script>
 (function(){
   "use strict";
-  var ddBtn=document.getElementById("ddBtn"),ddMenu=document.getElementById("ddMenu");
-  ddBtn.addEventListener("click",function(e){e.stopPropagation();var o=ddMenu.classList.toggle("open");ddBtn.setAttribute("aria-expanded",o);});
-  document.addEventListener("click",function(e){if(!ddMenu.contains(e.target)&&e.target!==ddBtn){ddMenu.classList.remove("open");ddBtn.setAttribute("aria-expanded","false");}});
-
-  var deck=document.getElementById("deck");
-  var slides=Array.prototype.slice.call(deck.querySelectorAll(".slide"));
-  var dotsWrap=document.getElementById("dots"),upBtn=document.getElementById("upBtn"),downBtn=document.getElementById("downBtn"),current=0;
-  slides.forEach(function(s,i){var b=document.createElement("button");b.innerHTML='<span class="tip">'+(i+1)+'. '+(s.dataset.title||"")+'</span>';b.setAttribute("aria-label",(i+1)+". "+(s.dataset.title||""));b.addEventListener("click",function(){go(i);});dotsWrap.appendChild(b);});
-  var dotBtns=Array.prototype.slice.call(dotsWrap.children);
-  function setActive(i){current=i;dotBtns.forEach(function(d,k){d.classList.toggle("on",k===i);});upBtn.disabled=(i===0);downBtn.disabled=(i===slides.length-1);}
-  function go(i){i=Math.max(0,Math.min(slides.length-1,i));slides[i].scrollIntoView({behavior:"smooth",block:"start"});}
-  upBtn.addEventListener("click",function(){go(current-1);});downBtn.addEventListener("click",function(){go(current+1);});
-  var io=new IntersectionObserver(function(es){es.forEach(function(en){if(en.isIntersecting)setActive(slides.indexOf(en.target));});},{root:deck,threshold:0.55});
-  slides.forEach(function(s){io.observe(s);});setActive(0);
-  document.addEventListener("keydown",function(e){if(e.key==="ArrowDown"||e.key==="PageDown"){e.preventDefault();go(current+1);}if(e.key==="ArrowUp"||e.key==="PageUp"){e.preventDefault();go(current-1);}});
-})();
-</script>
-
-<script>
-(function(){
-  "use strict";
   /* APIキーは config.js（デプロイ時に自動生成 / Git管理外）から読み込みます。HTMLには鍵を埋め込みません。 */
   var GEMINI_API_KEY = (typeof window!=="undefined" && window.GEMINI_API_KEY) ? window.GEMINI_API_KEY : "";
   var GEMINI_MODEL   = (typeof window!=="undefined" && window.GEMINI_MODEL) ? window.GEMINI_MODEL : "gemini-3.5-flash";
-  var LECTURE_FOCUS = "データドリブンな投資家向けピッチの最終発表、質疑応答と相互フィードバック、Lean Analyticsの学びの振り返り、SDGsにデータで取り組む意義";
-  var FALLBACK_QS = ["良いピッチと弱いピッチの違いは？", "質疑応答でどう答えると良い？", "フィードバックの上手な伝え方は？", "Lean Analyticsの学びを一言で言うと？", "データドリブンにSDGsへ取り組む意義は？", "学びを次にどう活かす？"];
+
+  var LECTURE_FOCUS = "最終回（第7回）。提出された1分間のピッチ動画をみんなで講評し、優れた発表を表彰する会。提出方法（Classroom直接アップロード／Google Drive公開リンク／YouTube等のURL）、良いピッチの5観点（主張＝タイトル／トラクション＝数字＋分母n／1画面1メッセージ／次の一手ask／誠実さ＝盛らない）、So What?・Why So?で互いに問い合う講評の作法、代表者のライブ発表、全7回（OMTM→データ収集→コホート/ファネル→A/B・ピボット→ストーリーテリング→ピッチ→講評）の振り返り、身近な一人から確かめて示すという結論";
+  var FALLBACK_QS = ["優れた指標の4条件をやさしく教えて","定性と定量はどう使い分ける？","虚栄指標と行動を促すの指標の見分け方は？","探索指標と報告指標の違いは？","先行指標と遅行指標の例は？","相関と因果はどう違う？","アイスと水難事故の例で相関と因果を説明して","『PV1万→So what?』と言われない報告は？"];
 
   var apiKey=GEMINI_API_KEY, history=[], busy=false, greeted=false;
   var fab=document.getElementById("aiFab"),panel=document.getElementById("aiPanel"),closeBtn=document.getElementById("aiClose"),
       msgs=document.getElementById("aiMsgs"),sgList=document.getElementById("sgList"),sgReload=document.getElementById("sgReload"),
       text=document.getElementById("aiText"),send=document.getElementById("aiSend");
+
   function openPanel(){document.body.classList.add("ai-open");panel.classList.add("open");panel.setAttribute("aria-hidden","false");
     if(!greeted){greeted=true;addBot("こんにちは。『Lean Analytics』とこの回の内容について、なんでも聞いてください。下の質問候補からも選べます。");renderSugs(FALLBACK_QS.slice(0,4));}
     setTimeout(function(){text.focus();},300);}
   function closePanel(){document.body.classList.remove("ai-open");panel.classList.remove("open");panel.setAttribute("aria-hidden","true");}
   fab.addEventListener("click",openPanel);closeBtn.addEventListener("click",closePanel);
   document.addEventListener("keydown",function(e){if(e.key==="Escape"&&panel.classList.contains("open"))closePanel();});
+
   function esc(s){return s.replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");}
   function fmt(s){return esc(s).replace(/\*\*(.+?)\*\*/g,"<b>$1</b>");}
   function addUser(t){var d=document.createElement("div");d.className="msg user";d.textContent=t;msgs.appendChild(d);sc();}
@@ -376,8 +964,11 @@
   function addNote(t){var d=document.createElement("div");d.className="msg note";d.textContent=t;msgs.appendChild(d);sc();}
   function sc(){msgs.scrollTop=msgs.scrollHeight;}
   function typing(on){var ex=document.getElementById("aiTyping");if(on){if(ex)return;var d=document.createElement("div");d.className="typing";d.id="aiTyping";d.innerHTML="<span></span><span></span><span></span>";msgs.appendChild(d);sc();}else if(ex){ex.remove();}}
+
   function needKey(){if(apiKey)return false;addNote("AI相談は現在ご利用いただけません（APIキーが未設定です）。担当者がデプロイ時にキーを設定すると有効になります。");return true;}
+
   function sysPrompt(){return "あなたは武蔵野大学の科目『SDGs発展2』の学習アシスタントです。教科書『Lean Analytics』(A. クロール & B. ヨスコビッツ)の考え方に基づき、学生の質問に日本語でやさしく簡潔に答えます。専門用語は身近な具体例で説明し、逐語引用はせず自分の言葉で説明します。授業の共通ケースはEKIDEN.AI（ランナー向けAIコーチ）で、収益(Stripe)の具体データには触れません。この回のテーマ："+LECTURE_FOCUS+"。テーマと無関係な質問には、丁寧にこの授業の範囲へ話を戻してください。回答は3〜6文程度を目安に。";}
+
   function callGemini(contents,system,cb,err){
     if(!apiKey){err("APIキーが未設定です。");return;}
     var url="https://generativelanguage.googleapis.com/v1beta/models/"+GEMINI_MODEL+":generateContent";
@@ -391,13 +982,16 @@
         if(!t){err("空の応答が返りました。");return;}cb(t);
       }).catch(function(e){err(e.message||"通信に失敗しました。");});
   }
+
   function ask(q){
     if(busy)return;if(needKey())return;
-    addUser(q);history.push({role:"user",text:q});busy=true;send.disabled=true;typing(true);
+    addUser(q);history.push({role:"user",text:q});
+    busy=true;send.disabled=true;typing(true);
     var contents=history.map(function(m){return {role:m.role,parts:[{text:m.text}]};});
     callGemini(contents,sysPrompt(),function(t){typing(false);addBot(t);history.push({role:"model",text:t});busy=false;send.disabled=false;},
       function(em){typing(false);addNote("エラー："+em);history.pop();busy=false;send.disabled=false;});
   }
+
   function renderSugs(list){sgList.innerHTML="";list.forEach(function(q){var b=document.createElement("button");b.className="sg";b.textContent=q;b.addEventListener("click",function(){ask(q);});sgList.appendChild(b);});}
   function pick4(){var a=FALLBACK_QS.slice();for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1)),t=a[i];a[i]=a[j];a[j]=t;}return a.slice(0,4);}
   function regenSugs(){
@@ -410,11 +1004,140 @@
     },function(){renderSugs(pick4());sgReload.classList.remove("spin");});
   }
   sgReload.addEventListener("click",regenSugs);
+
   function autoGrow(){text.style.height="auto";text.style.height=Math.min(text.scrollHeight,120)+"px";}
   text.addEventListener("input",autoGrow);
   text.addEventListener("keydown",function(e){if(e.key==="Enter"&&!e.shiftKey){e.preventDefault();submit();}});
   function submit(){var v=text.value.trim();if(!v)return;text.value="";autoGrow();ask(v);}
   send.addEventListener("click",submit);
+})();
+</script>
+<div class="lightbox" id="lightbox" hidden><img id="lightbox-img" src="" alt=""></div>
+<script>
+(function(){
+  var btns=document.querySelectorAll('.ex-toggle');
+  Array.prototype.forEach.call(btns,function(btn){
+    btn.addEventListener('click',function(){
+      var k=btn.getAttribute('data-ex');
+      var q=document.getElementById(k+'-q'),a=document.getElementById(k+'-a');
+      if(!q||!a)return;
+      if(a.hidden){a.hidden=false;q.hidden=true;btn.textContent='← 演習に戻る';btn.classList.add('on');}
+      else{a.hidden=true;q.hidden=false;btn.textContent='回答例を見る →';btn.classList.remove('on');}
+    });
+  });
+  var lb=document.getElementById('lightbox'),lbimg=document.getElementById('lightbox-img');
+  if(lb&&lbimg){
+    Array.prototype.forEach.call(document.querySelectorAll('img.zoomable'),function(im){
+      im.addEventListener('click',function(){lbimg.src=im.currentSrc||im.src;lbimg.alt=im.alt||'';lb.hidden=false;});
+    });
+    lb.addEventListener('click',function(){lb.hidden=true;lbimg.src='';});
+    document.addEventListener('keydown',function(e){if(e.key==='Escape'&&!lb.hidden){lb.hidden=true;lbimg.src='';}});
+  }
+})();
+</script>
+<script>
+(function(){
+  "use strict";
+  /* ===== 閲覧パスワード（変更可）。第3回以降の「準備中」ページの解錠に使います。 ===== */
+  var PAGE_PASSWORD = "sdgs2026";
+  /* ============================================================================ */
+  var pw=document.getElementById("gatePw"),btn=document.getElementById("gateBtn"),err=document.getElementById("gateErr");
+  function tryUnlock(){
+    if(pw.value===PAGE_PASSWORD){document.body.classList.remove("locked");err.textContent="";}
+    else{err.textContent="パスワードが違います。";pw.select();}
+  }
+  btn.addEventListener("click",tryUnlock);
+  pw.addEventListener("keydown",function(e){if(e.key==="Enter"){e.preventDefault();tryUnlock();}});
+  setTimeout(function(){if(document.body.classList.contains("locked"))pw.focus();},200);
+})();
+</script>
+<script>
+(function(){
+  var cards=document.querySelectorAll('.dcard');
+  function lbl(c){var t=c.querySelector('.dc-hint'); if(t) t.textContent=c.classList.contains('open')?'▾ 閉じる':'▸ 要点とリンクを見る';}
+  Array.prototype.forEach.call(cards,function(c){
+    c.addEventListener('click',function(e){
+      if(e.target.closest('.dc-link'))return;
+      var was=c.classList.contains('open');
+      Array.prototype.forEach.call(cards,function(o){o.classList.remove('open');lbl(o);});
+      if(!was){c.classList.add('open');lbl(c);}
+    });
+  });
+})();
+</script>
+<script>
+(function(){
+  Array.prototype.forEach.call(document.querySelectorAll('.tldr-btn'),function(btn){
+    btn.addEventListener('click',function(){
+      var full=btn.parentNode.querySelector('.tldr-full');
+      if(!full)return;
+      var slide=btn.closest('.slide');
+      if(full.hidden){
+        full.hidden=false;btn.textContent='閉じる ▾';
+        if(slide)slide.classList.add('reading');
+      }else{
+        full.hidden=true;btn.textContent='もっと詳しく ▸';
+        if(slide){slide.classList.remove('reading');slide.scrollTop=0;}
+      }
+    });
+  });
+})();
+</script>
+<script>
+(function(){
+  var g=document.getElementById('pnotCards');
+  if(!g)return;
+  g.addEventListener('click',function(e){
+    var c=e.target.closest('.ncard');
+    if(!c)return;
+    var was=c.classList.contains('open');
+    Array.prototype.forEach.call(g.querySelectorAll('.ncard'),function(o){
+      o.classList.remove('open');
+      var car=o.querySelector('.nc-car'); if(car)car.textContent='なぜ？ ▸';
+    });
+    if(!was){
+      c.classList.add('open');
+      var car=c.querySelector('.nc-car'); if(car)car.textContent='閉じる ▾';
+    }
+  });
+})();
+</script>
+<div class="ikey"><kbd>i</kbd><span>キーで解説を開閉</span></div>
+<script>
+(function(){
+  /* ===== "i" キーで、表示中スライドの「もっと詳しく」を開閉 ===== */
+  function isTyping(el){
+    if(!el) return false;
+    var t=(el.tagName||'').toLowerCase();
+    return t==='input'||t==='textarea'||t==='select'||el.isContentEditable;
+  }
+  function currentSlide(){
+    var deck=document.querySelector('.deck');
+    if(!deck) return null;
+    var slides=deck.querySelectorAll('.slide');
+    var best=null,bestDist=Infinity;
+    var mid=deck.scrollTop+deck.clientHeight/2;
+    Array.prototype.forEach.call(slides,function(s){
+      var c=s.offsetTop+s.offsetHeight/2;
+      var d=Math.abs(c-mid);
+      if(d<bestDist){bestDist=d;best=s;}
+    });
+    return best;
+  }
+  document.addEventListener('keydown',function(e){
+    if(e.key!=='i'&&e.key!=='I') return;
+    if(e.metaKey||e.ctrlKey||e.altKey) return;
+    if(isTyping(document.activeElement)) return;
+    var lb=document.getElementById('lightbox');
+    if(lb&&!lb.hidden) return;
+    var s=currentSlide();
+    if(!s) return;
+    var btn=s.querySelector('.tldr-btn');
+    if(!btn) return;
+    e.preventDefault();
+    btn.click();
+    if(s.classList.contains('reading')) s.scrollTop=0;
+  });
 })();
 </script>
 </body>
