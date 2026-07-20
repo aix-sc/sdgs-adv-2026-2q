@@ -1109,5 +1109,85 @@
   });
 })();
 </script>
+<style id="infopanel-css">
+/* ===== i解説：右端20%の縦長パネル（本体80%＋解説20%） ===== */
+.infopanel{position:fixed;top:0;right:0;width:20vw;height:100vh;z-index:150;background:var(--soft);border-left:1px solid var(--line);box-shadow:-12px 0 34px rgba(21,50,79,.12);transform:translateX(100%);transition:transform .28s cubic-bezier(.22,.61,.36,1);display:flex;flex-direction:column;font-family:var(--jp)}
+body.info-open .infopanel{transform:translateX(0)}
+.infopanel .ip-head{flex:none;height:var(--hd,54px);display:flex;align-items:center;justify-content:space-between;gap:8px;padding:0 12px 0 16px;border-bottom:1px solid var(--line);background:#fff}
+.infopanel .ip-title{font-size:12.5px;font-weight:800;color:var(--navy);line-height:1.3;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.infopanel .ip-close{flex:none;background:none;border:0;font-size:22px;line-height:1;color:var(--mute);cursor:pointer;padding:2px 6px;border-radius:6px}
+.infopanel .ip-close:hover{background:var(--soft);color:var(--navy)}
+.infopanel .ip-body{flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch;padding:16px 16px 30px}
+.infopanel .ip-body p{margin:0 0 11px;font-size:12.5px;line-height:1.9;color:var(--ink)}
+.infopanel .ip-body p:last-child{margin-bottom:0}
+.infopanel .ip-body b{color:var(--navy)}
+.infopanel .ip-empty{color:var(--mute)}
+.deck,.hd{transition:width .28s cubic-bezier(.22,.61,.36,1),right .28s cubic-bezier(.22,.61,.36,1)}
+body.info-open .deck{width:80vw}
+body.info-open .hd{right:20vw}
+body.info-open .dots,body.info-open .navbtns,body.info-open .ai-fab{opacity:0;pointer-events:none;transition:opacity .18s}
+@media(max-width:760px){
+  .infopanel{width:86vw}
+  body.info-open .deck{width:100vw}
+  body.info-open .hd{right:0}
+}
+</style>
+<script>
+(function(){
+  if(document.getElementById('infoPanel'))return;
+  var panel=document.createElement('aside');
+  panel.className='infopanel'; panel.id='infoPanel'; panel.setAttribute('aria-hidden','true');
+  panel.innerHTML='<div class="ip-head"><span class="ip-title" id="ipTitle">解説</span><button class="ip-close" id="ipClose" type="button" aria-label="閉じる">\u00d7</button></div><div class="ip-body" id="ipBody"></div>';
+  document.body.appendChild(panel);
+  var bodyEl=document.getElementById('ipBody'), titleEl=document.getElementById('ipTitle'), openFor=null;
+
+  function deck(){return document.querySelector('.deck');}
+  function currentSlide(){
+    var d=deck(); if(!d)return null;
+    var slides=d.querySelectorAll('.slide'),best=null,bd=Infinity,mid=d.scrollTop+d.clientHeight/2;
+    Array.prototype.forEach.call(slides,function(s){var c=s.offsetTop+s.offsetHeight/2,dist=Math.abs(c-mid);if(dist<bd){bd=dist;best=s;}});
+    return best;
+  }
+  function label(slide){
+    var t=slide.getAttribute('data-title'); if(t)return t;
+    var e=slide.querySelector('.eyebrow'); return e?e.textContent.trim():'解説';
+  }
+  function fill(slide){
+    var full=slide.querySelector('.tldr-full'), sum=slide.querySelector('.tldr-sum');
+    var html = (full && full.innerHTML.trim()) ? full.innerHTML
+             : (sum ? '<p>'+sum.innerHTML+'</p>' : '<p class="ip-empty">このスライドの詳しい解説はありません。</p>');
+    titleEl.textContent=label(slide);
+    bodyEl.innerHTML=html; bodyEl.scrollTop=0; openFor=slide;
+  }
+  function isOpen(){return document.body.classList.contains('info-open');}
+  function setBtn(slide,on){var b=slide&&slide.querySelector('.tldr-btn'); if(b)b.textContent=on?'解説を閉じる \u25be':'もっと詳しく \u25b8';}
+  function openInfo(slide){ if(!slide)return; if(openFor)setBtn(openFor,false); fill(slide); document.body.classList.add('info-open'); panel.setAttribute('aria-hidden','false'); setBtn(slide,true); }
+  function closeInfo(){ if(openFor)setBtn(openFor,false); document.body.classList.remove('info-open'); panel.setAttribute('aria-hidden','true'); openFor=null; }
+  function toggle(slide){ if(isOpen()&&openFor===slide)closeInfo(); else openInfo(slide); }
+
+  document.addEventListener('click',function(e){
+    var t=e.target; if(!t||!t.closest)return;
+    if(t.closest('#ipClose')){e.preventDefault();e.stopPropagation();closeInfo();return;}
+    var btn=t.closest('.tldr-btn');
+    if(btn){e.preventDefault();e.stopPropagation();toggle(btn.closest('.slide'));}
+  },true);
+
+  document.addEventListener('keydown',function(e){
+    if(e.key!=='i'&&e.key!=='I')return;
+    if(e.metaKey||e.ctrlKey||e.altKey)return;
+    var ae=document.activeElement,tag=(ae&&ae.tagName||'').toLowerCase();
+    if(tag==='input'||tag==='textarea'||tag==='select'||(ae&&ae.isContentEditable))return;
+    var lb=document.getElementById('lightbox'); if(lb&&!lb.hidden)return;
+    e.preventDefault();e.stopImmediatePropagation();
+    toggle(currentSlide());
+  },true);
+
+  document.addEventListener('keydown',function(e){if(e.key==='Escape'&&isOpen())closeInfo();});
+
+  var d=deck();
+  if(d){var tmr=null;d.addEventListener('scroll',function(){if(!isOpen())return;clearTimeout(tmr);tmr=setTimeout(function(){var s=currentSlide();if(s&&s!==openFor){if(openFor)setBtn(openFor,false);fill(s);setBtn(s,true);}},130);});}
+})();
+</script>
+
 </body>
 </html>
