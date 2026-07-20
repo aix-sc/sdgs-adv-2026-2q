@@ -572,7 +572,11 @@
   .slide.reading{height:100vh;max-height:100vh;justify-content:flex-start;overflow-y:auto;-webkit-overflow-scrolling:touch;overscroll-behavior:contain;scroll-snap-align:start}
   .slide.reading .in{margin:0 auto;padding-bottom:24px}
   
-  .ikey{position:fixed;right:16px;top:calc(var(--hd) + 12px);z-index:120;display:flex;align-items:center;gap:6px;background:rgba(255,255,255,.92);border:1px solid var(--line);border-radius:20px;padding:6px 12px;font-size:11px;color:var(--mute);box-shadow:0 2px 10px rgba(21,50,79,.10);pointer-events:none}
+  .ikey{position:fixed;right:16px;top:calc(var(--hd) + 12px);z-index:120;width:34px;height:34px;display:flex;align-items:center;justify-content:center;padding:0;background:rgba(255,255,255,.92);border:1px solid var(--line);border-radius:50%;color:var(--mute);cursor:pointer;box-shadow:0 2px 10px rgba(21,50,79,.10)}
+  .ikey:hover{color:var(--navy);border-color:var(--teal);background:#fff}
+  .ikey svg{width:22px;height:22px;display:block}
+  .ikey-tip{position:absolute;right:calc(100% + 8px);top:50%;transform:translateY(-50%);white-space:nowrap;background:var(--navy);color:#fff;font-size:11px;font-weight:700;padding:5px 10px;border-radius:7px;opacity:0;pointer-events:none;transition:opacity .15s;box-shadow:0 2px 8px rgba(21,50,79,.2)}
+  .ikey:hover .ikey-tip{opacity:1}
   .ikey kbd{font-family:var(--jp);font-size:10.5px;font-weight:700;color:var(--navy);background:var(--soft);border:1px solid var(--line);border-radius:5px;padding:2px 7px;box-shadow:0 1px 0 rgba(21,50,79,.12)}
   @media(max-width:860px){  }
   </style>
@@ -1292,7 +1296,7 @@
   });
 })();
 </script>
-<div class="ikey"><kbd>i</kbd><span>キーで解説を開閉</span></div>
+<button class="ikey" id="ikeyBtn" type="button" aria-label="解説を開閉（i キー）"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9.25" fill="none" stroke="currentColor" stroke-width="1.8"/><circle cx="12" cy="8.2" r="1.15" fill="currentColor"/><rect x="10.9" y="10.8" width="2.2" height="6.4" rx="1.1" fill="currentColor"/></svg><span class="ikey-tip">i キーで解説を開閉</span></button>
 <script>
 (function(){
   /* ===== "i" キーで、表示中スライドの「もっと詳しく」を開閉 ===== */
@@ -1392,6 +1396,7 @@ body.info-open .ikey{right:calc(20vw + 16px)}
   document.addEventListener('click',function(e){
     var t=e.target; if(!t||!t.closest)return;
     if(t.closest('#ipClose')){e.preventDefault();e.stopPropagation();closeInfo();return;}
+    if(t.closest('.ikey')){e.preventDefault();e.stopPropagation();toggle(currentSlide());return;}
     var btn=t.closest('.tldr-btn');
     if(btn){e.preventDefault();e.stopPropagation();toggle(btn.closest('.slide'));}
   },true);
