@@ -500,9 +500,9 @@
   .slide.reading{height:100vh;max-height:100vh;justify-content:flex-start;overflow-y:auto;-webkit-overflow-scrolling:touch;overscroll-behavior:contain;scroll-snap-align:start}
   .slide.reading .in{margin:0 auto;padding-bottom:24px}
   
-  .ikey{position:fixed;left:16px;bottom:16px;z-index:120;display:flex;align-items:center;gap:6px;background:rgba(255,255,255,.92);border:1px solid var(--line);border-radius:20px;padding:6px 12px;font-size:11px;color:var(--mute);box-shadow:0 2px 10px rgba(21,50,79,.10);pointer-events:none}
+  .ikey{position:fixed;right:16px;top:calc(var(--hd) + 12px);z-index:120;display:flex;align-items:center;gap:6px;background:rgba(255,255,255,.92);border:1px solid var(--line);border-radius:20px;padding:6px 12px;font-size:11px;color:var(--mute);box-shadow:0 2px 10px rgba(21,50,79,.10);pointer-events:none}
   .ikey kbd{font-family:var(--jp);font-size:10.5px;font-weight:700;color:var(--navy);background:var(--soft);border:1px solid var(--line);border-radius:5px;padding:2px 7px;box-shadow:0 1px 0 rgba(21,50,79,.12)}
-  @media(max-width:860px){ .ikey{display:none} }
+  @media(max-width:860px){  }
   </style>
   <script src="config.js"></script>
 </head>
@@ -1126,7 +1126,10 @@ body.info-open .infopanel{transform:translateX(0)}
 .deck,.hd{transition:width .28s cubic-bezier(.22,.61,.36,1),right .28s cubic-bezier(.22,.61,.36,1)}
 body.info-open .deck{width:80vw}
 body.info-open .hd{right:20vw}
-body.info-open .dots,body.info-open .navbtns,body.info-open .ai-fab{opacity:0;pointer-events:none;transition:opacity .18s}
+body.info-open .navbtns,body.info-open .ai-fab{opacity:0;pointer-events:none;transition:opacity .18s}
+.dots,.ikey{transition:right .28s cubic-bezier(.22,.61,.36,1)}
+body.info-open .dots{right:calc(20vw + 16px)}
+body.info-open .ikey{right:calc(20vw + 16px)}
 @media(max-width:760px){
   .infopanel{width:86vw}
   body.info-open .deck{width:100vw}
