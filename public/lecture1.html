@@ -26,7 +26,8 @@
   .hd-logo img{width:26px;height:26px;display:block;border-radius:6px}
   .hd-logo-fb{display:none;font-weight:800;font-size:16px;color:var(--navy);white-space:nowrap;letter-spacing:.02em}
   .hd-logo.noimg .hd-logo-fb{display:inline}
-  .hd .brand{font-weight:700;color:var(--navy);font-size:13.5px;letter-spacing:.01em;white-space:nowrap}
+  .hd .brand{font-weight:700;color:var(--navy);font-size:13.5px;letter-spacing:.01em;white-space:nowrap;cursor:pointer;text-decoration:none}
+  .hd .brand:hover{color:var(--teal)}
   .hd .brand span{color:var(--teal)}
   .dropdown{position:relative}
   .dd-btn{font-family:var(--jp);font-size:13px;border:1px solid var(--line);background:#fff;border-radius:9px;padding:8px 13px;cursor:pointer;color:var(--navy);display:flex;align-items:center;gap:8px}
@@ -362,11 +363,12 @@
 <!-- HEADER -->
 <header class="hd">
   <a class="hd-logo" href="https://aix.sc/" target="_blank" rel="noopener" aria-label="AIx"><img src="assets/aix-logo.svg" alt="AIx" onerror="this.style.display='none';this.parentNode.classList.add('noimg')"><span class="hd-logo-fb">AIx{ }</span></a>
-  <div class="brand">SDGs発展2 <span>講義資料</span></div>
+  <a class="brand" href="index.html">SDGs発展2 <span>講義資料</span></a>
   <a class="hd-cr" href="https://classroom.google.com/c/ODU5NjUzNDM0Njk0" target="_blank" rel="noopener">🎓 Classroom</a>
   <div class="dropdown">
     <button class="dd-btn" id="ddBtn" aria-expanded="false">第1回：全体像とOMTM <span class="caret">▼</span></button>
     <div class="dd-menu" id="ddMenu">
+      <a href="index.html"><span class="ttl">表紙</span></a>
       <div class="grp">全7回</div>
       <a class="current" href="#"><span class="ttl">第1回　全体像 ── OMTMとビジネスモデル</span><span class="badge ready">表示中</span></a>
       <a href="lecture2.html"><span class="ttl">第2回　データ収集の設計 ── 定性と定量</span><span class="badge ready">公開</span></a>
