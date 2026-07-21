@@ -29,6 +29,22 @@
   .hd .brand span{color:var(--teal)}
   .hd-cr{margin-left:auto;display:inline-flex;align-items:center;gap:7px;font-size:12.5px;font-weight:700;color:var(--green);background:var(--green-soft);border:1px solid #cfe3d4;border-radius:9px;padding:7px 13px;white-space:nowrap}
   .hd-cr:hover{background:#dcebe0}
+  .dropdown{position:relative}
+  .dd-btn{font-family:var(--jp);font-size:13px;border:1px solid var(--line);background:#fff;border-radius:9px;padding:8px 13px;cursor:pointer;color:var(--navy);display:flex;align-items:center;gap:8px;white-space:nowrap}
+  .dd-btn .caret{transition:.2s;font-size:10px;color:var(--mute)}
+  .dd-btn[aria-expanded="true"] .caret{transform:rotate(180deg)}
+  .dd-menu{position:absolute;right:0;top:calc(100% + 8px);background:#fff;border:1px solid var(--line);border-radius:12px;box-shadow:0 14px 36px rgba(21,50,79,.16);padding:6px;min-width:268px;display:none;z-index:200}
+  .dd-menu.open{display:block}
+  .dd-menu .grp{font-size:10.5px;font-weight:700;letter-spacing:.08em;color:var(--mute);padding:8px 12px 4px}
+  .dd-menu a{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:9px 12px;border-radius:8px;font-size:13px;color:var(--ink)}
+  .dd-menu a:hover{background:var(--soft)}
+  .dd-menu a.current{background:var(--teal-soft);color:var(--navy);font-weight:700}
+  .dd-menu a.soon{color:#9aa4ad}
+  .dd-menu a.soon:hover{background:transparent;cursor:default}
+  .dd-menu a .ttl{display:flex;gap:9px;align-items:center}
+  .dd-menu a .badge{font-size:10px;border-radius:5px;padding:2px 7px;font-weight:700}
+  .badge.ready{background:var(--green-soft);color:var(--green)}
+  .badge.soon{background:#eef1f3;color:#9aa4ad}
 
   .wrap{max-width:1000px;margin:0 auto;padding:0 22px}
 
@@ -115,6 +131,20 @@
   <a class="hd-logo" href="https://aix.sc/" target="_blank" rel="noopener" aria-label="AIx"><img src="assets/aix-logo.svg" alt="AIx" onerror="this.style.display='none';this.parentNode.classList.add('noimg')"><span class="hd-logo-fb">AIx{ }</span></a>
   <a class="brand" href="index.html">SDGs発展2 <span>講義資料</span></a>
   <a class="hd-cr" href="https://classroom.google.com/c/ODU5NjUzNDM0Njk0" target="_blank" rel="noopener">🎓 Classroom</a>
+  <div class="dropdown">
+    <button class="dd-btn" id="ddBtn" aria-expanded="false">講義一覧 <span class="caret">▼</span></button>
+    <div class="dd-menu" id="ddMenu">
+      <a class="current" href="#"><span class="ttl">表紙</span><span class="badge ready">表示中</span></a>
+      <div class="grp">全7回</div>
+      <a href="lecture1.html"><span class="ttl">第1回　全体像 ── OMTMとビジネスモデル</span><span class="badge ready">公開</span></a>
+      <a href="lecture2.html"><span class="ttl">第2回　データ収集の設計 ── 定性と定量</span><span class="badge ready">公開</span></a>
+      <a href="lecture3.html"><span class="ttl">第3回　コホート分析とファネル分析</span><span class="badge ready">公開</span></a>
+      <a href="lecture4.html"><span class="ttl">第4回　A/Bテストとピボット ── 実験と意思決定</span><span class="badge ready">公開</span></a>
+      <a href="lecture5.html"><span class="ttl">第5回　データストーリーテリング</span><span class="badge ready">公開</span></a>
+      <a href="lecture6.html"><span class="ttl">第6回　投資家向けピッチの準備</span><span class="badge ready">公開</span></a>
+      <a href="lecture7.html"><span class="ttl">第7回　最終発表＆振り返り</span><span class="badge soon">準備中</span></a>
+    </div>
+  </div>
 </header>
 
 <div class="wrap">
@@ -239,5 +269,13 @@
 
 </div>
 
+<script>
+(function(){
+  var ddBtn=document.getElementById("ddBtn"), ddMenu=document.getElementById("ddMenu");
+  if(!ddBtn||!ddMenu)return;
+  ddBtn.addEventListener("click",function(e){e.stopPropagation();var o=ddMenu.classList.toggle("open");ddBtn.setAttribute("aria-expanded",o);});
+  document.addEventListener("click",function(e){ if(!ddMenu.contains(e.target)&&e.target!==ddBtn){ddMenu.classList.remove("open");ddBtn.setAttribute("aria-expanded","false");}});
+})();
+</script>
 </body>
 </html>
